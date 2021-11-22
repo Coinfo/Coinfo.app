@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="app.coinfo.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_coins"
+        android:name="app.coinfo.features.coins.ui.coins.CoinsFragment"
+        android:label="@string/title_coins"
+        tools:layout="@layout/fragment_coins" />
 
     <fragment
         android:id="@+id/navigation_notifications"
