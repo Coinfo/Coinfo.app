@@ -4,6 +4,14 @@ on:
   push:
 
 jobs:
+  static_code_analysis:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Detekt
+        run: ./gradlew detekt
+
   unit_tests:
     runs-on: [ubuntu-latest]
     steps:
@@ -11,14 +19,3 @@ jobs:
 
       - name: Unit tests
         run: ./gradlew test
-
-  android_tests:
-    runs-on: [macos-latest]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Instrumentation Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedAndroidTest

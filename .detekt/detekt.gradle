@@ -1,0 +1,14 @@
+
+detekt {
+    toolVersion = "1.19.0"
+    input = files("src/main/kotlin", "src/main/java",)
+    config = files("${project.rootDir}/.detekt/detekt.yml")
+    parallel = true
+    ignoreFailures = false
+    reports {
+        xml.enabled   = false
+        html.enabled  = false
+        txt.enabled   = true
+        sarif.enabled = false
+    }
+}
