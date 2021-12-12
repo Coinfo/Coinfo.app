@@ -1,0 +1,29 @@
+
+spotless {
+    kotlin {
+        target project.fileTree(project.rootDir) {
+            include '**/*.kt'
+            exclude '.idea/**', '**/build/**', '/build/**'
+        }
+        ktlint("0.42.0")
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+    format 'misc', {
+        target '**/*.gradle', '**/*.md', '**/.gitignore'
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    format 'xml', {
+        target project.fileTree(project.rootDir) {
+            include '**/*.xml'
+            exclude '.idea/**', '**/build/**', '/build/**', '**/*.gradle', '**/caches/**', '**/.gitignore'
+        }
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
