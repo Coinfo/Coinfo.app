@@ -12,6 +12,9 @@ jobs:
       - name: Detekt
         run: ./gradlew detekt
 
+      - name: Ktlint
+        run: ./gradlew ktlintCheck
+
   unit_tests:
     runs-on: [ubuntu-latest]
     steps:
