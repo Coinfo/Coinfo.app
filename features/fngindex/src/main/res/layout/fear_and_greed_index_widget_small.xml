@@ -1,22 +1,79 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.Coinfo.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.Coinfo.AppWidgetContainer">
 
-    <TextView
-        android:id="@+id/appwidget_text"
-        style="@style/Widget.Coinfo.AppWidget.InnerView"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:src="@drawable/ic_bitcoin" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:layout_toEndOf="@+id/imageView"
+        android:text="@string/appwidget_label_fear_and_greed_index" />
+
+    <TextView
+        android:id="@+id/label_provided_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginTop="4dp"
+        android:text="@string/appwidget_label_by_alternative_me"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/label_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/label_provided_by"
+        android:layout_alignStart="@+id/imageView"
+        android:textSize="21sp"
+        android:text="@string/appwidget_label_index" />
+
+    <TextView
+        android:id="@+id/text_index_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/label_index"
+        android:layout_alignBottom="@+id/label_index"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/label_index"
+        android:textSize="21sp"
+        tools:text="24" />
+
+    <TextView
+        android:id="@+id/text_index_value_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label_index"
+        android:layout_alignStart="@+id/imageView"
+        android:textSize="21sp"
+        tools:text="Greed" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_index_value_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="8dp"
+        tools:text="Next update on: 23.12.2021 14:32" />
 
 </RelativeLayout>

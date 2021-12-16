@@ -6,9 +6,8 @@
     android:minWidth="110dp"
     android:minHeight="110dp"
     android:previewImage="@drawable/example_appwidget_preview"
-
     android:previewLayout="@layout/fear_and_greed_index_widget_small"
     android:targetCellWidth="2"
     android:targetCellHeight="2"
-    android:updatePeriodMillis="86400000"
+    android:updatePeriodMillis="0"
     android:widgetCategory="home_screen" />

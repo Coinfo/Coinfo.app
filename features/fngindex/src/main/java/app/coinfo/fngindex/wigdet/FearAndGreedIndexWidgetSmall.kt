@@ -4,20 +4,32 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.util.Log
+import android.view.View
 import android.widget.RemoteViews
-import androidx.work.*
+import androidx.work.WorkRequest
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.Constraints
+import androidx.work.BackoffPolicy
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import app.coinfo.fngindex.R
-import app.coinfo.fngindex.repo.Repository
+import app.coinfo.fngindex.model.FearAndGreedIndex
+import app.coinfo.fngindex.prefs.Preferences
 import app.coinfo.fngindex.worker.DailyIndexChecker
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
 
 /**
  * Implementation of App Widget functionality.
  */
 @AndroidEntryPoint
 internal class FearAndGreedIndexWidgetSmall : AppWidgetProvider() {
+
+    @Inject
+    lateinit var preferences: Preferences
 
     /**
      * This is called to update the widget at intervals defined by the updatePeriodMillis attribute
@@ -32,7 +44,18 @@ internal class FearAndGreedIndexWidgetSmall : AppWidgetProvider() {
      * configuration is complete. (See Creating a widget configuration activity.)
      */
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        Log.d(TAG, "onUpdate() called for: First Fear and Greed Index Widget Small")
+        Log.d(TAG, "Widget On Update Called:")
+        Log.d(TAG, "Load Fear And Greed Index Preferences")
+
+        val savedFearAndGreedIndex = preferences.getFearAndGreedIndex()
+        Log.d(TAG, "   > Value: ${savedFearAndGreedIndex.value}")
+        Log.d(TAG, "   > Value Name: ${savedFearAndGreedIndex.valueName}")
+        Log.d(TAG, "   > Last Update Date: ${savedFearAndGreedIndex.lastUpdateDateMillis}")
+        Log.d(TAG, "   > Next Update Date: ${savedFearAndGreedIndex.nextUpdateDateSeconds}")
+
+        appWidgetIds.forEach { id ->
+            updateAppWidget(context, appWidgetManager, id, savedFearAndGreedIndex)
+        }
     }
 
     /**
@@ -42,7 +65,7 @@ internal class FearAndGreedIndexWidgetSmall : AppWidgetProvider() {
      * all widget instances, then this is a good place to do it.
      */
     override fun onEnabled(context: Context) {
-        Log.d(TAG, "onEnabled() called for: First Fear and Greed Index Widget Small")
+        Log.d(TAG, "Widget On Enabled Called")
         val checkFearAndGreedIndex: WorkRequest =
             OneTimeWorkRequestBuilder<DailyIndexChecker>()
                 // Adds a tag for the work. You can query and cancel work by tags. Tags are particularly
@@ -68,11 +91,14 @@ internal class FearAndGreedIndexWidgetSmall : AppWidgetProvider() {
      * This is where you should clean up any work done in onEnabled(Context), such as delete a temporary database.
      */
     override fun onDisabled(context: Context) {
-        Log.d(TAG, "onDisabled() called for: Last Fear and Greed Index Widget Small")
+        Log.d(TAG, "Widget On Disabled:")
         // Cancels all unfinished work with the given tag.  Note that cancellation is a best-effort
         // policy and work that is already executing may continue to run.  Upon cancellation,
         // {@link ListenableWorker#onStopped()} will be invoked for any affected workers.
         WorkManager.getInstance(context).cancelAllWorkByTag(WORK_TAG)
+
+        // Clean all previously saved preferences
+        preferences.reset()
     }
 
     companion object {
@@ -81,16 +107,22 @@ internal class FearAndGreedIndexWidgetSmall : AppWidgetProvider() {
     }
 }
 
-//internal fun updateAppWidget(
-//    context: Context,
-//    appWidgetManager: AppWidgetManager,
-//    appWidgetId: Int
-//) {
-//    val widgetText = context.getString(R.string.appwidget_text)
-//    // Construct the RemoteViews object
-//    val views = RemoteViews(context.packageName, R.layout.fear_and_greed_index_widget_small)
-//    //views.setTextViewText(R.id.appwidget_text, widgetText)
-//
-//    // Instruct the widget manager to update the widget
-//    appWidgetManager.updateAppWidget(appWidgetId, views)
-//}
+internal fun updateAppWidget(
+    context: Context,
+    appWidgetManager: AppWidgetManager,
+    appWidgetId: Int,
+    savedFearAndGreedIndex: FearAndGreedIndex
+) {
+    val views = RemoteViews(context.packageName, R.layout.fear_and_greed_index_widget_small)
+    // Previously no data was download, so nothing to show in the widget.
+    //if (!preferences.hasSavedFearAndGreedIndex()) {
+    //    views.setViewVisibility(R.id.text_index_value, View.GONE)
+    //    views.setViewVisibility(R.id.text_index_value_name, View.GONE)
+    //} else {
+        views.setViewVisibility(R.id.text_index_value, View.VISIBLE)
+        views.setTextViewText(R.id.text_index_value, savedFearAndGreedIndex.value)
+        views.setViewVisibility(R.id.text_index_value_name, View.VISIBLE)
+        views.setTextViewText(R.id.text_index_value_name, savedFearAndGreedIndex.valueName)
+    //}
+    appWidgetManager.updateAppWidget(appWidgetId, views)
+}

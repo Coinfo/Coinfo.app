@@ -1,11 +1,15 @@
 package app.coinfo.fngindex.di
 
+import android.content.Context
 import app.coinfo.fngindex.net.AlternativeService
+import app.coinfo.fngindex.prefs.FearAndGreedIndexPreferences
+import app.coinfo.fngindex.prefs.Preferences
 import app.coinfo.fngindex.repo.FearAndGreedIndexRepository
 import app.coinfo.fngindex.repo.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -25,9 +29,17 @@ internal object FngModule {
 
     @Provides
     @Singleton
+    fun providesPreferences(
+        @ApplicationContext appContext: Context,
+    ) : Preferences = FearAndGreedIndexPreferences(appContext)
+
+    @Provides
+    @Singleton
     fun providesRepository(
-        service: AlternativeService
-    ): Repository = FearAndGreedIndexRepository(service)
+        service: AlternativeService,
+        preferences: Preferences,
+        @ApplicationContext appContext: Context,
+    ): Repository = FearAndGreedIndexRepository(service, preferences, appContext)
 
     private const val ENDPOINT = "https://api.alternative.me/"
 }
