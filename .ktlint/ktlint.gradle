@@ -9,7 +9,7 @@ ktlint {
     android = true
     outputToConsole = true
     ignoreFailures = false
-    enableExperimentalRules = true
+    enableExperimentalRules = false
 
     filter {
         exclude("**/generated/**")

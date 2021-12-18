@@ -68,12 +68,24 @@
         tools:text="Greed" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/text_view_next_update_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_index_value_name"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="8dp"
         tools:text="Next update on: 23.12.2021 14:32" />
+
+    <TextView
+        android:id="@+id/text_view_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_view_next_update_date"
+        android:layout_below="@+id/label_provided_by"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:text="Error, application will update later"
+        android:textAlignment="center" />
 
 </RelativeLayout>

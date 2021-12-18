@@ -1,6 +1,7 @@
 package app.coinfo.fngindex.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import app.coinfo.fngindex.net.AlternativeService
 import app.coinfo.fngindex.prefs.FearAndGreedIndexPreferences
 import app.coinfo.fngindex.prefs.Preferences
@@ -31,15 +32,25 @@ internal object FngModule {
     @Singleton
     fun providesPreferences(
         @ApplicationContext appContext: Context,
-    ) : Preferences = FearAndGreedIndexPreferences(appContext)
+    ): Preferences = FearAndGreedIndexPreferences(appContext)
+
+    @Provides
+    @Singleton
+    fun providesWorkManager(
+        @ApplicationContext appContext: Context
+    ): WorkManager = WorkManager.getInstance(appContext)
 
     @Provides
     @Singleton
     fun providesRepository(
         service: AlternativeService,
         preferences: Preferences,
-        @ApplicationContext appContext: Context,
-    ): Repository = FearAndGreedIndexRepository(service, preferences, appContext)
+        workManager: WorkManager,
+    ): Repository = FearAndGreedIndexRepository(
+        service = service,
+        preferences = preferences,
+        workManager = workManager
+    )
 
     private const val ENDPOINT = "https://api.alternative.me/"
 }

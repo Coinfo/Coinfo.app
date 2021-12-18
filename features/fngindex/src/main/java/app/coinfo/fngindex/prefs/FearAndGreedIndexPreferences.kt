@@ -19,12 +19,14 @@ class FearAndGreedIndexPreferences(
         }
     }
 
-    override fun getFearAndGreedIndex() = FearAndGreedIndex(
-        value = preferences.getString(PREFERENCES_KEY_VALUE, "") ?: "",
-        valueName = preferences.getString(PREFERENCES_KEY_VALUE_NAME, "") ?: "",
-        lastUpdateDateMillis = preferences.getLong(PREFERENCES_KEY_LAST_UPDATE_DATE, 0L),
-        nextUpdateDateSeconds = preferences.getLong(PREFERENCES_KEY_NEXT_UPDATE_DATE, 0L),
-    )
+    override fun getFearAndGreedIndex() = if (hasSavedFearAndGreedIndex()) {
+        FearAndGreedIndex.FearAndGreedIndexSuccess(
+            value = preferences.getString(PREFERENCES_KEY_VALUE, "") ?: "",
+            valueName = preferences.getString(PREFERENCES_KEY_VALUE_NAME, "") ?: "",
+            lastUpdateDateMillis = preferences.getLong(PREFERENCES_KEY_LAST_UPDATE_DATE, 0L),
+            nextUpdateDateSeconds = preferences.getLong(PREFERENCES_KEY_NEXT_UPDATE_DATE, 0L),
+        )
+    } else FearAndGreedIndex.FearAndGreedIndexEmpty
 
     override fun getLastUpdateDate() = preferences.getLong(PREFERENCES_KEY_LAST_UPDATE_DATE, 0L)
 
@@ -35,10 +37,10 @@ class FearAndGreedIndexPreferences(
     override fun getFearAndGreedIndexValueName() = preferences.getString(PREFERENCES_KEY_VALUE_NAME, "") ?: ""
 
     override fun hasSavedFearAndGreedIndex() =
-        preferences.contains(PREFERENCES_KEY_VALUE)
-            && preferences.contains(PREFERENCES_KEY_VALUE_NAME)
-            && preferences.contains(PREFERENCES_KEY_LAST_UPDATE_DATE)
-            && preferences.contains(PREFERENCES_KEY_NEXT_UPDATE_DATE)
+        preferences.contains(PREFERENCES_KEY_VALUE) &&
+            preferences.contains(PREFERENCES_KEY_VALUE_NAME) &&
+            preferences.contains(PREFERENCES_KEY_LAST_UPDATE_DATE) &&
+            preferences.contains(PREFERENCES_KEY_NEXT_UPDATE_DATE)
 
     override fun reset() {
         preferences.edit(commit = true) {
@@ -48,7 +50,6 @@ class FearAndGreedIndexPreferences(
             remove(PREFERENCES_KEY_NEXT_UPDATE_DATE)
         }
     }
-
 
     companion object {
         private const val PREFERENCES_NAME = "fng.prefs"
