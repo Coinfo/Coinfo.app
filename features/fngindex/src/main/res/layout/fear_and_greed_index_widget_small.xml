@@ -6,74 +6,46 @@
     android:theme="@style/Theme.Coinfo.AppWidgetContainer">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/image_view_fng_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginTop="@dimen/widget_margin"
         android:src="@drawable/ic_bitcoin" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_view_fng_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/imageView"
-        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignTop="@id/image_view_fng_icon"
+        android:layout_alignBottom="@+id/image_view_fng_icon"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:text="@string/appwidget_label_fear_and_greed_index" />
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_toEndOf="@+id/image_view_fng_icon"
+        android:text="@string/appwidget_label_fear_and_greed_index"
+        android:maxLines="2"/>
 
     <TextView
         android:id="@+id/label_provided_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
+        android:layout_below="@+id/image_view_fng_icon"
+        android:layout_alignStart="@+id/image_view_fng_icon"
         android:layout_marginTop="4dp"
         android:text="@string/appwidget_label_by_alternative_me"
         android:textSize="11sp" />
 
     <TextView
-        android:id="@+id/label_index"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/label_provided_by"
-        android:layout_alignStart="@+id/imageView"
-        android:textSize="21sp"
-        android:text="@string/appwidget_label_index" />
-
-    <TextView
-        android:id="@+id/text_index_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/label_index"
-        android:layout_alignBottom="@+id/label_index"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/label_index"
-        android:textSize="21sp"
-        tools:text="24" />
-
-    <TextView
-        android:id="@+id/text_index_value_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/label_index"
-        android:layout_alignStart="@+id/imageView"
-        android:textSize="21sp"
-        tools:text="Greed" />
-
-    <TextView
         android:id="@+id/text_view_next_update_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_index_value_name"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="8dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_marginBottom="@dimen/widget_margin"
         tools:text="Next update on: 23.12.2021 14:32" />
 
     <TextView
@@ -86,6 +58,52 @@
         android:layout_alignParentEnd="true"
         android:gravity="center"
         android:text="Error, application will update later"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        tools:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_view_next_update_date"
+        android:layout_below="@+id/label_provided_by"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_marginBottom="4dp"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/label_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appwidget_label_index"
+                android:textSize="21sp" />
+
+            <TextView
+                android:id="@+id/text_index_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/widget_margin"
+                android:textSize="21sp"
+                tools:text="24" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_index_value_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textSize="21sp"
+            tools:text="Greed" />
+
+    </LinearLayout>
 
 </RelativeLayout>
