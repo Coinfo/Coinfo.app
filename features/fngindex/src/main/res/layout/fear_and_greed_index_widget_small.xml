@@ -3,6 +3,8 @@
     style="@style/Widget.Coinfo.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:layout_width="160dp"
+    tools:layout_height="160dp"
     android:theme="@style/Theme.Coinfo.AppWidgetContainer">
 
     <ImageView
