@@ -20,7 +20,11 @@ internal class FearAndGreedIndexRepository(
     override suspend fun getDailyFearAndGreedIndex() = try {
         val data = service.requestLatestFearAndGreedIndex().asFearAndGreedIndex
         preferences.setFearAndGreedIndex(data)
-        workManager.enqueue(WorkRequests.createFearAndGreedIndexCheckWorkRequest(data.nextUpdateDateSeconds))
+        workManager.enqueue(
+            WorkRequests.createFearAndGreedIndexCheckWorkRequest(
+                data.nextUpdateDateSeconds + ADDITIONAL_WAIT_TIME_IN_SECONDS
+            )
+        )
         ResultWrapper.Success(data)
     } catch (e: IOException) {
         Log.e(TAG, "Exception occurs, while downloading fear and greed index", e)
@@ -42,5 +46,9 @@ internal class FearAndGreedIndexRepository(
 
     companion object {
         private const val TAG = "FNG/Repository"
+
+        // Additional 5 minutes of waiting time before next update check.
+        // Needs this time to be sure that on the server side data updated.
+        private const val ADDITIONAL_WAIT_TIME_IN_SECONDS = 300L
     }
 }

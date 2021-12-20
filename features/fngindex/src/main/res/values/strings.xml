@@ -9,5 +9,6 @@
     <string name="appwidget_label_fear_and_greed_index">Fear and Greed Index</string>
     <string name="appwidget_label_by_alternative_me">by alternative.me</string>
     <string name="appwidget_label_index">Index:</string>
+    <string name="appwidget_text_next_update">Next update: %s</string>
 
 </resources>
