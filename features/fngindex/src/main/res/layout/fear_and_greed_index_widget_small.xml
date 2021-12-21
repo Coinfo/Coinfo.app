@@ -54,7 +54,7 @@
         android:singleLine="true"
         android:textSize="11sp"
         android:gravity="end"
-        tools:text="Next update on: 23.12.2021 14:32" />
+        tools:text="Next update: 25 Dec 01:00" />
 
     <TextView
         android:id="@+id/text_view_error"

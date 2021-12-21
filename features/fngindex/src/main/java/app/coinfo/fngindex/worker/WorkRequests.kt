@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit
 object WorkRequests {
 
     const val FEAR_AND_GREED_INDEX_CHECK_REQUEST_TAG = "fng_index_check_request_tag"
+    private const val BACKOFF_DELAY_IN_MINUTES = 1L
 
     /**
      * Creates Fear and Greed Index check work request. If no parameters are specified the request
@@ -33,10 +34,6 @@ object WorkRequests {
                     .build()
             )
             // Sets the backoff policy and backoff delay for the work.
-            .setBackoffCriteria(
-                BackoffPolicy.LINEAR,
-                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
-                TimeUnit.MILLISECONDS
-            )
+            .setBackoffCriteria(BackoffPolicy.LINEAR, BACKOFF_DELAY_IN_MINUTES, TimeUnit.MINUTES)
             .build()
 }
