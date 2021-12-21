@@ -1,0 +1,156 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Coinfo.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_width="160dp"
+    tools:layout_height="160dp"
+    android:theme="@style/Theme.Coinfo.AppWidgetContainer">
+
+    <ImageView
+        android:id="@+id/image_view_fng_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginTop="@dimen/widget_margin"
+        android:src="@drawable/ic_bitcoin" />
+
+    <TextView
+        android:id="@+id/text_view_fng_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/image_view_fng_icon"
+        android:layout_alignBottom="@+id/image_view_fng_icon"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_toEndOf="@+id/image_view_fng_icon"
+        android:text="@string/appwidget_label_fear_and_greed_index"
+        android:maxLines="2"/>
+
+    <TextView
+        android:id="@+id/label_provided_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_view_fng_icon"
+        android:layout_alignStart="@+id/image_view_fng_icon"
+        android:layout_marginTop="4dp"
+        android:text="@string/appwidget_label_by_alternative_me"
+        android:textSize="11sp" />
+
+    <TextView
+        android:id="@+id/text_view_next_update_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_marginBottom="@dimen/widget_margin"
+        android:ellipsize="start"
+        android:singleLine="true"
+        android:textSize="11sp"
+        android:gravity="end"
+        tools:text="Next update: 25 Dec 01:00" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_fng_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_view_next_update_date"
+        android:layout_below="@+id/label_provided_by"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/text_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:duplicateParentState="true"
+            android:layout_marginStart="@dimen/widget_margin"
+            android:layout_marginEnd="@dimen/widget_margin"
+            android:text="@string/appwidget_error_failed_to_update"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:duplicateParentState="true"
+            android:layout_marginEnd="@dimen/widget_margin"
+            android:layout_marginStart="@dimen/widget_margin"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_fng_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_view_next_update_date"
+        android:layout_below="@+id/label_provided_by"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        tools:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:duplicateParentState="true"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/label_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appwidget_label_index"
+                android:textSize="21sp"
+                android:duplicateParentState="true" />
+
+            <TextView
+                android:id="@+id/text_index_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/widget_margin"
+                android:duplicateParentState="true"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                tools:text="24" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_index_value_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:maxLines="2"
+            android:textSize="21sp"
+            android:textStyle="bold"
+            tools:text="Greed" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+
+
+    <!-- Strings used inside widgets -->
+    <string name="appwidget_label_fear_and_greed_index">Fear and Greed Index</string>
+    <string name="appwidget_label_by_alternative_me">by alternative.me</string>
+    <string name="appwidget_label_index">Index:</string>
+    <string name="appwidget_text_next_update">Next update: %s</string>
+    <string name="appwidget_text_loading_data">Loading data…</string>
+    <string name="appwidget_error_failed_to_update">Failed to update widget</string>
+
+</resources>

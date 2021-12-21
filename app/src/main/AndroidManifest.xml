@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="app.coinfo">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -20,6 +23,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--
+            If you want to disable android.startup completely.
+            Otherwise enqueued works of WorkManager will not be executed, if they have additional
+            constructor arguments except: Context and WorkerParameters.
+        -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="app.coinfo.androidx-startup"
+            tools:node="remove">
+        </provider>
+
     </application>
 
 </manifest>
