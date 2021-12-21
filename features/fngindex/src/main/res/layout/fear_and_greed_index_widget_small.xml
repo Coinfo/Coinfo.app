@@ -56,18 +56,47 @@
         android:gravity="end"
         tools:text="Next update: 25 Dec 01:00" />
 
-    <TextView
-        android:id="@+id/text_view_error"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear_layout_fng_error"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/text_view_next_update_date"
         android:layout_below="@+id/label_provided_by"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:text="Error, application will update later"
-        android:textAlignment="center"
-        tools:visibility="gone"/>
+        android:layout_marginStart="@dimen/widget_margin"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="@dimen/widget_margin"
+        android:layout_marginBottom="4dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/text_view_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:duplicateParentState="true"
+            android:layout_marginStart="@dimen/widget_margin"
+            android:layout_marginEnd="@dimen/widget_margin"
+            android:text="@string/appwidget_error_failed_to_update"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textAlignment="center" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:duplicateParentState="true"
+            android:layout_marginEnd="@dimen/widget_margin"
+            android:layout_marginStart="@dimen/widget_margin"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linear_layout_fng_data"
@@ -82,7 +111,8 @@
         android:layout_marginEnd="@dimen/widget_margin"
         android:layout_marginBottom="4dp"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:visibility="invisible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/appwidget_label_index"
                 android:textSize="21sp"
-                android:duplicateParentState="true"/>
+                android:duplicateParentState="true" />
 
             <TextView
                 android:id="@+id/text_index_value"

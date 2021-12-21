@@ -19,6 +19,11 @@ internal class FearAndGreedIndexRepository(
 
     override suspend fun getDailyFearAndGreedIndex() = try {
         val data = service.requestLatestFearAndGreedIndex().asFearAndGreedIndex
+        Log.d(TAG, "Get Daily Fear and Greed Index")
+        Log.d(TAG, "   > Value: ${data.value}")
+        Log.d(TAG, "   > Value Name: ${data.valueName}")
+        Log.d(TAG, "   > Last Update Date: ${data.lastUpdateDateMillis}")
+        Log.d(TAG, "   > Next Update Date: ${data.nextUpdateDateSeconds}")
         preferences.setFearAndGreedIndex(data)
         workManager.enqueue(
             WorkRequests.createFearAndGreedIndexCheckWorkRequest(
@@ -32,6 +37,9 @@ internal class FearAndGreedIndexRepository(
     } catch (e: HttpException) {
         Log.e(TAG, "Exception occurs, while downloading fear and greed index", e)
         ResultWrapper.GenericError(e.code(), e.message())
+    } catch (e: IllegalStateException) {
+        Log.e(TAG, "Exception occurs, while downloading fear and greed index", e)
+        ResultWrapper.GenericError()
     }
 
     private val FearAndGreedIndexResponse.asFearAndGreedIndex
@@ -42,7 +50,7 @@ internal class FearAndGreedIndexRepository(
                 lastUpdateDateMillis = it.timestamp.toLong(),
                 nextUpdateDateSeconds = it.timeUntilUpdate.toLong()
             )
-        } ?: FearAndGreedIndex.FearAndGreedIndexError
+        } ?: throw IllegalStateException("Unable to get data for first item in the fear and greed list")
 
     companion object {
         private const val TAG = "FNG/Repository"

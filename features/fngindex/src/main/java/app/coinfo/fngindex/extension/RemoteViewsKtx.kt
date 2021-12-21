@@ -6,7 +6,7 @@ import androidx.annotation.IdRes
 
 /** Hides the remote view */
 fun RemoteViews.hide(@IdRes viewId: Int) =
-    this.setViewVisibility(viewId, View.INVISIBLE)
+    this.setViewVisibility(viewId, View.GONE)
 
 /** Shows the remote view */
 fun RemoteViews.show(@IdRes viewId: Int) =
