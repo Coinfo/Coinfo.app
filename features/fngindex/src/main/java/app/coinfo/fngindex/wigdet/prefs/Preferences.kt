@@ -4,9 +4,12 @@ import app.coinfo.fngindex.wigdet.model.DailyFearAndGreedIndex
 
 interface Preferences {
 
-    fun setDailyFearAndGreedIndex(data: DailyFearAndGreedIndex)
+    /** Sets the [DailyFearAndGreedIndex] to preferences. */
+    suspend fun setDailyFearAndGreedIndex(data: DailyFearAndGreedIndex)
 
+    /** Gets [DailyFearAndGreedIndex] from preferences. */
     fun getDailyFearAndGreedIndex(): DailyFearAndGreedIndex?
 
+    /** Removes all data related to [DailyFearAndGreedIndex] from preferences. */
     fun removeDailyFearAndGreedIndex()
 }

@@ -27,16 +27,22 @@ internal class DailyFearAndGreedIndexWorker @AssistedInject constructor(
 
     override suspend fun doWork() = when (val result = repository.getDailyFearAndGreedIndexForWidget()) {
         is ResultWrapper.Success -> {
+            Log.d(TAG, "Do work successfully completed.")
+            Log.d(TAG, "Saving Daily Fear and Greed Index to shared preferences.")
             preferences.setDailyFearAndGreedIndex(result.data)
+            Log.d(TAG, "Scheduling next update.")
             scheduleNextUpdateOnSuccess(result.data.nextUpdateDateSeconds)
+            Log.d(TAG, "Updating widget with success data.")
             DailyFearAndGreedIndexWidgetHelper.showSuccess(context = appContext, data = result.data)
             Result.success()
         }
         is ResultWrapper.NetworkError -> {
+            Log.e(TAG, "Updating widget with Network Error data.")
             DailyFearAndGreedIndexWidgetHelper.showError(appContext)
             Result.retry()
         }
         is ResultWrapper.GenericError -> {
+            Log.e(TAG, "Updating widget with Generic Error data.")
             DailyFearAndGreedIndexWidgetHelper.showError(appContext)
             Result.retry()
         }

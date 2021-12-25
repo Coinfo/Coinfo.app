@@ -41,12 +41,20 @@ internal class DailyFearAndGreedIndexWidget : AppWidgetProvider() {
      * @see AppWidgetManager#ACTION_APPWIDGET_UPDATE
      */
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        Log.d(TAG, "Widget On Update Called:")
+        Log.d(TAG, "Widget On Update Called")
         Log.d(TAG, "Load Fear And Greed Index Preferences")
+        val data = preferences.getDailyFearAndGreedIndex()
+        Log.d(TAG, "   > Index            : ${data?.value}")
+        Log.d(TAG, "   > Index Name       : ${data?.valueName}")
+        Log.d(TAG, "   > Last Update Date : ${data?.lastUpdateDateMillis}")
+        Log.d(TAG, "   > Next Update Date : ${data?.nextUpdateDateSeconds}")
+        Log.d(TAG, "   > Updating Widgets : ${appWidgetIds.map { it.toString() } }}")
 
-        preferences.getDailyFearAndGreedIndex()?.let { data ->
+        if (data != null) {
             DailyFearAndGreedIndexWidgetHelper.showSuccess(context, appWidgetManager, appWidgetIds, data)
-        } ?: DailyFearAndGreedIndexWidgetHelper.showProgress(context, appWidgetManager, appWidgetIds)
+        } else {
+            DailyFearAndGreedIndexWidgetHelper.showProgress(context, appWidgetManager, appWidgetIds)
+        }
     }
 
     /**

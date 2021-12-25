@@ -10,7 +10,7 @@ class WidgetPreferences(
 
     private val preferences = appContext.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE)
 
-    override fun setDailyFearAndGreedIndex(data: DailyFearAndGreedIndex) {
+    override suspend fun setDailyFearAndGreedIndex(data: DailyFearAndGreedIndex) {
         preferences.edit(commit = true) {
             putInt(PREFERENCES_KEY_VALUE, data.value)
             putString(PREFERENCES_KEY_VALUE_NAME, data.valueName)
@@ -47,7 +47,7 @@ class WidgetPreferences(
 
     private fun contains(keys: List<String>): Boolean {
         keys.forEach { key ->
-            if (preferences.contains(key)) {
+            if (!preferences.contains(key)) {
                 return false
             }
         }
