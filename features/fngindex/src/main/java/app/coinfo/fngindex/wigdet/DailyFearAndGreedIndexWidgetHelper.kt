@@ -38,7 +38,10 @@ object DailyFearAndGreedIndexWidgetHelper {
             views.setTextColor(R.id.text_index_value, getFearAndGreedColor(data.value))
             views.setTextViewText(
                 R.id.text_view_next_update_date,
-                context.getString(R.string.appwidget_text_next_update, getNextUpdateDate(data.nextUpdateDateSeconds))
+                context.getString(
+                    R.string.appwidget_text_next_update,
+                    getNextUpdateDate(data.nextUpdateDateSeconds, data.timestampInMillis)
+                )
             )
             widgetManager.updateAppWidget(id, views)
         }
@@ -78,8 +81,9 @@ object DailyFearAndGreedIndexWidgetHelper {
         }
     }
 
-    private fun getNextUpdateDate(seconds: Int): String {
+    private fun getNextUpdateDate(seconds: Int, timestamp: Long): String {
         val calendar: Calendar = Calendar.getInstance()
+        calendar.timeInMillis = timestamp
         calendar.add(Calendar.SECOND, seconds)
         return SimpleDateFormat("d MMM HH:mm", Locale.getDefault()).format(calendar.time)
     }

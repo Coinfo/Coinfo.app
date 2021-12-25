@@ -16,6 +16,7 @@ class WidgetPreferences(
             putString(PREFERENCES_KEY_VALUE_NAME, data.valueName)
             putLong(PREFERENCES_KEY_LAST_UPDATE_DATE, data.lastUpdateDateMillis)
             putInt(PREFERENCES_KEY_NEXT_UPDATE_DATE, data.nextUpdateDateSeconds)
+            putLong(PREFERENCES_KET_TIMESTAMP, data.timestampInMillis)
         }
     }
 
@@ -24,7 +25,8 @@ class WidgetPreferences(
             PREFERENCES_KEY_VALUE,
             PREFERENCES_KEY_VALUE_NAME,
             PREFERENCES_KEY_LAST_UPDATE_DATE,
-            PREFERENCES_KEY_NEXT_UPDATE_DATE
+            PREFERENCES_KEY_NEXT_UPDATE_DATE,
+            PREFERENCES_KET_TIMESTAMP
         )
         return if (contains(keys)) {
             DailyFearAndGreedIndex(
@@ -32,6 +34,7 @@ class WidgetPreferences(
                 valueName = preferences.getString(PREFERENCES_KEY_VALUE_NAME, "") ?: "",
                 lastUpdateDateMillis = preferences.getLong(PREFERENCES_KEY_LAST_UPDATE_DATE, 0),
                 nextUpdateDateSeconds = preferences.getInt(PREFERENCES_KEY_NEXT_UPDATE_DATE, 0),
+                timestampInMillis = preferences.getLong(PREFERENCES_KET_TIMESTAMP, 0),
             )
         } else null
     }
@@ -42,6 +45,7 @@ class WidgetPreferences(
             remove(PREFERENCES_KEY_VALUE_NAME)
             remove(PREFERENCES_KEY_LAST_UPDATE_DATE)
             remove(PREFERENCES_KEY_NEXT_UPDATE_DATE)
+            remove(PREFERENCES_KET_TIMESTAMP)
         }
     }
 
@@ -60,5 +64,6 @@ class WidgetPreferences(
         private const val PREFERENCES_KEY_VALUE_NAME = "key_daily_widget_value_name"
         private const val PREFERENCES_KEY_LAST_UPDATE_DATE = "key_daily_widget_last_update_date"
         private const val PREFERENCES_KEY_NEXT_UPDATE_DATE = "key_daily_widget_next_update_date"
+        private const val PREFERENCES_KET_TIMESTAMP = "key_daily_widget_timestamp"
     }
 }

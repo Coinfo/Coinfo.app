@@ -22,7 +22,8 @@ internal class FearAndGreedIndexRepository(
                 value = data.value.toInt(),
                 valueName = data.valueClassification,
                 nextUpdateDateSeconds = data.timeUntilUpdate.toInt(),
-                lastUpdateDateMillis = data.timestamp.toLong()
+                lastUpdateDateMillis = data.timestamp.toLong(),
+                timestampInMillis = System.currentTimeMillis(),
             )
             ResultWrapper.Success(fearAndGreedIndex)
         } ?: ResultWrapper.GenericError(error = "List doesn't contain fear and greed index data")

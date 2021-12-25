@@ -48,6 +48,7 @@ internal class DailyFearAndGreedIndexWidget : AppWidgetProvider() {
         Log.d(TAG, "   > Index Name       : ${data?.valueName}")
         Log.d(TAG, "   > Last Update Date : ${data?.lastUpdateDateMillis}")
         Log.d(TAG, "   > Next Update Date : ${data?.nextUpdateDateSeconds}")
+        Log.d(TAG, "   > Timestamp        : ${data?.timestampInMillis}")
         Log.d(TAG, "   > Updating Widgets : ${appWidgetIds.map { it.toString() } }}")
 
         if (data != null) {
