@@ -5,7 +5,7 @@
     android:initialLayout="@layout/daily_fear_and_greed_index_widget"
     android:minWidth="110dp"
     android:minHeight="110dp"
-    android:previewImage="@drawable/example_appwidget_preview"
+    android:previewImage="@drawable/daily_fear_and_greed_index_widget_preview"
     android:previewLayout="@layout/daily_fear_and_greed_index_widget"
     android:targetCellWidth="2"
     android:targetCellHeight="2"
