@@ -5,7 +5,7 @@
 
     <application>
         <receiver
-            android:name="app.coinfo.fngindex.wigdet.FearAndGreedIndexWidgetSmall"
+            android:name="app.coinfo.fngindex.wigdet.DailyFearAndGreedIndexWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

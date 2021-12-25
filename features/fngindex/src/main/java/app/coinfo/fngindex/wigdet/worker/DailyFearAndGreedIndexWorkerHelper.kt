@@ -1,4 +1,4 @@
-package app.coinfo.fngindex.worker
+package app.coinfo.fngindex.wigdet.worker
 
 import androidx.work.BackoffPolicy
 import androidx.work.Constraints
@@ -6,7 +6,7 @@ import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequestBuilder
 import java.util.concurrent.TimeUnit
 
-object WorkRequests {
+object DailyFearAndGreedIndexWorkerHelper {
 
     const val FEAR_AND_GREED_INDEX_CHECK_REQUEST_TAG = "fng_index_check_request_tag"
     private const val BACKOFF_DELAY_IN_MINUTES = 1L
@@ -19,7 +19,7 @@ object WorkRequests {
      * @param timeUnit The units of time for {@code duration}
      */
     fun createFearAndGreedIndexCheckWorkRequest(duration: Long = 0, timeUnit: TimeUnit = TimeUnit.SECONDS) =
-        OneTimeWorkRequestBuilder<DailyIndexChecker>()
+        OneTimeWorkRequestBuilder<DailyFearAndGreedIndexWorker>()
             // Adds a tag for the work. You can query and cancel work by tags. Tags are particularly
             // useful for modules or libraries to find and operate on their own work.
             .addTag(FEAR_AND_GREED_INDEX_CHECK_REQUEST_TAG)
