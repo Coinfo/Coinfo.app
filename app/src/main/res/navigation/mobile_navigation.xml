@@ -13,9 +13,15 @@
 
     <fragment
         android:id="@+id/navigation_coins"
-        android:name="app.coinfo.features.coins.ui.coins.CoinsFragment"
+        android:name="app.coinfo.ui.coins.CoinsFragment"
         android:label="@string/title_coins"
         tools:layout="@layout/fragment_coins" />
+
+    <fragment
+        android:id="@+id/navigation_portfolios"
+        android:name="app.coinfo.ui.portfolios.PortfoliosFragment"
+        android:label="@string/title_portfolios"
+        tools:layout="@layout/fragment_portfolios" />
 
     <fragment
         android:id="@+id/navigation_notifications"
