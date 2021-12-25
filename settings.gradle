@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 rootProject.name = "Coinfo"
 include ':app'
 include ':features:fngindex'
+include ':features:portfolios'

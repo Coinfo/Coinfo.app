@@ -1,4 +1,4 @@
-package app.coinfo.features.coins.ui.coins
+package app.coinfo.ui.coins
 
 import android.os.Bundle
 import android.view.LayoutInflater

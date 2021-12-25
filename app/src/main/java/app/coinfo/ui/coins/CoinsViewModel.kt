@@ -1,4 +1,4 @@
-package app.coinfo.features.coins.ui.coins
+package app.coinfo.ui.coins
 
 import androidx.lifecycle.ViewModel
 
