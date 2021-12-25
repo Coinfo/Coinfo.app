@@ -1,4 +1,4 @@
-package app.coinfo.ui.portfolios
+package app.coinfo.portfolios
 
 import androidx.lifecycle.ViewModel
 

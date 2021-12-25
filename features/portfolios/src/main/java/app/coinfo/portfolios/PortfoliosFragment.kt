@@ -1,4 +1,4 @@
-package app.coinfo.ui.portfolios
+package app.coinfo.portfolios
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import app.coinfo.R
-import app.coinfo.databinding.FragmentPortfoliosBinding
+import app.coinfo.portfolios.databinding.FragmentPortfoliosBinding
 
 /** Fragment manages and displays all portfolios. */
 class PortfoliosFragment : Fragment() {
