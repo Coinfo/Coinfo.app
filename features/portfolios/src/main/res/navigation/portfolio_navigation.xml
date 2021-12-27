@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/portfolio_navigation"
+    app:startDestination="@id/overviewFragment">
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="app.coinfo.portfolios.ui.overview.OverviewFragment"
+        android:label="fragment_overview"
+        tools:layout="@layout/fragment_overview" >
+        <action
+            android:id="@+id/action_overviewFragment_to_destination_add_portfolio"
+            app:destination="@id/destination_add_portfolio" />
+    </fragment>
+
+    <dialog android:id="@+id/destination_add_portfolio"
+        android:name="app.coinfo.portfolios.ui.add.AddPortfolioDialog"
+        android:label="dialog_add_portfolio"
+        tools:layout="@layout/dialog_add_portfolio"
+        >
+        <action
+            android:id="@+id/action_destination_add_portfolio_to_blankFragment"
+            app:destination="@id/blankFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="app.coinfo.portfolios.ui.aaa.BlankFragment"
+        android:label="BlankFragment" />
+
+
+</navigation>
