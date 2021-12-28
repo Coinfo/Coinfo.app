@@ -1,16 +1,55 @@
 package app.coinfo.portfolios.ui.add
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.PermissionChecker
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.DialogFragment
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.DialogAddPortfolioBinding
+import app.coinfo.portfolios.ext.action
+import app.coinfo.portfolios.ext.shortSnackBar
 
 class AddPortfolioDialog : DialogFragment() {
 
     private var _binding: DialogAddPortfolioBinding? = null
+
+    private val permissionRequestLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val isGranted = permissions.entries.all { permission -> permission.value == true }
+            if (isGranted) {
+                // IMPROVEMENT: Provide specific mime type "text/csv" instead of "text/*"
+                // ISSUE: https://github.com/ChamichApps/Coinfo/issues/6
+                fileBrowserLauncher.launch(arrayOf(MIME_TYPE_CSV))
+            } else {
+                Log.w(TAG, "Notify user about consequences of not granting permission")
+                view?.shortSnackBar(getString(R.string.permission_read_external_storage)) {
+                    action(getString(R.string.grant_permissions)) { openApplicationPermissionSettings() }
+                }
+            }
+        }
+
+    /**
+     * An {@link ActivityResultContract} to prompt the user to open a document, receiving its
+     * contents as a {@code file:/http:/content:} {@link Uri}.
+     * <p>
+     * The input is the mime types to filter by, e.g. {@code image}.
+     * <p>
+     * This can be extended to override {@link #createIntent} if you wish to pass additional
+     * extras to the Intent created by {@code super.createIntent()}.
+     */
+    private val fileBrowserLauncher =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+            // Read csv file here.
+        }
 
     /** This property is only valid between onCreateView and onDestroyView. */
     private val binding get() = _binding!!
@@ -51,7 +90,16 @@ class AddPortfolioDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener { dismissAllowingStateLoss() }
-        binding.cryptoComApp.setOnClickListener {}
+        binding.cryptoComApp.setOnClickListener {
+            if (isReadExternalStoragePermissionGranted()) {
+                // IMPROVEMENT: Provide specific mime type "text/csv" instead of "text/*"
+                // ISSUE: https://github.com/ChamichApps/Coinfo/issues/6
+                fileBrowserLauncher.launch(arrayOf(MIME_TYPE_CSV))
+            } else {
+                Log.w(TAG, "Read External Storage permission is not granted. Requesting user to grant permission.")
+                permissionRequestLauncher.launch(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE))
+            }
+        }
     }
 
     /**
@@ -66,5 +114,27 @@ class AddPortfolioDialog : DialogFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun isReadExternalStoragePermissionGranted() = checkSelfPermission(
+        requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE
+    ) == PermissionChecker.PERMISSION_GRANTED
+
+    private fun openApplicationPermissionSettings() {
+        startActivity(
+            Intent().apply {
+                action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                data = Uri.fromParts(URI_SCHEME, APPLICATION_ID, null)
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+        )
+    }
+
+    companion object {
+        private const val TAG = "PORT/AddPortfolioDialog"
+
+        private const val MIME_TYPE_CSV = "text/*"
+        private const val APPLICATION_ID = "app.coinfo"
+        private const val URI_SCHEME = "package"
     }
 }
