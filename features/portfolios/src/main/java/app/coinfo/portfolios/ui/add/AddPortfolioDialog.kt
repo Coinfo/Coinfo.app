@@ -50,8 +50,8 @@ class AddPortfolioDialog : DialogFragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.toolbar.setNavigationOnClickListener { dismissAllowingStateLoss() }
+        binding.cryptoComApp.setOnClickListener {}
     }
 
     /**
