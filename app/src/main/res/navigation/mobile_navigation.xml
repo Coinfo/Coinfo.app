@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_portfolios"
-        android:name="app.coinfo.portfolios.PortfoliosFragment"
+        android:name="app.coinfo.portfolios.ui.PortfoliosFragment"
         android:label="@string/title_portfolios"
         tools:layout="@layout/fragment_portfolios" />
 
