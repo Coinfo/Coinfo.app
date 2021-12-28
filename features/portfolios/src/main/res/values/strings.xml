@@ -3,5 +3,7 @@
     <string name="text_add_portfolio_title">Connect Wallet / Exchange</string>
     <string name="text_add_portfolio_subtitle">Connect your crypto platforms and manage all your assets together now.</string>
     <string name="text_exchange_crypto_com">Crypto.com app</string>
+    <string name="permission_read_external_storage">Please grant Read External Storage permission, to browse and select .csv file.</string>
+    <string name="grant_permissions">Grant</string>
 
 </resources>
