@@ -39,7 +39,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
-                android:text="Connect Wallet / Exchange"
+                android:text="@string/text_add_portfolio_title"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:text="Connect your crypto platforms and manage all your assets together now."
+                android:text="@string/text_add_portfolio_subtitle"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
@@ -91,7 +91,7 @@
 
                     <TextView
                         android:id="@+id/textView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_marginStart="16dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
