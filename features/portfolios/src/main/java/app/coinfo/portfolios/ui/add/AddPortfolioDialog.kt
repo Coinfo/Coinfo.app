@@ -26,13 +26,29 @@ class AddPortfolioDialog : DialogFragment() {
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             val isGranted = permissions.entries.all { permission -> permission.value == true }
             if (isGranted) {
-                // Load csv file here
+                // IMPROVEMENT: Provide specific mime type "text/csv" instead of "text/*"
+                // ISSUE: https://github.com/ChamichApps/Coinfo/issues/6
+                fileBrowserLauncher.launch(arrayOf(MIME_TYPE_CSV))
             } else {
                 Log.w(TAG, "Notify user about consequences of not granting permission")
                 view?.shortSnackBar(getString(R.string.permission_read_external_storage)) {
                     action(getString(R.string.grant_permissions)) { openApplicationPermissionSettings() }
                 }
             }
+        }
+
+    /**
+     * An {@link ActivityResultContract} to prompt the user to open a document, receiving its
+     * contents as a {@code file:/http:/content:} {@link Uri}.
+     * <p>
+     * The input is the mime types to filter by, e.g. {@code image}.
+     * <p>
+     * This can be extended to override {@link #createIntent} if you wish to pass additional
+     * extras to the Intent created by {@code super.createIntent()}.
+     */
+    private val fileBrowserLauncher =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) {
+            // Read csv file here.
         }
 
     /** This property is only valid between onCreateView and onDestroyView. */
@@ -76,7 +92,9 @@ class AddPortfolioDialog : DialogFragment() {
         binding.toolbar.setNavigationOnClickListener { dismissAllowingStateLoss() }
         binding.cryptoComApp.setOnClickListener {
             if (isReadExternalStoragePermissionGranted()) {
-                // Load csv file here
+                // IMPROVEMENT: Provide specific mime type "text/csv" instead of "text/*"
+                // ISSUE: https://github.com/ChamichApps/Coinfo/issues/6
+                fileBrowserLauncher.launch(arrayOf(MIME_TYPE_CSV))
             } else {
                 Log.w(TAG, "Read External Storage permission is not granted. Requesting user to grant permission.")
                 permissionRequestLauncher.launch(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE))
@@ -115,6 +133,7 @@ class AddPortfolioDialog : DialogFragment() {
     companion object {
         private const val TAG = "PORT/AddPortfolioDialog"
 
+        private const val MIME_TYPE_CSV = "text/*"
         private const val APPLICATION_ID = "app.coinfo"
         private const val URI_SCHEME = "package"
     }
