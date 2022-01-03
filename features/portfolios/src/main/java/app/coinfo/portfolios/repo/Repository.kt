@@ -1,3 +1,8 @@
 package app.coinfo.portfolios.repo
 
-interface Repository
+import java.io.InputStream
+
+interface Repository {
+
+    fun readCryptoComAppCsv(stream: InputStream?)
+}
