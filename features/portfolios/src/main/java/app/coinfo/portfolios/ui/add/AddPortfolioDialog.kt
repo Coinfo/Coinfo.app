@@ -1,6 +1,7 @@
 package app.coinfo.portfolios.ui.add
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,10 +18,17 @@ import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.DialogAddPortfolioBinding
 import app.coinfo.portfolios.ext.action
 import app.coinfo.portfolios.ext.shortSnackBar
+import app.coinfo.portfolios.repo.Repository
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddPortfolioDialog : DialogFragment() {
 
     private var _binding: DialogAddPortfolioBinding? = null
+
+    @Inject
+    lateinit var repository: Repository
 
     private val permissionRequestLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -46,10 +54,11 @@ class AddPortfolioDialog : DialogFragment() {
      * This can be extended to override {@link #createIntent} if you wish to pass additional
      * extras to the Intent created by {@code super.createIntent()}.
      */
-    private val fileBrowserLauncher =
-        registerForActivityResult(ActivityResultContracts.OpenDocument()) {
-            // Read csv file here.
+    private val fileBrowserLauncher = registerForActivityResult(object : ActivityResultContracts.OpenDocument() {
+        override fun createIntent(context: Context, input: Array<out String>): Intent {
+            return super.createIntent(context, input).apply { addCategory(Intent.CATEGORY_OPENABLE) }
         }
+    }) { uri -> repository.readCryptoComAppCsv(requireContext().contentResolver.openInputStream(uri)) }
 
     /** This property is only valid between onCreateView and onDestroyView. */
     private val binding get() = _binding!!
