@@ -9,3 +9,5 @@ rootProject.name = "Coinfo"
 include ':app'
 include ':features:fngindex'
 include ':features:portfolios'
+include ':libraries:database'
+include ':libraries:logger'

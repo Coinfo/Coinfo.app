@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,12 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.PermissionChecker
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.DialogAddPortfolioBinding
 import app.coinfo.portfolios.ext.action
 import app.coinfo.portfolios.ext.shortSnackBar
 import app.coinfo.portfolios.repo.Repository
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -58,7 +61,7 @@ class AddPortfolioDialog : DialogFragment() {
         override fun createIntent(context: Context, input: Array<out String>): Intent {
             return super.createIntent(context, input).apply { addCategory(Intent.CATEGORY_OPENABLE) }
         }
-    }) { uri -> repository.readCryptoComAppCsv(requireContext().contentResolver.openInputStream(uri)) }
+    }) { uri -> readCryptoComAppCsv(uri) }
 
     /** This property is only valid between onCreateView and onDestroyView. */
     private val binding get() = _binding!!
@@ -137,6 +140,21 @@ class AddPortfolioDialog : DialogFragment() {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
             }
         )
+    }
+
+    private fun readCryptoComAppCsv(uri: Uri) {
+        val stream = requireContext().contentResolver.openInputStream(uri)
+        lifecycleScope.launch { repository.readCryptoComAppCsv(getFilename(uri), stream) }
+    }
+
+    private fun getFilename(uri: Uri) = requireContext().contentResolver.query(uri, null, null, null, null)?.use {
+        it.moveToFirst()
+        return@use try {
+            it.getString(it.getColumnIndexOrThrow(OpenableColumns.DISPLAY_NAME))
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "Unable to get filename")
+            null
+        }
     }
 
     companion object {

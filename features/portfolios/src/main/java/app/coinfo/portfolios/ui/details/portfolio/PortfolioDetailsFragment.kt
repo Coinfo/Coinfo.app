@@ -1,28 +1,17 @@
-package app.coinfo.portfolios.ui.overview
+package app.coinfo.portfolios.ui.details.portfolio
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import app.coinfo.portfolios.R
-import app.coinfo.portfolios.databinding.FragmentOverviewBinding
-import app.coinfo.portfolios.model.UIPortfolio
-import app.coinfo.portfolios.ui.adapter.PortfolioAdapter
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import app.coinfo.portfolios.databinding.FragmentPortfolioDetailsBinding
 
-@AndroidEntryPoint
-class OverviewFragment : Fragment() {
+class PortfolioDetailsFragment : Fragment() {
 
-    private var _binding: FragmentOverviewBinding? = null
+    private var _binding: FragmentPortfolioDetailsBinding? = null
 
     /** This property is only valid between onCreateView and onDestroyView. */
-    private val binding get() = _binding!!
-
-    @Inject
-    lateinit var adapter: PortfolioAdapter
+    // private val binding get() = _binding!!
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -51,30 +40,9 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentOverviewBinding.inflate(inflater, container, false).apply {
+    ) = FragmentPortfolioDetailsBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
-
-    /**
-     * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
-     * has returned, but before any saved state has been restored in to the view.
-     * This gives subclasses a chance to initialize themselves once
-     * they know their view hierarchy has been completely created.  The fragment's
-     * view hierarchy is not however attached to its parent at this point.
-     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     */
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        adapter.setPortfolioClickListener(object : PortfolioAdapter.OnPortfolioClickListener {
-            override fun onClick(portfolio: UIPortfolio) {
-                findNavController().navigate(R.id.destination_portfolio_details)
-            }
-        })
-        binding.recyclerViewPortfoliosOverview.adapter = adapter
-    }
 
     /**
      * Called when the view previously created by {@link #onCreateView} has
@@ -86,8 +54,6 @@ class OverviewFragment : Fragment() {
      * been saved but before it has been removed from its parent.
      */
     override fun onDestroyView() {
-        adapter.setPortfolioClickListener(null)
-        binding.recyclerViewPortfoliosOverview.adapter = null
         _binding = null
         super.onDestroyView()
     }

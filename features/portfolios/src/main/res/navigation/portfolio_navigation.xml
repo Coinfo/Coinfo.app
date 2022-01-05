@@ -14,21 +14,22 @@
         <action
             android:id="@+id/action_overviewFragment_to_destination_add_portfolio"
             app:destination="@id/destination_add_portfolio" />
+        <action
+            android:id="@+id/action_overviewFragment_to_profileDetailsFragment"
+            app:destination="@id/destination_portfolio_details" />
     </fragment>
 
     <dialog android:id="@+id/destination_add_portfolio"
         android:name="app.coinfo.portfolios.ui.add.AddPortfolioDialog"
         android:label="dialog_add_portfolio"
-        tools:layout="@layout/dialog_add_portfolio"
-        >
-        <action
-            android:id="@+id/action_destination_add_portfolio_to_blankFragment"
-            app:destination="@id/blankFragment" />
+        tools:layout="@layout/dialog_add_portfolio">
     </dialog>
+
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="app.coinfo.portfolios.ui.aaa.BlankFragment"
-        android:label="BlankFragment" />
+        android:id="@+id/destination_portfolio_details"
+        android:name="app.coinfo.portfolios.ui.details.portfolio.PortfolioDetailsFragment"
+        android:label="fragment_profile_details"
+        tools:layout="@layout/fragment_portfolio_details" />
 
 
 </navigation>
