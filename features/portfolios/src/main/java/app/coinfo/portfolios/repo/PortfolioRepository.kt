@@ -4,7 +4,10 @@ import app.coinfo.library.database.Database
 import app.coinfo.library.database.model.PortfolioData
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.database.model.TransactionType
+import app.coinfo.portfolios.model.UIPortfolio
 import com.opencsv.CSVReader
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import java.io.InputStream
 import java.io.InputStreamReader
 
@@ -71,6 +74,9 @@ class PortfolioRepository(
             }
         }
     }
+
+    override fun loadPortfolios(): Flow<List<UIPortfolio>> =
+        database.portfolios.map { portfolios -> portfolios.map { UIPortfolio(1, it.name) } }
 
     companion object {
         private const val INDEX_CURRENCY = 2

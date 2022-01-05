@@ -8,6 +8,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.overview.OverviewFragment">
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_portfolios_overview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_portfolio"
+        tools:itemCount="2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

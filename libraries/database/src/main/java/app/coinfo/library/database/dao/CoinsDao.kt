@@ -8,6 +8,7 @@ import androidx.room.Transaction
 import app.coinfo.library.database.entity.Coin
 import app.coinfo.library.database.entity.CoinWithTransactions
 import app.coinfo.library.database.entity.Portfolio
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal interface CoinsDao {
@@ -24,4 +25,7 @@ internal interface CoinsDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insertPortfolio(portfolio: Portfolio): Long
+
+    @Query("SELECT * FROM portfolios ORDER BY creationDate ASC")
+    fun getPortfolios(): Flow<List<Portfolio>>
 }

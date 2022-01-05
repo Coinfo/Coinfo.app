@@ -8,12 +8,19 @@ import app.coinfo.library.database.model.PortfolioData
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.logger.Logger
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 internal class CoinfoDatabase(
     private val database: CoinfoRoomDatabase,
     private val logger: Logger
 ) : Database {
+
+    override val portfolios: Flow<List<PortfolioData>>
+        get() = database.coinsDao().getPortfolios().map { portfolios ->
+            portfolios.map { PortfolioData(it.displayName, it.source, it.date) }
+        }
 
     override suspend fun addPortfolio(data: PortfolioData): Long = withContext(Dispatchers.Default) {
         logger.logDebugEx(TAG, "Add Portfolio:")
