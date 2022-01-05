@@ -24,6 +24,7 @@ class PortfolioAdapter(
 ) : ListAdapter<UIPortfolio, PortfolioAdapter.PhotosViewHolder>(DiffCallback()) {
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+    private var listener: OnPortfolioClickListener? = null
 
     /**
      * Called by RecyclerView when it starts observing this Adapter.
@@ -106,11 +107,16 @@ class PortfolioAdapter(
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
-    class PhotosViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    fun setPortfolioClickListener(listener: OnPortfolioClickListener?) {
+        this.listener = listener
+    }
+
+    inner class PhotosViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val textViewName: TextView = view.findViewById(R.id.text_view_portfolio_name)
 
         fun bind(item: UIPortfolio) {
             textViewName.text = item.displayName
+            view.setOnClickListener { listener?.onClick(item) }
         }
     }
 
@@ -122,8 +128,11 @@ class PortfolioAdapter(
             oldItem == newItem
     }
 
-    companion object {
+    interface OnPortfolioClickListener {
+        fun onClick(portfolio: UIPortfolio)
+    }
 
+    companion object {
         private const val TAG = "PORT/PortfolioAdapter"
     }
 }
