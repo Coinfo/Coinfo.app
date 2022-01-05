@@ -4,5 +4,5 @@ import java.io.InputStream
 
 interface Repository {
 
-    fun readCryptoComAppCsv(stream: InputStream?)
+    suspend fun readCryptoComAppCsv(filename: String?, stream: InputStream?)
 }

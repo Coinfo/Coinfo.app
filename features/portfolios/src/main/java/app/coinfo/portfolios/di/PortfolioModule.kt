@@ -1,5 +1,6 @@
 package app.coinfo.portfolios.di
 
+import app.coinfo.library.database.Database
 import app.coinfo.portfolios.repo.PortfolioRepository
 import app.coinfo.portfolios.repo.Repository
 import dagger.Module
@@ -14,5 +15,7 @@ internal object PortfolioModule {
 
     @Provides
     @Singleton
-    fun providesPortfolioRepository(): Repository = PortfolioRepository()
+    fun providesPortfolioRepository(
+        database: Database
+    ): Repository = PortfolioRepository(database)
 }
