@@ -2,16 +2,24 @@ package app.coinfo.portfolios.ui.details.portfolio
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.coinfo.portfolios.databinding.FragmentPortfolioDetailsBinding
+import app.coinfo.portfolios.ui.adapter.PortfolioDetailsAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PortfolioDetailsFragment : Fragment() {
 
     private var _binding: FragmentPortfolioDetailsBinding? = null
 
     /** This property is only valid between onCreateView and onDestroyView. */
-    // private val binding get() = _binding!!
+    private val binding get() = _binding!!
+
+    @Inject
+    lateinit var adapter: PortfolioDetailsAdapter
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -45,6 +53,23 @@ class PortfolioDetailsFragment : Fragment() {
     }.root
 
     /**
+     * Called immediately after {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}
+     * has returned, but before any saved state has been restored in to the view.
+     * This gives subclasses a chance to initialize themselves once
+     * they know their view hierarchy has been completely created.  The fragment's
+     * view hierarchy is not however attached to its parent at this point.
+     * @param view The View returned by {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     */
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recyclerViewAssets.adapter = adapter
+        adapter.loadAssets(arguments?.getLong(ARG_PORTFOLIO_ID)!!)
+    }
+
+    /**
      * Called when the view previously created by {@link #onCreateView} has
      * been detached from the fragment.  The next time the fragment needs
      * to be displayed, a new view will be created.  This is called
@@ -56,5 +81,9 @@ class PortfolioDetailsFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        const val ARG_PORTFOLIO_ID = "portfolio_id"
     }
 }
