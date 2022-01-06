@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.FragmentOverviewBinding
 import app.coinfo.portfolios.model.UIPortfolio
 import app.coinfo.portfolios.ui.adapter.PortfolioAdapter
+import app.coinfo.portfolios.ui.details.portfolio.PortfolioDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -70,7 +72,10 @@ class OverviewFragment : Fragment() {
 
         adapter.setPortfolioClickListener(object : PortfolioAdapter.OnPortfolioClickListener {
             override fun onClick(portfolio: UIPortfolio) {
-                findNavController().navigate(R.id.destination_portfolio_details)
+                findNavController().navigate(
+                    R.id.destination_portfolio_details,
+                    bundleOf(PortfolioDetailsFragment.ARG_PORTFOLIO_ID to portfolio.id)
+                )
             }
         })
         binding.recyclerViewPortfoliosOverview.adapter = adapter

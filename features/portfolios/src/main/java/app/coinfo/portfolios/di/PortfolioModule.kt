@@ -5,6 +5,7 @@ import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.repo.PortfolioRepository
 import app.coinfo.portfolios.repo.Repository
 import app.coinfo.portfolios.ui.adapter.PortfolioAdapter
+import app.coinfo.portfolios.ui.adapter.PortfolioDetailsAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +20,8 @@ internal object PortfolioModule {
     @Singleton
     fun providesPortfolioRepository(
         database: Database,
-    ): Repository = PortfolioRepository(database)
+        logger: Logger,
+    ): Repository = PortfolioRepository(database, logger)
 
     @Provides
     @Singleton
@@ -27,4 +29,11 @@ internal object PortfolioModule {
         repository: Repository,
         logger: Logger,
     ): PortfolioAdapter = PortfolioAdapter(repository, logger)
+
+    @Provides
+    @Singleton
+    fun providesPortfolioDetailsAdapter(
+        repository: Repository,
+        logger: Logger,
+    ): PortfolioDetailsAdapter = PortfolioDetailsAdapter(repository, logger)
 }

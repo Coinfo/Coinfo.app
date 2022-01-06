@@ -4,6 +4,8 @@ import app.coinfo.library.database.Database
 import app.coinfo.library.database.model.PortfolioData
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.database.model.TransactionType
+import app.coinfo.library.logger.Logger
+import app.coinfo.portfolios.model.UIAsset
 import app.coinfo.portfolios.model.UIPortfolio
 import com.opencsv.CSVReader
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +14,8 @@ import java.io.InputStream
 import java.io.InputStreamReader
 
 class PortfolioRepository(
-    private val database: Database
+    private val database: Database,
+    private val logger: Logger
 ) : Repository {
 
     override suspend fun readCryptoComAppCsv(filename: String?, stream: InputStream?) {
@@ -21,7 +24,7 @@ class PortfolioRepository(
             PortfolioData(
                 name = filename ?: "Crypto.com App (csv)",
                 source = "crypto.com",
-                data = System.currentTimeMillis()
+                date = System.currentTimeMillis()
             )
         )
 
@@ -76,9 +79,35 @@ class PortfolioRepository(
     }
 
     override fun loadPortfolios(): Flow<List<UIPortfolio>> =
-        database.portfolios.map { portfolios -> portfolios.map { UIPortfolio(1, it.name) } }
+        database.portfolios.map { portfolios -> portfolios.map { UIPortfolio(it.id, it.name) } }
+
+    override fun loadAssets(portfolioId: Long): Flow<List<UIAsset>> =
+        database.getTransactions(portfolioId).map { transactions ->
+            val assets = hashMapOf<String, UIAsset>()
+            logger.logDebugEx(TAG, "Loading Assets:")
+            logger.logDebugEx(TAG, "   > Total Assets Loaded: ${transactions.size}")
+            transactions.onEach { transaction ->
+                val asset = assets[transaction.coinId]
+                if (asset == null) {
+                    assets[transaction.coinId] = UIAsset(
+                        id = transaction.coinId,
+                        name = transaction.coinId,
+                        price = 0.0,
+                        totalPrice = 0.0,
+                        totalHolding = transaction.amount,
+                        percentage = 0.0f
+                    )
+                } else {
+                    assets[transaction.coinId] = asset.copy(totalHolding = asset.totalHolding + transaction.amount)
+                }
+            }
+
+            return@map assets.values.toList()
+        }
 
     companion object {
+        private const val TAG = "PORT/PortfolioRepository"
+
         private const val INDEX_CURRENCY = 2
         private const val INDEX_AMOUNT = 3
         private const val INDEX_NATIVE_CURRENCY = 6
