@@ -12,4 +12,10 @@ enum class CryptocomTransactionType(
     CRYPTO_EARN_PROGRAM_WITHDRAWN("crypto_earn_program_withdrawn"),
     LOCKUP_LOCK("lockup_lock"),
     MCO_STAKE_REWARD("mco_stake_reward"),
+    UNKNOWN("unknown");
+
+    companion object {
+        fun fromString(value: String): CryptocomTransactionType =
+            values().firstOrNull { it.value == value } ?: UNKNOWN
+    }
 }

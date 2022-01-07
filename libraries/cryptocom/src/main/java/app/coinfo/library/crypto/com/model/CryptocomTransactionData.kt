@@ -2,7 +2,7 @@ package app.coinfo.library.crypto.com.model
 
 data class CryptocomTransactionData(
     /** Transaction timestamp UTC */
-    val timestamp: String,
+    val timestamp: Long,
 
     /** Transaction Description */
     val description: String,
