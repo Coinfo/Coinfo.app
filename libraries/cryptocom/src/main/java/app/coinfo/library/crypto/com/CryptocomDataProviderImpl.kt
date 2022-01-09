@@ -1,6 +1,5 @@
 package app.coinfo.library.crypto.com
 
-import android.annotation.SuppressLint
 import app.coinfo.library.crypto.com.model.CryptocomTransactionData
 import app.coinfo.library.crypto.com.model.CryptocomTransactionType
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
@@ -8,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.InputStream
 import java.text.SimpleDateFormat
+import java.util.Locale
 
 class CryptocomDataProviderImpl : CryptocomDataProvider {
 
@@ -56,9 +56,8 @@ class CryptocomDataProviderImpl : CryptocomDataProvider {
 
     private fun String.toSafeDouble(): Double = if (this.isBlank()) 0.0 else this.toDouble()
 
-    @SuppressLint("SimpleDateFormat")
     private fun String.toDateMilliseconds(): Long {
-        val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
         val utcDate = dateFormatLocal.parse(this)
         return utcDate?.time ?: 0
     }
