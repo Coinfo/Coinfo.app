@@ -8,4 +8,5 @@ data class TransactionData(
     val currency: String,
     val type: TransactionType,
     val date: Long = 0L,
+    val fee: Double = 0.0,
 )

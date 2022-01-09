@@ -29,5 +29,8 @@ internal data class Transaction(
     @ColumnInfo(name = "currency") val currency: String,
 
     /** The type of the transaction: Buy, Sell, Transfer */
-    @ColumnInfo(name = "type") val type: Int
+    @ColumnInfo(name = "type") val type: Int,
+
+    /** Fee for transaction */
+    @ColumnInfo(name = "fee") val fee: Double,
 )
