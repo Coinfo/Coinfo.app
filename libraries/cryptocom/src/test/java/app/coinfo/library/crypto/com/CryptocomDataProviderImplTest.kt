@@ -18,7 +18,11 @@ class CryptocomDataProviderImplTest {
         // Validate First Transaction Row in the CSV
         // 2021-12-16 00:25:01,Crypto Earn,CRO,13.80821918,,,EUR,6.72,7.6370730912,crypto_earn_interest_paid
         val firstTransaction = transactions[0]
+        println("------------------------------------------------------------------")
+        println("TEST IS FAILING BELOW:")
+        println("   > timestamp: ${firstTransaction.timestamp}")
         assertThat(firstTransaction.timestamp, `is`(1639610701000))
+        println("------------------------------------------------------------------")
         assertThat(firstTransaction.description, `is`("Crypto Earn"))
         assertThat(firstTransaction.currency, `is`("CRO"))
         assertThat(firstTransaction.amount, `is`(13.80821918))
