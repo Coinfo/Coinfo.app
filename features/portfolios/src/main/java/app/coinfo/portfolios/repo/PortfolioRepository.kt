@@ -49,15 +49,16 @@ class PortfolioRepository(
                     database.addTransaction(transaction.toDatabaseTransaction(TransactionType.DEPOSIT, portfolioId))
                 CryptocomTransactionType.LOCKUP_LOCK -> { }
                 CryptocomTransactionType.VIBAN_PURCHASE -> {
-                    database.addTransaction(TransactionData(
-                        coinId = transaction.toCurrency,
-                        portfolioId = portfolioId,
-                        amount = transaction.toAmount,
-                        price = transaction.nativeAmount,
-                        currency = transaction.nativeCurrency,
-                        date = transaction.timestamp,
-                        type = TransactionType.BUY,
-                    )
+                    database.addTransaction(
+                        TransactionData(
+                            coinId = transaction.toCurrency,
+                            portfolioId = portfolioId,
+                            amount = transaction.toAmount,
+                            price = transaction.nativeAmount,
+                            currency = transaction.nativeCurrency,
+                            date = transaction.timestamp,
+                            type = TransactionType.BUY,
+                        )
                     )
                 }
                 CryptocomTransactionType.CRYPTO_EXCHANGE -> { }
