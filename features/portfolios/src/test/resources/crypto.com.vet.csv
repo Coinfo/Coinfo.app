@@ -1,0 +1,28 @@
+Timestamp (UTC),Transaction Description,Currency,Amount,To Currency,To Amount,Native Currency,Native Amount,Native Amount (in USD),Transaction Kind
+2021-12-16 00:25:00,Crypto Earn,VET,4.35399475,,,EUR,0.32,0.3636701472,crypto_earn_interest_paid
+2021-12-09 00:31:34,Crypto Earn,VET,4.35399475,,,EUR,0.36,0.4091289156,crypto_earn_interest_paid
+2021-12-02 01:00:44,Crypto Earn,VET,4.35399475,,,EUR,0.44,0.5000464524,crypto_earn_interest_paid
+2021-11-25 01:04:32,Crypto Earn,VET,2.90266316,,,EUR,0.32,0.3636701472,crypto_earn_interest_paid
+2021-11-18 00:50:08,Crypto Earn,VET,2.90266316,,,EUR,0.37,0.4204936077,crypto_earn_interest_paid
+2021-11-11 00:47:07,Crypto Earn,VET,2.90266316,,,EUR,0.4,0.454587684,crypto_earn_interest_paid
+2021-11-04 00:42:18,Crypto Earn,VET,2.90266316,,,EUR,0.34,0.3863995314,crypto_earn_interest_paid
+2021-10-28 05:39:06,Crypto Earn Deposit,VET,-7567.65753426,,,EUR,-812.25,-923.0971158225,crypto_earn_program_created
+2021-10-15 10:33:24,EUR -> VET,EUR,-180.52,VET,1800.0,EUR,180.52,205.1554217892,viban_purchase
+2021-08-11 10:35:38,Crypto Earn Withdrawal,VET,5000.0,,,EUR,468.82,532.7994950322,crypto_earn_program_withdrawn
+2021-08-11 00:56:50,Crypto Earn,VET,1.64383562,,,EUR,0.15,0.1704703815,crypto_earn_interest_paid
+2021-08-05 01:20:04,Crypto Earn,VET,1.91780822,,,EUR,0.14,0.1591056894,crypto_earn_interest_paid
+2021-07-29 01:13:09,Crypto Earn,VET,1.91780822,,,EUR,0.13,0.1477409973,crypto_earn_interest_paid
+2021-07-22 00:09:33,Crypto Earn,VET,1.91780822,,,EUR,0.11,0.1250116131,crypto_earn_interest_paid
+2021-07-15 01:06:44,Crypto Earn,VET,1.91780822,,,EUR,0.12,0.1363763052,crypto_earn_interest_paid
+2021-07-08 01:16:32,Crypto Earn,VET,1.91780822,,,EUR,0.13,0.1477409973,crypto_earn_interest_paid
+2021-07-01 00:36:13,Crypto Earn,VET,1.91780822,,,EUR,0.14,0.1591056894,crypto_earn_interest_paid
+2021-06-24 01:05:00,Crypto Earn,VET,1.91780822,,,EUR,0.12,0.1363763052,crypto_earn_interest_paid
+2021-06-17 00:38:03,Crypto Earn,VET,1.91780822,,,EUR,0.17,0.1931997657,crypto_earn_interest_paid
+2021-06-10 00:48:46,Crypto Earn,VET,1.91780822,,,EUR,0.19,0.2159291499,crypto_earn_interest_paid
+2021-06-03 00:10:36,Crypto Earn,VET,1.91780822,,,EUR,0.2,0.227293842,crypto_earn_interest_paid
+2021-05-27 00:52:04,Crypto Earn,VET,1.91780822,,,EUR,0.2,0.227293842,crypto_earn_interest_paid
+2021-05-20 00:31:49,Crypto Earn,VET,1.91780822,,,EUR,0.16,0.1818350736,crypto_earn_interest_paid
+2021-05-13 10:31:22,Crypto Earn Deposit,VET,-5000.0,,,EUR,-689.96,-784.1182961316,crypto_earn_program_created
+2021-05-13 10:29:08,EUR -> VET,EUR,-406.25,VET,2743.0,EUR,406.25,461.6906165625,viban_purchase
+2021-03-15 17:45:40,EUR -> VET,EUR,-67.78,VET,1000.0,EUR,67.78,77.0298830538,viban_purchase
+2021-03-11 21:17:45,Buy VET,VET,2000.0,,,EUR,114.63,130.2734655423,crypto_purchase
