@@ -11,6 +11,7 @@ import app.coinfo.library.logger.Logger
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -71,7 +72,7 @@ class PortfolioRepositoryTest {
         val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val utcDate = dateFormatLocal.parse("2021-12-16 00:24:59")
 
-        assertThat(utcDate.time, `is`(1639610699000L))
+        assertTrue(utcDate?.time == 0L)
     }
 
     @Test
@@ -80,9 +81,7 @@ class PortfolioRepositoryTest {
         System.out.println("ccc")
         val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT)
         val utcDate = dateFormatLocal.parse("2021-12-16 00:24:59")
-        if (utcDate != null && utcDate.time != 0L) {
-            assertThat(utcDate.time, `is`(1639610699L))
-        }
+        assertTrue(utcDate?.time == 1639610699000L)
     }
 
     private fun getResourceAsStream(filename: String): InputStream? {
