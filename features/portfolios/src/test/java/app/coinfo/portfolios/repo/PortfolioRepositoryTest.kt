@@ -48,6 +48,8 @@ class PortfolioRepositoryTest {
 
     @Test
     fun aaa() {
+        System.out.println("-------------------------------------")
+        System.out.println("aaa")
         val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
         val utcDate = dateFormatLocal.parse("2021-12-16 00:24:59")
         assertThat(utcDate.time, `is`(1639610699000))
@@ -55,6 +57,8 @@ class PortfolioRepositoryTest {
 
     @Test
     fun bbb() {
+        System.out.println("-------------------------------------")
+        System.out.println("bbb")
         val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH)
         val utcDate = dateFormatLocal.parse("2021-12-16 00:24:59")
         assertThat(utcDate.time, `is`(1639610699000))
@@ -62,13 +66,18 @@ class PortfolioRepositoryTest {
 
     @Test
     fun ddd() {
+        System.out.println("-------------------------------------")
+        System.out.println("ddd")
         val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         val utcDate = dateFormatLocal.parse("2021-12-16 00:24:59")
+
         assertThat(utcDate.time, `is`(1639610699000))
     }
 
     @Test
     fun ccc() {
+        System.out.println("-------------------------------------")
+        System.out.println("ccc")
         val dateFormatLocal = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT)
         val utcDate = dateFormatLocal.parse("2021-12-16 00:24:59")
         assertThat(utcDate.time, `is`(1639610699000))
