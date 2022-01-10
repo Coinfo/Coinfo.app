@@ -31,7 +31,7 @@ internal val Transaction.asTransactionData
         amount = amount,
         price = price,
         currency = currency,
-        type = TransactionType.SELL,
+        type = TransactionType.fromValue(type),
         date = date,
         fee = fee
     )

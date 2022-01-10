@@ -116,7 +116,7 @@ class PortfolioDetailsAdapter(
 
         fun bind(asset: UIAsset) {
             textViewId.text = asset.id
-            textViewName.text = asset.id
+            textViewName.text = ""
             textViewPrice.text = "${asset.price}"
             textViewPercentage.text = "${asset.percentage}"
             textViewTotalHolding.text = "${asset.totalHolding}"
@@ -125,8 +125,7 @@ class PortfolioDetailsAdapter(
 
     private class DiffCallback : DiffUtil.ItemCallback<UIAsset>() {
         override fun areItemsTheSame(oldItem: UIAsset, newItem: UIAsset) =
-            oldItem.id == newItem.id &&
-                oldItem.name == newItem.name
+            oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: UIAsset, newItem: UIAsset) =
             oldItem == newItem
