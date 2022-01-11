@@ -9,4 +9,5 @@ data class TransactionData(
     val type: TransactionType,
     val date: Long = 0L,
     val fee: Double = 0.0,
+    val note: String = ""
 )

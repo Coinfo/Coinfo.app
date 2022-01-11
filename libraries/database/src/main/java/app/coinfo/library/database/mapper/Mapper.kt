@@ -21,7 +21,8 @@ internal val TransactionData.asTransactionEntity
         price = price,
         currency = currency,
         type = type.value,
-        fee = fee
+        fee = fee,
+        note = note
     )
 
 internal val Transaction.asTransactionData
@@ -31,7 +32,8 @@ internal val Transaction.asTransactionData
         amount = amount,
         price = price,
         currency = currency,
-        type = TransactionType.SELL,
+        type = TransactionType.fromValue(type),
         date = date,
-        fee = fee
+        fee = fee,
+        note = note
     )

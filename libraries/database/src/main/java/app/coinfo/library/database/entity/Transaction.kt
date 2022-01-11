@@ -33,4 +33,7 @@ internal data class Transaction(
 
     /** Fee for transaction */
     @ColumnInfo(name = "fee") val fee: Double,
+
+    /** Note associated with transaction */
+    @ColumnInfo(name = "note") val note: String
 )

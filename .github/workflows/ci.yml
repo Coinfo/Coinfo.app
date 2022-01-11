@@ -26,5 +26,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+#     Uses Java 8
+#     - name: Set up JDK 1.8
+#       uses: actions/setup-java@v1
+#       with:
+#           java-version: 1.8
+#
+#     Prints Java Version
+#     - name: Print Java version
+#       run: javac -version
+
       - name: Unit tests
         run: ./gradlew test
+
+      - name: Publish Feature Portfolios Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        if: always()
+        with:
+          files: features/portfolios/build/test-results/**/*.xml

@@ -9,7 +9,7 @@ import app.coinfo.library.database.entity.Coin
 import app.coinfo.library.database.entity.Portfolio
 import app.coinfo.library.database.entity.Transaction
 
-@Database(entities = [Coin::class, Transaction::class, Portfolio::class], version = 3)
+@Database(entities = [Coin::class, Transaction::class, Portfolio::class], version = 4)
 internal abstract class CoinfoRoomDatabase : RoomDatabase() {
 
     abstract fun coinsDao(): CoinsDao
