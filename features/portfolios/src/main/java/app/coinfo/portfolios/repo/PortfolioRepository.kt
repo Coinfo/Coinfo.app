@@ -58,6 +58,7 @@ class PortfolioRepository(
                             currency = transaction.nativeCurrency,
                             date = transaction.timestamp,
                             type = TransactionType.BUY,
+                            note = transaction.description
                         )
                     )
                 }

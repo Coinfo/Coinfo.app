@@ -14,8 +14,8 @@ import app.coinfo.portfolios.repo.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class PortfolioDetailsAdapter(
     private val repository: Repository,
@@ -107,7 +107,7 @@ class PortfolioDetailsAdapter(
         }
     }
 
-    inner class AssetsViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class AssetsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val textViewId: TextView = view.findViewById(R.id.text_view_asset_id)
         private val textViewName: TextView = view.findViewById(R.id.text_view_asset_name)
         private val textViewPrice: TextView = view.findViewById(R.id.text_view_asset_price)
@@ -119,7 +119,7 @@ class PortfolioDetailsAdapter(
             textViewName.text = ""
             textViewPrice.text = "${asset.price}"
             textViewPercentage.text = "${asset.percentage}"
-            textViewTotalHolding.text = "${asset.totalHolding}"
+            textViewTotalHolding.text = String.format(Locale.getDefault(), "%.2f", asset.totalHolding)
         }
     }
 

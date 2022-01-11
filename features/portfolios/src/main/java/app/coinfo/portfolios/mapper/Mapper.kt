@@ -15,4 +15,5 @@ internal fun CryptocomTransactionData.toDatabaseTransaction(
     currency = nativeCurrency,
     date = timestamp,
     type = transactionType,
+    note = description
 )
