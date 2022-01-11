@@ -20,6 +20,10 @@ class CoinfoLogger : Logger {
         Log.e(tag, message, throwable)
     }
 
+    override fun logError(tag: String, message: String) {
+        Log.e(tag, message)
+    }
+
     override fun logWarning(tag: String, message: String, throwable: Throwable) {
         Log.w(tag, message, throwable)
     }

@@ -4,9 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import app.coinfo.library.logger.Logger
+import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.FragmentPortfolioDetailsBinding
+import app.coinfo.portfolios.model.UIAsset
 import app.coinfo.portfolios.ui.adapter.PortfolioDetailsAdapter
+import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -20,6 +26,9 @@ class PortfolioDetailsFragment : Fragment() {
 
     @Inject
     lateinit var adapter: PortfolioDetailsAdapter
+
+    @Inject
+    lateinit var logger: Logger
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -65,8 +74,24 @@ class PortfolioDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewAssets.adapter = adapter
-        adapter.loadAssets(arguments?.getLong(ARG_PORTFOLIO_ID)!!)
+        val portfolioID = arguments?.getLong(ARG_PORTFOLIO_ID)
+        if (portfolioID == null) {
+            logger.logError(TAG, "Can't load assets as Portfolio ID is not provided")
+        } else {
+            binding.recyclerViewAssets.adapter = adapter
+            adapter.loadAssets(portfolioID)
+            adapter.setAssetClickListener(object : PortfolioDetailsAdapter.OnAssetClickListener {
+                override fun onClick(asset: UIAsset) {
+                    findNavController().navigate(
+                        R.id.destination_asset_details,
+                        bundleOf(
+                            AssetDetailsFragment.ARG_PORTFOLIO_ID to portfolioID,
+                            AssetDetailsFragment.ARG_COIN_ID to asset.id
+                        )
+                    )
+                }
+            })
+        }
     }
 
     /**
@@ -84,6 +109,7 @@ class PortfolioDetailsFragment : Fragment() {
     }
 
     companion object {
+        private const val TAG = "PORT/PortfolioDetailsFragment"
         const val ARG_PORTFOLIO_ID = "portfolio_id"
     }
 }
