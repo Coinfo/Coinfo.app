@@ -36,6 +36,14 @@ interface Logger {
     fun logError(tag: String, message: String, throwable: Throwable)
 
     /**
+     * Send a {@link #ERROR} log message and log the exception.
+     * @param tag Used to identify the source of a log message.  It usually identifies
+     *        the class or activity where the log call occurs.
+     * @param message The message you would like logged.
+     */
+    fun logError(tag: String, message: String)
+
+    /**
      * Send a {@link #WARN} log message and log the exception.
      * @param tag Used to identify the source of a log message.  It usually identifies
      *        the class or activity where the log call occurs.

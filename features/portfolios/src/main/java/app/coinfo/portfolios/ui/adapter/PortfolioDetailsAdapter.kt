@@ -23,6 +23,7 @@ class PortfolioDetailsAdapter(
 ) : ListAdapter<UIAsset, PortfolioDetailsAdapter.AssetsViewHolder>(DiffCallback()) {
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
+    private var listener: OnAssetClickListener? = null
 
     /**
      * Called by RecyclerView when it starts observing this Adapter.
@@ -99,6 +100,11 @@ class PortfolioDetailsAdapter(
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
+    /** Sets asset click listener */
+    fun setAssetClickListener(listener: OnAssetClickListener?) {
+        this.listener = listener
+    }
+
     /** Loads all assets for given [portfolioId] and adds to the adapter. */
     fun loadAssets(portfolioId: Long) {
         coroutineScope.launch {
@@ -107,7 +113,7 @@ class PortfolioDetailsAdapter(
         }
     }
 
-    inner class AssetsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class AssetsViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val textViewId: TextView = view.findViewById(R.id.text_view_asset_id)
         private val textViewName: TextView = view.findViewById(R.id.text_view_asset_name)
         private val textViewPrice: TextView = view.findViewById(R.id.text_view_asset_price)
@@ -120,6 +126,7 @@ class PortfolioDetailsAdapter(
             textViewPrice.text = "${asset.price}"
             textViewPercentage.text = "${asset.percentage}"
             textViewTotalHolding.text = String.format(Locale.getDefault(), "%.2f", asset.totalHolding)
+            view.setOnClickListener { listener?.onClick(asset) }
         }
     }
 
@@ -129,6 +136,10 @@ class PortfolioDetailsAdapter(
 
         override fun areContentsTheSame(oldItem: UIAsset, newItem: UIAsset) =
             oldItem == newItem
+    }
+
+    interface OnAssetClickListener {
+        fun onClick(asset: UIAsset)
     }
 
     companion object {

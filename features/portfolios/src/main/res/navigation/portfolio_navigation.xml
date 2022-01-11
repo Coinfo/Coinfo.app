@@ -29,7 +29,17 @@
         android:id="@+id/destination_portfolio_details"
         android:name="app.coinfo.portfolios.ui.details.portfolio.PortfolioDetailsFragment"
         android:label="fragment_profile_details"
-        tools:layout="@layout/fragment_portfolio_details" />
+        tools:layout="@layout/fragment_portfolio_details" >
+        <action
+            android:id="@+id/action_destination_portfolio_details_to_assetDetailsFragment"
+            app:destination="@id/destination_asset_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_asset_details"
+        android:name="app.coinfo.portfolios.ui.details.asset.AssetDetailsFragment"
+        android:label="fragment_asset_details"
+        tools:layout="@layout/fragment_asset_details" />
 
 
 </navigation>
