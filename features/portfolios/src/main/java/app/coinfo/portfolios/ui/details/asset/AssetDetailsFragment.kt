@@ -5,17 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.FragmentAssetDetailsBinding
 import app.coinfo.portfolios.repo.asset.AssetRepository
+import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragmentAdapter.Companion.TAB_INDEX_INFO
+import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragmentAdapter.Companion.TAB_INDEX_TRANSACTIONS
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AssetDetailsFragment : Fragment() {
 
     private var _binding: FragmentAssetDetailsBinding? = null
+
+    /** This property is only valid between onCreateView and onDestroyView. */
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var assetRepository: AssetRepository
@@ -64,9 +70,16 @@ class AssetDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
-            assetRepository.getAssetInfo("CRO")
-        }
+        binding.viewPager.adapter = AssetDetailsFragmentAdapter(this)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = getString(
+                when (position) {
+                    TAB_INDEX_INFO -> R.string.asset_details_tab_info
+                    TAB_INDEX_TRANSACTIONS -> R.string.asset_details_tab_transactions
+                    else -> throw IllegalStateException("Unsupported Tab Index")
+                }
+            )
+        }.attach()
     }
 
     /**

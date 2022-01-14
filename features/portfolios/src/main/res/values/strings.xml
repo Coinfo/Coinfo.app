@@ -6,4 +6,7 @@
     <string name="permission_read_external_storage">Please grant Read External Storage permission, to browse and select .csv file.</string>
     <string name="grant_permissions">Grant</string>
 
+    <string name="asset_details_tab_info">Coin Info</string>
+    <string name="asset_details_tab_transactions">Transactions</string>
+
 </resources>
