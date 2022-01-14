@@ -1,4 +1,4 @@
-package app.coinfo.library.coingecko
+package app.coinfo.library.cloud
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
