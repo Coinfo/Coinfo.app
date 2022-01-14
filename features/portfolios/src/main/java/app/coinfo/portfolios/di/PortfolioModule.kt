@@ -1,9 +1,12 @@
 package app.coinfo.portfolios.di
 
+import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.database.Database
 import app.coinfo.library.logger.Logger
-import app.coinfo.portfolios.repo.PortfolioRepository
-import app.coinfo.portfolios.repo.Repository
+import app.coinfo.portfolios.repo.asset.AssetRepository
+import app.coinfo.portfolios.repo.asset.AssetRepositoryImpl
+import app.coinfo.portfolios.repo.portfolio.PortfolioRepository
+import app.coinfo.portfolios.repo.portfolio.PortfolioRepositoryImpl
 import app.coinfo.portfolios.ui.adapter.PortfolioAdapter
 import app.coinfo.portfolios.ui.adapter.PortfolioDetailsAdapter
 import dagger.Module
@@ -21,19 +24,25 @@ internal object PortfolioModule {
     fun providesPortfolioRepository(
         database: Database,
         logger: Logger,
-    ): Repository = PortfolioRepository(database, logger)
+    ): PortfolioRepository = PortfolioRepositoryImpl(database, logger)
+
+    @Provides
+    @Singleton
+    fun providesAssetsRepository(
+        cloud: Cloud,
+    ): AssetRepository = AssetRepositoryImpl(cloud)
 
     @Provides
     @Singleton
     fun providesPortfoliosAdapter(
-        repository: Repository,
+        repository: PortfolioRepository,
         logger: Logger,
     ): PortfolioAdapter = PortfolioAdapter(repository, logger)
 
     @Provides
     @Singleton
     fun providesPortfolioDetailsAdapter(
-        repository: Repository,
+        repository: PortfolioRepository,
         logger: Logger,
     ): PortfolioDetailsAdapter = PortfolioDetailsAdapter(repository, logger)
 }

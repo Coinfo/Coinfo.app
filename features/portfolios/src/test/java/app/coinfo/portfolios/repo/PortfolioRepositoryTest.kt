@@ -8,6 +8,8 @@ import app.coinfo.library.database.model.TransactionType.DEPOSIT
 import app.coinfo.library.database.model.TransactionType.INTEREST_EARN
 import app.coinfo.library.database.model.TransactionType.SELL
 import app.coinfo.library.logger.Logger
+import app.coinfo.portfolios.repo.portfolio.PortfolioRepository
+import app.coinfo.portfolios.repo.portfolio.PortfolioRepositoryImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -51,7 +53,7 @@ class PortfolioRepositoryTest {
     private val mockedDatabase: Database = mockk(relaxed = true)
     private val mockedLogger: Logger = mockk(relaxed = true)
 
-    private val repository: Repository = PortfolioRepository(mockedDatabase, mockedLogger)
+    private val repository: PortfolioRepository = PortfolioRepositoryImpl(mockedDatabase, mockedLogger)
 
     @Test
     fun `check if SOL imported correct from csv to database`() = runBlocking {

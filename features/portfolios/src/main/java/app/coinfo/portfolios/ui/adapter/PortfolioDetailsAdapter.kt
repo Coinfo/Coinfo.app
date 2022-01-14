@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.model.UIAsset
-import app.coinfo.portfolios.repo.Repository
+import app.coinfo.portfolios.repo.portfolio.PortfolioRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import java.util.Locale
 
 class PortfolioDetailsAdapter(
-    private val repository: Repository,
+    private val repository: PortfolioRepository,
     private val logger: Logger,
 ) : ListAdapter<UIAsset, PortfolioDetailsAdapter.AssetsViewHolder>(DiffCallback()) {
 

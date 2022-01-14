@@ -20,7 +20,7 @@ import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.DialogAddPortfolioBinding
 import app.coinfo.portfolios.ext.action
 import app.coinfo.portfolios.ext.shortSnackBar
-import app.coinfo.portfolios.repo.Repository
+import app.coinfo.portfolios.repo.portfolio.PortfolioRepository
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,7 +31,7 @@ class AddPortfolioDialog : DialogFragment() {
     private var _binding: DialogAddPortfolioBinding? = null
 
     @Inject
-    lateinit var repository: Repository
+    lateinit var repository: PortfolioRepository
 
     private val permissionRequestLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
