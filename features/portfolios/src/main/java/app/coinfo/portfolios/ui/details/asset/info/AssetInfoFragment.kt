@@ -4,11 +4,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.databinding.FragmentAssetInfoBinding
+import app.coinfo.portfolios.ui.details.asset.AssetDetailsSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AssetInfoFragment : Fragment() {
 
     private var _binding: FragmentAssetInfoBinding? = null
+
+    @Inject
+    lateinit var logger: Logger
+
+    private val viewModel: AssetDetailsSharedViewModel by viewModels(
+        ownerProducer = { this.requireParentFragment() }
+    )
+
+    /**
+     * Called to do initial creation of a fragment.  This is called after
+     * {@link #onAttach(Activity)} and before
+     * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     *
+     * <p>Note that this can be called while the fragment's activity is
+     * still in the process of being created.  As such, you can not rely
+     * on things like the activity's content view hierarchy being initialized
+     * at this point.  If you want to do work once the activity itself is
+     * created, add a {@link androidx.lifecycle.LifecycleObserver} on the
+     * activity's Lifecycle, removing it when it receives the
+     * {@link Lifecycle.State#CREATED} callback.
+     *
+     * <p>Any restored child fragments will be created before the base
+     * <code>Fragment.onCreate</code> method returns.</p>
+     *
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        logger.logDebug(TAG, "Asset Info Fragment Created")
+        logger.logDebug(TAG, "   > Fragment ID        : ${System.identityHashCode(this)}")
+        logger.logDebug(TAG, "   > Parent Fragment ID : ${System.identityHashCode(this.parentFragment)}")
+        logger.logDebug(TAG, "   > View Model ID      : ${System.identityHashCode(viewModel)}")
+    }
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -53,5 +94,9 @@ class AssetInfoFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val TAG = "PORT/InfoFragment"
     }
 }
