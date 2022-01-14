@@ -2,15 +2,23 @@ package app.coinfo.portfolios.ui.details.asset
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import app.coinfo.portfolios.databinding.FragmentAssetDetailsBinding
+import app.coinfo.portfolios.repo.asset.AssetRepository
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AssetDetailsFragment : Fragment() {
 
     private var _binding: FragmentAssetDetailsBinding? = null
+
+    @Inject
+    lateinit var assetRepository: AssetRepository
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -42,6 +50,14 @@ class AssetDetailsFragment : Fragment() {
     ) = FragmentAssetDetailsBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            assetRepository.getAssetInfo("CRO")
+        }
+    }
 
     companion object {
         const val ARG_PORTFOLIO_ID = "portfolio_id"

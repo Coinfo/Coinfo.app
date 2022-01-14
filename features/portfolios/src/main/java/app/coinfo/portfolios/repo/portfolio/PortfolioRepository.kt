@@ -1,11 +1,11 @@
-package app.coinfo.portfolios.repo
+package app.coinfo.portfolios.repo.portfolio
 
 import app.coinfo.portfolios.model.UIAsset
 import app.coinfo.portfolios.model.UIPortfolio
 import kotlinx.coroutines.flow.Flow
 import java.io.InputStream
 
-interface Repository {
+interface PortfolioRepository {
 
     suspend fun readCryptoComAppCsv(filename: String?, stream: InputStream?)
 

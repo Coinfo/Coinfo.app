@@ -1,4 +1,4 @@
-package app.coinfo.portfolios.repo
+package app.coinfo.portfolios.repo.portfolio
 
 import app.coinfo.library.crypto.com.CryptocomDataProviderImpl
 import app.coinfo.library.crypto.com.model.CryptocomTransactionType
@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.io.InputStream
 
-class PortfolioRepository(
+class PortfolioRepositoryImpl(
     private val database: Database,
     private val logger: Logger
-) : Repository {
+) : PortfolioRepository {
 
     override suspend fun readCryptoComAppCsv(filename: String?, stream: InputStream?) {
 

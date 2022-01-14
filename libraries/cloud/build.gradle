@@ -34,7 +34,10 @@ android {
 
 dependencies {
 
+    implementation project(path: ':libraries:logger')
+
     implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.google.dagger:hilt-android:2.40.1'
