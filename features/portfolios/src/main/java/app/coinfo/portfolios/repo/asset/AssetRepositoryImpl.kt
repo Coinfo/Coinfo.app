@@ -22,7 +22,14 @@ class AssetRepositoryImpl(
     ) = withContext(Dispatchers.Default) {
         database.getTransactions(portfolioId, assetId).map { transactions ->
             transactions.map { transaction ->
-                UITransaction(transaction.coinId)
+                UITransaction(
+                    id = transaction.transactionId,
+                    assetId = transaction.coinId,
+                    amount = transaction.amount,
+                    price = transaction.price,
+                    date = transaction.date,
+                    currency = transaction.currency
+                )
             }
         }
     }

@@ -8,6 +8,7 @@ internal fun CryptocomTransactionData.toDatabaseTransaction(
     transactionType: TransactionType,
     portfolioId: Long
 ) = TransactionData(
+    transactionId = 0L,
     coinId = currency,
     portfolioId = portfolioId,
     amount = amount,

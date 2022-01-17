@@ -1,6 +1,7 @@
 package app.coinfo.library.database.model
 
 data class TransactionData(
+    val transactionId: Long = 0L,
     val coinId: String,
     val portfolioId: Long,
     val amount: Double,

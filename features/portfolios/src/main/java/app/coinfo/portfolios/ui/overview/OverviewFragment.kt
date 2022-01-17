@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.FragmentOverviewBinding
 import app.coinfo.portfolios.model.UIPortfolio
-import app.coinfo.portfolios.ui.adapter.PortfolioAdapter
 import app.coinfo.portfolios.ui.details.portfolio.PortfolioDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

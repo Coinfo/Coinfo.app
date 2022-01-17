@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import app.coinfo.library.core.ktx.parentFragmentViewModels
 import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.databinding.FragmentAssetTransactionBinding
+import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragment
 import app.coinfo.portfolios.ui.details.asset.AssetDetailsSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -17,12 +18,15 @@ class AssetTransactionFragment : Fragment() {
 
     private var _binding: FragmentAssetTransactionBinding? = null
 
+    private val adapter = AssetTransactionAdapter()
+
     /** This property is only valid between onCreateView and onDestroyView. */
     private val binding get() = _binding!!
 
     @Inject
     lateinit var logger: Logger
 
+    /** This view model live scope is connected with [AssetDetailsFragment].  */
     private val viewModel: AssetDetailsSharedViewModel by parentFragmentViewModels()
 
     /**
@@ -98,12 +102,14 @@ class AssetTransactionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Bindings.
+        binding.recyclerViewTransactions.adapter = adapter
         binding.swipeRefreshLayoutTransactions.setOnRefreshListener {
             logger.logDebug(TAG, "The user initiate Swipe to Refresh action.")
         }
 
         // Observers.
         viewModel.transactions.observe(viewLifecycleOwner) { transactions ->
+            adapter.submitList(transactions)
         }
     }
 

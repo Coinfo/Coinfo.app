@@ -7,8 +7,8 @@ import app.coinfo.portfolios.repo.asset.AssetRepository
 import app.coinfo.portfolios.repo.asset.AssetRepositoryImpl
 import app.coinfo.portfolios.repo.portfolio.PortfolioRepository
 import app.coinfo.portfolios.repo.portfolio.PortfolioRepositoryImpl
-import app.coinfo.portfolios.ui.adapter.PortfolioAdapter
-import app.coinfo.portfolios.ui.adapter.PortfolioDetailsAdapter
+import app.coinfo.portfolios.ui.details.portfolio.PortfolioDetailsAdapter
+import app.coinfo.portfolios.ui.overview.PortfolioAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -27,6 +27,7 @@ internal val TransactionData.asTransactionEntity
 
 internal val Transaction.asTransactionData
     get() = TransactionData(
+        transactionId = transactionId,
         coinId = coinId,
         portfolioId = portfolioId,
         amount = amount,

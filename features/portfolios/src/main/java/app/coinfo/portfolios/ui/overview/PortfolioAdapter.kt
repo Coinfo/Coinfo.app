@@ -1,4 +1,4 @@
-package app.coinfo.portfolios.ui.adapter
+package app.coinfo.portfolios.ui.overview
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,21 +9,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.R
-import app.coinfo.portfolios.model.UIAsset
+import app.coinfo.portfolios.model.UIPortfolio
 import app.coinfo.portfolios.repo.portfolio.PortfolioRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import java.util.Locale
 
-class PortfolioDetailsAdapter(
+class PortfolioAdapter(
     private val repository: PortfolioRepository,
     private val logger: Logger,
-) : ListAdapter<UIAsset, PortfolioDetailsAdapter.AssetsViewHolder>(DiffCallback()) {
+) : ListAdapter<UIPortfolio, PortfolioAdapter.PortfolioViewHolder>(DiffCallback()) {
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
-    private var listener: OnAssetClickListener? = null
+    private var listener: OnPortfolioClickListener? = null
 
     /**
      * Called by RecyclerView when it starts observing this Adapter.
@@ -35,7 +35,13 @@ class PortfolioDetailsAdapter(
      */
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
-        logger.logDebug(TAG, "Portfolio Details Adapter attached to the RecyclerView")
+        logger.logDebug(TAG, "Portfolio Adapter attached to the RecyclerView")
+        coroutineScope.launch {
+            repository
+                .loadPortfolios()
+                .catch { exception -> logger.logError(TAG, "Exception while loading profiles", exception) }
+                .collect { submitList(it) }
+        }
     }
 
     /**
@@ -59,9 +65,9 @@ class PortfolioDetailsAdapter(
      * @see #getItemViewType(int)
      * @see #onBindViewHolder(ViewHolder, int)
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = AssetsViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PortfolioViewHolder(
         LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_asset, parent, false)
+            .inflate(R.layout.item_portfolio, parent, false)
     )
 
     /**
@@ -84,7 +90,7 @@ class PortfolioDetailsAdapter(
      *        item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: AssetsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PortfolioViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
@@ -95,54 +101,37 @@ class PortfolioDetailsAdapter(
      * @see #onAttachedToRecyclerView(RecyclerView)
      */
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        logger.logDebug(TAG, "Portfolio Details Adapter detached from the RecyclerView")
+        logger.logDebug(TAG, "Portfolio Adapter detached from the RecyclerView")
         coroutineScope.coroutineContext.cancelChildren()
         super.onDetachedFromRecyclerView(recyclerView)
     }
 
-    /** Sets asset click listener */
-    fun setAssetClickListener(listener: OnAssetClickListener?) {
+    fun setPortfolioClickListener(listener: OnPortfolioClickListener?) {
         this.listener = listener
     }
 
-    /** Loads all assets for given [portfolioId] and adds to the adapter. */
-    fun loadAssets(portfolioId: Long) {
-        coroutineScope.launch {
-            repository.loadAssets(portfolioId)
-                .collect { submitList(it) }
+    inner class PortfolioViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+        private val textViewName: TextView = view.findViewById(R.id.text_view_portfolio_name)
+
+        fun bind(item: UIPortfolio) {
+            textViewName.text = item.displayName
+            view.setOnClickListener { listener?.onClick(item) }
         }
     }
 
-    inner class AssetsViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private val textViewId: TextView = view.findViewById(R.id.text_view_asset_id)
-        private val textViewName: TextView = view.findViewById(R.id.text_view_asset_name)
-        private val textViewPrice: TextView = view.findViewById(R.id.text_view_asset_price)
-        private val textViewPercentage: TextView = view.findViewById(R.id.text_view_asset_percentage)
-        private val textViewTotalHolding: TextView = view.findViewById(R.id.text_view_asset_total_holding)
-
-        fun bind(asset: UIAsset) {
-            textViewId.text = asset.id
-            textViewName.text = ""
-            textViewPrice.text = "${asset.price}"
-            textViewPercentage.text = "${asset.percentage}"
-            textViewTotalHolding.text = String.format(Locale.getDefault(), "%.2f", asset.totalHolding)
-            view.setOnClickListener { listener?.onClick(asset) }
-        }
-    }
-
-    private class DiffCallback : DiffUtil.ItemCallback<UIAsset>() {
-        override fun areItemsTheSame(oldItem: UIAsset, newItem: UIAsset) =
+    private class DiffCallback : DiffUtil.ItemCallback<UIPortfolio>() {
+        override fun areItemsTheSame(oldItem: UIPortfolio, newItem: UIPortfolio) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: UIAsset, newItem: UIAsset) =
+        override fun areContentsTheSame(oldItem: UIPortfolio, newItem: UIPortfolio) =
             oldItem == newItem
     }
 
-    interface OnAssetClickListener {
-        fun onClick(asset: UIAsset)
+    interface OnPortfolioClickListener {
+        fun onClick(portfolio: UIPortfolio)
     }
 
     companion object {
-        private const val TAG = "PORT/PortfolioDetailsAdapter"
+        private const val TAG = "PORT/PortfolioAdapter"
     }
 }
