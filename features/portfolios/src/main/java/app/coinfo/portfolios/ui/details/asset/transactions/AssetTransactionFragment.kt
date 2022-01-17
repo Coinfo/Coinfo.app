@@ -17,6 +17,9 @@ class AssetTransactionFragment : Fragment() {
 
     private var _binding: FragmentAssetTransactionBinding? = null
 
+    /** This property is only valid between onCreateView and onDestroyView. */
+    private val binding get() = _binding!!
+
     @Inject
     lateinit var logger: Logger
 
@@ -94,6 +97,12 @@ class AssetTransactionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Bindings.
+        binding.swipeRefreshLayoutTransactions.setOnRefreshListener {
+            logger.logDebug(TAG, "The user initiate Swipe to Refresh action.")
+        }
+
+        // Observers.
         viewModel.transactions.observe(viewLifecycleOwner) { transactions ->
         }
     }
