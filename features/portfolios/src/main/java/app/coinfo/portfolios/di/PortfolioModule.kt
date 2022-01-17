@@ -29,8 +29,9 @@ internal object PortfolioModule {
     @Provides
     @Singleton
     fun providesAssetsRepository(
+        database: Database,
         cloud: Cloud,
-    ): AssetRepository = AssetRepositoryImpl(cloud)
+    ): AssetRepository = AssetRepositoryImpl(database, cloud)
 
     @Provides
     @Singleton

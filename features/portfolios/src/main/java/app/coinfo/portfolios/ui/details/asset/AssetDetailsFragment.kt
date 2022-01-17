@@ -100,6 +100,8 @@ class AssetDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        logger.logDebug(TAG, "Asset Details Fragment View Created")
+
         binding.viewPager.adapter = AssetDetailsFragmentAdapter(this)
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = getString(
@@ -110,6 +112,15 @@ class AssetDetailsFragment : Fragment() {
                 }
             )
         }.attach()
+
+        val portfolioId = arguments?.getLong(ARG_PORTFOLIO_ID)
+        val assetId = arguments?.getString(ARG_COIN_ID)
+
+        logger.logDebug(TAG, "   > Portfolio ID : $portfolioId")
+        logger.logDebug(TAG, "   > Asset ID     : $assetId")
+
+        viewModel.setPortfolioId(portfolioId)
+        viewModel.setAssetId(assetId)
     }
 
     /**

@@ -35,6 +35,16 @@ internal class CoinfoDatabase(
         }.flowOn(Dispatchers.Default)
     }
 
+    override fun getTransactions(portfolioId: Long, assetId: String): Flow<List<TransactionData>> {
+        return database.transactionsDao().getTransactions(portfolioId, assetId).map { transactions ->
+            logger.logDebugEx(TAG, "Get Transactions:")
+            logger.logDebugEx(TAG, "   > Portfolio ID       : $portfolioId")
+            logger.logDebugEx(TAG, "   > Asset ID           : $assetId")
+            logger.logDebugEx(TAG, "   > Transactions Count : ${transactions.size}")
+            transactions.map { transaction -> transaction.asTransactionData }
+        }.flowOn(Dispatchers.Default)
+    }
+
     override suspend fun addPortfolio(data: PortfolioData): Long = withContext(Dispatchers.Default) {
         logger.logDebugEx(TAG, "Add Portfolio:")
         logger.logDebugEx(TAG, "   > Name   : ${data.name}")
