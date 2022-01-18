@@ -10,6 +10,8 @@ interface Database {
 
     fun getTransactions(portfolioId: Long): Flow<List<TransactionData>>
 
+    fun getTransactions(portfolioId: Long, assetId: String): Flow<List<TransactionData>>
+
     suspend fun addPortfolio(data: PortfolioData): Long
 
     suspend fun addTransaction(data: TransactionData)

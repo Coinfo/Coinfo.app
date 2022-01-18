@@ -11,7 +11,6 @@ import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.FragmentPortfolioDetailsBinding
 import app.coinfo.portfolios.model.UIAsset
-import app.coinfo.portfolios.ui.adapter.PortfolioDetailsAdapter
 import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

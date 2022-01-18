@@ -5,9 +5,10 @@ enum class TransactionType(val value: Int) {
     SELL(1),
     DEPOSIT(2),
     INTEREST_EARN(3),
-    INTEREST_PAID(4),
-    WITHDRAW(5),
-    UNKNOWN(6);
+    STAKE_REWARD(4),
+    INTEREST_PAID(5),
+    WITHDRAW(6),
+    UNKNOWN(7);
 
     companion object {
         fun fromValue(value: Int) = values().firstOrNull { it.value == value } ?: UNKNOWN

@@ -47,7 +47,7 @@ class PortfolioRepositoryTest {
             type: TransactionType,
             date: Long,
             note: String
-        ) = TransactionData("SOL", PORTFOLIO_ID, amount, price, "EUR", type, date, 0.0, note)
+        ) = TransactionData(0L, "SOL", PORTFOLIO_ID, amount, price, "EUR", type, date, 0.0, note)
     }
 
     private val mockedDatabase: Database = mockk(relaxed = true)

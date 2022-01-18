@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import app.coinfo.library.logger.Logger
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.databinding.FragmentAssetDetailsBinding
-import app.coinfo.portfolios.repo.asset.AssetRepository
 import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragmentAdapter.Companion.TAB_INDEX_INFO
 import app.coinfo.portfolios.ui.details.asset.AssetDetailsFragmentAdapter.Companion.TAB_INDEX_TRANSACTIONS
 import com.google.android.material.tabs.TabLayoutMediator
@@ -23,8 +24,37 @@ class AssetDetailsFragment : Fragment() {
     /** This property is only valid between onCreateView and onDestroyView. */
     private val binding get() = _binding!!
 
+    private val viewModel: AssetDetailsSharedViewModel by viewModels()
+
     @Inject
-    lateinit var assetRepository: AssetRepository
+    lateinit var logger: Logger
+
+    /**
+     * Called to do initial creation of a fragment.  This is called after
+     * {@link #onAttach(Activity)} and before
+     * {@link #onCreateView(LayoutInflater, ViewGroup, Bundle)}.
+     *
+     * <p>Note that this can be called while the fragment's activity is
+     * still in the process of being created.  As such, you can not rely
+     * on things like the activity's content view hierarchy being initialized
+     * at this point.  If you want to do work once the activity itself is
+     * created, add a {@link androidx.lifecycle.LifecycleObserver} on the
+     * activity's Lifecycle, removing it when it receives the
+     * {@link Lifecycle.State#CREATED} callback.
+     *
+     * <p>Any restored child fragments will be created before the base
+     * <code>Fragment.onCreate</code> method returns.</p>
+     *
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        logger.logDebug(TAG, "Asset Details Fragment Created")
+        logger.logDebug(TAG, "   > Fragment ID        : ${System.identityHashCode(this)}")
+        logger.logDebug(TAG, "   > View Model ID      : ${System.identityHashCode(viewModel)}")
+    }
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -70,6 +100,8 @@ class AssetDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        logger.logDebug(TAG, "Asset Details Fragment View Created")
+
         binding.viewPager.adapter = AssetDetailsFragmentAdapter(this)
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = getString(
@@ -80,6 +112,15 @@ class AssetDetailsFragment : Fragment() {
                 }
             )
         }.attach()
+
+        val portfolioId = arguments?.getLong(ARG_PORTFOLIO_ID)
+        val assetId = arguments?.getString(ARG_COIN_ID)
+
+        logger.logDebug(TAG, "   > Portfolio ID : $portfolioId")
+        logger.logDebug(TAG, "   > Asset ID     : $assetId")
+
+        viewModel.setPortfolioId(portfolioId)
+        viewModel.setAssetId(assetId)
     }
 
     /**
@@ -97,6 +138,7 @@ class AssetDetailsFragment : Fragment() {
     }
 
     companion object {
+        private const val TAG = "PORT/AssetDetailsFragment"
         const val ARG_PORTFOLIO_ID = "portfolio_id"
         const val ARG_COIN_ID = "coin_id"
     }

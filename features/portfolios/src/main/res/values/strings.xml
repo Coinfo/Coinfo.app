@@ -9,4 +9,10 @@
     <string name="asset_details_tab_info">Coin Info</string>
     <string name="asset_details_tab_transactions">Transactions</string>
 
+
+    <string name="ui_transaction_type_buy">Buy</string>
+    <string name="ui_transaction_type_sell">Sell</string>
+    <string name="ui_transaction_type_interest_earn">Interest Earn</string>
+    <string name="ui_transaction_type_stake_reward">Reward</string>
+
 </resources>
