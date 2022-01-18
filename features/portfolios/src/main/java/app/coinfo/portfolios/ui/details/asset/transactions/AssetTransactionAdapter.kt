@@ -1,5 +1,6 @@
 package app.coinfo.portfolios.ui.details.asset.transactions
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import app.coinfo.library.core.ktx.DEFAULT_DIGITS_AFTER_COMMA
+import app.coinfo.library.core.ktx.toDate
+import app.coinfo.library.core.ktx.toString
+import app.coinfo.library.core.utils.Currency
 import app.coinfo.portfolios.R
 import app.coinfo.portfolios.model.UITransaction
 
@@ -63,14 +68,21 @@ class AssetTransactionAdapter :
         holder.bind(currentList[position])
     }
 
-    inner class AssetTransactionViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class AssetTransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+        private val transactionType: TextView = view.findViewById(R.id.text_view_transaction_type)
         private val transactionAmount: TextView = view.findViewById(R.id.text_view_transaction_amount)
         private val transactionPrice: TextView = view.findViewById(R.id.text_view_transaction_price)
+        private val transactionDate: TextView = view.findViewById(R.id.text_view_transaction_date)
 
+        @SuppressLint("SetTextI18n")
         fun bind(transaction: UITransaction) {
-            transactionAmount.text = transaction.amount.toString()
-            transactionPrice.text = transaction.price.toString()
+            transactionType.setText(transaction.transactionType.stringRes)
+            transactionAmount.text = "${transaction.assetId} " +
+                transaction.amount.toString(DEFAULT_DIGITS_AFTER_COMMA)
+            transactionPrice.text = "${transaction.price.toString(DEFAULT_DIGITS_AFTER_COMMA)} " +
+                Currency.toSymbol(transaction.currency)
+            transactionDate.text = transaction.date.toDate()
         }
     }
 

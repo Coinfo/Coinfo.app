@@ -7,4 +7,5 @@ data class UITransaction(
     val price: Double,
     val currency: String,
     val date: Long,
+    val transactionType: UITransactionType
 )

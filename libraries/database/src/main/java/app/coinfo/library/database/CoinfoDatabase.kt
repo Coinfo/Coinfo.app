@@ -7,6 +7,7 @@ import app.coinfo.library.database.mapper.asTransactionData
 import app.coinfo.library.database.mapper.asTransactionEntity
 import app.coinfo.library.database.model.PortfolioData
 import app.coinfo.library.database.model.TransactionData
+import app.coinfo.library.database.model.TransactionType
 import app.coinfo.library.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -36,12 +37,16 @@ internal class CoinfoDatabase(
     }
 
     override fun getTransactions(portfolioId: Long, assetId: String): Flow<List<TransactionData>> {
+        val allowedTransactionTypes = listOf(
+            TransactionType.BUY, TransactionType.SELL, TransactionType.INTEREST_EARN, TransactionType.STAKE_REWARD
+        )
         return database.transactionsDao().getTransactions(portfolioId, assetId).map { transactions ->
             logger.logDebugEx(TAG, "Get Transactions:")
             logger.logDebugEx(TAG, "   > Portfolio ID       : $portfolioId")
             logger.logDebugEx(TAG, "   > Asset ID           : $assetId")
             logger.logDebugEx(TAG, "   > Transactions Count : ${transactions.size}")
-            transactions.map { transaction -> transaction.asTransactionData }
+            transactions.filter { allowedTransactionTypes.contains(TransactionType.fromValue(it.type)) }
+                .map { transaction -> transaction.asTransactionData }
         }.flowOn(Dispatchers.Default)
     }
 

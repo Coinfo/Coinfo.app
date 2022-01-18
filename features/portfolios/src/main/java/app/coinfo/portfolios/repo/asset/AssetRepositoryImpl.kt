@@ -2,6 +2,7 @@ package app.coinfo.portfolios.repo.asset
 
 import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.database.Database
+import app.coinfo.portfolios.mapper.toUITransactionType
 import app.coinfo.portfolios.model.UITransaction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
@@ -28,7 +29,8 @@ class AssetRepositoryImpl(
                     amount = transaction.amount,
                     price = transaction.price,
                     date = transaction.date,
-                    currency = transaction.currency
+                    currency = transaction.currency,
+                    transactionType = transaction.type.toUITransactionType
                 )
             }
         }

@@ -3,6 +3,7 @@ package app.coinfo.portfolios.mapper
 import app.coinfo.library.crypto.com.model.CryptocomTransactionData
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.database.model.TransactionType
+import app.coinfo.portfolios.model.UITransactionType
 
 internal fun CryptocomTransactionData.toDatabaseTransaction(
     transactionType: TransactionType,
@@ -18,3 +19,12 @@ internal fun CryptocomTransactionData.toDatabaseTransaction(
     type = transactionType,
     note = description
 )
+
+internal val TransactionType.toUITransactionType
+    get() = when (this) {
+        TransactionType.BUY -> UITransactionType.BUY
+        TransactionType.SELL -> UITransactionType.SELL
+        TransactionType.INTEREST_EARN -> UITransactionType.INTEREST_EARN
+        TransactionType.STAKE_REWARD -> UITransactionType.STAKE_REWARD
+        else -> throw IllegalStateException("Unsupported Transaction Type")
+    }

@@ -41,7 +41,7 @@ class PortfolioRepositoryImpl(
                     )
                 CryptocomTransactionType.MCO_STAKE_REWARD ->
                     database.addTransaction(
-                        transaction.toDatabaseTransaction(TransactionType.INTEREST_EARN, portfolioId)
+                        transaction.toDatabaseTransaction(TransactionType.STAKE_REWARD, portfolioId)
                     )
                 CryptocomTransactionType.CRYPTO_EARN_PROGRAM_WITHDRAWN ->
                     database.addTransaction(transaction.toDatabaseTransaction(TransactionType.WITHDRAW, portfolioId))
