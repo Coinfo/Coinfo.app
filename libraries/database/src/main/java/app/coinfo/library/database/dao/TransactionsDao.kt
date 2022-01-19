@@ -18,7 +18,9 @@ internal interface TransactionsDao {
 
     @Query(
         """SELECT * FROM transactions
-                    WHERE portfolioCreatorId=:portfolioId AND coinCreatorId=:assetId
+                    WHERE portfolioCreatorId=:portfolioId AND coinCreatorId=:assetId AND (
+                        type=0 OR type=1 OR type=3 OR type=4
+                    )
                     ORDER BY date DESC"""
     )
     fun getTransactions(portfolioId: Long, assetId: String): Flow<List<Transaction>>
