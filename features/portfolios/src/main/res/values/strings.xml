@@ -9,6 +9,13 @@
     <string name="asset_details_tab_info">Coin Info</string>
     <string name="asset_details_tab_transactions">Transactions</string>
 
+    <string name="text_total_holdings">Total Holdings</string>
+    <string name="placeholder_total_holdings">%f %s</string>
+    <string name="text_total_worth">Total Worth</string>
+    <string name="placeholder_total_worth">%f %s</string>
+    <string name="placeholder_total_and_average_buy">Buy %f %s (Avg. Buy %f %s)</string>
+    <string name="placeholder_total_and_average_sell">Sell %f %s (Avg. Sell %f %s)</string>
+    <string name="placeholder_total_reward">Total Reward: %f %s (%f %s)</string>
 
     <string name="ui_transaction_type_buy">Buy</string>
     <string name="ui_transaction_type_sell">Sell</string>
