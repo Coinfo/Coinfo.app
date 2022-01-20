@@ -12,8 +12,8 @@ enum class Currency(
 
     companion object {
         /** Returns symbol for the given currency code */
-        fun toSymbol(code: String) = values().firstOrNull { it.code.equals(code, true) }?.symbol ?: NA.symbol
+        fun toSymbol(code: String?) = values().firstOrNull { it.code.equals(code, true) }?.symbol ?: NA.symbol
         /** Returns code for the given currency symbol */
-        fun toCode(symbol: String) = values().firstOrNull { it.symbol == symbol }?.code ?: NA.code
+        fun toCode(symbol: String?) = values().firstOrNull { it.symbol == symbol }?.code ?: NA.code
     }
 }

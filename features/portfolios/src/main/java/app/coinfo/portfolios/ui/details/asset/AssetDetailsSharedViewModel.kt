@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.portfolios.model.UITransaction
+import app.coinfo.portfolios.model.UITransactionData
 import app.coinfo.portfolios.repo.asset.AssetRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,8 +18,8 @@ class AssetDetailsSharedViewModel @Inject constructor(
     private var portfolioId: Long? = null
     private var assetId: String? = null
 
-    private val _transactions: MutableLiveData<List<UITransaction>> by lazy {
-        MutableLiveData<List<UITransaction>>().also { livedata ->
+    private val _transactions: MutableLiveData<UITransactionData> by lazy {
+        MutableLiveData<UITransactionData>().also { livedata ->
             viewModelScope.launch {
                 assetsRepository.loadTransactions(portfolioId!!, assetId!!).collect { transactions ->
                     livedata.value = transactions
@@ -28,7 +28,7 @@ class AssetDetailsSharedViewModel @Inject constructor(
         }
     }
 
-    val transactions: LiveData<List<UITransaction>>
+    val transactions: LiveData<UITransactionData>
         get() = _transactions
 
     /** Sets portfolio ID. */

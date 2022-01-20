@@ -110,9 +110,9 @@ class AssetTransactionFragment : Fragment() {
         }
 
         // Observers.
-        viewModel.transactions.observe(viewLifecycleOwner) { transactions ->
-            transactionsAdapter.submitList(transactions)
-            headerAdapter.setTransactions(transactions)
+        viewModel.transactions.observe(viewLifecycleOwner) { transactionsData ->
+            transactionsAdapter.submitList(transactionsData.transactions)
+            headerAdapter.setOverview(transactionsData.overview)
         }
     }
 

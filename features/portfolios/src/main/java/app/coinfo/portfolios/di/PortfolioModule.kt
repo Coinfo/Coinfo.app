@@ -31,7 +31,8 @@ internal object PortfolioModule {
     fun providesAssetsRepository(
         database: Database,
         cloud: Cloud,
-    ): AssetRepository = AssetRepositoryImpl(database, cloud)
+        logger: Logger,
+    ): AssetRepository = AssetRepositoryImpl(database, cloud, logger)
 
     @Provides
     @Singleton

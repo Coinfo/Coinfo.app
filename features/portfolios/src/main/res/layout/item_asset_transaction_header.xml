@@ -79,25 +79,15 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_buy" />
 
     <TextView
-        android:id="@+id/text_view_interest_earn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/item_asset_transaction_header_interest_earn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_sell" />
-
-    <TextView
         android:id="@+id/text_view_reward"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/item_asset_transaction_header_reward"
+        android:text="@string/placeholder_total_reward"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_interest_earn" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sell" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

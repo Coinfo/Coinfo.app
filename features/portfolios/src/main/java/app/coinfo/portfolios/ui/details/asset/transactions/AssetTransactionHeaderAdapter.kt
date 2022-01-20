@@ -7,29 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.library.core.utils.Currency
 import app.coinfo.portfolios.R
-import app.coinfo.portfolios.model.UITransaction
-import app.coinfo.portfolios.model.UITransactionType
+import app.coinfo.portfolios.model.UITransactionOverview
 
 class AssetTransactionHeaderAdapter : RecyclerView.Adapter<AssetTransactionHeaderAdapter.HeaderViewHolder>() {
 
-    private var assetId: String = ""
-    private var totalHolding: Double = 0.0
-    private var totalWorth: Double = 0.0
-    private var currencySymbol: String = Currency.NA.symbol
-    private var totalBuyPrice: Double = 0.0
-    private var totalBuyHolding: Double = 0.0
-    private var totalBuyPricePerAsset: Double = 0.0
-    private var buyCount = 0
-    private var buyAvg = 0.0
-    private var totalSellPrice: Double = 0.0
-    private var totalSellHolding: Double = 0.0
-    private var totalSellPricePerAsset: Double = 0.0
-    private var sellCount = 0
-    private var sellAvg = 0.0
-    private var totalInterestEarnHolding: Double = 0.0
-    private var totalInterestEarnPrice: Double = 0.0
-    private var totalRewardHolding: Double = 0.0
-    private var totalRewardPrice: Double = 0.0
+    private var overview: UITransactionOverview? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeaderViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -43,76 +25,49 @@ class AssetTransactionHeaderAdapter : RecyclerView.Adapter<AssetTransactionHeade
 
     override fun getItemCount() = NUMBER_OF_ITEMS
 
-    fun setTransactions(transactions: List<UITransaction>?) {
-        transactions?.forEachIndexed { index, transaction ->
-            // Values which should be set only once.
-            if (index == 0) {
-                assetId = transaction.assetId
-                currencySymbol = Currency.toSymbol(transaction.currency)
-            }
-            totalHolding += transaction.amount
-            when (transaction.transactionType) {
-                UITransactionType.BUY -> {
-                    buyCount++
-                    totalBuyHolding += transaction.amount
-                    totalBuyPricePerAsset += (transaction.price / transaction.amount)
-                    totalBuyPrice += transaction.price
-                }
-                UITransactionType.SELL -> {
-                    sellCount++
-                    totalSellHolding += transaction.amount
-                    totalSellPricePerAsset += (transaction.price / transaction.amount)
-                    totalSellPrice += transaction.price
-                }
-                UITransactionType.INTEREST_EARN -> {
-                    totalInterestEarnHolding += transaction.amount
-                    totalInterestEarnPrice += transaction.price
-                }
-                UITransactionType.STAKE_REWARD -> {
-                    totalRewardHolding += transaction.amount
-                    totalRewardPrice += transaction.price
-                }
-            }
-
-            if (index == transactions.size - 1) {
-                buyAvg = totalBuyPricePerAsset / buyCount
-                sellAvg = totalSellPricePerAsset / sellCount
-                totalWorth = totalSellPrice - totalBuyPrice
-            }
-        }
+    fun setOverview(transactionOverview: UITransactionOverview) {
+        overview = transactionOverview
         notifyItemChanged(0)
     }
 
     inner class HeaderViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         private val textViewTotalHolding: TextView = view.findViewById(R.id.text_view_total_holding)
-        private val textViewTotalWorth: TextView = view.findViewById(R.id.text_view_total_worth)
         private val textViewBuy: TextView = view.findViewById(R.id.text_view_buy)
         private val textViewSell: TextView = view.findViewById(R.id.text_view_sell)
-        private val textViewInterestEarn: TextView = view.findViewById(R.id.text_view_interest_earn)
         private val textViewReward: TextView = view.findViewById(R.id.text_view_reward)
 
         fun bind() {
-            val context = view.context
-            textViewTotalHolding.text = context.getString(R.string.placeholder_total_holdings, totalHolding, assetId)
-            textViewTotalWorth.text = context.getString(R.string.placeholder_total_worth, totalWorth, currencySymbol)
-            textViewBuy.text = context.getString(
-                R.string.placeholder_total_and_average_buy,
-                totalBuyHolding, assetId, buyAvg, currencySymbol
-            )
-            textViewSell.text = context.getString(
-                R.string.placeholder_total_and_average_sell,
-                totalSellHolding, assetId, sellAvg, currencySymbol
-            )
-            textViewInterestEarn.text = context.getString(
-                R.string.placeholder_total_interest_earn,
-                totalInterestEarnPrice, currencySymbol, totalInterestEarnHolding, assetId
-            )
-            textViewReward.text = context.getString(
-                R.string.placeholder_total_reward,
-                totalRewardPrice, currencySymbol, totalRewardHolding, assetId
-            )
+            textViewTotalHolding.setHoldings(overview)
+            textViewBuy.setBuying(overview)
+            textViewSell.setSelling(overview)
+            textViewReward.setReward(overview)
         }
+    }
+
+    private fun TextView.setHoldings(overview: UITransactionOverview?) = overview?.let {
+        text = context.getString(R.string.placeholder_total_holdings, it.totalHoldings, it.assetID)
+    }
+
+    private fun TextView.setBuying(overview: UITransactionOverview?) = overview?.let {
+        text = context.getString(
+            R.string.placeholder_total_and_average_buy,
+            it.totalBoughtAmount, it.assetID, it.boughtAverage, Currency.toSymbol(it.currency)
+        )
+    }
+
+    private fun TextView.setSelling(overview: UITransactionOverview?) = overview?.let {
+        this.text = context.getString(
+            R.string.placeholder_total_and_average_sell,
+            it.totalSoldAmount, it.assetID, it.soldAverage, Currency.toSymbol(it.currency)
+        )
+    }
+
+    private fun TextView.setReward(overview: UITransactionOverview?) = overview?.let {
+        this.text = context.getString(
+            R.string.placeholder_total_reward,
+            it.totalRewardAmount, it.assetID, it.totalRewardInCash, Currency.toSymbol(it.currency)
+        )
     }
 
     companion object {
