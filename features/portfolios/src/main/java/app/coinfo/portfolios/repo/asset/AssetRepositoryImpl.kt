@@ -26,10 +26,14 @@ class AssetRepositoryImpl(
         assetId: String
     ) = withContext(Dispatchers.Default) {
         logger.logDebug(TAG, "Load Transactions")
+        val currentPrice = cloud.getCoinPrice(assetId)
         val transactions = mutableListOf<UITransaction>()
         val transactionOverview = UITransactionOverview(assetId)
         database.getTransactions(portfolioId, assetId).map {
-            it.onEach { transaction ->
+            it.onEachIndexed { index, transaction ->
+                if (index == 0) {
+                    transactionOverview.currentPrice(currentPrice)
+                }
                 transactions.add(transaction.asUITransaction)
                 transactionOverview.calculateOverview(
                     transaction.type,
@@ -38,7 +42,7 @@ class AssetRepositoryImpl(
                     transaction.price
                 )
             }
-            return@map UITransactionData(transactions, transactionOverview)
+            return@map UITransactionData(transactions, transactionOverview, currentPrice)
         }
     }
 

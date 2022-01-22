@@ -36,9 +36,11 @@ class AssetTransactionHeaderAdapter : RecyclerView.Adapter<AssetTransactionHeade
         private val textViewBuy: TextView = view.findViewById(R.id.text_view_buy)
         private val textViewSell: TextView = view.findViewById(R.id.text_view_sell)
         private val textViewReward: TextView = view.findViewById(R.id.text_view_reward)
+        private val textViewTotalWorth: TextView = view.findViewById(R.id.text_view_total_worth)
 
         fun bind() {
             textViewTotalHolding.setHoldings(overview)
+            textViewTotalWorth.setTotalWorth(overview)
             textViewBuy.setBuying(overview)
             textViewSell.setSelling(overview)
             textViewReward.setReward(overview)
@@ -47,6 +49,10 @@ class AssetTransactionHeaderAdapter : RecyclerView.Adapter<AssetTransactionHeade
 
     private fun TextView.setHoldings(overview: UITransactionOverview?) = overview?.let {
         text = context.getString(R.string.placeholder_total_holdings, it.totalHoldings, it.assetID)
+    }
+
+    private fun TextView.setTotalWorth(overview: UITransactionOverview?) = overview?.let {
+        text = context.getString(R.string.placeholder_total_worth, overview.totalWorth, Currency.toSymbol(it.currency))
     }
 
     private fun TextView.setBuying(overview: UITransactionOverview?) = overview?.let {

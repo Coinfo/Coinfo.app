@@ -40,6 +40,11 @@ data class UITransactionOverview(
 
     private var _totalSoldInCash = 0.0
 
+    private var _currentPrice: Double = 0.0
+
+    val totalWorth: Double
+        get() = totalHoldings * _currentPrice
+
     private var _currency: String = ""
     val currency: String
         get() = _currency
@@ -64,5 +69,9 @@ data class UITransactionOverview(
             else -> Unit
         }
         _totalHoldings += amount
+    }
+
+    fun currentPrice(currentPrice: Double) {
+        _currentPrice = currentPrice
     }
 }
