@@ -62,7 +62,20 @@ class PortfolioRepositoryImpl(
                         )
                     )
                 }
-                CryptocomTransactionType.CRYPTO_EXCHANGE -> { }
+                CryptocomTransactionType.CRYPTO_EXCHANGE -> {
+                    database.addTransaction(
+                        TransactionData(
+                            coinId = transaction.currency,
+                            portfolioId = portfolioId,
+                            amount = transaction.amount,
+                            price = transaction.nativeAmount,
+                            currency = transaction.nativeCurrency,
+                            date = transaction.timestamp,
+                            type = TransactionType.SELL,
+                            note = transaction.description
+                        )
+                    )
+                }
                 CryptocomTransactionType.UNKNOWN -> { }
             }
         }
