@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/overviewFragment"
-        android:name="app.coinfo.portfolios.ui.overview.OverviewFragment"
+        android:name="app.coinfo.feature.portfolios.ui.overview.OverviewFragment"
         android:label="fragment_overview"
         tools:layout="@layout/fragment_overview" >
         <action
@@ -20,14 +20,14 @@
     </fragment>
 
     <dialog android:id="@+id/destination_add_portfolio"
-        android:name="app.coinfo.portfolios.ui.add.AddPortfolioDialog"
+        android:name="app.coinfo.feature.portfolios.ui.add.AddPortfolioDialog"
         android:label="dialog_add_portfolio"
         tools:layout="@layout/dialog_add_portfolio">
     </dialog>
 
     <fragment
         android:id="@+id/destination_portfolio_details"
-        android:name="app.coinfo.portfolios.ui.details.portfolio.PortfolioDetailsFragment"
+        android:name="app.coinfo.feature.portfolios.ui.details.portfolio.PortfolioDetailsFragment"
         android:label="fragment_profile_details"
         tools:layout="@layout/fragment_portfolio_details" >
         <action
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/destination_asset_details"
-        android:name="app.coinfo.portfolios.ui.details.asset.AssetDetailsFragment"
+        android:name="app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsFragment"
         android:label="fragment_asset_details"
         tools:layout="@layout/fragment_asset_details" />
 

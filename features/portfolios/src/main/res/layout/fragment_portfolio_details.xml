@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.details.portfolio.PortfolioDetailsFragment">
+    tools:context=".portfolios.ui.details.portfolio.PortfolioDetailsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_assets"
