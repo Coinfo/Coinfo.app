@@ -31,7 +31,6 @@ class CoinfoActivity : AppCompatActivity() {
                 R.id.navigation_home,
                 R.id.navigation_coins,
                 R.id.navigation_portfolios,
-                R.id.navigation_notifications,
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:title="@string/title_dashboard" />
 
     <item
         android:id="@+id/navigation_coins"
@@ -15,10 +15,5 @@
         android:id="@+id/navigation_portfolios"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_portfolios" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
 
 </menu>
