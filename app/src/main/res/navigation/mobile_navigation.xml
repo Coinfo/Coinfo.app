@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_coins"
-        android:name="app.coinfo.ui.coins.CoinsFragment"
+        android:name="app.coinfo.features.coins.ui.CoinsFragment"
         android:label="@string/title_coins"
         tools:layout="@layout/fragment_coins" />
 
