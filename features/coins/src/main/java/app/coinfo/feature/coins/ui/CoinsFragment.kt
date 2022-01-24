@@ -1,14 +1,14 @@
-package app.coinfo.feature.dashboard.ui
+package app.coinfo.feature.coins.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import app.coinfo.feature.dashboard.databinding.FragmentDashboardBinding
+import app.coinfo.feature.coins.databinding.FragmentCoinsBinding
 
-internal class DashboardFragment : Fragment() {
+internal class CoinsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentCoinsBinding? = null
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -37,7 +37,7 @@ internal class DashboardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentDashboardBinding.inflate(inflater, container, false).apply {
+    ) = FragmentCoinsBinding.inflate(inflater, container, false).apply {
         _binding = this
     }.root
 }
