@@ -1,10 +1,10 @@
-package app.coinfo.features.coins.ui
+package app.coinfo.feature.coins.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import app.coinfo.features.coins.databinding.FragmentCoinsBinding
+import app.coinfo.feature.coins.databinding.FragmentCoinsBinding
 
 class CoinsFragment : Fragment() {
 
