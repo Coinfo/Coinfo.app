@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.portfolios.R
-import app.coinfo.library.logger.Logger
 import app.coinfo.feature.portfolios.model.UIAsset
 import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepository
+import app.coinfo.library.logger.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancelChildren

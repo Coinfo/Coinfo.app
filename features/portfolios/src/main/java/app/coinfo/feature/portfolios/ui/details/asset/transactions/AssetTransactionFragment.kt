@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import app.coinfo.feature.portfolios.databinding.FragmentAssetTransactionBinding
-import app.coinfo.library.core.ktx.parentFragmentViewModels
-import app.coinfo.library.logger.Logger
 import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsFragment
 import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsSharedViewModel
+import app.coinfo.library.core.ktx.parentFragmentViewModels
+import app.coinfo.library.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

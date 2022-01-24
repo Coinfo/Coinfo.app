@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.portfolios.R
+import app.coinfo.feature.portfolios.model.UITransaction
 import app.coinfo.library.core.ktx.DEFAULT_DIGITS_AFTER_COMMA
 import app.coinfo.library.core.ktx.toDate
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.utils.Currency
-import app.coinfo.feature.portfolios.model.UITransaction
 
 class AssetTransactionAdapter :
     ListAdapter<UITransaction, AssetTransactionAdapter.AssetTransactionViewHolder>(DiffCallback()) {

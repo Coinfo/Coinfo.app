@@ -1,5 +1,7 @@
 package app.coinfo.feature.portfolios.repo
 
+import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepository
+import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepositoryImpl
 import app.coinfo.library.database.Database
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.database.model.TransactionType
@@ -8,8 +10,6 @@ import app.coinfo.library.database.model.TransactionType.DEPOSIT
 import app.coinfo.library.database.model.TransactionType.INTEREST_EARN
 import app.coinfo.library.database.model.TransactionType.SELL
 import app.coinfo.library.logger.Logger
-import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepository
-import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepositoryImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every

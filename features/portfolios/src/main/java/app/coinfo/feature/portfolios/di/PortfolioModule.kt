@@ -1,14 +1,14 @@
 package app.coinfo.feature.portfolios.di
 
-import app.coinfo.library.cloud.Cloud
-import app.coinfo.library.database.Database
-import app.coinfo.library.logger.Logger
 import app.coinfo.feature.portfolios.repo.asset.AssetRepository
 import app.coinfo.feature.portfolios.repo.asset.AssetRepositoryImpl
 import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepository
 import app.coinfo.feature.portfolios.repo.portfolio.PortfolioRepositoryImpl
 import app.coinfo.feature.portfolios.ui.details.portfolio.PortfolioDetailsAdapter
 import app.coinfo.feature.portfolios.ui.overview.PortfolioAdapter
+import app.coinfo.library.cloud.Cloud
+import app.coinfo.library.database.Database
+import app.coinfo.library.logger.Logger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

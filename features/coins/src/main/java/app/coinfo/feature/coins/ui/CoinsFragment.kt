@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.coinfo.feature.coins.databinding.FragmentCoinsBinding
 
-class CoinsFragment : Fragment() {
+internal class CoinsFragment : Fragment() {
 
     private var _binding: FragmentCoinsBinding? = null
 

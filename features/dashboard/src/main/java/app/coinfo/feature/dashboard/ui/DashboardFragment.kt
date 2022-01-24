@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.coinfo.feature.dashboard.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+internal class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
 

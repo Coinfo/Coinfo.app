@@ -3,7 +3,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/portfolio_navigation"
+    android:id="@+id/portfolio_navigation_graph"
     app:startDestination="@id/overviewFragment">
 
     <fragment

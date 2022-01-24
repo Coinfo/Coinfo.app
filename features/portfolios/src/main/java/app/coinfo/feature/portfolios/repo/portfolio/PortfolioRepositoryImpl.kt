@@ -1,5 +1,8 @@
 package app.coinfo.feature.portfolios.repo.portfolio
 
+import app.coinfo.feature.portfolios.mapper.toDatabaseTransaction
+import app.coinfo.feature.portfolios.model.UIAsset
+import app.coinfo.feature.portfolios.model.UIPortfolio
 import app.coinfo.library.crypto.com.CryptocomDataProviderImpl
 import app.coinfo.library.crypto.com.model.CryptocomTransactionType
 import app.coinfo.library.database.Database
@@ -7,9 +10,6 @@ import app.coinfo.library.database.model.PortfolioData
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.database.model.TransactionType
 import app.coinfo.library.logger.Logger
-import app.coinfo.feature.portfolios.mapper.toDatabaseTransaction
-import app.coinfo.feature.portfolios.model.UIAsset
-import app.coinfo.feature.portfolios.model.UIPortfolio
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.io.InputStream

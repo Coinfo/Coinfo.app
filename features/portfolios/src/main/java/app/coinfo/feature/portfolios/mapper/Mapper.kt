@@ -1,10 +1,10 @@
 package app.coinfo.feature.portfolios.mapper
 
+import app.coinfo.feature.portfolios.model.UITransaction
+import app.coinfo.feature.portfolios.model.UITransactionType
 import app.coinfo.library.crypto.com.model.CryptocomTransactionData
 import app.coinfo.library.database.model.TransactionData
 import app.coinfo.library.database.model.TransactionType
-import app.coinfo.feature.portfolios.model.UITransaction
-import app.coinfo.feature.portfolios.model.UITransactionType
 
 internal fun CryptocomTransactionData.toDatabaseTransaction(
     transactionType: TransactionType,

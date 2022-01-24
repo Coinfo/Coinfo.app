@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import app.coinfo.feature.portfolios.R
 import app.coinfo.feature.portfolios.databinding.FragmentAssetDetailsBinding
-import app.coinfo.library.logger.Logger
 import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsFragmentAdapter.Companion.TAB_INDEX_INFO
 import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsFragmentAdapter.Companion.TAB_INDEX_TRANSACTIONS
+import app.coinfo.library.logger.Logger
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IllegalStateException

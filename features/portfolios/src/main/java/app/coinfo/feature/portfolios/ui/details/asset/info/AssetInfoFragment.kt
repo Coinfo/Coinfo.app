@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import app.coinfo.feature.portfolios.databinding.FragmentAssetInfoBinding
+import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsSharedViewModel
 import app.coinfo.library.core.ktx.parentFragmentViewModels
 import app.coinfo.library.logger.Logger
-import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsSharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

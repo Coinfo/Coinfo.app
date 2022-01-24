@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import app.coinfo.feature.portfolios.R
 import app.coinfo.feature.portfolios.databinding.FragmentPortfolioDetailsBinding
-import app.coinfo.library.logger.Logger
 import app.coinfo.feature.portfolios.model.UIAsset
 import app.coinfo.feature.portfolios.ui.details.asset.AssetDetailsFragment
+import app.coinfo.library.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
