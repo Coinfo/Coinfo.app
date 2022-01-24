@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Coinfo</string>
-    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
     <string name="title_portfolios">Portfolios</string>
     <string name="title_coins">Coins</string>
-    <string name="title_notifications">Notifications</string>
     <string name="menu_item_title_add_portfolio">Add portfolio</string>
 </resources>
