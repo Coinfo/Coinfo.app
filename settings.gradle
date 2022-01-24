@@ -9,6 +9,7 @@ rootProject.name = "Coinfo"
 include ':app'
 include ':features:fngindex'
 include ':features:portfolios'
+include ':features:coins'
 include ':libraries:database'
 include ':libraries:logger'
 include ':libraries:cryptocom'
