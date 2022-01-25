@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="app.coinfo.feature.coins.ui.CoinsViewModel" />
+            type="app.coinfo.feature.coins.ui.entrypoint.CoinsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

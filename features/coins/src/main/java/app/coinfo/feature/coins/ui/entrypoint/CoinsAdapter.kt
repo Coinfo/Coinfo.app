@@ -1,4 +1,4 @@
-package app.coinfo.feature.coins.ui
+package app.coinfo.feature.coins.ui.entrypoint
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

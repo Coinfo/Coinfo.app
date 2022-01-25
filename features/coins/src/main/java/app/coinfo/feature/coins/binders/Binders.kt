@@ -4,7 +4,7 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.coins.model.CoinListItem
-import app.coinfo.feature.coins.ui.CoinsAdapter
+import app.coinfo.feature.coins.ui.entrypoint.CoinsAdapter
 
 @BindingAdapter("android:visibility")
 internal fun setVisibility(view: View, value: Boolean) {
