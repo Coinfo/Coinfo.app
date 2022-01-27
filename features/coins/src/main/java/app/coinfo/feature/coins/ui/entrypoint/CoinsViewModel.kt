@@ -16,19 +16,13 @@ internal class CoinsViewModel @Inject constructor() : ViewModel() {
         get() = _coins
     private val _coins = MutableLiveData(emptyList<CoinListItem>())
 
-    val loading: LiveData<Boolean>
-        get() = _loading
-    private val _loading = MutableLiveData(false)
-
     init {
         loadCoins()
     }
 
     private fun loadCoins() {
-        _loading.value = true
         viewModelScope.launch {
             _coins.postValue(listOf(CoinListItem(1), CoinListItem(2)))
-            _loading.value = false
         }
     }
 }
