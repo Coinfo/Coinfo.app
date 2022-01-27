@@ -2,11 +2,12 @@ package app.coinfo.feature.coins.ui.entrypoint
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import android.widget.ImageView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.coins.databinding.ListItemCoinBinding
 import app.coinfo.feature.coins.model.CoinListItem
+import com.bumptech.glide.Glide
 
 internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>(CoinsDiffCallback()) {
 
@@ -21,8 +22,16 @@ internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: CoinListItem) {
-            binding.textView.text = coin.id.toString()
+            binding.textViewCoinName.text = coin.name
+            binding.textViewCoinPrice.text = coin.price
+            binding.imageViewCoinImage.load(coin.image)
             binding.executePendingBindings()
+        }
+
+        private fun ImageView.load(imageAddress: String) {
+            Glide.with(this)
+                .load(imageAddress)
+                .into(this)
         }
 
         companion object {
@@ -33,11 +42,4 @@ internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>
             }
         }
     }
-}
-
-internal class CoinsDiffCallback : DiffUtil.ItemCallback<CoinListItem>() {
-
-    override fun areItemsTheSame(oldItem: CoinListItem, newItem: CoinListItem) = oldItem.id == newItem.id
-
-    override fun areContentsTheSame(oldItem: CoinListItem, newItem: CoinListItem) = oldItem == newItem
 }

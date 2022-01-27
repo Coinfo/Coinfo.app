@@ -1,5 +1,6 @@
 package app.coinfo.library.cloud
 
+import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.ServerStatus
 import app.coinfo.library.cloud.service.CoingeckoService
 import app.coinfo.library.logger.Logger
@@ -51,6 +52,12 @@ class CoinfoCloud(
         prices[id]?.get(CURRENCY) ?: throw IllegalStateException("Unable to fetch price of coin")
     }
 
+    override suspend fun loadCoins(): List<Coin> {
+        return service.coinMarkets("eur", "market_cap_desc", LOAD_COINS_PER_PAGE, LOAD_PAGE).map {
+            Coin(it.id, it.name, it.symbol, it.image, it.currentPrice)
+        }
+    }
+
     private suspend fun initializeCoinsMapIfEmpty() {
         if (coins.isEmpty()) {
             logger.logDebugEx(TAG, "Get List of Coins from the Server.")
@@ -63,6 +70,8 @@ class CoinfoCloud(
 
     companion object {
         private const val TAG = "CLD/CoinfoCloud"
+        private const val LOAD_COINS_PER_PAGE = 100
+        private const val LOAD_PAGE = 1
         private const val CURRENCY = "eur"
     }
 }

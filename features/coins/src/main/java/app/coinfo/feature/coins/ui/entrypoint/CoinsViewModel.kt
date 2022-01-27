@@ -5,12 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.repos.CoinsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-internal class CoinsViewModel @Inject constructor() : ViewModel() {
+internal class CoinsViewModel @Inject constructor(
+    private val repository: CoinsRepository
+) : ViewModel() {
 
     val coins: LiveData<List<CoinListItem>>
         get() = _coins
@@ -22,7 +25,7 @@ internal class CoinsViewModel @Inject constructor() : ViewModel() {
 
     private fun loadCoins() {
         viewModelScope.launch {
-            _coins.postValue(listOf(CoinListItem(1), CoinListItem(2)))
+            _coins.postValue(repository.loadCoins())
         }
     }
 }
