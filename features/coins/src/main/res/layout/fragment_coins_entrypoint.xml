@@ -14,6 +14,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_coins"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:coins="@{viewModel.coins}"

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/destination_coins"
         android:name="app.coinfo.feature.coins.ui.entrypoint.CoinsFragment"
-        android:label="fragment_coins"
+        android:label="@string/fragment_title_coins"
         tools:layout="@layout/fragment_coins_entrypoint" />
 
 </navigation>
