@@ -29,17 +29,76 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            tools:text="Bitcoin"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintBottom_toTopOf="@+id/text_view_market_cap_rank"
             app:layout_constraintStart_toEndOf="@+id/image_view_coin_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Bitcoin" />
 
         <TextView
             android:id="@+id/text_view_coin_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="98.000$"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/text_view_coin_name"
+            tools:text="98.000$" />
+
+        <TextView
+            android:id="@+id/text_view_market_cap_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_view_coin_image"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_coin_name"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/text_view_coin_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            tools:text="BTC"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_market_cap_rank"
+            app:layout_constraintStart_toEndOf="@+id/text_view_market_cap_rank"
+            app:layout_constraintTop_toTopOf="@+id/text_view_market_cap_rank" />
+
+        <TextView
+            android:id="@+id/text_view_price_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_coin_symbol"
+            app:layout_constraintStart_toEndOf="@+id/image_view_price_change"
+            app:layout_constraintTop_toTopOf="@+id/text_view_coin_symbol"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="1%" />
+
+        <TextView
+            android:id="@+id/text_view_market_cap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            tools:text="MCap 784 bn"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_price_change"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_view_price_change" />
+
+        <ImageView
+            android:id="@+id/image_view_price_change"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_price_change"
+            app:layout_constraintStart_toEndOf="@+id/text_view_coin_symbol"
+            app:layout_constraintTop_toTopOf="@+id/text_view_price_change"
+            app:srcCompat="@drawable/coins_ic_arrow_up" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
