@@ -32,6 +32,7 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
                 }
             )
         }
+        binding.chipCurrency.setOnClickListener { model.loadNextCurrency() }
     }
 
     companion object {
