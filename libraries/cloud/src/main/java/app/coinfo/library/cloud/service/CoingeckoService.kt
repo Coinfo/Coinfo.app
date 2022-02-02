@@ -40,7 +40,8 @@ interface CoingeckoService {
         @Query("vs_currency") targetCurrency: String,
         @Query("order") order: String,
         @Query("per_page") perPage: Int,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("price_change_percentage") priceChangePercentage: String,
     ): MarketsList
 
     companion object {

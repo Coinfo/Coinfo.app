@@ -38,6 +38,14 @@
                     android:textAllCaps="true"
                     tools:text="EUR"/>
 
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_price_change_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/formatter_change_timeline(viewModel.changeTimeline)}"
+                    android:textAllCaps="false"
+                    tools:text="24h"/>
+
             </com.google.android.material.chip.ChipGroup>
 
         </HorizontalScrollView>

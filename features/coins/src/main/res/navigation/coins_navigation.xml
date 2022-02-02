@@ -9,6 +9,15 @@
         android:id="@+id/destination_coins"
         android:name="app.coinfo.feature.coins.ui.entrypoint.CoinsFragment"
         android:label="@string/fragment_title_coins"
-        tools:layout="@layout/fragment_coins_entrypoint" />
+        tools:layout="@layout/fragment_coins_entrypoint" >
+        <action
+            android:id="@+id/action_destination_coins_to_priceChangePercentageFilter"
+            app:destination="@id/destination_price_change_percentage_filter" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/destination_price_change_percentage_filter"
+        android:name="app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet"
+        android:label="PriceChangePercentageFilter" />
 
 </navigation>

@@ -9,7 +9,7 @@ internal data class CoinListItem(
     val image: String,
     val symbol: String,
     val rank: String,
-    val priceChangePercentage24h: String,
+    val priceChangePercentage: String,
     val marketCap: String,
-    val isPriceChnage24hUp: Boolean
+    val isPriceChangeUp: Boolean
 )

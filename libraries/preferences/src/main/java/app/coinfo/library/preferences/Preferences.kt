@@ -7,4 +7,8 @@ interface Preferences {
 
     /** Loads saved currency, if no value saved returns "EUR" */
     fun loadCurrency(): String
+
+    fun saveChangeTimeline(value: String)
+
+    fun loadChangeTimeline(): String?
 }
