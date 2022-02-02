@@ -24,6 +24,24 @@ data class MarketsListItem(
     @SerializedName("market_cap_rank")
     val marketCapRank: Int,
 
-    @SerializedName("price_change_percentage_24h")
-    val priceChangePercentage24h: Double,
+    @SerializedName("price_change_percentage_1h_in_currency")
+    val priceChangePercentage1h: Double?,
+
+    @SerializedName("price_change_percentage_24h_in_currency")
+    val priceChangePercentage24h: Double?,
+
+    @SerializedName("price_change_percentage_7d_in_currency")
+    val priceChangePercentage7d: Double?,
+
+    @SerializedName("price_change_percentage_14d_in_currency")
+    val priceChangePercentage14d: Double?,
+
+    @SerializedName("price_change_percentage_30d_in_currency")
+    val priceChangePercentage30d: Double?,
+
+    @SerializedName("price_change_percentage_200d_in_currency")
+    val priceChangePercentage200d: Double?,
+
+    @SerializedName("price_change_percentage_1y_in_currency")
+    val priceChangePercentage1y: Double?,
 )

@@ -1,3 +1,16 @@
 <resources>
     <string name="fragment_title_coins">Coins</string>
+
+    <string name="title_filter_change_timeline">%% Change Timeline</string>
+    <string name="text_filter_change_timeline_1h">1 hour</string>
+    <string name="text_filter_change_timeline_24h">24 hours</string>
+    <string name="text_filter_change_timeline_7d">7 days</string>
+    <string name="text_filter_change_timeline_14d">14 days</string>
+    <string name="text_filter_change_timeline_30d">1 month</string>
+    <string name="text_filter_change_timeline_200d">200 days</string>
+    <string name="text_filter_change_timeline_1y">1 year</string>
+
+    <!-- Untranslatable Strings -->
+    <string name="formatter_change_timeline" translatable="false">%%(%s)</string>
+
 </resources>

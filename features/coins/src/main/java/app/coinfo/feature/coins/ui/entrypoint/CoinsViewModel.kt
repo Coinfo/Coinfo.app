@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coins.model.CoinListItem
 import app.coinfo.feature.coins.repos.CoinsRepository
+import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
 import app.coinfo.library.core.utils.Currency
 import app.coinfo.library.preferences.Preferences
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,13 @@ internal class CoinsViewModel @Inject constructor(
             }
         }
 
+    val changeTimeline: LiveData<String>
+        get() = _changeTimeline
+    private val _changeTimeline = MutableLiveData(
+        preferences.loadChangeTimeline()
+            ?: ChangeTimelineFilterItem.DAY.toString()
+    )
+
     val currency: LiveData<String>
         get() = _currency
     private val _currency = MutableLiveData(preferences.loadCurrency())
@@ -41,18 +49,24 @@ internal class CoinsViewModel @Inject constructor(
     private val _coins = MutableLiveData(emptyList<CoinListItem>())
 
     init {
-        loadCoins(currentCurrency)
+        loadCoins(currentCurrency, ChangeTimelineFilterItem.YEAR)
     }
 
-    private fun loadCoins(currency: Currency) {
+    private fun loadCoins(currency: Currency, changeTimeline: ChangeTimelineFilterItem) {
         viewModelScope.launch {
-            _coins.postValue(repository.loadCoins(currency))
+            _coins.postValue(repository.loadCoins(currency, changeTimeline))
         }
+    }
+
+    fun setChangeTimeline(value: ChangeTimelineFilterItem) {
+        preferences.saveChangeTimeline(value.toString())
+        _changeTimeline.value = value.toString()
+        loadCoins(currentCurrency, value)
     }
 
     fun loadNextCurrency() = with(nextCurrency) {
         preferences.saveCurrency(this.name)
         _currency.value = this.name
-        loadCoins(this)
+        loadCoins(this, ChangeTimelineFilterItem.YEAR)
     }
 }

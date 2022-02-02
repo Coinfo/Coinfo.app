@@ -1,7 +1,9 @@
 package app.coinfo.feature.coins.repos
 
 import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
 import app.coinfo.library.cloud.Cloud
+import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.core.ktx.DEFAULT_DIGITS_AFTER_COMMA
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
@@ -13,7 +15,10 @@ internal class CoinsRepositoryImpl(
     private val cloud: Cloud
 ) : CoinsRepository {
 
-    override suspend fun loadCoins(currency: Currency): List<CoinListItem> = withContext(Dispatchers.IO) {
+    override suspend fun loadCoins(
+        currency: Currency,
+        changeTimeline: ChangeTimelineFilterItem
+    ): List<CoinListItem> = withContext(Dispatchers.IO) {
         return@withContext cloud.loadCoins(currency.code).map { coin ->
             CoinListItem(
                 name = coin.name,
@@ -21,10 +26,21 @@ internal class CoinsRepositoryImpl(
                 price = "${coin.currentPrice.toString(DEFAULT_DIGITS_AFTER_COMMA)}${currency.symbol}",
                 image = coin.image,
                 rank = coin.marketCapRank.toString(),
-                priceChangePercentage24h = "${coin.priceChangePercentage24h.toString(DEFAULT_DIGITS_AFTER_COMMA)} %",
-                isPriceChnage24hUp = coin.priceChangePercentage24h > 0,
+                priceChangePercentage =
+                "${changeTimeline.getPriceChangePercentage(coin).toString(DEFAULT_DIGITS_AFTER_COMMA)} %",
+                isPriceChangeUp = changeTimeline.getPriceChangePercentage(coin) > 0,
                 marketCap = "${currency.symbol}${coin.marketCap.toStringWithSuffix(DEFAULT_DIGITS_AFTER_COMMA)}",
             )
         }
+    }
+
+    private fun ChangeTimelineFilterItem.getPriceChangePercentage(coin: Coin) = when (this) {
+        ChangeTimelineFilterItem.HOUR -> coin.priceChangePercentage1h
+        ChangeTimelineFilterItem.DAY -> coin.priceChangePercentage24h
+        ChangeTimelineFilterItem.WEEK -> coin.priceChangePercentage7d
+        ChangeTimelineFilterItem.HALF_WEEK -> coin.priceChangePercentage14d
+        ChangeTimelineFilterItem.MONTH -> coin.priceChangePercentage30d
+        ChangeTimelineFilterItem.HALF_YEAR -> coin.priceChangePercentage200d
+        ChangeTimelineFilterItem.YEAR -> coin.priceChangePercentage1y
     }
 }

@@ -27,9 +27,9 @@ internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>
             binding.textViewCoinPrice.text = coin.price
             binding.textViewCoinSymbol.text = coin.symbol
             binding.textViewMarketCapRank.text = coin.rank
-            binding.textViewPriceChange.text = coin.priceChangePercentage24h
+            binding.textViewPriceChange.text = coin.priceChangePercentage
             binding.imageViewPriceChange.setImageResource(
-                if (coin.isPriceChnage24hUp) R.drawable.coins_ic_arrow_up else R.drawable.coins_ic_arrow_down
+                if (coin.isPriceChangeUp) R.drawable.coins_ic_arrow_up else R.drawable.coins_ic_arrow_down
             )
             binding.textViewMarketCap.text = coin.marketCap
             binding.imageViewCoinImage.load(coin.image)
