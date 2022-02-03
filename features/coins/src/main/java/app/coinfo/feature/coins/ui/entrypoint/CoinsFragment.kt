@@ -12,6 +12,9 @@ import app.coinfo.feature.coins.databinding.FragmentCoinsEntrypointBinding
 import app.coinfo.feature.coins.ui.decoration.CoinHorizontalDividerItemDecoration
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
+import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet
+import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
+import app.coinfo.library.core.ktx.getReturnValue
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,9 +32,15 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         binding.viewModel = model
         setupCoinsRecyclerView()
         setupFilterSelectionCallback()
-        binding.chipCurrency.setOnClickListener { model.loadNextCurrency() }
         binding.chipPriceChangePercentage.setOnClickListener {
-            findNavController().navigate(R.id.destination_price_change_percentage_filter)
+            findNavController().navigate(
+                CoinsFragmentDirections.toChangePercentageFilter(model.changeTimelineFilterValue)
+            )
+        }
+        binding.chipCurrency.setOnClickListener {
+            findNavController().navigate(
+                CoinsFragmentDirections.toCurrencyFilter(model.currencyFilterValue)
+            )
         }
     }
 
@@ -45,9 +54,14 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
     }
 
     private fun setupFilterSelectionCallback() {
-        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<ChangeTimelineFilterItem>(
+        // Price Change Percentage
+        findNavController().getReturnValue<ChangeTimelineFilterItem>(
             ChangeTimelineFilterBottomSheet.KEY_CHANGE_TIMELINE_FILTER
-        )?.observe(viewLifecycleOwner) { result -> model.setChangeTimeline(result) }
+        )?.observe(viewLifecycleOwner) { result -> model.changeTimelineFilterValue = result }
+        // Currency
+        findNavController().getReturnValue<CurrencyFilterItem>(
+            CurrencyFilterBottomSheet.KEY_CHANGE_CURRENCY_FILTER
+        )?.observe(viewLifecycleOwner) { result -> model.currencyFilterValue = result }
     }
 
     companion object {

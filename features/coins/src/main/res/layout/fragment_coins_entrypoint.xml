@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.content.Context" />
         <variable
             name="viewModel"
             type="app.coinfo.feature.coins.ui.entrypoint.CoinsViewModel" />
@@ -34,7 +35,7 @@
                     android:id="@+id/chip_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.currency}"
+                    android:text="@{viewModel.currencyFilter.value}"
                     android:textAllCaps="true"
                     tools:text="EUR"/>
 
@@ -42,7 +43,7 @@
                     android:id="@+id/chip_price_change_percentage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{@string/formatter_change_timeline(viewModel.changeTimeline)}"
+                    android:text="@{@string/formatter_change_timeline(viewModel.changeTimelineFilter.value)}"
                     android:textAllCaps="false"
                     tools:text="24h"/>
 

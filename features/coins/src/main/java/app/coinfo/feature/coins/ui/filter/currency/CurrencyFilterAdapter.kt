@@ -1,17 +1,17 @@
-package app.coinfo.feature.coins.ui.filter.changetimeline
+package app.coinfo.feature.coins.ui.filter.currency
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
-import app.coinfo.feature.coins.databinding.ListItemChangeTimelineBinding
+import app.coinfo.feature.coins.databinding.ListItemCurrencyBinding
 
-class ChangeTimelineFilterAdapter(
-    private val onFilterClickListener: (ChangeTimelineFilterItem) -> Unit
-) : RecyclerView.Adapter<ChangeTimelineFilterAdapter.ViewHolder>() {
+class CurrencyFilterAdapter(
+    private val onFilterClickListener: (CurrencyFilterItem) -> Unit
+) : RecyclerView.Adapter<CurrencyFilterAdapter.ViewHolder>() {
 
-    private var selectedFilter: ChangeTimelineFilterItem? = null
-    private val filters = ChangeTimelineFilterItem.values().toList()
+    private var selectedFilter: CurrencyFilterItem? = null
+    private val filters = CurrencyFilterItem.values().toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
@@ -22,18 +22,18 @@ class ChangeTimelineFilterAdapter(
 
     override fun getItemCount() = filters.size
 
-    fun setPreselectedFilter(filter: ChangeTimelineFilterItem) {
+    fun setPreselectedFilter(filter: CurrencyFilterItem) {
         selectedFilter = filter
     }
 
     class ViewHolder private constructor(
-        private val binding: ListItemChangeTimelineBinding
+        private val binding: ListItemCurrencyBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            filter: ChangeTimelineFilterItem,
+            filter: CurrencyFilterItem,
             isSelected: Boolean,
-            onFilterClickListener: (ChangeTimelineFilterItem) -> Unit
+            onFilterClickListener: (CurrencyFilterItem) -> Unit
         ) {
             binding.textViewFilterName.setText(filter.resId)
             binding.imageViewChecked.isInvisible = !isSelected
@@ -44,7 +44,7 @@ class ChangeTimelineFilterAdapter(
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemChangeTimelineBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemCurrencyBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

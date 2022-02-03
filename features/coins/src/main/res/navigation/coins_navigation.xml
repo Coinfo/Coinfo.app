@@ -11,13 +11,30 @@
         android:label="@string/fragment_title_coins"
         tools:layout="@layout/fragment_coins_entrypoint" >
         <action
-            android:id="@+id/action_destination_coins_to_priceChangePercentageFilter"
+            android:id="@+id/to_change_percentage_filter"
             app:destination="@id/destination_price_change_percentage_filter" />
+        <action
+            android:id="@+id/to_currency_filter"
+            app:destination="@id/destination_currency_filter" />
     </fragment>
 
     <dialog
         android:id="@+id/destination_price_change_percentage_filter"
         android:name="app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet"
-        android:label="PriceChangePercentageFilter" />
+        android:label="PriceChangePercentageFilter" >
+        <argument
+            android:name="filter"
+            app:argType="app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem"
+            android:defaultValue="DAY" />
+    </dialog>
+    <dialog
+        android:id="@+id/destination_currency_filter"
+        android:name="app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet"
+        android:label="CurrencyFilterBottomSheet" >
+        <argument
+            android:name="filter"
+            app:argType="app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem"
+            android:defaultValue="EUR" />
+    </dialog>
 
 </navigation>
