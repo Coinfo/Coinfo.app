@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coins.model.CoinListItem
 import app.coinfo.feature.coins.repos.CoinsRepository
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
-import app.coinfo.library.core.utils.Currency
+import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
 import app.coinfo.library.preferences.Preferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,47 +24,38 @@ internal class CoinsViewModel @Inject constructor(
             field = value
             _changeTimelineFilter.value = value
             preferences.saveChangeTimeline(value.value)
+            // Check if not same and then load
+            loadCoins()
+        }
+
+    var currencyFilterValue = CurrencyFilterItem.fromValue(preferences.loadCurrency())
+        set(value) {
+            field = value
+            _currencyFilter.value = value
+            preferences.saveCurrency(value.value)
+            // Check if not same and then load
+            loadCoins()
         }
 
     val changeTimelineFilter: LiveData<ChangeTimelineFilterItem>
         get() = _changeTimelineFilter
     private val _changeTimelineFilter = MutableLiveData(changeTimelineFilterValue)
 
-    private val currentCurrency: Currency
-        get() = Currency.valueOf(preferences.loadCurrency())
-
-    private val nextCurrency: Currency
-        get() {
-            val listOfSupportedCurrencies = listOf(Currency.EUR, Currency.USD)
-            val indexOfCurrentCurrency = listOfSupportedCurrencies.indexOf(currentCurrency)
-            return if (indexOfCurrentCurrency == listOfSupportedCurrencies.size - 1) {
-                listOfSupportedCurrencies[0]
-            } else {
-                listOfSupportedCurrencies[indexOfCurrentCurrency + 1]
-            }
-        }
-
-    val currency: LiveData<String>
-        get() = _currency
-    private val _currency = MutableLiveData(preferences.loadCurrency())
+    val currencyFilter: LiveData<CurrencyFilterItem>
+        get() = _currencyFilter
+    private val _currencyFilter = MutableLiveData(currencyFilterValue)
 
     val coins: LiveData<List<CoinListItem>>
         get() = _coins
     private val _coins = MutableLiveData(emptyList<CoinListItem>())
 
     init {
-        loadCoins(currentCurrency, ChangeTimelineFilterItem.YEAR)
+        loadCoins()
     }
 
-    private fun loadCoins(currency: Currency, changeTimeline: ChangeTimelineFilterItem) {
+    private fun loadCoins() {
         viewModelScope.launch {
-            _coins.postValue(repository.loadCoins(currency, changeTimeline))
+            _coins.postValue(repository.loadCoins(currencyFilterValue, changeTimelineFilterValue))
         }
-    }
-
-    fun loadNextCurrency() = with(nextCurrency) {
-        preferences.saveCurrency(this.name)
-        _currency.value = this.name
-        loadCoins(this, ChangeTimelineFilterItem.YEAR)
     }
 }

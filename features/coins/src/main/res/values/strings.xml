@@ -1,6 +1,10 @@
 <resources>
     <string name="fragment_title_coins">Coins</string>
 
+    <string name="title_filter_currency">Currency</string>
+    <string name="text_filter_currency_usd">United Stated Dollar</string>
+    <string name="text_filter_currency_eur">Euro</string>
+
     <string name="title_filter_change_timeline">Change Timeline (Percentage)</string>
     <string name="text_filter_change_timeline_1h">1 hour</string>
     <string name="text_filter_change_timeline_24h">24 hours</string>

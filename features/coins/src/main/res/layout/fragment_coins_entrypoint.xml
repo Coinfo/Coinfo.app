@@ -35,7 +35,7 @@
                     android:id="@+id/chip_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.currency}"
+                    android:text="@{viewModel.currencyFilter.value}"
                     android:textAllCaps="true"
                     tools:text="EUR"/>
 

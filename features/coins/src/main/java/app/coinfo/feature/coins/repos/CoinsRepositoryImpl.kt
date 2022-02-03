@@ -2,12 +2,12 @@ package app.coinfo.feature.coins.repos
 
 import app.coinfo.feature.coins.model.CoinListItem
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
+import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
 import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.core.ktx.DEFAULT_DIGITS_AFTER_COMMA
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
-import app.coinfo.library.core.utils.Currency
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -16,10 +16,10 @@ internal class CoinsRepositoryImpl(
 ) : CoinsRepository {
 
     override suspend fun loadCoins(
-        currency: Currency,
+        currency: CurrencyFilterItem,
         changeTimeline: ChangeTimelineFilterItem
     ): List<CoinListItem> = withContext(Dispatchers.IO) {
-        return@withContext cloud.loadCoins(currency.code).map { coin ->
+        return@withContext cloud.loadCoins(currency.value).map { coin ->
             CoinListItem(
                 name = coin.name,
                 symbol = coin.symbol,
