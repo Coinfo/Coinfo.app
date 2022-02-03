@@ -1,7 +1,6 @@
 package app.coinfo.feature.portfolios.ui.add
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -58,10 +57,10 @@ class AddPortfolioDialog : DialogFragment() {
      * extras to the Intent created by {@code super.createIntent()}.
      */
     private val fileBrowserLauncher = registerForActivityResult(object : ActivityResultContracts.OpenDocument() {
-        override fun createIntent(context: Context, input: Array<out String>): Intent {
-            return super.createIntent(context, input).apply { addCategory(Intent.CATEGORY_OPENABLE) }
-        }
-    }) { uri -> readCryptoComAppCsv(uri) }
+//        override fun createIntent(context: Context, input: Array<out String>): Intent {
+//            return super.createIntent(context, input).apply { addCategory(Intent.CATEGORY_OPENABLE) }
+//        }
+    }) { uri -> readCryptoComAppCsv(uri!!) }
 
     /** This property is only valid between onCreateView and onDestroyView. */
     private val binding get() = _binding!!

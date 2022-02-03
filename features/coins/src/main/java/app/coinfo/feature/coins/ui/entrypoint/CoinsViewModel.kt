@@ -19,6 +19,17 @@ internal class CoinsViewModel @Inject constructor(
     private val preferences: Preferences,
 ) : ViewModel() {
 
+    var changeTimelineFilterValue = ChangeTimelineFilterItem.fromValue(preferences.loadChangeTimeline())
+        set(value) {
+            field = value
+            _changeTimelineFilter.value = value
+            preferences.saveChangeTimeline(value.value)
+        }
+
+    val changeTimelineFilter: LiveData<ChangeTimelineFilterItem>
+        get() = _changeTimelineFilter
+    private val _changeTimelineFilter = MutableLiveData(changeTimelineFilterValue)
+
     private val currentCurrency: Currency
         get() = Currency.valueOf(preferences.loadCurrency())
 
@@ -32,13 +43,6 @@ internal class CoinsViewModel @Inject constructor(
                 listOfSupportedCurrencies[indexOfCurrentCurrency + 1]
             }
         }
-
-    val changeTimeline: LiveData<String>
-        get() = _changeTimeline
-    private val _changeTimeline = MutableLiveData(
-        preferences.loadChangeTimeline()
-            ?: ChangeTimelineFilterItem.DAY.toString()
-    )
 
     val currency: LiveData<String>
         get() = _currency
@@ -56,12 +60,6 @@ internal class CoinsViewModel @Inject constructor(
         viewModelScope.launch {
             _coins.postValue(repository.loadCoins(currency, changeTimeline))
         }
-    }
-
-    fun setChangeTimeline(value: ChangeTimelineFilterItem) {
-        preferences.saveChangeTimeline(value.toString())
-        _changeTimeline.value = value.toString()
-        loadCoins(currentCurrency, value)
     }
 
     fun loadNextCurrency() = with(nextCurrency) {
