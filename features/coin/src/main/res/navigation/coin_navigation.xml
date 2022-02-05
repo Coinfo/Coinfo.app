@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coin_navigation_graph"
+    app:startDestination="@id/destination_coin">
+
+    <fragment
+        android:id="@+id/destination_coin"
+        android:name="app.coinfo.feature.coin.ui.entrypoint.CoinFragment"
+        android:label="fragment_coin"
+        tools:layout="@layout/fragment_coin">
+
+        <deepLink app:uri="coinfo://app.coinfo.feature/coin?id={id}" />
+        <argument android:name="id" app:argType="string"/>
+
+    </fragment>
+
+
+</navigation>
