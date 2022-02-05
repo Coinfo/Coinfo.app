@@ -7,6 +7,7 @@
 
     <include app:graph="@navigation/dashboard_navigation" />
     <include app:graph="@navigation/coins_navigation" />
+    <include app:graph="@navigation/coin_navigation" />
     <include app:graph="@navigation/portfolios_navigation" />
 
 </navigation>

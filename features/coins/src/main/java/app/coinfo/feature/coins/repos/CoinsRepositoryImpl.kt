@@ -21,6 +21,7 @@ internal class CoinsRepositoryImpl(
     ): List<CoinListItem> = withContext(Dispatchers.IO) {
         return@withContext cloud.loadCoins(currency.value).map { coin ->
             CoinListItem(
+                id = coin.id,
                 name = coin.name,
                 symbol = coin.symbol,
                 price = "${coin.currentPrice.toString(DEFAULT_DIGITS_AFTER_COMMA)}${currency.symbol}",
