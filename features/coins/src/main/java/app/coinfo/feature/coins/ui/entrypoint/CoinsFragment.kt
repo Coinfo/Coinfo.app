@@ -42,6 +42,10 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
                 CoinsFragmentDirections.toCurrencyFilter(model.currencyFilterValue)
             )
         }
+
+        binding.swipeRefreshLayoutCoins.setOnRefreshListener {
+            model.refreshCoins()
+        }
     }
 
     private fun setupCoinsRecyclerView() = with(binding.recyclerViewCoins) {

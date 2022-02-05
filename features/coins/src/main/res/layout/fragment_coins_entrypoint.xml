@@ -51,16 +51,24 @@
 
         </HorizontalScrollView>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_coins"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout_coins"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:coins="@{viewModel.coins}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:isRefreshing="@{viewModel.isRefreshing}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_coins"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:coins="@{viewModel.coins}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

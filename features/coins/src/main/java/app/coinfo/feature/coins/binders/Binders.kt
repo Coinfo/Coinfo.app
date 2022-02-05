@@ -3,6 +3,7 @@ package app.coinfo.feature.coins.binders
 import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.coinfo.feature.coins.model.CoinListItem
 import app.coinfo.feature.coins.ui.entrypoint.CoinsAdapter
 
@@ -17,4 +18,9 @@ internal fun bindCoins(recyclerView: RecyclerView, coins: List<CoinListItem>?) {
         recyclerView.adapter = CoinsAdapter()
     }
     (recyclerView.adapter as CoinsAdapter).submitList(coins)
+}
+
+@BindingAdapter("isRefreshing")
+internal fun bindIsRefreshing(swipeRefreshLayout: SwipeRefreshLayout, isRefreshing: Boolean) {
+    swipeRefreshLayout.isRefreshing = isRefreshing
 }
