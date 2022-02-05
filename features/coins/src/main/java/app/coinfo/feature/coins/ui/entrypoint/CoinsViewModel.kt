@@ -21,6 +21,7 @@ internal class CoinsViewModel @Inject constructor(
 
     var changeTimelineFilterValue = ChangeTimelineFilterItem.fromValue(preferences.loadChangeTimeline())
         set(value) {
+            if (value == changeTimelineFilterValue) return
             field = value
             _changeTimelineFilter.value = value
             preferences.saveChangeTimeline(value.value)
@@ -30,6 +31,7 @@ internal class CoinsViewModel @Inject constructor(
 
     var currencyFilterValue = CurrencyFilterItem.fromValue(preferences.loadCurrency())
         set(value) {
+            if (value == currencyFilterValue) return
             field = value
             _currencyFilter.value = value
             preferences.saveCurrency(value.value)
