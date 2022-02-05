@@ -37,6 +37,10 @@ internal class CoinsViewModel @Inject constructor(
             loadCoins()
         }
 
+    val isRefreshing: LiveData<Boolean>
+        get() = _isRefreshing
+    private val _isRefreshing = MutableLiveData(false)
+
     val changeTimelineFilter: LiveData<ChangeTimelineFilterItem>
         get() = _changeTimelineFilter
     private val _changeTimelineFilter = MutableLiveData(changeTimelineFilterValue)
@@ -51,6 +55,12 @@ internal class CoinsViewModel @Inject constructor(
 
     init {
         loadCoins()
+    }
+
+    fun refreshCoins() {
+        _isRefreshing.value = true
+        loadCoins()
+        _isRefreshing.value = false
     }
 
     private fun loadCoins() {
