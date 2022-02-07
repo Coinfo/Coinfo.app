@@ -2,6 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="coinViewModel"
+            type="app.coinfo.feature.coin.ui.entrypoint.CoinViewModel" />
 
     </data>
 
