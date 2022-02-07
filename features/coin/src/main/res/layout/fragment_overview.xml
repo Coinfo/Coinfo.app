@@ -1,0 +1,19 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="coinViewModel"
+            type="app.coinfo.feature.coin.ui.entrypoint.CoinViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="app.coinfo.feature.coin.ui.overview.OverviewFragment">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
