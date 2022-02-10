@@ -38,6 +38,8 @@ android {
 dependencies {
 
     implementation project(path: ':libraries:core')
+    implementation project(path: ':libraries:cloud')
+    implementation project(path: ':libraries:logger')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -56,6 +58,9 @@ dependencies {
 
     // View Bindings
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.3"
+
+    // Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // Hilt
     implementation 'com.google.dagger:hilt-android:2.40.1'
