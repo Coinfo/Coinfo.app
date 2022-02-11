@@ -1,5 +1,6 @@
 package app.coinfo.library.cloud
 
+import app.coinfo.library.cloud.mapper.asCoin
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.ServerStatus
 import app.coinfo.library.cloud.service.CoingeckoService
@@ -76,6 +77,13 @@ class CoinfoCloud(
                 priceChangePercentage1y = it.priceChangePercentage200d ?: 0.0
             )
         }
+    }
+
+    override suspend fun getCoinData(id: String) = withContext(Dispatchers.IO) {
+        return@withContext service.coinCurrentData(
+            id = id,
+            marketData = true,
+        ).asCoin
     }
 
     private suspend fun initializeCoinsMapIfEmpty() {

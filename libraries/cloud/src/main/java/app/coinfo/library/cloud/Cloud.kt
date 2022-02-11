@@ -1,6 +1,7 @@
 package app.coinfo.library.cloud
 
 import app.coinfo.library.cloud.model.Coin
+import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.ServerStatus
 
 interface Cloud {
@@ -15,4 +16,7 @@ interface Cloud {
     suspend fun getCoinPrice(symbol: String): Double
 
     suspend fun loadCoins(currency: String): List<Coin>
+
+    /** Returns [CoinData] for the given coin [id]. */
+    suspend fun getCoinData(id: String): CoinData
 }

@@ -9,7 +9,7 @@
         android:id="@+id/destination_coin"
         android:name="app.coinfo.feature.coin.ui.entrypoint.CoinFragment"
         android:label="fragment_coin"
-        tools:layout="@layout/fragment_coin">
+        tools:layout="@layout/coin_fragment_coin">
 
         <deepLink app:uri="coinfo://app.coinfo.feature/coin?id={id}" />
         <argument android:name="id" app:argType="string"/>

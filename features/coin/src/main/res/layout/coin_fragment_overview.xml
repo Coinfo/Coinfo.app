@@ -1,0 +1,126 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="app.coinfo.library.cloud.enums.TimeInterval"/>
+        <variable
+            name="coinViewModel"
+            type="app.coinfo.feature.coin.ui.entrypoint.CoinViewModel" />
+
+    </data>
+
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        tools:context="app.coinfo.feature.coin.ui.overview.OverviewFragment">-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_coin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@{coinViewModel.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Bitcoin" />
+
+        <TextView
+            android:id="@+id/text_view_coin_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="@{coinViewModel.price}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_coin_name"
+            tools:text="$97.000" />
+
+        <TextView
+            android:id="@+id/text_view_coin_percentage_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="@{coinViewModel.percentage}"
+            tools:text="35000%"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_coin_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_view_coin_price" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_coin_price">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_1h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.HOUR)}"
+                android:text="@string/coin_text_1h" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_24h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.DAY)}"
+                android:text="@string/coin_text_24h" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_7d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.WEEK)}"
+                android:text="@string/coin_text_7d" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_30d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.MONTH)}"
+                android:text="@string/coin_text_30d" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_60d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.TWO_MONTHS)}"
+                android:text="@string/coin_text_60d" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_1y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.YEAR)}"
+                android:text="@string/coin_text_1y" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart_coin"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    </ScrollView>-->
+
+</layout>
