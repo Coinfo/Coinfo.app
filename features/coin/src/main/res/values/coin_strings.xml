@@ -2,6 +2,12 @@
 
     <string name="coin_text_tab_overview">Overview</string>
     <string name="coin_text_tab_portfolio">Portfolio</string>
+    <string name="coin_text_1h">1h</string>
+    <string name="coin_text_24h">24h</string>
+    <string name="coin_text_7d">7d</string>
+    <string name="coin_text_60d">60d</string>
+    <string name="coin_text_30d">30d</string>
+    <string name="coin_text_1y">1y</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

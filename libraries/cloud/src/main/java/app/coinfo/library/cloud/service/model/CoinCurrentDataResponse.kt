@@ -9,4 +9,6 @@ data class CoinCurrentDataResponse(
     val symbol: String,
     @SerializedName("name")
     val name: String,
+    @SerializedName("market_data")
+    val marketData: CoinMarketData,
 )

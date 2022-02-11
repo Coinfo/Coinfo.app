@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="app.coinfo.library.cloud.enums.TimeInterval"/>
         <variable
             name="coinViewModel"
             type="app.coinfo.feature.coin.ui.entrypoint.CoinViewModel" />
@@ -68,13 +69,43 @@
                 android:id="@+id/chip_1h"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1h" />
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.HOUR)}"
+                android:text="@string/coin_text_1h" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_all"
+                android:id="@+id/chip_24h"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="All" />
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.DAY)}"
+                android:text="@string/coin_text_24h" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_7d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.WEEK)}"
+                android:text="@string/coin_text_7d" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_30d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.MONTH)}"
+                android:text="@string/coin_text_30d" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_60d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.TWO_MONTHS)}"
+                android:text="@string/coin_text_60d" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_1y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.YEAR)}"
+                android:text="@string/coin_text_1y" />
 
         </com.google.android.material.chip.ChipGroup>
 

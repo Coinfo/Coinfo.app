@@ -80,7 +80,10 @@ class CoinfoCloud(
     }
 
     override suspend fun getCoinData(id: String) = withContext(Dispatchers.IO) {
-        return@withContext service.coinCurrentData(id = id).asCoin
+        return@withContext service.coinCurrentData(
+            id = id,
+            marketData = true,
+        ).asCoin
     }
 
     private suspend fun initializeCoinsMapIfEmpty() {

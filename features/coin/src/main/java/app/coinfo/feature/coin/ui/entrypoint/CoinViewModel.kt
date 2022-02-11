@@ -5,6 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.library.cloud.Cloud
+import app.coinfo.library.cloud.enums.Currency
+import app.coinfo.library.cloud.enums.TimeInterval
+import app.coinfo.library.cloud.model.CoinData
+import app.coinfo.library.core.ktx.toString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,6 +17,8 @@ import javax.inject.Inject
 internal class CoinViewModel @Inject constructor(
     private val cloud: Cloud
 ) : ViewModel() {
+
+    private lateinit var coin: CoinData
 
     val name: LiveData<String>
         get() = _name
@@ -28,11 +34,18 @@ internal class CoinViewModel @Inject constructor(
 
     fun loadCoinData(id: String) {
         viewModelScope.launch {
-            val daya = cloud.getCoinData(id)
-            _name.value = daya.name
+            coin = cloud.getCoinData(id)
+
+            _name.value = coin.name
+            _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
+            _percentage.value = coin.getPercentageChange(Currency.EUR, TimeInterval.DAY).toString(2)
         }
         viewModelScope.launch {
 //            cloud.getHistoricalMarketData(id)
         }
+    }
+
+    fun onTimeIntervalChanged(interval: TimeInterval) {
+        _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
     }
 }
