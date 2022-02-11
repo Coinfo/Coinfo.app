@@ -2,6 +2,7 @@ package app.coinfo.library.cloud.service
 
 import app.coinfo.library.cloud.service.model.CoinCurrentDataResponse
 import app.coinfo.library.cloud.service.model.CoinsList
+import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
 import app.coinfo.library.cloud.service.model.MarketsList
 import app.coinfo.library.cloud.service.model.PingResponse
 import retrofit2.http.GET
@@ -48,6 +49,7 @@ interface CoingeckoService {
     /**
      * Get current data (name, price, market, ... including exchange tickers) for a coin.
      *
+     * @param id The coin id (can be obtained from /coins) eg. bitcoin
      * @param localization Include all localized languages in response (true/false) [default: true]
      * @param tickers Include tickers data (true/false) [default: true]
      * @param marketData Include market_data (true/false) [default: true]
@@ -65,6 +67,22 @@ interface CoingeckoService {
         @Query("developer_data") developerData: Boolean = true,
         @Query("sparkline") sparkline: Boolean = false,
     ): CoinCurrentDataResponse
+
+    /**
+     * Get historical market data include price, market cap, and 24h volume (granularity auto)
+     *
+     * @param id The coin id (can be obtained from /coins) eg. bitcoin
+     * @param vsCurrency The target currency of market data (usd, eur, jpy, etc.)
+     * @param days Data up to number of days ago (eg. 1,14,30,max)
+     * @param interval Data interval. Possible value: daily
+     */
+    @GET("coins/{id}/market_chart")
+    suspend fun historicalMarketData(
+        @Path("id") id: String,
+        @Query("vs_currency") vsCurrency: String,
+        @Query("days") days: String,
+        @Query("interval") interval: String = ""
+    ): HistoricalMarketDataResponse
 
     companion object {
         const val ENDPOINT = "https://api.coingecko.com/api/v3/"

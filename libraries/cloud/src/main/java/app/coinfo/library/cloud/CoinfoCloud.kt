@@ -1,6 +1,9 @@
 package app.coinfo.library.cloud
 
+import app.coinfo.library.cloud.enums.Currency
+import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.mapper.asCoin
+import app.coinfo.library.cloud.mapper.asHistoricalMarketData
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.ServerStatus
 import app.coinfo.library.cloud.service.CoingeckoService
@@ -79,12 +82,34 @@ class CoinfoCloud(
         }
     }
 
+    // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     override suspend fun getCoinData(id: String) = withContext(Dispatchers.IO) {
         return@withContext service.coinCurrentData(
             id = id,
             marketData = true,
         ).asCoin
     }
+
+    override suspend fun getCoinHistoricalMarketData(
+        id: String,
+        currency: Currency,
+        timeInterval: TimeInterval,
+    ) = withContext(Dispatchers.IO) {
+        return@withContext service.historicalMarketData(
+            id = id,
+            vsCurrency = currency.value,
+            days = when (timeInterval) {
+                TimeInterval.DAY, TimeInterval.HOUR -> "1"
+                TimeInterval.WEEK -> "7"
+                TimeInterval.MONTH -> "30"
+                TimeInterval.TWO_MONTHS -> "60"
+                TimeInterval.YEAR -> "360"
+            },
+        ).asHistoricalMarketData
+    }
+
+    // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private suspend fun initializeCoinsMapIfEmpty() {
         if (coins.isEmpty()) {

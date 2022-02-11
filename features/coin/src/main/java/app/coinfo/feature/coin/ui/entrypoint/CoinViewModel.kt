@@ -41,7 +41,7 @@ internal class CoinViewModel @Inject constructor(
             _percentage.value = coin.getPercentageChange(Currency.EUR, TimeInterval.DAY).toString(2)
         }
         viewModelScope.launch {
-//            cloud.getHistoricalMarketData(id)
+            cloud.getCoinHistoricalMarketData(id, Currency.EUR, TimeInterval.MONTH)
         }
     }
 
