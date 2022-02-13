@@ -11,4 +11,6 @@ data class CoinCurrentDataResponse(
     val name: String,
     @SerializedName("market_data")
     val marketData: CoinMarketData,
+    @SerializedName("developer_data")
+    val developerData: DeveloperData?,
 )
