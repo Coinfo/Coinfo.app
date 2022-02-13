@@ -1,7 +1,10 @@
 package app.coinfo.library.cloud
 
+import app.coinfo.library.cloud.enums.Currency
+import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.CoinData
+import app.coinfo.library.cloud.model.HistoricalMarketData
 import app.coinfo.library.cloud.model.ServerStatus
 
 interface Cloud {
@@ -19,4 +22,10 @@ interface Cloud {
 
     /** Returns [CoinData] for the given coin [id]. */
     suspend fun getCoinData(id: String): CoinData
+
+    suspend fun getCoinHistoricalMarketData(
+        id: String,
+        currency: Currency,
+        timeInterval: TimeInterval,
+    ): HistoricalMarketData
 }
