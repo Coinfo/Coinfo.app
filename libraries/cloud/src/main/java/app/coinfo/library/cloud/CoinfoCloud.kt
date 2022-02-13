@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-class CoinfoCloud(
+internal class CoinfoCloud(
     private val service: CoingeckoService,
     private val logger: Logger,
 ) : Cloud {

@@ -1,7 +1,10 @@
 package app.coinfo.feature.coin.binders
 
 import android.graphics.Color
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
+import app.coinfo.feature.coin.details.R
+import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.PriceDatePair
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
@@ -9,12 +12,35 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 private const val DASHED_LINE_LENGTH = 10f
 private const val DASHED_LINE_SPACE_LENGTH = 5f
 private const val DASHED_LINE_PHASE = 0f
 private const val LINE_THICKNESS_WIDTH = 1f
 private const val LINE_POINT_RADIUS = 3f
+
+@BindingAdapter("developerInfo")
+internal fun bindDeveloperIndo(chipGroup: ChipGroup, info: DeveloperInfo?) {
+    info?.let {
+        val context = chipGroup.context
+        it.forks?.let { forks ->
+            val chip = Chip(context)
+            chip.text = context.getString(R.string.coin_dev_info_forks, forks)
+            chip.isCloseIconVisible = false
+            chip.chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_fork)
+            chipGroup.addView(chip)
+        }
+        it.stars?.let { stars ->
+            val chip = Chip(context)
+            chip.text = context.getString(R.string.coin_dev_info_stars, stars)
+            chip.isCloseIconVisible = false
+            chip.chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_star)
+            chipGroup.addView(chip)
+        }
+    }
+}
 
 @BindingAdapter("historicalMarketData")
 internal fun bindHistoricalMarketData(chart: LineChart, data: List<PriceDatePair>) {
@@ -25,7 +51,7 @@ internal fun bindHistoricalMarketData(chart: LineChart, data: List<PriceDatePair
         values.add(Entry(it.date.toFloat(), it.price.toFloat()))
     }
 
-    val set1 = LineDataSet(values, "DataSet 1")
+    val set1 = LineDataSet(values, "Coin Price")
 
     set1.setDrawIcons(false)
 

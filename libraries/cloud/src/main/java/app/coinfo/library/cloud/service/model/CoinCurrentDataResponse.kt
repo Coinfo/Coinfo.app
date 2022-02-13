@@ -2,13 +2,15 @@ package app.coinfo.library.cloud.service.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CoinCurrentDataResponse(
+internal data class CoinCurrentDataResponse(
     @SerializedName("id")
     val id: String,
     @SerializedName("symbol")
     val symbol: String,
     @SerializedName("name")
     val name: String,
+    @SerializedName("description")
+    val descriptions: Map<String, String>,
     @SerializedName("market_data")
     val marketData: CoinMarketData,
     @SerializedName("developer_data")

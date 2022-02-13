@@ -2,7 +2,7 @@ package app.coinfo.library.cloud.service.model
 
 import com.google.gson.annotations.SerializedName
 
-data class DeveloperData(
+internal data class DeveloperData(
     @SerializedName("forks")
     val forks: Long?,
     @SerializedName("stars")

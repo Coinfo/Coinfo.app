@@ -2,7 +2,7 @@ package app.coinfo.library.cloud.service.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CoinsListItem(
+internal data class CoinsListItem(
     @SerializedName("id")
     val id: String,
     @SerializedName("name")

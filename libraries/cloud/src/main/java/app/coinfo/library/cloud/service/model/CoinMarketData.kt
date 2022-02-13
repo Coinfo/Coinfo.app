@@ -2,7 +2,7 @@ package app.coinfo.library.cloud.service.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CoinMarketData(
+internal data class CoinMarketData(
     @SerializedName("current_price")
     val currentPriceInCurrency: Map<String, Double>,
     @SerializedName("ath")
