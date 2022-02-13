@@ -88,4 +88,6 @@ internal fun bindHistoricalMarketData(chart: LineChart, data: List<PriceDatePair
     dataSets.add(set1) // add the data sets
 
     chart.data = LineData(dataSets)
+    chart.notifyDataSetChanged()
+    chart.invalidate()
 }
