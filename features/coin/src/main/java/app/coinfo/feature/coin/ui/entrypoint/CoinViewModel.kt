@@ -19,6 +19,7 @@ internal class CoinViewModel @Inject constructor(
     private val cloud: Cloud
 ) : ViewModel() {
 
+    private lateinit var id: String
     private lateinit var coin: CoinData
 
     val name: LiveData<String>
@@ -38,27 +39,31 @@ internal class CoinViewModel @Inject constructor(
     private val _priceHistoricalDataSet = MutableLiveData(emptyList<PriceDatePair>())
 
     fun loadCoinData(id: String) {
-        loadCoinInformation(id)
-        loadCoinHistoricalMarketData(id)
+        this.id = id
+        loadCoinInformation(TimeInterval.DAY)
+        loadCoinHistoricalMarketData(TimeInterval.DAY)
     }
 
     fun onTimeIntervalChanged(interval: TimeInterval) {
+        // Change Price Percentage Change.
         _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
+        // Reload Historical Market Data.
+        loadCoinHistoricalMarketData(interval)
     }
 
-    private fun loadCoinInformation(id: String) {
+    private fun loadCoinInformation(interval: TimeInterval) {
         viewModelScope.launch {
             coin = cloud.getCoinData(id)
 
             _name.value = coin.name
             _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
-            _percentage.value = coin.getPercentageChange(Currency.EUR, TimeInterval.DAY).toString(2)
+            _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
         }
     }
 
-    private fun loadCoinHistoricalMarketData(id: String) {
+    private fun loadCoinHistoricalMarketData(interval: TimeInterval) {
         viewModelScope.launch {
-            val historicalData = cloud.getCoinHistoricalMarketData(id, Currency.EUR, TimeInterval.DAY)
+            val historicalData = cloud.getCoinHistoricalMarketData(id, Currency.EUR, interval)
             _priceHistoricalDataSet.value = historicalData.prices
         }
     }
