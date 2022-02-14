@@ -7,6 +7,8 @@ internal data class CoinMarketData(
     val currentPriceInCurrency: Map<String, Double>,
     @SerializedName("ath")
     val allTimeHighInCurrency: Map<String, Double>,
+    @SerializedName("atl")
+    val allTimeLowInCurrency: Map<String, Double>,
     @SerializedName("ath_change_percentage")
     val allTimeHighChangePercentageInCurrency: Map<String, Double>,
     @SerializedName("ath_date")
@@ -35,4 +37,6 @@ internal data class CoinMarketData(
     val priceChangePercentage200dInCurrency: Map<String, Double>,
     @SerializedName("price_change_percentage_1y_in_currency")
     val priceChangePercentage1yInCurrency: Map<String, Double>,
+    @SerializedName("max_supply")
+    val maxSupply: Double,
 )
