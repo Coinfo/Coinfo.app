@@ -31,6 +31,7 @@ internal class CoinFragment : Fragment(R.layout.coin_fragment_coin) {
             ?: throw IllegalStateException("Unable to get coin id from arguments.")
 
         binding.lifecycleOwner = this
+        binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = CoinStateAdapter(this)
         initializeTabs()
 
