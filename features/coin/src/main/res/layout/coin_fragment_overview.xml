@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:text="@string/coin_statistics_label_max_support" />
+                    android:text="@string/coin_statistics_label_max_supply" />
 
                 <TextView
                     android:id="@+id/text_max_supply"
@@ -231,16 +231,64 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/label_fully_diluted_valuation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_fully_diluted_valuation" />
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/text_view_fully_diluted_valuation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView" />
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.fullyDilutedValuation}" />
+
+                <TextView
+                    android:id="@+id/label_circulating_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_circulating_supply" />
+
+                <TextView
+                    android:id="@+id/text_view_circulating_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.circulatingSupply}" />
+
+                <TextView
+                    android:id="@+id/label_total_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_total_supply" />
+
+                <TextView
+                    android:id="@+id/text_view_total_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.totalSupply}" />
+
+                <TextView
+                    android:id="@+id/label_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_rank" />
+
+                <TextView
+                    android:id="@+id/text_view_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.rank}" />
 
             </LinearLayout>
 

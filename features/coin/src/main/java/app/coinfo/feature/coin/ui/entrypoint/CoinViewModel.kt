@@ -52,6 +52,22 @@ internal class CoinViewModel @Inject constructor(
         get() = _allTimeLow
     private val _allTimeLow = MutableLiveData("")
 
+    val fullyDilutedValuation: LiveData<String>
+        get() = _fullyDilutedValuation
+    private val _fullyDilutedValuation = MutableLiveData("")
+
+    val circulatingSupply: LiveData<String>
+        get() = _circulatingSupply
+    private val _circulatingSupply = MutableLiveData("")
+
+    val totalSupply: LiveData<String>
+        get() = _totalSupply
+    private val _totalSupply = MutableLiveData("")
+
+    val rank: LiveData<String>
+        get() = _rank
+    private val _rank = MutableLiveData("")
+
     val percentage: LiveData<String>
         get() = _percentage
     private val _percentage = MutableLiveData("")
@@ -85,6 +101,10 @@ internal class CoinViewModel @Inject constructor(
             _maxSupply.value = coin.maxSupply.toStringWithSuffix(2)
             _allTimeHigh.value = coin.getAllTimeHigh(Currency.EUR).toStringWithSuffix(2)
             _allTimeLow.value = coin.getAllTimeLow(Currency.EUR).toStringWithSuffix(2)
+            _circulatingSupply.value = coin.circulatingSupply.toStringWithSuffix(2)
+            _totalSupply.value = coin.totalSupply.toStringWithSuffix(2)
+            _rank.value = coin.rank.toString()
+            _fullyDilutedValuation.value = coin.getFullyDilutedValuation(Currency.EUR).toStringWithSuffix(2)
         }
     }
 

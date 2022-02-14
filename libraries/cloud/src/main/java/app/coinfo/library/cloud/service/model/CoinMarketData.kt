@@ -39,4 +39,10 @@ internal data class CoinMarketData(
     val priceChangePercentage1yInCurrency: Map<String, Double>,
     @SerializedName("max_supply")
     val maxSupply: Double,
+    @SerializedName("circulating_supply")
+    val circulatingSupply: Double,
+    @SerializedName("total_supply")
+    val totalSupply: Double,
+    @SerializedName("fully_diluted_valuation")
+    val fullyDilutedValuation: Map<String, Double>,
 )

@@ -22,10 +22,17 @@ internal val CoinCurrentDataResponse.asCoin
                 it.pullRequestsMerged
             )
         },
+        rank = marketData.marketCapRank,
+        circulatingSupply = marketData.circulatingSupply,
+        totalSupply = marketData.totalSupply,
         maxSupply = marketData.maxSupply,
         allTimeHighInCurrency = mapOf(
             Currency.USD to (marketData.allTimeHighInCurrency[Currency.USD.value] ?: 0.0),
             Currency.EUR to (marketData.allTimeHighInCurrency[Currency.EUR.value] ?: 0.0),
+        ),
+        fullyDilutedValuationInCurrency = mapOf(
+            Currency.USD to (marketData.fullyDilutedValuation[Currency.USD.value] ?: 0.0),
+            Currency.EUR to (marketData.fullyDilutedValuation[Currency.EUR.value] ?: 0.0),
         ),
         allTimeLowInCurrency = mapOf(
             Currency.USD to (marketData.allTimeLowInCurrency[Currency.USD.value] ?: 0.0),

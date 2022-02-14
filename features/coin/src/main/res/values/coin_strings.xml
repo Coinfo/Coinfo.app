@@ -18,9 +18,13 @@
     <string name="coin_dev_info_issues_closed">Issues Closed: %d</string>
     <string name="coin_dev_info_pull_requests_merged">Pull Requests Merged: %d</string>
     <string name="coin_statistics_label_market_cap">Market Cap</string>
-    <string name="coin_statistics_label_max_support">Max Support</string>
+    <string name="coin_statistics_label_max_supply">Max Supply</string>
     <string name="coin_statistics_ath">All Time High</string>
     <string name="coin_statistics_atl">All Time Low</string>
+    <string name="coin_statistics_fully_diluted_valuation">Fully Diluted Valuation</string>
+    <string name="coin_statistics_circulating_supply">Circulating Supply</string>
+    <string name="coin_statistics_total_supply">Total Supply</string>
+    <string name="coin_statistics_rank">Rank</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
