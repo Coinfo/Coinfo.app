@@ -26,18 +26,48 @@ internal fun bindDeveloperIndo(chipGroup: ChipGroup, info: DeveloperInfo?) {
     info?.let {
         val context = chipGroup.context
         it.forks?.let { forks ->
-            val chip = Chip(context)
-            chip.text = context.getString(R.string.coin_dev_info_forks, forks)
-            chip.isCloseIconVisible = false
-            chip.chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_fork)
-            chipGroup.addView(chip)
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_forks, forks)
+                    chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_fork)
+                }
+            )
         }
         it.stars?.let { stars ->
-            val chip = Chip(context)
-            chip.text = context.getString(R.string.coin_dev_info_stars, stars)
-            chip.isCloseIconVisible = false
-            chip.chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_star)
-            chipGroup.addView(chip)
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_stars, stars)
+                    chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_star)
+                }
+            )
+        }
+        it.subscribers?.let { subscribers ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_subscribers, subscribers)
+                }
+            )
+        }
+        it.issues?.let { open ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_issues_open, open)
+                }
+            )
+        }
+        it.closedIssues?.let { close ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_issues_closed, close)
+                }
+            )
+        }
+        it.pullRequestsMerged?.let { merged ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_pull_requests_merged, merged)
+                }
+            )
         }
     }
 }

@@ -12,7 +12,16 @@ import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
 internal val CoinCurrentDataResponse.asCoin
     get() = CoinData(
         name = name,
-        developerInfo = developerData?.let { DeveloperInfo(developerData.forks, developerData.start) },
+        developerInfo = developerData?.let {
+            DeveloperInfo(
+                it.forks,
+                it.start,
+                it.subscribers,
+                it.totalIssues,
+                it.closedIssues,
+                it.pullRequestsMerged
+            )
+        },
         currentPrice = mapOf(
             Currency.USD to (marketData.currentPriceInCurrency[Currency.USD.value] ?: 0.0),
             Currency.EUR to (marketData.currentPriceInCurrency[Currency.EUR.value] ?: 0.0),
