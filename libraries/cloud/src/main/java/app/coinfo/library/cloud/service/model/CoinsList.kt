@@ -1,3 +1,3 @@
 package app.coinfo.library.cloud.service.model
 
-class CoinsList : ArrayList<CoinsListItem>()
+internal class CoinsList : ArrayList<CoinsListItem>()

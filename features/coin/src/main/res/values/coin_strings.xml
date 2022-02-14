@@ -1,5 +1,7 @@
 <resources>
 
+    <string name="coin_title_about_coin">About %s</string>
+    <string name="coin_developer_info">Developer Info</string>
     <string name="coin_text_tab_overview">Overview</string>
     <string name="coin_text_tab_portfolio">Portfolio</string>
     <string name="coin_text_1h">1h</string>
@@ -8,6 +10,13 @@
     <string name="coin_text_60d">60d</string>
     <string name="coin_text_30d">30d</string>
     <string name="coin_text_1y">1y</string>
+    <string name="coin_dev_info_forks">Forks: %d</string>
+    <string name="coin_dev_info_stars">Stars: %d</string>
+    <string name="coin_dev_info_subscribers">Subscribers: %d</string>
+    <string name="coin_dev_info_issues_open">Issues: %d</string>
+    <string name="coin_dev_info_issues_closed">Issues Closed: %d</string>
+    <string name="coin_dev_info_pull_requests_merged">Pull Requests Merged: %d</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

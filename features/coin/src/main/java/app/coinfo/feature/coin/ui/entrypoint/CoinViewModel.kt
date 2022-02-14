@@ -8,6 +8,7 @@ import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.cloud.enums.Currency
 import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.model.CoinData
+import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.PriceDatePair
 import app.coinfo.library.core.ktx.toString
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,10 @@ internal class CoinViewModel @Inject constructor(
     val name: LiveData<String>
         get() = _name
     private val _name = MutableLiveData("")
+
+    val developerInfo: LiveData<DeveloperInfo?>
+        get() = _developerInfo
+    private val _developerInfo = MutableLiveData<DeveloperInfo?>(null)
 
     val price: LiveData<String>
         get() = _price
@@ -58,6 +63,7 @@ internal class CoinViewModel @Inject constructor(
             _name.value = coin.name
             _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
             _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
+            _developerInfo.value = coin.developerInfo
         }
     }
 

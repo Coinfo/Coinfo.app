@@ -1,7 +1,10 @@
 package app.coinfo.feature.coin.binders
 
 import android.graphics.Color
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
+import app.coinfo.feature.coin.details.R
+import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.PriceDatePair
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
@@ -9,12 +12,65 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 private const val DASHED_LINE_LENGTH = 10f
 private const val DASHED_LINE_SPACE_LENGTH = 5f
 private const val DASHED_LINE_PHASE = 0f
 private const val LINE_THICKNESS_WIDTH = 1f
 private const val LINE_POINT_RADIUS = 3f
+
+@BindingAdapter("developerInfo")
+internal fun bindDeveloperIndo(chipGroup: ChipGroup, info: DeveloperInfo?) {
+    info?.let {
+        val context = chipGroup.context
+        it.forks?.let { forks ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_forks, forks)
+                    chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_fork)
+                }
+            )
+        }
+        it.stars?.let { stars ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_stars, stars)
+                    chipIcon = AppCompatResources.getDrawable(context, R.drawable.coin_ic_star)
+                }
+            )
+        }
+        it.subscribers?.let { subscribers ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_subscribers, subscribers)
+                }
+            )
+        }
+        it.issues?.let { open ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_issues_open, open)
+                }
+            )
+        }
+        it.closedIssues?.let { close ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_issues_closed, close)
+                }
+            )
+        }
+        it.pullRequestsMerged?.let { merged ->
+            chipGroup.addView(
+                Chip(context).apply {
+                    text = context.getString(R.string.coin_dev_info_pull_requests_merged, merged)
+                }
+            )
+        }
+    }
+}
 
 @BindingAdapter("historicalMarketData")
 internal fun bindHistoricalMarketData(chart: LineChart, data: List<PriceDatePair>) {
@@ -25,7 +81,7 @@ internal fun bindHistoricalMarketData(chart: LineChart, data: List<PriceDatePair
         values.add(Entry(it.date.toFloat(), it.price.toFloat()))
     }
 
-    val set1 = LineDataSet(values, "DataSet 1")
+    val set1 = LineDataSet(values, "Coin Price")
 
     set1.setDrawIcons(false)
 

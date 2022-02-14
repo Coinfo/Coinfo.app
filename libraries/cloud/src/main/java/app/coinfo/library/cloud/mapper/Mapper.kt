@@ -3,14 +3,25 @@ package app.coinfo.library.cloud.mapper
 import app.coinfo.library.cloud.enums.Currency
 import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.model.CoinData
+import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.HistoricalMarketData
 import app.coinfo.library.cloud.model.PriceDatePair
 import app.coinfo.library.cloud.service.model.CoinCurrentDataResponse
 import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
 
-val CoinCurrentDataResponse.asCoin
+internal val CoinCurrentDataResponse.asCoin
     get() = CoinData(
         name = name,
+        developerInfo = developerData?.let {
+            DeveloperInfo(
+                it.forks,
+                it.start,
+                it.subscribers,
+                it.totalIssues,
+                it.closedIssues,
+                it.pullRequestsMerged
+            )
+        },
         currentPrice = mapOf(
             Currency.USD to (marketData.currentPriceInCurrency[Currency.USD.value] ?: 0.0),
             Currency.EUR to (marketData.currentPriceInCurrency[Currency.EUR.value] ?: 0.0),
@@ -43,7 +54,7 @@ val CoinCurrentDataResponse.asCoin
         )
     )
 
-val HistoricalMarketDataResponse.asHistoricalMarketData
+internal val HistoricalMarketDataResponse.asHistoricalMarketData
     get() = HistoricalMarketData(
         prices = this.prices.map { data -> PriceDatePair(date = data[0].toLong(), price = data[1]) },
         marketCaps = this.marketCap.map { data -> PriceDatePair(date = data[0].toLong(), price = data[1]) }

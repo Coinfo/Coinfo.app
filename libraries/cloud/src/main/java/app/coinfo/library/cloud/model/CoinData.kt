@@ -5,6 +5,7 @@ import app.coinfo.library.cloud.enums.TimeInterval
 
 data class CoinData(
     val name: String,
+    val developerInfo: DeveloperInfo?,
     private val currentPrice: Map<Currency, Double> = emptyMap(),
     private val percentageChange: Map<TimeInterval, Map<Currency, Double>> = emptyMap(),
 ) {

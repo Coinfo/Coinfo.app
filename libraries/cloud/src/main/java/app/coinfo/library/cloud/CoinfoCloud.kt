@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-class CoinfoCloud(
+internal class CoinfoCloud(
     private val service: CoingeckoService,
     private val logger: Logger,
 ) : Cloud {
@@ -88,6 +88,7 @@ class CoinfoCloud(
         return@withContext service.coinCurrentData(
             id = id,
             marketData = true,
+            developerData = true,
         ).asCoin
     }
 
@@ -99,13 +100,7 @@ class CoinfoCloud(
         return@withContext service.historicalMarketData(
             id = id,
             vsCurrency = currency.value,
-            days = when (timeInterval) {
-                TimeInterval.DAY, TimeInterval.HOUR -> "1"
-                TimeInterval.WEEK -> "7"
-                TimeInterval.MONTH -> "30"
-                TimeInterval.TWO_MONTHS -> "60"
-                TimeInterval.YEAR -> "360"
-            },
+            days = TimeInterval.toDays(timeInterval).toString()
         ).asHistoricalMarketData
     }
 
