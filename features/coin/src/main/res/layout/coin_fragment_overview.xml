@@ -10,10 +10,10 @@
 
     </data>
 
-    <!--    <ScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        tools:context="app.coinfo.feature.coin.ui.overview.OverviewFragment">-->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="app.coinfo.feature.coin.ui.overview.OverviewFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -122,17 +122,190 @@
             app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
         <TextView
-            android:id="@+id/label_about"
+            android:id="@+id/label_statistics"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:text="@string/coin_statistics"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_coin" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_statistics"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_statistics">
+
+            <LinearLayout
+                android:id="@+id/linear_layout_statistics_left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout2">
+
+                <TextView
+                    android:id="@+id/label_market_cap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:text="@string/coin_statistics_label_market_cap" />
+
+                <TextView
+                    android:id="@+id/text_view_market_cap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.marketCap}"
+                    tools:text="$750bn"/>
+
+                <TextView
+                    android:id="@+id/label_max_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:text="@string/coin_statistics_label_max_supply" />
+
+                <TextView
+                    android:id="@+id/text_max_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.maxSupply}"
+                    tools:text="$74bn"/>
+
+                <TextView
+                    android:id="@+id/label_all_time_high"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_ath" />
+
+                <TextView
+                    android:id="@+id/text_view_all_time_high"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.allTimeHigh}" />
+
+                <TextView
+                    android:id="@+id/label_all_time_low"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_atl" />
+
+                <TextView
+                    android:id="@+id/text_view_all_time_low"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.allTimeLow}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_statistics_right"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/label_fully_diluted_valuation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_fully_diluted_valuation" />
+
+                <TextView
+                    android:id="@+id/text_view_fully_diluted_valuation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.fullyDilutedValuation}" />
+
+                <TextView
+                    android:id="@+id/label_circulating_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_circulating_supply" />
+
+                <TextView
+                    android:id="@+id/text_view_circulating_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.circulatingSupply}" />
+
+                <TextView
+                    android:id="@+id/label_total_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_total_supply" />
+
+                <TextView
+                    android:id="@+id/text_view_total_supply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.totalSupply}" />
+
+                <TextView
+                    android:id="@+id/label_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/coin_statistics_rank" />
+
+                <TextView
+                    android:id="@+id/text_view_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                    android:text="@{coinViewModel.rank}" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/label_about"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@{@string/coin_title_about_coin(coinViewModel.name)}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart_coin"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_statistics"
             tools:text="About Harmony One" />
 
         <TextView
@@ -169,6 +342,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <!--    </ScrollView>-->
+        </ScrollView>
 
 </layout>

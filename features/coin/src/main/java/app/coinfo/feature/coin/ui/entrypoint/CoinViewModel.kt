@@ -11,6 +11,7 @@ import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.PriceDatePair
 import app.coinfo.library.core.ktx.toString
+import app.coinfo.library.core.ktx.toStringWithSuffix
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,6 +35,38 @@ internal class CoinViewModel @Inject constructor(
     val price: LiveData<String>
         get() = _price
     private val _price = MutableLiveData("")
+
+    val marketCap: LiveData<String>
+        get() = _marketCap
+    private val _marketCap = MutableLiveData("")
+
+    val maxSupply: LiveData<String>
+        get() = _maxSupply
+    private val _maxSupply = MutableLiveData("")
+
+    val allTimeHigh: LiveData<String>
+        get() = _allTimeHigh
+    private val _allTimeHigh = MutableLiveData("")
+
+    val allTimeLow: LiveData<String>
+        get() = _allTimeLow
+    private val _allTimeLow = MutableLiveData("")
+
+    val fullyDilutedValuation: LiveData<String>
+        get() = _fullyDilutedValuation
+    private val _fullyDilutedValuation = MutableLiveData("")
+
+    val circulatingSupply: LiveData<String>
+        get() = _circulatingSupply
+    private val _circulatingSupply = MutableLiveData("")
+
+    val totalSupply: LiveData<String>
+        get() = _totalSupply
+    private val _totalSupply = MutableLiveData("")
+
+    val rank: LiveData<String>
+        get() = _rank
+    private val _rank = MutableLiveData("")
 
     val percentage: LiveData<String>
         get() = _percentage
@@ -64,6 +97,14 @@ internal class CoinViewModel @Inject constructor(
             _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
             _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
             _developerInfo.value = coin.developerInfo
+            _marketCap.value = coin.getMarketCap(Currency.EUR).toStringWithSuffix(2)
+            _maxSupply.value = coin.maxSupply.toStringWithSuffix(2)
+            _allTimeHigh.value = coin.getAllTimeHigh(Currency.EUR).toStringWithSuffix(2)
+            _allTimeLow.value = coin.getAllTimeLow(Currency.EUR).toStringWithSuffix(2)
+            _circulatingSupply.value = coin.circulatingSupply.toStringWithSuffix(2)
+            _totalSupply.value = coin.totalSupply.toStringWithSuffix(2)
+            _rank.value = coin.rank.toString()
+            _fullyDilutedValuation.value = coin.getFullyDilutedValuation(Currency.EUR).toStringWithSuffix(2)
         }
     }
 
