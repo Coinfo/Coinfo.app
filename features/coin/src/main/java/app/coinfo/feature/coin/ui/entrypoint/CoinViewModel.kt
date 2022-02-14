@@ -29,7 +29,7 @@ internal class CoinViewModel @Inject constructor(
 
     val developerInfo: LiveData<DeveloperInfo?>
         get() = _developerInfo
-    private val _developerInfo = MutableLiveData<DeveloperInfo>(null)
+    private val _developerInfo = MutableLiveData<DeveloperInfo?>(null)
 
     val price: LiveData<String>
         get() = _price
