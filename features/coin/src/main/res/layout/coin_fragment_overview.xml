@@ -133,7 +133,7 @@
             app:historicalMarketData="@{coinViewModel.priceHistoricalDataSet}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/toggle_group_time_interval" />
 
         <TextView
             android:id="@+id/label_statistics"
