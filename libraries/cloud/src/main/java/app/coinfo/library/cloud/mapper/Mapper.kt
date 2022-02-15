@@ -23,6 +23,7 @@ internal val CoinCurrentDataResponse.asCoin
             )
         },
         rank = marketData.marketCapRank,
+        description = descriptions["en"] ?: "",
         circulatingSupply = marketData.circulatingSupply,
         totalSupply = marketData.totalSupply,
         maxSupply = marketData.maxSupply,

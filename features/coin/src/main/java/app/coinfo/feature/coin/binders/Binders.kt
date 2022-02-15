@@ -1,6 +1,7 @@
 package app.coinfo.feature.coin.binders
 
 import android.graphics.Color
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import app.coinfo.feature.coin.details.R
@@ -14,6 +15,8 @@ import com.github.mikephil.charting.formatter.IFillFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import io.noties.markwon.Markwon
+import io.noties.markwon.html.HtmlPlugin
 
 private const val DASHED_LINE_LENGTH = 10f
 private const val DASHED_LINE_SPACE_LENGTH = 5f
@@ -70,6 +73,14 @@ internal fun bindDeveloperIndo(chipGroup: ChipGroup, info: DeveloperInfo?) {
             )
         }
     }
+}
+
+@BindingAdapter("markdown")
+internal fun bindMarkdownText(textView: TextView, text: String) {
+    Markwon.builder(textView.context)
+        .usePlugin(HtmlPlugin.create())
+        .build()
+        .setMarkdown(textView, text)
 }
 
 @BindingAdapter("historicalMarketData")

@@ -10,6 +10,7 @@ data class CoinData(
     val rank: Int,
     val circulatingSupply: Double,
     val totalSupply: Double,
+    val description: String,
     private val currentPrice: Map<Currency, Double> = emptyMap(),
     private val percentageChange: Map<TimeInterval, Map<Currency, Double>> = emptyMap(),
     private val marketCapInCurrency: Map<Currency, Double> = emptyMap(),

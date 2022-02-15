@@ -72,6 +72,10 @@ internal class CoinViewModel @Inject constructor(
         get() = _percentage
     private val _percentage = MutableLiveData("")
 
+    val description: LiveData<String>
+        get() = _description
+    private val _description = MutableLiveData("")
+
     val priceHistoricalDataSet: LiveData<List<PriceDatePair>>
         get() = _priceHistoricalDataSet
     private val _priceHistoricalDataSet = MutableLiveData(emptyList<PriceDatePair>())
@@ -105,6 +109,7 @@ internal class CoinViewModel @Inject constructor(
             _totalSupply.value = coin.totalSupply.toStringWithSuffix(2)
             _rank.value = coin.rank.toString()
             _fullyDilutedValuation.value = coin.getFullyDilutedValuation(Currency.EUR).toStringWithSuffix(2)
+            _description.value = coin.description
         }
     }
 
