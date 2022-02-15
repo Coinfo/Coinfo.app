@@ -308,6 +308,21 @@
             app:layout_constraintTop_toBottomOf="@+id/linear_layout_statistics"
             tools:text="About Harmony One" />
 
+        <kr.co.prnd.readmore.ReadMoreTextView
+            android:id="@+id/text_view_about"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:markdown="@{coinViewModel.description}"
+            app:readMoreColor="@color/design_default_color_primary_dark"
+            app:readMoreMaxLine="4"
+            app:readMoreText="@string/coin_read_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_about" />
+
         <TextView
             android:id="@+id/label_developer_info"
             android:layout_width="0dp"
@@ -319,7 +334,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_about" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_about" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"

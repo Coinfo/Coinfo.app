@@ -47,17 +47,24 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Navigation
-    implementation "androidx.navigation:navigation-runtime-ktx:2.5.0-alpha01"
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0-alpha01"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.0-alpha01"
+    implementation "androidx.navigation:navigation-runtime-ktx:2.5.0-alpha02"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0-alpha02"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.0-alpha02"
 
     // Lifecycle
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
 
     // View Bindings
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.3"
+
+    // Markdown
+    implementation "io.noties.markwon:core:4.6.2"
+    implementation"io.noties.markwon:html:4.6.2"
+
+    // Read More Text View
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
 
     // Charts
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

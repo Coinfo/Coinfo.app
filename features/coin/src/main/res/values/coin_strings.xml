@@ -25,6 +25,7 @@
     <string name="coin_statistics_circulating_supply">Circulating Supply</string>
     <string name="coin_statistics_total_supply">Total Supply</string>
     <string name="coin_statistics_rank">Rank</string>
+    <string name="coin_read_more">…Read More</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
