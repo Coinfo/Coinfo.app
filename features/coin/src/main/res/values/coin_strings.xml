@@ -26,6 +26,7 @@
     <string name="coin_statistics_total_supply">Total Supply</string>
     <string name="coin_statistics_rank">Rank</string>
     <string name="coin_read_more">…Read More</string>
+    <string name="coin_menu_item_title_favorite">Favorite</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

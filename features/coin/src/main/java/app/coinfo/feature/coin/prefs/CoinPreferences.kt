@@ -7,6 +7,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/** Shared Preferences used to save ONLY data which is used locally by feature coin. */
 @Singleton
 internal class CoinPreferences @Inject constructor(
     @ApplicationContext private val appContext: Context
