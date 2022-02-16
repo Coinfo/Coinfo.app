@@ -60,14 +60,15 @@ internal class CoinsViewModel @Inject constructor(
     }
 
     fun refreshCoins() {
-        _isRefreshing.value = true
-        loadCoins()
-        _isRefreshing.value = false
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            val job = loadCoins()
+            job.join()
+            _isRefreshing.value = false
+        }
     }
 
-    private fun loadCoins() {
-        viewModelScope.launch {
-            _coins.postValue(repository.loadCoins(currencyFilterValue, changeTimelineFilterValue))
-        }
+    private fun loadCoins() = viewModelScope.launch {
+        _coins.postValue(repository.loadCoins(currencyFilterValue, changeTimelineFilterValue))
     }
 }

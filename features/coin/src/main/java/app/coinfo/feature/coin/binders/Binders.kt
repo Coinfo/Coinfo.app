@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.coinfo.feature.coin.details.R
 import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.PriceDatePair
@@ -81,6 +82,11 @@ internal fun bindMarkdownText(textView: TextView, text: String) {
         .usePlugin(HtmlPlugin.create())
         .build()
         .setMarkdown(textView, text)
+}
+
+@BindingAdapter("isRefreshing")
+internal fun bindIsRefreshing(swipeRefreshLayout: SwipeRefreshLayout, isRefreshing: Boolean) {
+    swipeRefreshLayout.isRefreshing = isRefreshing
 }
 
 @BindingAdapter("historicalMarketData")

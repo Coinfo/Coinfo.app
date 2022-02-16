@@ -82,6 +82,10 @@ internal class CoinViewModel @Inject constructor(
         get() = _priceHistoricalDataSet
     private val _priceHistoricalDataSet = MutableLiveData(emptyList<PriceDatePair>())
 
+    val isRefreshingCoinActive: LiveData<Boolean>
+        get() = _isRefreshingCoinActive
+    private val _isRefreshingCoinActive = MutableLiveData(false)
+
     fun loadCoinData(id: String) {
         this.id = id
         val timeInterval = preferences.loadSelectedTimeInterval()
@@ -97,30 +101,36 @@ internal class CoinViewModel @Inject constructor(
         loadCoinHistoricalMarketData(interval)
     }
 
-    private fun loadCoinInformation(interval: TimeInterval) {
+    fun onRefreshCoinData() {
         viewModelScope.launch {
-            coin = cloud.getCoinData(id)
-
-            _name.value = coin.name
-            _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
-            _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
-            _developerInfo.value = coin.developerInfo
-            _marketCap.value = coin.getMarketCap(Currency.EUR).toStringWithSuffix(2)
-            _maxSupply.value = coin.maxSupply.toStringWithSuffix(2)
-            _allTimeHigh.value = coin.getAllTimeHigh(Currency.EUR).toStringWithSuffix(2)
-            _allTimeLow.value = coin.getAllTimeLow(Currency.EUR).toStringWithSuffix(2)
-            _circulatingSupply.value = coin.circulatingSupply.toStringWithSuffix(2)
-            _totalSupply.value = coin.totalSupply.toStringWithSuffix(2)
-            _rank.value = coin.rank.toString()
-            _fullyDilutedValuation.value = coin.getFullyDilutedValuation(Currency.EUR).toStringWithSuffix(2)
-            _description.value = coin.description
+            _isRefreshingCoinActive.value = true
+            val job1 = loadCoinInformation(TimeInterval.DAY)
+            val job2 = loadCoinHistoricalMarketData(TimeInterval.DAY)
+            job1.join()
+            job2.join()
+            _isRefreshingCoinActive.value = false
         }
     }
 
-    private fun loadCoinHistoricalMarketData(interval: TimeInterval) {
-        viewModelScope.launch {
-            val historicalData = cloud.getCoinHistoricalMarketData(id, Currency.EUR, interval)
-            _priceHistoricalDataSet.value = historicalData.prices
-        }
+    private fun loadCoinInformation(interval: TimeInterval) = viewModelScope.launch {
+        coin = cloud.getCoinData(id)
+        _name.value = coin.name
+        _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
+        _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
+        _developerInfo.value = coin.developerInfo
+        _marketCap.value = coin.getMarketCap(Currency.EUR).toStringWithSuffix(2)
+        _maxSupply.value = coin.maxSupply.toStringWithSuffix(2)
+        _allTimeHigh.value = coin.getAllTimeHigh(Currency.EUR).toStringWithSuffix(2)
+        _allTimeLow.value = coin.getAllTimeLow(Currency.EUR).toStringWithSuffix(2)
+        _circulatingSupply.value = coin.circulatingSupply.toStringWithSuffix(2)
+        _totalSupply.value = coin.totalSupply.toStringWithSuffix(2)
+        _rank.value = coin.rank.toString()
+        _fullyDilutedValuation.value = coin.getFullyDilutedValuation(Currency.EUR).toStringWithSuffix(2)
+        _description.value = coin.description
+    }
+
+    private fun loadCoinHistoricalMarketData(interval: TimeInterval) = viewModelScope.launch {
+        val historicalData = cloud.getCoinHistoricalMarketData(id, Currency.EUR, interval)
+        _priceHistoricalDataSet.value = historicalData.prices
     }
 }
