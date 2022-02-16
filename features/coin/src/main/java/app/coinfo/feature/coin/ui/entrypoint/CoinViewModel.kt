@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.coinfo.feature.coin.prefs.CoinPreferences
 import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.cloud.enums.Currency
 import app.coinfo.library.cloud.enums.TimeInterval
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class CoinViewModel @Inject constructor(
-    private val cloud: Cloud
+    private val cloud: Cloud,
+    private val preferences: CoinPreferences,
 ) : ViewModel() {
 
     private lateinit var id: String
@@ -82,11 +84,13 @@ internal class CoinViewModel @Inject constructor(
 
     fun loadCoinData(id: String) {
         this.id = id
-        loadCoinInformation(TimeInterval.DAY)
-        loadCoinHistoricalMarketData(TimeInterval.DAY)
+        val timeInterval = preferences.loadSelectedTimeInterval()
+        loadCoinInformation(timeInterval)
+        loadCoinHistoricalMarketData(timeInterval)
     }
 
     fun onTimeIntervalChanged(interval: TimeInterval) {
+        preferences.saveSelectedTimeInterval(interval)
         // Change Price Percentage Change.
         _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
         // Reload Historical Market Data.

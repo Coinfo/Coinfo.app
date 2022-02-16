@@ -1,13 +1,13 @@
 package app.coinfo.library.cloud.enums
 
 /** Enumeration of supported time intervals. */
-enum class TimeInterval {
-    HOUR,
-    DAY,
-    WEEK,
-    MONTH,
-    TWO_MONTHS,
-    YEAR;
+enum class TimeInterval(val id: Int) {
+    HOUR(0),
+    DAY(1),
+    WEEK(2),
+    MONTH(3),
+    TWO_MONTHS(4),
+    YEAR(5);
 
     companion object {
         private const val ONE_DAY = 1
