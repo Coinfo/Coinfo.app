@@ -76,59 +76,66 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_coin_price"
+                    app:checkedButton="@id/button_time_interval_hour"
                     app:selectionRequired="true"
                     app:singleSelection="true">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_time_interval_1h"
+                        android:id="@+id/button_time_interval_hour"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.HOUR)}"
                         android:text="@string/coin_text_1h"
                         android:textSize="12sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_time_interval_24h"
+                        android:id="@+id/button_time_interval_day"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.DAY)}"
                         android:text="@string/coin_text_24h"
                         android:textSize="12sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_time_interval_7d"
+                        android:id="@+id/button_time_interval_week"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.WEEK)}"
                         android:text="@string/coin_text_7d"
                         android:textSize="12sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_time_interval_30d"
+                        android:id="@+id/button_time_interval_month"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.MONTH)}"
                         android:text="@string/coin_text_30d"
                         android:textSize="12sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_time_interval_60d"
+                        android:id="@+id/button_time_interval_two_months"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.TWO_MONTHS)}"
                         android:text="@string/coin_text_60d"
                         android:textSize="12sp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/button_time_interval_1y"
+                        android:id="@+id/button_time_interval_year"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.YEAR)}"
                         android:text="@string/coin_text_1y"
                         android:textSize="12sp" />
