@@ -21,5 +21,11 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
 
         binding.lifecycleOwner = this
         binding.coinViewModel = coinViewModel
+
+        setOnRefreshListener()
+    }
+
+    private fun setOnRefreshListener() {
+        binding.swipeRefreshLayoutCoin.setOnRefreshListener { coinViewModel.onRefreshCoinData() }
     }
 }

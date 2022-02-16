@@ -3,374 +3,387 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="app.coinfo.library.cloud.enums.TimeInterval"/>
+
+        <import type="app.coinfo.library.cloud.enums.TimeInterval" />
+
         <variable
             name="coinViewModel"
             type="app.coinfo.feature.coin.ui.entrypoint.CoinViewModel" />
 
     </data>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout_coin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:isRefreshing="@{coinViewModel.isRefreshingCoinActive}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="app.coinfo.feature.coin.ui.overview.OverviewFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/text_view_coin_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:text="@{coinViewModel.name}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Bitcoin" />
-
-        <TextView
-            android:id="@+id/text_view_coin_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:text="@{coinViewModel.price}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_coin_name"
-            tools:text="$97.000" />
-
-        <TextView
-            android:id="@+id/text_view_coin_percentage_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:text="@{coinViewModel.percentage}"
-            tools:text="35000%"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_coin_price"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_view_coin_price" />
-
-        <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggle_group_time_interval"
-            app:selectionRequired="true"
-            app:singleSelection="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_coin_price">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_time_interval_1h"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.HOUR)}"
-                android:text="@string/coin_text_1h" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_time_interval_24h"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.DAY)}"
-                android:text="@string/coin_text_24h" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_time_interval_7d"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.WEEK)}"
-                android:text="@string/coin_text_7d" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_time_interval_30d"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.MONTH)}"
-                android:text="@string/coin_text_30d" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_time_interval_60d"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.TWO_MONTHS)}"
-                android:text="@string/coin_text_60d" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/button_time_interval_1y"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.YEAR)}"
-                android:text="@string/coin_text_1y" />
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/chart_coin"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:historicalMarketData="@{coinViewModel.priceHistoricalDataSet}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toggle_group_time_interval" />
-
-        <TextView
-            android:id="@+id/label_statistics"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/coin_statistics"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart_coin" />
-
-        <LinearLayout
-            android:id="@+id/linear_layout_statistics"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_statistics">
-
-            <LinearLayout
-                android:id="@+id/linear_layout_statistics_left"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout2">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/label_market_cap"
-                    android:layout_width="match_parent"
+                    android:id="@+id/text_view_coin_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:text="@string/coin_statistics_label_market_cap" />
+                    android:text="@{coinViewModel.name}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Bitcoin" />
 
                 <TextView
-                    android:id="@+id/text_view_market_cap"
-                    android:layout_width="match_parent"
+                    android:id="@+id/text_view_coin_price"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.marketCap}"
-                    tools:text="$750bn"/>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@{coinViewModel.price}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_coin_name"
+                    tools:text="$97.000" />
 
                 <TextView
-                    android:id="@+id/label_max_supply"
+                    android:id="@+id/text_view_coin_percentage_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{coinViewModel.percentage}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_coin_price"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_coin_price"
+                    tools:text="35000%" />
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggle_group_time_interval"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:text="@string/coin_statistics_label_max_supply" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_coin_price"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_time_interval_1h"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.HOUR)}"
+                        android:text="@string/coin_text_1h"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_time_interval_24h"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.DAY)}"
+                        android:text="@string/coin_text_24h"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_time_interval_7d"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.WEEK)}"
+                        android:text="@string/coin_text_7d"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_time_interval_30d"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.MONTH)}"
+                        android:text="@string/coin_text_30d"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_time_interval_60d"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.TWO_MONTHS)}"
+                        android:text="@string/coin_text_60d"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/button_time_interval_1y"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> coinViewModel.onTimeIntervalChanged(TimeInterval.YEAR)}"
+                        android:text="@string/coin_text_1y"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_coin"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:historicalMarketData="@{coinViewModel.priceHistoricalDataSet}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toggle_group_time_interval" />
 
                 <TextView
-                    android:id="@+id/text_max_supply"
-                    android:layout_width="match_parent"
+                    android:id="@+id/label_statistics"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.maxSupply}"
-                    tools:text="$74bn"/>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/coin_statistics"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chart_coin" />
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_statistics"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_statistics">
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_statistics_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayout2">
+
+                        <TextView
+                            android:id="@+id/label_market_cap"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_label_market_cap"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_market_cap"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.marketCap}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                            tools:text="$750bn" />
+
+                        <TextView
+                            android:id="@+id/label_max_supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_label_max_supply"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_max_supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.maxSupply}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
+                            tools:text="$74bn" />
+
+                        <TextView
+                            android:id="@+id/label_all_time_high"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_ath"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_all_time_high"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.allTimeHigh}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                        <TextView
+                            android:id="@+id/label_all_time_low"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_atl"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_all_time_low"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.allTimeLow}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_layout_statistics_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <TextView
+                            android:id="@+id/label_fully_diluted_valuation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_fully_diluted_valuation"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_fully_diluted_valuation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.fullyDilutedValuation}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                        <TextView
+                            android:id="@+id/label_circulating_supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_circulating_supply"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_circulating_supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.circulatingSupply}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                        <TextView
+                            android:id="@+id/label_total_supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_total_supply"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_total_supply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.totalSupply}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                        <TextView
+                            android:id="@+id/label_rank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/coin_statistics_rank"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+
+                        <TextView
+                            android:id="@+id/text_view_rank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{coinViewModel.rank}"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/label_all_time_high"
-                    android:layout_width="match_parent"
+                    android:id="@+id/label_about"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/coin_statistics_ath" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@{@string/coin_title_about_coin(coinViewModel.name)}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_statistics"
+                    tools:text="About Harmony One" />
+
+                <kr.co.prnd.readmore.ReadMoreTextView
+                    android:id="@+id/text_view_about"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_about"
+                    app:markdown="@{coinViewModel.description}"
+                    app:readMoreColor="@color/design_default_color_primary_dark"
+                    app:readMoreMaxLine="4"
+                    app:readMoreText="@string/coin_read_more" />
 
                 <TextView
-                    android:id="@+id/text_view_all_time_high"
+                    android:id="@+id/label_developer_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/coin_developer_info"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_about" />
+
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.allTimeHigh}" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/label_developer_info">
 
-                <TextView
-                    android:id="@+id/label_all_time_low"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/coin_statistics_atl" />
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_developer_info"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:developerInfo="@{coinViewModel.developerInfo}" />
 
-                <TextView
-                    android:id="@+id/text_view_all_time_low"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.allTimeLow}" />
+                </HorizontalScrollView>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/linear_layout_statistics_right"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <TextView
-                    android:id="@+id/label_fully_diluted_valuation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/coin_statistics_fully_diluted_valuation" />
-
-                <TextView
-                    android:id="@+id/text_view_fully_diluted_valuation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.fullyDilutedValuation}" />
-
-                <TextView
-                    android:id="@+id/label_circulating_supply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/coin_statistics_circulating_supply" />
-
-                <TextView
-                    android:id="@+id/text_view_circulating_supply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.circulatingSupply}" />
-
-                <TextView
-                    android:id="@+id/label_total_supply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/coin_statistics_total_supply" />
-
-                <TextView
-                    android:id="@+id/text_view_total_supply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.totalSupply}" />
-
-                <TextView
-                    android:id="@+id/label_rank"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/coin_statistics_rank" />
-
-                <TextView
-                    android:id="@+id/text_view_rank"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:text="@{coinViewModel.rank}" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/label_about"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@{@string/coin_title_about_coin(coinViewModel.name)}"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_layout_statistics"
-            tools:text="About Harmony One" />
-
-        <kr.co.prnd.readmore.ReadMoreTextView
-            android:id="@+id/text_view_about"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:markdown="@{coinViewModel.description}"
-            app:readMoreColor="@color/design_default_color_primary_dark"
-            app:readMoreMaxLine="4"
-            app:readMoreText="@string/coin_read_more"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_about" />
-
-        <TextView
-            android:id="@+id/label_developer_info"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/coin_developer_info"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_about" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_developer_info">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_developer_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:developerInfo="@{coinViewModel.developerInfo}"/>
-
-        </HorizontalScrollView>
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>
