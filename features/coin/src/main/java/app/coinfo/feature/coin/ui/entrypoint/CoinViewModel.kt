@@ -26,6 +26,12 @@ internal class CoinViewModel @Inject constructor(
     private lateinit var id: String
     private lateinit var coin: CoinData
 
+    private val currentTimeInterval: TimeInterval
+        get() = preferences.loadTimeInterval()
+
+    private val currentCurrency: Currency
+        get() = preferences.loadCurrency()
+
     val name: LiveData<String>
         get() = _name
     private val _name = MutableLiveData("")
@@ -88,15 +94,14 @@ internal class CoinViewModel @Inject constructor(
 
     fun loadCoinData(id: String) {
         this.id = id
-        val timeInterval = preferences.loadTimeInterval()
-        loadCoinInformation(timeInterval)
-        loadCoinHistoricalMarketData(timeInterval)
+        loadCoinInformation(currentTimeInterval)
+        loadCoinHistoricalMarketData(currentTimeInterval)
     }
 
     fun onTimeIntervalChanged(interval: TimeInterval) {
         preferences.saveTimeInterval(interval)
         // Change Price Percentage Change.
-        _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
+        _percentage.value = coin.getPercentageChange(currentCurrency, interval).toString(2)
         // Reload Historical Market Data.
         loadCoinHistoricalMarketData(interval)
     }
@@ -116,22 +121,22 @@ internal class CoinViewModel @Inject constructor(
     private fun loadCoinInformation(interval: TimeInterval) = viewModelScope.launch {
         coin = cloud.getCoinData(id)
         _name.value = coin.name
-        _price.value = coin.getCurrentPrice(Currency.EUR).toString(2)
-        _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
+        _price.value = coin.getCurrentPrice(currentCurrency).toString(2)
+        _percentage.value = coin.getPercentageChange(currentCurrency, interval).toString(2)
         _developerInfo.value = coin.developerInfo
-        _marketCap.value = coin.getMarketCap(Currency.EUR).toStringWithSuffix(2)
+        _marketCap.value = coin.getMarketCap(currentCurrency).toStringWithSuffix(2)
         _maxSupply.value = coin.maxSupply.toStringWithSuffix(2)
-        _allTimeHigh.value = coin.getAllTimeHigh(Currency.EUR).toStringWithSuffix(2)
-        _allTimeLow.value = coin.getAllTimeLow(Currency.EUR).toStringWithSuffix(2)
+        _allTimeHigh.value = coin.getAllTimeHigh(currentCurrency).toStringWithSuffix(2)
+        _allTimeLow.value = coin.getAllTimeLow(currentCurrency).toStringWithSuffix(2)
         _circulatingSupply.value = coin.circulatingSupply.toStringWithSuffix(2)
         _totalSupply.value = coin.totalSupply.toStringWithSuffix(2)
         _rank.value = coin.rank.toString()
-        _fullyDilutedValuation.value = coin.getFullyDilutedValuation(Currency.EUR).toStringWithSuffix(2)
+        _fullyDilutedValuation.value = coin.getFullyDilutedValuation(currentCurrency).toStringWithSuffix(2)
         _description.value = coin.description
     }
 
     private fun loadCoinHistoricalMarketData(interval: TimeInterval) = viewModelScope.launch {
-        val historicalData = cloud.getCoinHistoricalMarketData(id, Currency.EUR, interval)
+        val historicalData = cloud.getCoinHistoricalMarketData(id, currentCurrency, interval)
         _priceHistoricalDataSet.value = historicalData.prices
     }
 }

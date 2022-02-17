@@ -12,10 +12,9 @@ import app.coinfo.feature.coins.databinding.FragmentCoinsEntrypointBinding
 import app.coinfo.feature.coins.ui.decoration.CoinHorizontalDividerItemDecoration
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet
-import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
+import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.getBackStackData
-import app.coinfo.library.core.ktx.getReturnValue
 import app.coinfo.library.preferences.Preferences
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +44,7 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         }
         binding.chipCurrency.setOnClickListener {
             findNavController().navigate(
-                CoinsFragmentDirections.toCurrencyFilter(model.currencyFilterValue)
+                CoinsFragmentDirections.toCurrencyFilter(model.currentCurrency)
             )
         }
 
@@ -73,14 +72,13 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         // get the right NavBackStackEntry
         val navBackStackEntry = navController.getBackStackEntry(R.id.destination_coins)
 
-        getBackStackData<TimeInterval>(navBackStackEntry, ChangeTimelineFilterBottomSheet.KEY_CHANGE_TIMELINE_FILTER) {
+        getBackStackData<TimeInterval>(navBackStackEntry, ChangeTimelineFilterBottomSheet.KEY_TIME_INTERVAL) {
             it?.let { model.onTimeIntervalChanged(it) }
         }
 
-        // Currency
-        findNavController().getReturnValue<CurrencyFilterItem>(
-            CurrencyFilterBottomSheet.KEY_CHANGE_CURRENCY_FILTER
-        )?.observe(viewLifecycleOwner) { result -> model.currencyFilterValue = result }
+        getBackStackData<Currency>(navBackStackEntry, CurrencyFilterBottomSheet.KEY_CURRENCY) {
+            it?.let { model.onCurrencyChanged(it) }
+        }
     }
 
     companion object {

@@ -16,6 +16,6 @@ enum class TimeInterval(
 
     companion object {
         /** Converts given [uuid] to [TimeInterval], if conversion fails returns [DAY] */
-        fun fromUUID(uuid: String?): TimeInterval = values().firstOrNull { it.uuid == uuid } ?: DAY
+        fun fromUUID(uuid: String?) = values().firstOrNull { it.uuid == uuid } ?: DAY
     }
 }

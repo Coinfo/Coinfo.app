@@ -1,9 +1,9 @@
 package app.coinfo.feature.coins.repos
 
 import app.coinfo.feature.coins.model.CoinListItem
-import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
 import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.cloud.model.Coin
+import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.DEFAULT_DIGITS_AFTER_COMMA
 import app.coinfo.library.core.ktx.toString
@@ -16,10 +16,10 @@ internal class CoinsRepositoryImpl(
 ) : CoinsRepository {
 
     override suspend fun loadCoins(
-        currency: CurrencyFilterItem,
+        currency: Currency,
         timeInterval: TimeInterval
     ): List<CoinListItem> = withContext(Dispatchers.IO) {
-        return@withContext cloud.loadCoins(currency.value).map { coin ->
+        return@withContext cloud.loadCoins(currency.code).map { coin ->
             CoinListItem(
                 id = coin.id,
                 name = coin.name,

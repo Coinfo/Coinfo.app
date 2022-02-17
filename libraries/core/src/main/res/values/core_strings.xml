@@ -9,4 +9,8 @@
     <string name="core_time_interval_two_months">60 days</string>
     <string name="core_time_interval_one_year">1 year</string>
 
+    <string name="core_currency_usd">United Stated Dollar</string>
+    <string name="core_currency_eur">Euro</string>
+    <string name="core_currency_na">Not Defined</string>
+
 </resources>

@@ -15,8 +15,8 @@ internal class ChangeTimelineFilterBottomSheet : BottomSheetDialogFragment() {
 
     private val binding: DialogChangeTimelineBinding by viewBinding(DialogChangeTimelineBinding::bind)
     private val args: ChangeTimelineFilterBottomSheetArgs by navArgs()
-    private val adapter: ChangeTimelineFilterAdapter = ChangeTimelineFilterAdapter { filter ->
-        setBackStackData(KEY_CHANGE_TIMELINE_FILTER, filter, true)
+    private val adapter: ChangeTimelineFilterAdapter = ChangeTimelineFilterAdapter { timeInterval ->
+        setBackStackData(KEY_TIME_INTERVAL, timeInterval, true)
     }
 
     override fun onCreateView(
@@ -34,6 +34,6 @@ internal class ChangeTimelineFilterBottomSheet : BottomSheetDialogFragment() {
     }
 
     companion object {
-        const val KEY_CHANGE_TIMELINE_FILTER = "key.change.timeline.filter"
+        const val KEY_TIME_INTERVAL = "app.coinfo.feature.coins.ui.filter.changetimeline.TIME_INTERVAL"
     }
 }

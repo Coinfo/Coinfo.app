@@ -1,14 +1,18 @@
 package app.coinfo.library.preferences
 
+import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 
 interface Preferences {
 
-    /** Saves currency */
-    fun saveCurrency(currency: String)
+    /** Saves [Currency] to the global shared preferences. */
+    fun saveCurrency(currency: Currency)
 
-    /** Loads saved currency, if no value saved returns "EUR" */
-    fun loadCurrency(): String
+    /**
+     * Loads globally saved [Currency] from shared preferences.
+     * If no value previously saved returns [Currency.EUR]
+     */
+    fun loadCurrency(): Currency
 
     /** Saves [TimeInterval] to the global shared preferences. */
     fun saveTimeInterval(interval: TimeInterval)

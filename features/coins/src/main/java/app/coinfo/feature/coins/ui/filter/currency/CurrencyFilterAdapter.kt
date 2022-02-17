@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.coins.databinding.ListItemCurrencyBinding
+import app.coinfo.library.core.enums.Currency
 
 class CurrencyFilterAdapter(
-    private val onFilterClickListener: (CurrencyFilterItem) -> Unit
+    private val onFilterClickListener: (Currency) -> Unit
 ) : RecyclerView.Adapter<CurrencyFilterAdapter.ViewHolder>() {
 
-    private var selectedFilter: CurrencyFilterItem? = null
-    private val filters = CurrencyFilterItem.values().toList()
+    private var selectedFilter: Currency? = null
+    private val filters = Currency.values().toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
@@ -22,7 +23,7 @@ class CurrencyFilterAdapter(
 
     override fun getItemCount() = filters.size
 
-    fun setPreselectedFilter(filter: CurrencyFilterItem) {
+    fun setPreselectedFilter(filter: Currency) {
         selectedFilter = filter
     }
 
@@ -31,13 +32,13 @@ class CurrencyFilterAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            filter: CurrencyFilterItem,
+            currency: Currency,
             isSelected: Boolean,
-            onFilterClickListener: (CurrencyFilterItem) -> Unit
+            onFilterClickListener: (Currency) -> Unit
         ) {
-            binding.textViewFilterName.setText(filter.resId)
+            binding.textViewFilterName.setText(currency.resId)
             binding.imageViewChecked.isInvisible = !isSelected
-            binding.root.setOnClickListener { onFilterClickListener(filter) }
+            binding.root.setOnClickListener { onFilterClickListener(currency) }
             binding.executePendingBindings()
         }
 

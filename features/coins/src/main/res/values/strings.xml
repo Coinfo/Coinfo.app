@@ -2,8 +2,6 @@
     <string name="fragment_title_coins">Coins</string>
 
     <string name="title_filter_currency">Currency</string>
-    <string name="text_filter_currency_usd">United Stated Dollar</string>
-    <string name="text_filter_currency_eur">Euro</string>
 
     <string name="title_filter_change_timeline">Change Timeline (Percentage)</string>
 

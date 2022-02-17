@@ -32,8 +32,8 @@
         android:name="app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet"
         android:label="CurrencyFilterBottomSheet" >
         <argument
-            android:name="filter"
-            app:argType="app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem"
+            android:name="currency"
+            app:argType="app.coinfo.library.core.enums.Currency"
             android:defaultValue="EUR" />
     </dialog>
 
