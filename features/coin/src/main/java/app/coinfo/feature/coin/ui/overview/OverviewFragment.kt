@@ -1,6 +1,9 @@
 package app.coinfo.feature.coin.ui.overview
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import app.coinfo.feature.coin.details.R
@@ -31,6 +34,21 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
         setOnRefreshListener()
         setButtonToggleGroupCheckedButton()
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.overview, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        if (item.itemId == R.id.action_favorite) {
+            true
+        } else super.onContextItemSelected(item)
 
     private fun setOnRefreshListener() {
         binding.swipeRefreshLayoutCoin.setOnRefreshListener { coinViewModel.onRefreshCoinData() }
