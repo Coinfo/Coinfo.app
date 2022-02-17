@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coins.model.CoinListItem
 import app.coinfo.feature.coins.repos.CoinsRepository
-import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
+import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.preferences.Preferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,12 +19,12 @@ internal class CoinsViewModel @Inject constructor(
     private val preferences: Preferences,
 ) : ViewModel() {
 
-    var changeTimelineFilterValue = ChangeTimelineFilterItem.fromValue(preferences.loadChangeTimeline())
+    var timeIntervalValue = preferences.loadTimeInterval()
         set(value) {
-            if (value == changeTimelineFilterValue) return
+            if (value == timeIntervalValue) return
             field = value
-            _changeTimelineFilter.value = value
-            preferences.saveChangeTimeline(value.value)
+            _timeInterval.value = value
+            preferences.saveTimeInterval(value)
             // Check if not same and then load
             loadCoins()
         }
@@ -43,9 +43,9 @@ internal class CoinsViewModel @Inject constructor(
         get() = _isRefreshing
     private val _isRefreshing = MutableLiveData(false)
 
-    val changeTimelineFilter: LiveData<ChangeTimelineFilterItem>
-        get() = _changeTimelineFilter
-    private val _changeTimelineFilter = MutableLiveData(changeTimelineFilterValue)
+    val timeInterval: LiveData<TimeInterval>
+        get() = _timeInterval
+    private val _timeInterval = MutableLiveData(timeIntervalValue)
 
     val currencyFilter: LiveData<CurrencyFilterItem>
         get() = _currencyFilter
@@ -69,6 +69,6 @@ internal class CoinsViewModel @Inject constructor(
     }
 
     private fun loadCoins() = viewModelScope.launch {
-        _coins.postValue(repository.loadCoins(currencyFilterValue, changeTimelineFilterValue))
+        _coins.postValue(repository.loadCoins(currencyFilterValue, timeIntervalValue))
     }
 }

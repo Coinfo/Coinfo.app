@@ -61,7 +61,6 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
                 TimeInterval.DAY -> R.id.button_time_interval_day
                 TimeInterval.WEEK -> R.id.button_time_interval_week
                 TimeInterval.MONTH -> R.id.button_time_interval_month
-                TimeInterval.TWO_MONTHS -> R.id.button_time_interval_two_months
                 TimeInterval.YEAR -> R.id.button_time_interval_year
                 else -> throw IllegalStateException("Unknown Time Interval value, can't check toggle button")
             }

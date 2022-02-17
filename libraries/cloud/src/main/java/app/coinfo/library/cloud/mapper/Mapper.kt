@@ -64,10 +64,6 @@ internal val CoinCurrentDataResponse.asCoin
                 Currency.USD to (marketData.priceChangePercentage30dInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage30dInCurrency[Currency.EUR.code] ?: 0.0),
             ),
-            TimeInterval.TWO_MONTHS to mapOf(
-                Currency.USD to (marketData.priceChangePercentage60dInCurrency[Currency.USD.code] ?: 0.0),
-                Currency.EUR to (marketData.priceChangePercentage60dInCurrency[Currency.EUR.code] ?: 0.0),
-            ),
             TimeInterval.YEAR to mapOf(
                 Currency.USD to (marketData.priceChangePercentage1yInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage1yInCurrency[Currency.EUR.code] ?: 0.0),

@@ -11,9 +11,9 @@ import app.coinfo.feature.coins.R
 import app.coinfo.feature.coins.databinding.FragmentCoinsEntrypointBinding
 import app.coinfo.feature.coins.ui.decoration.CoinHorizontalDividerItemDecoration
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet
-import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
+import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.getReturnValue
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +34,7 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         setupFilterSelectionCallback()
         binding.chipPriceChangePercentage.setOnClickListener {
             findNavController().navigate(
-                CoinsFragmentDirections.toChangePercentageFilter(model.changeTimelineFilterValue)
+                CoinsFragmentDirections.toChangePercentageFilter(model.timeIntervalValue)
             )
         }
         binding.chipCurrency.setOnClickListener {
@@ -59,9 +59,9 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
 
     private fun setupFilterSelectionCallback() {
         // Price Change Percentage
-        findNavController().getReturnValue<ChangeTimelineFilterItem>(
+        findNavController().getReturnValue<TimeInterval>(
             ChangeTimelineFilterBottomSheet.KEY_CHANGE_TIMELINE_FILTER
-        )?.observe(viewLifecycleOwner) { result -> model.changeTimelineFilterValue = result }
+        )?.observe(viewLifecycleOwner) { result -> model.timeIntervalValue = result }
         // Currency
         findNavController().getReturnValue<CurrencyFilterItem>(
             CurrencyFilterBottomSheet.KEY_CHANGE_CURRENCY_FILTER

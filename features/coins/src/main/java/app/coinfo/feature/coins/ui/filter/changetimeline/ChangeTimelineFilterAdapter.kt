@@ -5,13 +5,14 @@ import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.coins.databinding.ListItemChangeTimelineBinding
+import app.coinfo.library.core.enums.TimeInterval
 
 class ChangeTimelineFilterAdapter(
-    private val onFilterClickListener: (ChangeTimelineFilterItem) -> Unit
+    private val onFilterClickListener: (TimeInterval) -> Unit
 ) : RecyclerView.Adapter<ChangeTimelineFilterAdapter.ViewHolder>() {
 
-    private var selectedFilter: ChangeTimelineFilterItem? = null
-    private val filters = ChangeTimelineFilterItem.values().toList()
+    private var selectedFilter: TimeInterval? = null
+    private val filters = TimeInterval.values().toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
@@ -22,7 +23,7 @@ class ChangeTimelineFilterAdapter(
 
     override fun getItemCount() = filters.size
 
-    fun setPreselectedFilter(filter: ChangeTimelineFilterItem) {
+    fun setPreselectedFilter(filter: TimeInterval) {
         selectedFilter = filter
     }
 
@@ -31,9 +32,9 @@ class ChangeTimelineFilterAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            filter: ChangeTimelineFilterItem,
+            filter: TimeInterval,
             isSelected: Boolean,
-            onFilterClickListener: (ChangeTimelineFilterItem) -> Unit
+            onFilterClickListener: (TimeInterval) -> Unit
         ) {
             binding.textViewFilterName.setText(filter.resId)
             binding.imageViewChecked.isInvisible = !isSelected

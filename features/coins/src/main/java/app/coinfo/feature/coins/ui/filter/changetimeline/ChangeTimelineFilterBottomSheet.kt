@@ -33,7 +33,7 @@ internal class ChangeTimelineFilterBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter.setPreselectedFilter(args.filter)
+        adapter.setPreselectedFilter(args.timeInterval)
         binding.recyclerViewChangeTimelineFilters.adapter = adapter
     }
 

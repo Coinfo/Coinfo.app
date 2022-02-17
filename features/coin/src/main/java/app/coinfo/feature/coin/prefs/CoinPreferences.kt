@@ -28,7 +28,6 @@ internal class CoinPreferences @Inject constructor(
         TimeInterval.DAY.uuid -> TimeInterval.DAY
         TimeInterval.WEEK.uuid -> TimeInterval.WEEK
         TimeInterval.MONTH.uuid -> TimeInterval.MONTH
-        TimeInterval.TWO_MONTHS.uuid -> TimeInterval.TWO_MONTHS
         TimeInterval.YEAR.uuid -> TimeInterval.YEAR
         else -> throw IllegalStateException("Unknown Time Interval value.")
     }

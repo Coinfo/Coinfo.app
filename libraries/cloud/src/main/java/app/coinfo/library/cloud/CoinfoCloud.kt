@@ -74,9 +74,7 @@ internal class CoinfoCloud(
                 priceChangePercentage1h = it.priceChangePercentage1h ?: 0.0,
                 priceChangePercentage24h = it.priceChangePercentage24h ?: 0.0,
                 priceChangePercentage7d = it.priceChangePercentage7d ?: 0.0,
-                priceChangePercentage14d = it.priceChangePercentage14d ?: 0.0,
                 priceChangePercentage30d = it.priceChangePercentage30d ?: 0.0,
-                priceChangePercentage200d = it.priceChangePercentage200d ?: 0.0,
                 priceChangePercentage1y = it.priceChangePercentage200d ?: 0.0
             )
         }
