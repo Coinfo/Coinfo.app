@@ -32,8 +32,9 @@ fun <T> Fragment.getBackStackData(
 ) {
     // Create our observer and add it to the NavBackStackEntry's lifecycle
     val observer = LifecycleEventObserver { _, event ->
-        if (event == Lifecycle.Event.ON_RESUME
-            && navBackStackEntry.savedStateHandle.contains(key)) {
+        if (event == Lifecycle.Event.ON_RESUME &&
+            navBackStackEntry.savedStateHandle.contains(key)
+        ) {
             result(navBackStackEntry.savedStateHandle.get<T>(key))
         }
     }
@@ -41,10 +42,12 @@ fun <T> Fragment.getBackStackData(
 
     // As addObserver() does not automatically remove the observer, we
     // call removeObserver() manually when the view lifecycle is destroyed
-    viewLifecycleOwner.lifecycle.addObserver(LifecycleEventObserver { _, event ->
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            navBackStackEntry.savedStateHandle.remove<TimeInterval>(key)
-            navBackStackEntry.lifecycle.removeObserver(observer)
+    viewLifecycleOwner.lifecycle.addObserver(
+        LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_DESTROY) {
+                navBackStackEntry.savedStateHandle.remove<TimeInterval>(key)
+                navBackStackEntry.lifecycle.removeObserver(observer)
+            }
         }
-    })
+    )
 }

@@ -66,7 +66,7 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
     }
 
     private fun setupFilterSelectionCallback() {
-        val navController = findNavController();
+        val navController = findNavController()
         // After a configuration change or process death, the currentBackStackEntry
         // points to the dialog destination, so you must use getBackStackEntry()
         // with the specific ID of your destination to ensure we always
@@ -76,7 +76,6 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         getBackStackData<TimeInterval>(navBackStackEntry, ChangeTimelineFilterBottomSheet.KEY_CHANGE_TIMELINE_FILTER) {
             it?.let { model.onTimeIntervalChanged(it) }
         }
-
 
         // Currency
         findNavController().getReturnValue<CurrencyFilterItem>(

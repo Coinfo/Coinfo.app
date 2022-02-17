@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.coins.R
 import app.coinfo.feature.coins.databinding.DialogChangeTimelineBinding
 import app.coinfo.library.core.ktx.setBackStackData
-import app.coinfo.library.core.ktx.setReturnValue
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
