@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="core_time_interval_hour">1 hour</string>
+    <string name="core_time_interval_day">24 hours</string>
+    <string name="core_time_interval_week">7 days</string>
+    <string name="core_time_interval_month">30 days</string>
+    <string name="core_time_interval_two_months">60 days</string>
+    <string name="core_time_interval_one_year">1 year</string>
+
+    <string name="core_currency_usd">United Stated Dollar</string>
+    <string name="core_currency_eur">Euro</string>
+    <string name="core_currency_na">Not Defined</string>
+
+</resources>

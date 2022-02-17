@@ -11,8 +11,6 @@ data class Coin(
     val priceChangePercentage1h: Double,
     val priceChangePercentage24h: Double,
     val priceChangePercentage7d: Double,
-    val priceChangePercentage14d: Double,
     val priceChangePercentage30d: Double,
-    val priceChangePercentage200d: Double,
     val priceChangePercentage1y: Double,
 )

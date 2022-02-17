@@ -35,15 +35,15 @@
                     android:id="@+id/chip_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.currencyFilter.value}"
+                    android:text="@{viewModel.currency.code}"
                     android:textAllCaps="true"
                     tools:text="EUR"/>
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_price_change_percentage"
+                    android:id="@+id/chip_time_interval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{@string/formatter_change_timeline(viewModel.changeTimelineFilter.value)}"
+                    android:text="@{@string/formatter_change_timeline(context.getString(viewModel.timeInterval.resId))}"
                     android:textAllCaps="false"
                     tools:text="24h"/>
 
