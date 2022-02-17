@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.portfolios.R
 import app.coinfo.feature.portfolios.model.UITransactionOverview
-import app.coinfo.library.core.utils.Currency
+import app.coinfo.library.core.enums.Currency
 
 class AssetTransactionHeaderAdapter : RecyclerView.Adapter<AssetTransactionHeaderAdapter.HeaderViewHolder>() {
 

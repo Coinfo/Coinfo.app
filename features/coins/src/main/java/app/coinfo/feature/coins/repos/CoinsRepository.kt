@@ -3,7 +3,7 @@ package app.coinfo.feature.coins.repos
 import app.coinfo.feature.coins.model.CoinListItem
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterItem
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
-import app.coinfo.library.core.utils.Currency
+import app.coinfo.library.core.enums.Currency
 
 internal interface CoinsRepository {
 

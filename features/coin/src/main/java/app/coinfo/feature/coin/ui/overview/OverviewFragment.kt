@@ -10,7 +10,7 @@ import app.coinfo.feature.coin.details.R
 import app.coinfo.feature.coin.details.databinding.CoinFragmentOverviewBinding
 import app.coinfo.feature.coin.prefs.CoinPreferences
 import app.coinfo.feature.coin.ui.entrypoint.CoinViewModel
-import app.coinfo.library.cloud.enums.TimeInterval
+import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.parentFragmentViewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint

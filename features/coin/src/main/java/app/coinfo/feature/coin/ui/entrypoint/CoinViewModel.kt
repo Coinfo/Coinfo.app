@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coin.prefs.CoinPreferences
 import app.coinfo.library.cloud.Cloud
-import app.coinfo.library.cloud.enums.Currency
-import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.PriceDatePair
+import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import dagger.hilt.android.lifecycle.HiltViewModel

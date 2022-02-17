@@ -1,7 +1,7 @@
 package app.coinfo.library.cloud.model
 
-import app.coinfo.library.cloud.enums.Currency
-import app.coinfo.library.cloud.enums.TimeInterval
+import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TimeInterval
 
 data class CoinData(
     val name: String,

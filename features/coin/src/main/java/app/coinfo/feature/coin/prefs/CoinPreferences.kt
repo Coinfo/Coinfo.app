@@ -2,7 +2,7 @@ package app.coinfo.feature.coin.prefs
 
 import android.content.Context
 import androidx.core.content.edit
-import app.coinfo.library.cloud.enums.TimeInterval
+import app.coinfo.library.core.enums.TimeInterval
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,18 +18,18 @@ internal class CoinPreferences @Inject constructor(
     /** Saves selected [TimeInterval] to Shared Preferences. */
     fun saveSelectedTimeInterval(interval: TimeInterval) {
         preferences.edit(commit = true) {
-            putInt(KET_TIME_INTERVAL, interval.id)
+            putString(KET_TIME_INTERVAL, interval.uuid)
         }
     }
 
     /** Loads [TimeInterval] from Shared Preferences, if no value saved before returns [TimeInterval.DAY] */
-    fun loadSelectedTimeInterval() = when (preferences.getInt(KET_TIME_INTERVAL, TimeInterval.DAY.id)) {
-        TimeInterval.HOUR.id -> TimeInterval.HOUR
-        TimeInterval.DAY.id -> TimeInterval.DAY
-        TimeInterval.WEEK.id -> TimeInterval.WEEK
-        TimeInterval.MONTH.id -> TimeInterval.MONTH
-        TimeInterval.TWO_MONTHS.id -> TimeInterval.TWO_MONTHS
-        TimeInterval.YEAR.id -> TimeInterval.YEAR
+    fun loadSelectedTimeInterval() = when (preferences.getString(KET_TIME_INTERVAL, TimeInterval.DAY.uuid)) {
+        TimeInterval.HOUR.uuid -> TimeInterval.HOUR
+        TimeInterval.DAY.uuid -> TimeInterval.DAY
+        TimeInterval.WEEK.uuid -> TimeInterval.WEEK
+        TimeInterval.MONTH.uuid -> TimeInterval.MONTH
+        TimeInterval.TWO_MONTHS.uuid -> TimeInterval.TWO_MONTHS
+        TimeInterval.YEAR.uuid -> TimeInterval.YEAR
         else -> throw IllegalStateException("Unknown Time Interval value.")
     }
 

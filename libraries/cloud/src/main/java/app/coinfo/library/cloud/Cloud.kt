@@ -1,11 +1,11 @@
 package app.coinfo.library.cloud
 
-import app.coinfo.library.cloud.enums.Currency
-import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.HistoricalMarketData
 import app.coinfo.library.cloud.model.ServerStatus
+import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TimeInterval
 
 interface Cloud {
 

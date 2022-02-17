@@ -1,12 +1,12 @@
 package app.coinfo.library.cloud
 
-import app.coinfo.library.cloud.enums.Currency
-import app.coinfo.library.cloud.enums.TimeInterval
 import app.coinfo.library.cloud.mapper.asCoin
 import app.coinfo.library.cloud.mapper.asHistoricalMarketData
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.ServerStatus
 import app.coinfo.library.cloud.service.CoingeckoService
+import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.logger.Logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -99,8 +99,8 @@ internal class CoinfoCloud(
     ) = withContext(Dispatchers.IO) {
         return@withContext service.historicalMarketData(
             id = id,
-            vsCurrency = currency.value,
-            days = TimeInterval.toDays(timeInterval).toString()
+            vsCurrency = currency.code,
+            days = timeInterval.numberInDays.toString()
         ).asHistoricalMarketData
     }
 
@@ -110,7 +110,6 @@ internal class CoinfoCloud(
         if (coins.isEmpty()) {
             logger.logDebugEx(TAG, "Get List of Coins from the Server.")
             service.coinsList().onEach { coinListItem ->
-//              logger.logDebugEx(TAG, "   > Coin List Item: $coinListItem")
                 coins[coinListItem.symbol.lowercase()] = coinListItem.id
             }
         }
