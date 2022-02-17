@@ -23,7 +23,7 @@ internal class CoinViewModel @Inject constructor(
     private val preferences: Preferences,
 ) : ViewModel() {
 
-    private lateinit var id: String
+    lateinit var id: String
     private lateinit var coin: CoinData
 
     private val currentTimeInterval: TimeInterval

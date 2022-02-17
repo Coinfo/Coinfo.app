@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import app.coinfo.feature.coin.details.R
 import app.coinfo.feature.coin.details.databinding.CoinFragmentOverviewBinding
@@ -21,6 +22,8 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
 
     private val coinViewModel: CoinViewModel by parentFragmentViewModels()
     private val binding: CoinFragmentOverviewBinding by viewBinding(CoinFragmentOverviewBinding::bind)
+
+    private var menuItemActionFavorite: MenuItem? = null
 
     @Inject
     lateinit var preferences: Preferences
@@ -42,11 +45,20 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.overview, menu)
+        menuItemActionFavorite = menu.findItem(R.id.action_favorite)
+        menuItemActionFavorite?.icon = getFavoriteIcon(preferences.isCoinFavorite(coinViewModel.id))
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
         if (item.itemId == R.id.action_favorite) {
+            if (preferences.isCoinFavorite(coinViewModel.id)) {
+                preferences.removeFavorite(coinViewModel.id)
+                menuItemActionFavorite?.icon = getFavoriteIcon(false)
+            } else {
+                preferences.saveFavoriteCoin(coinViewModel.id)
+                menuItemActionFavorite?.icon = getFavoriteIcon(true)
+            }
             true
         } else super.onContextItemSelected(item)
 
@@ -66,4 +78,8 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
             }
         )
     }
+
+    private fun getFavoriteIcon(isFavorite: Boolean) = AppCompatResources.getDrawable(
+        requireContext(), if (isFavorite) R.drawable.coin_ic_favorite_added else R.drawable.coin_ic_favorite_removed
+    )
 }
