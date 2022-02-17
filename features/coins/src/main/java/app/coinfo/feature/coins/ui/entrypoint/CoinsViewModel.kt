@@ -19,23 +19,16 @@ internal class CoinsViewModel @Inject constructor(
     private val preferences: Preferences,
 ) : ViewModel() {
 
-    var timeIntervalValue = preferences.loadTimeInterval()
-        set(value) {
-            if (value == timeIntervalValue) return
-            field = value
-            _timeInterval.value = value
-            preferences.saveTimeInterval(value)
-            // Check if not same and then load
-            loadCoins()
-        }
+    val currentTimeInterval: TimeInterval
+        get() = preferences.loadTimeInterval()
 
     var currencyFilterValue = CurrencyFilterItem.fromValue(preferences.loadCurrency())
         set(value) {
-            if (value == currencyFilterValue) return
             field = value
             _currencyFilter.value = value
             preferences.saveCurrency(value.value)
             // Check if not same and then load
+            if (value == currencyFilterValue) return
             loadCoins()
         }
 
@@ -45,7 +38,7 @@ internal class CoinsViewModel @Inject constructor(
 
     val timeInterval: LiveData<TimeInterval>
         get() = _timeInterval
-    private val _timeInterval = MutableLiveData(timeIntervalValue)
+    private val _timeInterval = MutableLiveData(currentTimeInterval)
 
     val currencyFilter: LiveData<CurrencyFilterItem>
         get() = _currencyFilter
@@ -55,20 +48,23 @@ internal class CoinsViewModel @Inject constructor(
         get() = _coins
     private val _coins = MutableLiveData(emptyList<CoinListItem>())
 
-    init {
-        loadCoins()
-    }
-
-    fun refreshCoins() {
+    fun refreshCoins(showLoading: Boolean = false) {
         viewModelScope.launch {
-            _isRefreshing.value = true
+            _isRefreshing.value = showLoading
             val job = loadCoins()
             job.join()
             _isRefreshing.value = false
         }
     }
 
+    fun onTimeIntervalChanged(interval: TimeInterval) {
+        _timeInterval.value = interval
+        preferences.saveTimeInterval(interval)
+        loadCoins()
+    }
+
     private fun loadCoins() = viewModelScope.launch {
-        _coins.postValue(repository.loadCoins(currencyFilterValue, timeIntervalValue))
+        _timeInterval.value = currentTimeInterval
+        _coins.value = repository.loadCoins(currencyFilterValue, currentTimeInterval)
     }
 }

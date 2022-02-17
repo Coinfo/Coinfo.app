@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.feature.coin.prefs.CoinPreferences
 import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.DeveloperInfo
@@ -13,6 +12,7 @@ import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
+import app.coinfo.library.preferences.Preferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class CoinViewModel @Inject constructor(
     private val cloud: Cloud,
-    private val preferences: CoinPreferences,
+    private val preferences: Preferences,
 ) : ViewModel() {
 
     private lateinit var id: String
@@ -88,13 +88,13 @@ internal class CoinViewModel @Inject constructor(
 
     fun loadCoinData(id: String) {
         this.id = id
-        val timeInterval = preferences.loadSelectedTimeInterval()
+        val timeInterval = preferences.loadTimeInterval()
         loadCoinInformation(timeInterval)
         loadCoinHistoricalMarketData(timeInterval)
     }
 
     fun onTimeIntervalChanged(interval: TimeInterval) {
-        preferences.saveSelectedTimeInterval(interval)
+        preferences.saveTimeInterval(interval)
         // Change Price Percentage Change.
         _percentage.value = coin.getPercentageChange(Currency.EUR, interval).toString(2)
         // Reload Historical Market Data.
@@ -104,8 +104,9 @@ internal class CoinViewModel @Inject constructor(
     fun onRefreshCoinData() {
         viewModelScope.launch {
             _isRefreshingCoinActive.value = true
-            val job1 = loadCoinInformation(TimeInterval.DAY)
-            val job2 = loadCoinHistoricalMarketData(TimeInterval.DAY)
+            val timeInterval = preferences.loadTimeInterval()
+            val job1 = loadCoinInformation(timeInterval)
+            val job2 = loadCoinHistoricalMarketData(timeInterval)
             job1.join()
             job2.join()
             _isRefreshingCoinActive.value = false

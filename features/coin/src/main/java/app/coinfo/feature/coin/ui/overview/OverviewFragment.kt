@@ -8,10 +8,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import app.coinfo.feature.coin.details.R
 import app.coinfo.feature.coin.details.databinding.CoinFragmentOverviewBinding
-import app.coinfo.feature.coin.prefs.CoinPreferences
 import app.coinfo.feature.coin.ui.entrypoint.CoinViewModel
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.parentFragmentViewModels
+import app.coinfo.library.preferences.Preferences
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -23,7 +23,7 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
     private val binding: CoinFragmentOverviewBinding by viewBinding(CoinFragmentOverviewBinding::bind)
 
     @Inject
-    lateinit var preferences: CoinPreferences
+    lateinit var preferences: Preferences
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +56,7 @@ internal class OverviewFragment : Fragment(R.layout.coin_fragment_overview) {
 
     private fun setButtonToggleGroupCheckedButton() {
         binding.toggleGroupTimeInterval.check(
-            when (preferences.loadSelectedTimeInterval()) {
+            when (preferences.loadTimeInterval()) {
                 TimeInterval.HOUR -> R.id.button_time_interval_hour
                 TimeInterval.DAY -> R.id.button_time_interval_day
                 TimeInterval.WEEK -> R.id.button_time_interval_week

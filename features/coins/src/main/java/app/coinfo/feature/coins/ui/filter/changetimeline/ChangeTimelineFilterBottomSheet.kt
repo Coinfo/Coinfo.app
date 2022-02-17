@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.coins.R
 import app.coinfo.feature.coins.databinding.DialogChangeTimelineBinding
+import app.coinfo.library.core.ktx.setBackStackData
 import app.coinfo.library.core.ktx.setReturnValue
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -17,10 +18,7 @@ internal class ChangeTimelineFilterBottomSheet : BottomSheetDialogFragment() {
     private val binding: DialogChangeTimelineBinding by viewBinding(DialogChangeTimelineBinding::bind)
     private val args: ChangeTimelineFilterBottomSheetArgs by navArgs()
     private val adapter: ChangeTimelineFilterAdapter = ChangeTimelineFilterAdapter { filter ->
-        with(findNavController()) {
-            setReturnValue(KEY_CHANGE_TIMELINE_FILTER, filter)
-            navigateUp()
-        }
+        setBackStackData(KEY_CHANGE_TIMELINE_FILTER, filter, true)
     }
 
     override fun onCreateView(

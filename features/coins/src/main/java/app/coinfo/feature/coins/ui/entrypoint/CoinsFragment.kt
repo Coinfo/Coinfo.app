@@ -14,13 +14,19 @@ import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBot
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterItem
 import app.coinfo.library.core.enums.TimeInterval
+import app.coinfo.library.core.ktx.getBackStackData
 import app.coinfo.library.core.ktx.getReturnValue
+import app.coinfo.library.preferences.Preferences
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 /** Feature Coins entry point fragment. */
 internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
+
+    @Inject
+    lateinit var preferences: Preferences
 
     private val binding: FragmentCoinsEntrypointBinding by viewBinding(FragmentCoinsEntrypointBinding::bind)
     private val model: CoinsViewModel by viewModels()
@@ -32,9 +38,9 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         binding.viewModel = model
         setupCoinsRecyclerView()
         setupFilterSelectionCallback()
-        binding.chipPriceChangePercentage.setOnClickListener {
+        binding.chipTimeInterval.setOnClickListener {
             findNavController().navigate(
-                CoinsFragmentDirections.toChangePercentageFilter(model.timeIntervalValue)
+                CoinsFragmentDirections.toChangePercentageFilter(model.currentTimeInterval)
             )
         }
         binding.chipCurrency.setOnClickListener {
@@ -44,8 +50,10 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         }
 
         binding.swipeRefreshLayoutCoins.setOnRefreshListener {
-            model.refreshCoins()
+            model.refreshCoins(true)
         }
+
+        model.refreshCoins()
     }
 
     private fun setupCoinsRecyclerView() = with(binding.recyclerViewCoins) {
@@ -58,10 +66,18 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
     }
 
     private fun setupFilterSelectionCallback() {
-        // Price Change Percentage
-        findNavController().getReturnValue<TimeInterval>(
-            ChangeTimelineFilterBottomSheet.KEY_CHANGE_TIMELINE_FILTER
-        )?.observe(viewLifecycleOwner) { result -> model.timeIntervalValue = result }
+        val navController = findNavController();
+        // After a configuration change or process death, the currentBackStackEntry
+        // points to the dialog destination, so you must use getBackStackEntry()
+        // with the specific ID of your destination to ensure we always
+        // get the right NavBackStackEntry
+        val navBackStackEntry = navController.getBackStackEntry(R.id.destination_coins)
+
+        getBackStackData<TimeInterval>(navBackStackEntry, ChangeTimelineFilterBottomSheet.KEY_CHANGE_TIMELINE_FILTER) {
+            it?.let { model.onTimeIntervalChanged(it) }
+        }
+
+
         // Currency
         findNavController().getReturnValue<CurrencyFilterItem>(
             CurrencyFilterBottomSheet.KEY_CHANGE_CURRENCY_FILTER
