@@ -1,10 +1,15 @@
 package app.coinfo.feature.coins.ui.entrypoint
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import app.coinfo.feature.coins.R
@@ -30,6 +35,11 @@ internal class CoinsFragment : Fragment(R.layout.coins_fragment_coins) {
     private val binding: CoinsFragmentCoinsBinding by viewBinding(CoinsFragmentCoinsBinding::bind)
     private val model: CoinsViewModel by viewModels()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,6 +60,21 @@ internal class CoinsFragment : Fragment(R.layout.coins_fragment_coins) {
 
         model.refreshCoins()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.coins, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        if (item.itemId == R.id.action_search) {
+            findNavController().navigate(
+                NavDeepLinkRequest.Builder
+                    .fromUri("coinfo://app.coinfo.feature/search".toUri())
+                    .build()
+            )
+            true
+        } else super.onContextItemSelected(item)
 
     private fun setupCoinsRecyclerView() = with(binding.recyclerViewCoins) {
         addItemDecoration(CoinHorizontalDividerItemDecoration(DIVIDER_SIZE))
