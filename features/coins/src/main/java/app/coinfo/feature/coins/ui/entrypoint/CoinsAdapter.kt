@@ -7,11 +7,10 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.coins.R
-import app.coinfo.feature.coins.databinding.ListItemCoinBinding
+import app.coinfo.feature.coins.databinding.CoinsListItemCoinBinding
 import app.coinfo.feature.coins.model.CoinListItem
 import com.bumptech.glide.Glide
 
@@ -24,7 +23,7 @@ internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>
     }
 
     class ViewHolder private constructor(
-        private val binding: ListItemCoinBinding
+        private val binding: CoinsListItemCoinBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: CoinListItem) {
@@ -57,7 +56,7 @@ internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemCoinBinding.inflate(layoutInflater, parent, false)
+                val binding = CoinsListItemCoinBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
