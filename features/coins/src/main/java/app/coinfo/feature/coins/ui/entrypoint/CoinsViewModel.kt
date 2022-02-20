@@ -71,11 +71,13 @@ internal class CoinsViewModel @Inject constructor(
     fun onFavoritesModeChanged() {
         val result = localPreferences.switchFavoritesMode()
         _isFavoritesModeActive.value = result
+        loadCoins()
     }
 
     private fun loadCoins() = viewModelScope.launch {
+        val ids = if (localPreferences.isFavoritesModeActive()) { preferences.loadFavoriteCoins() } else emptyList()
         _timeInterval.value = currentTimeInterval
         _currency.value = currentCurrency
-        _coins.value = repository.loadCoins(currentCurrency, currentTimeInterval)
+        _coins.value = repository.loadCoins(ids, currentCurrency, currentTimeInterval)
     }
 }

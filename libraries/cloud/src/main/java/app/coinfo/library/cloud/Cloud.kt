@@ -18,7 +18,7 @@ interface Cloud {
     /** Returns Coin Price in Euro */
     suspend fun getCoinPrice(symbol: String): Double
 
-    suspend fun loadCoins(currency: String): List<Coin>
+    suspend fun loadCoins(ids: List<String>, currency: Currency): List<Coin>
 
     /** Returns [CoinData] for the given coin [id]. */
     suspend fun getCoinData(id: String): CoinData

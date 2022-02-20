@@ -16,10 +16,11 @@ internal class CoinsRepositoryImpl(
 ) : CoinsRepository {
 
     override suspend fun loadCoins(
+        ids: List<String>,
         currency: Currency,
         timeInterval: TimeInterval
     ): List<CoinListItem> = withContext(Dispatchers.IO) {
-        return@withContext cloud.loadCoins(currency.code).map { coin ->
+        return@withContext cloud.loadCoins(ids, currency).map { coin ->
             CoinListItem(
                 id = coin.id,
                 name = coin.name,
