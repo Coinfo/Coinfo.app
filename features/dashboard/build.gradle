@@ -43,9 +43,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Navigation
-    implementation "androidx.navigation:navigation-runtime-ktx:2.5.0-alpha02"
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0-alpha02"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.0-alpha02"
+    implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

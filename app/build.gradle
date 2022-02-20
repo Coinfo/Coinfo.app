@@ -58,9 +58,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 
     // Navigation
-    implementation "androidx.navigation:navigation-runtime-ktx:2.5.0-alpha02"
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0-alpha02"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.0-0alpha02"
+    implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
 
     implementation 'com.google.dagger:hilt-android:2.40.1'
     implementation 'androidx.hilt:hilt-work:1.0.0'
