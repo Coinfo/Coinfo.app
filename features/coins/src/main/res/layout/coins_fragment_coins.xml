@@ -32,6 +32,14 @@
                 app:singleSelection="true" >
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_favorites"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewModel.onFavoritesModeChanged()}"
+                    app:chipIcon="@{viewModel.isFavoritesModeActive ? @drawable/coins_ic_favorite_active : @drawable/coins_ic_favorite_inactive}"
+                    />
+
+                <com.google.android.material.chip.Chip
                     android:id="@+id/chip_currency"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

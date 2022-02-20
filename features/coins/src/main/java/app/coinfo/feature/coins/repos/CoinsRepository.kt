@@ -8,6 +8,7 @@ internal interface CoinsRepository {
 
     /** Load [CoinListItem] for given [Currency] */
     suspend fun loadCoins(
+        ids: List<String>,
         currency: Currency,
         timeInterval: TimeInterval
     ): List<CoinListItem>

@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.coins.R
-import app.coinfo.feature.coins.databinding.DialogChangeTimelineBinding
+import app.coinfo.feature.coins.databinding.CoinsDialogChangeTimeIntervalBinding
 import app.coinfo.library.core.ktx.setBackStackData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 internal class ChangeTimelineFilterBottomSheet : BottomSheetDialogFragment() {
 
-    private val binding: DialogChangeTimelineBinding by viewBinding(DialogChangeTimelineBinding::bind)
+    private val binding: CoinsDialogChangeTimeIntervalBinding by viewBinding(CoinsDialogChangeTimeIntervalBinding::bind)
     private val args: ChangeTimelineFilterBottomSheetArgs by navArgs()
     private val adapter: ChangeTimelineFilterAdapter = ChangeTimelineFilterAdapter { timeInterval ->
         setBackStackData(KEY_TIME_INTERVAL, timeInterval, true)
@@ -24,7 +24,7 @@ internal class ChangeTimelineFilterBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_change_timeline, container, false)
+        return inflater.inflate(R.layout.coins_dialog_change_time_interval, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

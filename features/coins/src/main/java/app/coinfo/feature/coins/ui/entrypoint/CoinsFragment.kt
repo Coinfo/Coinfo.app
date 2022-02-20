@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import app.coinfo.feature.coins.R
-import app.coinfo.feature.coins.databinding.FragmentCoinsEntrypointBinding
+import app.coinfo.feature.coins.databinding.CoinsFragmentCoinsBinding
 import app.coinfo.feature.coins.ui.decoration.CoinHorizontalDividerItemDecoration
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet
@@ -22,12 +22,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 /** Feature Coins entry point fragment. */
-internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
+internal class CoinsFragment : Fragment(R.layout.coins_fragment_coins) {
 
     @Inject
     lateinit var preferences: Preferences
 
-    private val binding: FragmentCoinsEntrypointBinding by viewBinding(FragmentCoinsEntrypointBinding::bind)
+    private val binding: CoinsFragmentCoinsBinding by viewBinding(CoinsFragmentCoinsBinding::bind)
     private val model: CoinsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,14 +38,10 @@ internal class CoinsFragment : Fragment(R.layout.fragment_coins_entrypoint) {
         setupCoinsRecyclerView()
         setupFilterSelectionCallback()
         binding.chipTimeInterval.setOnClickListener {
-            findNavController().navigate(
-                CoinsFragmentDirections.toChangePercentageFilter(model.currentTimeInterval)
-            )
+            findNavController().navigate(CoinsFragmentDirections.toChangePercentageFilter(model.currentTimeInterval))
         }
         binding.chipCurrency.setOnClickListener {
-            findNavController().navigate(
-                CoinsFragmentDirections.toCurrencyFilter(model.currentCurrency)
-            )
+            findNavController().navigate(CoinsFragmentDirections.toCurrencyFilter(model.currentCurrency))
         }
 
         binding.swipeRefreshLayoutCoins.setOnRefreshListener {

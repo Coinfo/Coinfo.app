@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.coins.R
-import app.coinfo.feature.coins.databinding.DialogCurrencyBinding
+import app.coinfo.feature.coins.databinding.CoinsDialogCurrencyBinding
 import app.coinfo.library.core.ktx.setBackStackData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 internal class CurrencyFilterBottomSheet : BottomSheetDialogFragment() {
 
-    private val binding: DialogCurrencyBinding by viewBinding(DialogCurrencyBinding::bind)
+    private val binding: CoinsDialogCurrencyBinding by viewBinding(CoinsDialogCurrencyBinding::bind)
     private val args: CurrencyFilterBottomSheetArgs by navArgs()
     private val adapter: CurrencyFilterAdapter = CurrencyFilterAdapter { currency ->
         setBackStackData(KEY_CURRENCY, currency, true)
@@ -24,7 +24,7 @@ internal class CurrencyFilterBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_currency, container, false)
+        return inflater.inflate(R.layout.coins_dialog_currency, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

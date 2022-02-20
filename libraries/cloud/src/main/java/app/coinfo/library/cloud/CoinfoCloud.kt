@@ -56,9 +56,10 @@ internal class CoinfoCloud(
         prices[id]?.get(CURRENCY) ?: throw IllegalStateException("Unable to fetch price of coin")
     }
 
-    override suspend fun loadCoins(currency: String): List<Coin> {
+    override suspend fun loadCoins(ids: List<String>, currency: Currency): List<Coin> {
         return service.coinMarkets(
-            currency,
+            ids.joinToString(separator = ",") { it.lowercase() },
+            currency.code,
             "market_cap_desc",
             LOAD_COINS_PER_PAGE, LOAD_PAGE,
             "1h,24h,7d,14d,30d,200d,1y"

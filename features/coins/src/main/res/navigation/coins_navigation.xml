@@ -9,7 +9,7 @@
         android:id="@+id/destination_coins"
         android:name="app.coinfo.feature.coins.ui.entrypoint.CoinsFragment"
         android:label="@string/fragment_title_coins"
-        tools:layout="@layout/fragment_coins_entrypoint" >
+        tools:layout="@layout/coins_fragment_coins" >
         <action
             android:id="@+id/to_change_percentage_filter"
             app:destination="@id/destination_price_change_percentage_filter" />
