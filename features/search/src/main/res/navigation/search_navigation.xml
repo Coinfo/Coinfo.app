@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_navigation_graph"
+    app:startDestination="@id/destination_search">
+
+    <fragment
+        android:id="@+id/destination_search"
+        android:name="app.coinfo.feature.search.ui.entrypoint.SearchFragment"
+        android:label="@string/search_label_entrypoint"
+        tools:layout="@layout/search_fragment_search">
+
+        <deepLink app:uri="coinfo://app.coinfo.feature/search" />
+
+    </fragment>
+
+</navigation>

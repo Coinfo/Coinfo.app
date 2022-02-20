@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/dashboard_navigation_graph">
 
@@ -9,5 +8,6 @@
     <include app:graph="@navigation/coins_navigation" />
     <include app:graph="@navigation/coin_navigation" />
     <include app:graph="@navigation/portfolios_navigation" />
+    <include app:graph="@navigation/search_navigation" />
 
 </navigation>
