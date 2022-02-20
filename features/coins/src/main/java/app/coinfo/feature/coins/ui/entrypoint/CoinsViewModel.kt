@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.prefs.CoinsPreferences
 import app.coinfo.feature.coins.repos.CoinsRepository
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
@@ -17,7 +18,12 @@ import javax.inject.Inject
 internal class CoinsViewModel @Inject constructor(
     private val repository: CoinsRepository,
     private val preferences: Preferences,
+    private val localPreferences: CoinsPreferences
 ) : ViewModel() {
+
+    val isFavoritesModeActive: LiveData<Boolean>
+        get() = _isFavoritesModeActive
+    private val _isFavoritesModeActive = MutableLiveData(localPreferences.isFavoritesModeActive())
 
     val currentTimeInterval: TimeInterval
         get() = preferences.loadTimeInterval()
@@ -60,6 +66,11 @@ internal class CoinsViewModel @Inject constructor(
         _currency.value = currency
         preferences.saveCurrency(currency)
         loadCoins()
+    }
+
+    fun onFavoritesModeChanged() {
+        val result = localPreferences.switchFavoritesMode()
+        _isFavoritesModeActive.value = result
     }
 
     private fun loadCoins() = viewModelScope.launch {

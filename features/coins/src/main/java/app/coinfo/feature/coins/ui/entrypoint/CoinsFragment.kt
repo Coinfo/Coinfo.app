@@ -38,14 +38,10 @@ internal class CoinsFragment : Fragment(R.layout.coins_fragment_coins) {
         setupCoinsRecyclerView()
         setupFilterSelectionCallback()
         binding.chipTimeInterval.setOnClickListener {
-            findNavController().navigate(
-                CoinsFragmentDirections.toChangePercentageFilter(model.currentTimeInterval)
-            )
+            findNavController().navigate(CoinsFragmentDirections.toChangePercentageFilter(model.currentTimeInterval))
         }
         binding.chipCurrency.setOnClickListener {
-            findNavController().navigate(
-                CoinsFragmentDirections.toCurrencyFilter(model.currentCurrency)
-            )
+            findNavController().navigate(CoinsFragmentDirections.toCurrencyFilter(model.currentCurrency))
         }
 
         binding.swipeRefreshLayoutCoins.setOnRefreshListener {
