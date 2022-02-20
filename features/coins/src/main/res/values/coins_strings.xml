@@ -1,9 +1,10 @@
 <resources>
     <string name="fragment_title_coins">Coins</string>
 
-    <string name="title_filter_currency">Currency</string>
+    <string name="coins_title_filter_currency">Currency</string>
+    <string name="coins_title_filter_change_timeline">Change Timeline (Percentage)</string>
+    <string name="coins_menu_item_title_search">Search</string>
 
-    <string name="title_filter_change_timeline">Change Timeline (Percentage)</string>
 
     <!-- Untranslatable Strings -->
     <string name="formatter_change_timeline" translatable="false">%%(%s)</string>
