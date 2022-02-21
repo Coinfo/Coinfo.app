@@ -55,4 +55,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$version_dagger"
     kapt "androidx.hilt:hilt-compiler:$version_hilt_compiler"
     kapt "com.google.dagger:hilt-compiler:$version_dagger"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$version_glide"
 }

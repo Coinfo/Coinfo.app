@@ -1,15 +1,17 @@
 package app.coinfo.library.cloud.mapper
 
+import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.DeveloperInfo
 import app.coinfo.library.cloud.model.HistoricalMarketData
 import app.coinfo.library.cloud.model.PriceDatePair
 import app.coinfo.library.cloud.service.model.CoinCurrentDataResponse
 import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
+import app.coinfo.library.cloud.service.model.SearchedCoin
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 
-internal val CoinCurrentDataResponse.asCoin
+internal val CoinCurrentDataResponse.asCoinData
     get() = CoinData(
         name = name,
         developerInfo = developerData?.let {
@@ -75,4 +77,13 @@ internal val HistoricalMarketDataResponse.asHistoricalMarketData
     get() = HistoricalMarketData(
         prices = this.prices.map { data -> PriceDatePair(date = data[0].toLong(), price = data[1]) },
         marketCaps = this.marketCap.map { data -> PriceDatePair(date = data[0].toLong(), price = data[1]) }
+    )
+
+internal val SearchedCoin.asCoin
+    get() = Coin(
+        id = id,
+        name = name,
+        symbol = symbol,
+        marketCapRank = marketCapRank,
+        image = large
     )
