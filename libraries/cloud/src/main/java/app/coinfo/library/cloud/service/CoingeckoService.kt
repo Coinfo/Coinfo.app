@@ -5,6 +5,7 @@ import app.coinfo.library.cloud.service.model.CoinsList
 import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
 import app.coinfo.library.cloud.service.model.MarketsList
 import app.coinfo.library.cloud.service.model.PingResponse
+import app.coinfo.library.cloud.service.model.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -85,6 +86,16 @@ internal interface CoingeckoService {
         @Query("days") days: String,
         @Query("interval") interval: String = ""
     ): HistoricalMarketDataResponse
+
+    /**
+     * Search for coins, categories and markets listed on CoinGecko ordered by largest Market Cap first
+     *
+     * @param query - Search string
+     */
+    @GET("search")
+    suspend fun search(
+        @Query("query") query: String,
+    ): SearchResponse
 
     companion object {
         const val ENDPOINT = "https://api.coingecko.com/api/v3/"

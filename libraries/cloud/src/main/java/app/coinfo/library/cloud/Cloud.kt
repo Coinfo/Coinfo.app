@@ -3,6 +3,7 @@ package app.coinfo.library.cloud
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.HistoricalMarketData
+import app.coinfo.library.cloud.model.SearchResults
 import app.coinfo.library.cloud.model.ServerStatus
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
@@ -29,5 +30,5 @@ interface Cloud {
         timeInterval: TimeInterval,
     ): HistoricalMarketData
 
-    suspend fun search(toString: String)
+    suspend fun search(query: String): SearchResults
 }

@@ -1,8 +1,10 @@
 package app.coinfo.library.cloud
 
 import app.coinfo.library.cloud.mapper.asCoin
+import app.coinfo.library.cloud.mapper.asCoinData
 import app.coinfo.library.cloud.mapper.asHistoricalMarketData
 import app.coinfo.library.cloud.model.Coin
+import app.coinfo.library.cloud.model.SearchResults
 import app.coinfo.library.cloud.model.ServerStatus
 import app.coinfo.library.cloud.service.CoingeckoService
 import app.coinfo.library.core.enums.Currency
@@ -88,7 +90,7 @@ internal class CoinfoCloud(
             id = id,
             marketData = true,
             developerData = true,
-        ).asCoin
+        ).asCoinData
     }
 
     override suspend fun getCoinHistoricalMarketData(
@@ -103,8 +105,9 @@ internal class CoinfoCloud(
         ).asHistoricalMarketData
     }
 
-    override suspend fun search(toString: String) = withContext(Dispatchers.IO) {
-        TODO("Not yet implemented")
+    override suspend fun search(query: String) = withContext(Dispatchers.IO) {
+        val result = service.search(query)
+        return@withContext SearchResults(result.coins.map { it.asCoin })
     }
 
     // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
