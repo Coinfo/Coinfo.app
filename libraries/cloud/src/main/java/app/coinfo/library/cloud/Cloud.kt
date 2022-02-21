@@ -28,4 +28,6 @@ interface Cloud {
         currency: Currency,
         timeInterval: TimeInterval,
     ): HistoricalMarketData
+
+    suspend fun search(toString: String)
 }

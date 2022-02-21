@@ -41,5 +41,8 @@ subprojects {
 }
 
 ext {
-    version_navigation = "2.5.0-alpha02"
+    version_navigation    = "2.5.0-alpha02"
+    version_viewbinding   = "1.5.3"
+    version_dagger        = "2.40.1"
+    version_hilt_compiler = "1.0.0"
 }

@@ -1,16 +1,24 @@
 package app.coinfo.feature.search.ui.entrypoint
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import app.coinfo.feature.search.R
+import app.coinfo.feature.search.databinding.SearchFragmentSearchBinding
+import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-internal class SearchFragment : Fragment() {
+@AndroidEntryPoint
+internal class SearchFragment : Fragment(R.layout.search_fragment_search) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.search_fragment_search, container, false)
+    private val binding: SearchFragmentSearchBinding by viewBinding(SearchFragmentSearchBinding::bind)
+    private val viewModel: SearchViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+    }
 }

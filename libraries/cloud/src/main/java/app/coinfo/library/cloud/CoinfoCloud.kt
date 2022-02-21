@@ -103,6 +103,10 @@ internal class CoinfoCloud(
         ).asHistoricalMarketData
     }
 
+    override suspend fun search(toString: String) = withContext(Dispatchers.IO) {
+        TODO("Not yet implemented")
+    }
+
     // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private suspend fun initializeCoinsMapIfEmpty() {
