@@ -2,4 +2,5 @@
 
 <resources>
     <string name="search_label_entrypoint">Search</string>
+    <string name="search_hint_search">Search</string>
 </resources>
