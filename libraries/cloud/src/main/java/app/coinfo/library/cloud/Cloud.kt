@@ -5,6 +5,7 @@ import app.coinfo.library.cloud.model.CoinData
 import app.coinfo.library.cloud.model.HistoricalMarketData
 import app.coinfo.library.cloud.model.SearchResults
 import app.coinfo.library.cloud.model.ServerStatus
+import app.coinfo.library.cloud.model.TrendingResults
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 
@@ -31,4 +32,6 @@ interface Cloud {
     ): HistoricalMarketData
 
     suspend fun search(query: String): SearchResults
+
+    suspend fun getTrending(): TrendingResults
 }

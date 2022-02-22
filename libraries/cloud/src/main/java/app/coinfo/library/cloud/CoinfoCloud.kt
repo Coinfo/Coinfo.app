@@ -6,6 +6,7 @@ import app.coinfo.library.cloud.mapper.asHistoricalMarketData
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.cloud.model.SearchResults
 import app.coinfo.library.cloud.model.ServerStatus
+import app.coinfo.library.cloud.model.TrendingResults
 import app.coinfo.library.cloud.service.CoingeckoService
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
@@ -108,6 +109,11 @@ internal class CoinfoCloud(
     override suspend fun search(query: String) = withContext(Dispatchers.IO) {
         val result = service.search(query)
         return@withContext SearchResults(result.coins.map { it.asCoin })
+    }
+
+    override suspend fun getTrending() = withContext(Dispatchers.IO) {
+        val result = service.trending()
+        return@withContext TrendingResults(result.coins.map { it.item.asCoin })
     }
 
     // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
