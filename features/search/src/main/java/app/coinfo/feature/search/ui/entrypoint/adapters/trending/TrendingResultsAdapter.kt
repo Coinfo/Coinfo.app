@@ -1,4 +1,4 @@
-package app.coinfo.feature.search.ui.entrypoint.adapters.results
+package app.coinfo.feature.search.ui.entrypoint.adapters.trending
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +9,11 @@ import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import app.coinfo.feature.search.databinding.SearchListItemSearchBinding
+import app.coinfo.feature.search.databinding.SearchListItemTrendingBinding
 import com.bumptech.glide.Glide
 
-internal class SearchResultsAdapter : ListAdapter<UISearchItem, SearchResultsAdapter.ViewHolder>(
-    SearchResultDiffCallback()
+internal class TrendingResultsAdapter : ListAdapter<UITrendingItem, TrendingResultsAdapter.ViewHolder>(
+    TrendingResultDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
@@ -23,10 +23,10 @@ internal class SearchResultsAdapter : ListAdapter<UISearchItem, SearchResultsAda
     }
 
     class ViewHolder private constructor(
-        private val binding: SearchListItemSearchBinding
+        private val binding: SearchListItemTrendingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(coin: UISearchItem) {
+        fun bind(coin: UITrendingItem) {
             binding.root.setOnClickListener { navigateToDeepLink(it, coin.id) }
             binding.textViewCoinName.text = coin.name
             binding.textViewCoinSymbol.text = coin.symbol
@@ -50,7 +50,7 @@ internal class SearchResultsAdapter : ListAdapter<UISearchItem, SearchResultsAda
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = SearchListItemSearchBinding.inflate(layoutInflater, parent, false)
+                val binding = SearchListItemTrendingBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

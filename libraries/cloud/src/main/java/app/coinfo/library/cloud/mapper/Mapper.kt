@@ -8,6 +8,7 @@ import app.coinfo.library.cloud.model.PriceDatePair
 import app.coinfo.library.cloud.service.model.CoinCurrentDataResponse
 import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
 import app.coinfo.library.cloud.service.model.SearchedCoin
+import app.coinfo.library.cloud.service.model.TrendingItem
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 
@@ -86,4 +87,13 @@ internal val SearchedCoin.asCoin
         symbol = symbol,
         marketCapRank = marketCapRank,
         image = large
+    )
+
+internal val TrendingItem.asCoin
+    get() = Coin(
+        id = id,
+        name = name,
+        symbol = symbol,
+        marketCapRank = marketCapRank,
+        image = imageLarge
     )

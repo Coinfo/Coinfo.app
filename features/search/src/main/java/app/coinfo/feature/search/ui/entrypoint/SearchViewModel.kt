@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.feature.search.ui.entrypoint.adapters.results.UISearchResult
+import app.coinfo.feature.search.ui.entrypoint.adapters.results.UISearchItem
+import app.coinfo.feature.search.ui.entrypoint.adapters.trending.UITrendingItem
 import app.coinfo.library.cloud.Cloud
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -19,9 +20,17 @@ internal class SearchViewModel @Inject constructor(
 
     private var delayJob: Job? = null
 
-    val searchResults: LiveData<List<UISearchResult>>
+    val searchResults: LiveData<List<UISearchItem>>
         get() = _searchResults
-    private val _searchResults = MutableLiveData(emptyList<UISearchResult>())
+    private val _searchResults = MutableLiveData(emptyList<UISearchItem>())
+
+    val trendingResults: LiveData<List<UITrendingItem>>
+        get() = _trendingResults
+    private val _trendingResults = MutableLiveData(emptyList<UITrendingItem>())
+
+    init {
+        loadTrending()
+    }
 
     fun onSearchTextChanged(text: CharSequence) {
         delayJob?.cancel()
@@ -30,10 +39,21 @@ internal class SearchViewModel @Inject constructor(
             if (delayJob?.isCancelled == false) {
                 val searchResult = cloud.search(text.toString())
                 _searchResults.value = searchResult.coins.map {
-                    UISearchResult(
+                    UISearchItem(
                         it.id, it.symbol, it.name, it.marketCapRank.toString(), it.image
                     )
                 }
+            }
+        }
+    }
+
+    private fun loadTrending() {
+        viewModelScope.launch {
+            val trendingResult = cloud.getTrending()
+            _trendingResults.value = trendingResult.coins.map {
+                UITrendingItem(
+                    it.id, it.symbol, it.name, it.marketCapRank.toString(), it.image
+                )
             }
         }
     }

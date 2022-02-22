@@ -6,6 +6,7 @@ import app.coinfo.library.cloud.service.model.HistoricalMarketDataResponse
 import app.coinfo.library.cloud.service.model.MarketsList
 import app.coinfo.library.cloud.service.model.PingResponse
 import app.coinfo.library.cloud.service.model.SearchResponse
+import app.coinfo.library.cloud.service.model.TrendingResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -96,6 +97,13 @@ internal interface CoingeckoService {
     suspend fun search(
         @Query("query") query: String,
     ): SearchResponse
+
+    /**
+     * Top-7 trending coins on CoinGecko as searched by users in the
+     * last 24 hours (Ordered by most popular first)
+     */
+    @GET("search/trending")
+    suspend fun trending(): TrendingResponse
 
     companion object {
         const val ENDPOINT = "https://api.coingecko.com/api/v3/"

@@ -29,11 +29,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_search_results"
+            android:id="@+id/recycler_view_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:searchResults="@{viewModel.searchResults}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_trending"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:trendingResults="@{viewModel.trendingResults}" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
