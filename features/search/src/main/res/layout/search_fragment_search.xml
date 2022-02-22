@@ -28,18 +28,46 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_search"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/label_trending_results"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:searchResults="@{viewModel.searchResults}" />
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:visibility="@{viewModel.searchResults.size() == 0}"
+            android:text="@string/search_label_trending_results" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_trending"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:trendingResults="@{viewModel.trendingResults}" />
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:visibility="@{viewModel.searchResults.size() == 0}"
+            app:trendingResults="@{viewModel.trendingResults}" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/label_search_results"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:visibility="@{viewModel.searchResults.size() != 0}"
+            android:text="@string/search_label_search_results" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:visibility="@{viewModel.searchResults.size() != 0}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:searchResults="@{viewModel.searchResults}" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

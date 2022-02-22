@@ -1,5 +1,6 @@
 package app.coinfo.feature.search.binders
 
+import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,4 +25,9 @@ internal fun bindTrendingResults(recyclerView: RecyclerView, results: List<UITre
         recyclerView.adapter = TrendingResultsAdapter()
     }
     (recyclerView.adapter as TrendingResultsAdapter).submitList(results)
+}
+
+@BindingAdapter("android:visibility")
+internal fun setVisibility(view: View, value: Boolean) {
+    view.visibility = if (value) View.VISIBLE else View.GONE
 }

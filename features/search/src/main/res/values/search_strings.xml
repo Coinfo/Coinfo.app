@@ -2,5 +2,7 @@
 
 <resources>
     <string name="search_label_entrypoint">Search</string>
+    <string name="search_label_trending_results">Trending Results</string>
+    <string name="search_label_search_results">Search Results</string>
     <string name="search_hint_search">Search</string>
 </resources>
