@@ -39,7 +39,7 @@ android {
 
 dependencies {
 
-    implementation project(path: ':features:fngindex')
+    implementation project(path: ':widgets:fngindex')
     implementation project(path: ':features:portfolios')
     implementation project(path: ':features:coins')
     implementation project(path: ':features:coin')

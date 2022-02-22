@@ -8,7 +8,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Coinfo"
 include ':app'
-include ':features:fngindex'
+include ':widgets:fngindex'
 include ':features:portfolios'
 include ':features:coins'
 include ':features:dashboard'
