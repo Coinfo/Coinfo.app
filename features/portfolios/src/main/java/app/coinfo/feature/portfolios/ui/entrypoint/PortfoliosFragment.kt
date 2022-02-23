@@ -1,20 +1,41 @@
 package app.coinfo.feature.portfolios.ui.entrypoint
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import app.coinfo.feature.portfolios.R
+import app.coinfo.feature.portfolios.databinding.PortfoliosFragmentPortfoliosBinding
+import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-internal class PortfoliosFragment : Fragment() {
+@AndroidEntryPoint
+internal class PortfoliosFragment : Fragment(R.layout.portfolios_fragment_portfolios) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.portfolios_fragment_portfolios, container, false)
+    private val binding: PortfoliosFragmentPortfoliosBinding by viewBinding(PortfoliosFragmentPortfoliosBinding::bind)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.portfolios, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        if (item.itemId == R.id.action_create_portfolio) {
+            findNavController().navigate(PortfoliosFragmentDirections.toCreatePortfolio())
+            true
+        } else super.onContextItemSelected(item)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = this
     }
 }

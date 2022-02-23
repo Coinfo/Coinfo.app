@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="fragment_title_portfolios">Portfolios</string>
+    <string name="portfolios_fragment_title_portfolios">Portfolios</string>
+    <string name="portfolios_fragment_title_create_portfolio">Create Portfolio</string>
+    <string name="portfolios_menu_item_title_create_portfolio">Create Portfolio</string>
+    <string name="portfolios_button_text_create_portfolio">Create Portfolio</string>
+    <string name="portfolios_hint_text_portfolio_name">Portfolio Name</string>
 </resources>
