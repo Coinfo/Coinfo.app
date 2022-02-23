@@ -38,9 +38,9 @@ android {
 
 dependencies {
 
-    implementation project(path: ':libraries:database')
+    implementation project(path: ':deprecated:database')
     implementation project(path: ':libraries:logger')
-    implementation project(path: ':libraries:cryptocom')
+    implementation project(path: ':deprecated:cryptocom')
     implementation project(path: ':libraries:cloud')
     implementation project(path: ':libraries:core')
 

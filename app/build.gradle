@@ -40,12 +40,10 @@ android {
 dependencies {
 
     implementation project(path: ':widgets:fngindex')
-    implementation project(path: ':features:portfolios')
     implementation project(path: ':features:coins')
     implementation project(path: ':features:coin')
     implementation project(path: ':features:search')
     implementation project(path: ':features:dashboard')
-    implementation project(path: ':libraries:database')
     implementation project(path: ':libraries:logger')
     implementation project(path: ':libraries:cloud')
     implementation project(path: ':libraries:preferences')
