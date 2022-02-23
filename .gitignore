@@ -17,3 +17,4 @@ local.properties
 /features/build/intermediates/ktLint/reporterProviders.bin
 /features/build/intermediates/ktLint/
 /libraries/build/intermediates/ktLint/
+/widgets/build/intermediates/ktLint/
