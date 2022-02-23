@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/portfolios_navigation_graph"
     app:startDestination="@id/destination_portfolios">
 
     <fragment
         android:id="@+id/destination_portfolios"
         android:name="app.coinfo.feature.portfolios.ui.entrypoint.PortfoliosFragment"
-        android:label="@string/fragment_title_portfolios" />
+        android:label="@string/portfolios_fragment_title_portfolios"
+        tools:layout="@layout/portfolios_fragment_portfolios">
+        <action
+            android:id="@+id/to_create_portfolio"
+            app:destination="@id/destination_create_portfolio" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/destination_create_portfolio"
+        android:name="app.coinfo.feature.portfolios.ui.create.CreatePortfolioFragment"
+        android:label="@string/portfolios_fragment_title_create_portfolio"
+        tools:layout="@layout/portfolios_fragment_create_portfolio"/>
+
 </navigation>

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -42,5 +44,7 @@ dependencies {
     implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    // View Bindings
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$version_viewbinding"
 }
