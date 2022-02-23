@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import app.coinfo.feature.portfolios.R
 import app.coinfo.feature.portfolios.databinding.PortfoliosFragmentPortfoliosBinding
 import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 internal class PortfoliosFragment : Fragment(R.layout.portfolios_fragment_portfolios) {
 
     private val binding: PortfoliosFragmentPortfoliosBinding by viewBinding(PortfoliosFragmentPortfoliosBinding::bind)

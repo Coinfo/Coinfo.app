@@ -24,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_portfolio_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/portfolios_hint_text_portfolio_name" />
@@ -31,7 +32,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button_create_portfolio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/portfolios_button_text_create_portfolio"
