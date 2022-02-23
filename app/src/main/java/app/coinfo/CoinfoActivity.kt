@@ -35,7 +35,7 @@ class CoinfoActivity : AppCompatActivity() {
 
         // Setup the ActionBar with navController and 3 top level destinations
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.dashboard_navigation_graph, R.id.coins_navigation_graph, R.id.portfolio_navigation_graph)
+            setOf(R.id.dashboard_navigation_graph, R.id.coins_navigation_graph, R.id.portfolios_navigation_graph)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
