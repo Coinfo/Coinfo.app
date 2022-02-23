@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -30,26 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-    buildFeatures {
-        dataBinding true
-    }
 }
 
 dependencies {
 
-    implementation project(path: ':repositories:portfolios')
-
     implementation "androidx.core:core-ktx:$version_core_ktx"
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-
-    // Navigation
-    implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
-    implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
-    implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
-
-    // View Bindings
-    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$version_viewbinding"
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$version_dagger"
