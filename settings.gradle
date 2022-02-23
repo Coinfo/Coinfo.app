@@ -9,14 +9,15 @@ dependencyResolutionManagement {
 rootProject.name = "Coinfo"
 include ':app'
 include ':widgets:fngindex'
-include ':features:portfolios'
 include ':features:coins'
 include ':features:dashboard'
-include ':libraries:database'
 include ':libraries:logger'
-include ':libraries:cryptocom'
 include ':libraries:cloud'
 include ':libraries:core'
 include ':libraries:preferences'
 include ':features:coin'
 include ':features:search'
+
+include ':deprecated:portfolios'
+include ':deprecated:cryptocom'
+include ':deprecated:database'
