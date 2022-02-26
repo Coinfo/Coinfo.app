@@ -48,6 +48,7 @@ dependencies {
     implementation project(path: ':libraries:logger')
     implementation project(path: ':libraries:cloud')
     implementation project(path: ':libraries:preferences')
+    implementation project(path: ':libraries:database')
     implementation project(path: ':repositories:portfolios')
 
     implementation 'androidx.core:core-ktx:1.7.0'

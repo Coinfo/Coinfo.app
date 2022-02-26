@@ -1,8 +1,12 @@
 package app.coinfo.repository.portfolios
 
-internal class PortfoliosRepositoryImpl : PortfoliosRepository {
+import app.coinfo.library.database.Database
+
+internal class PortfoliosRepositoryImpl(
+    private val database: Database
+) : PortfoliosRepository {
 
     override suspend fun createPortfolio(name: String) {
-        TODO("Not yet implemented")
+        database.savePortfolio(name)
     }
 }

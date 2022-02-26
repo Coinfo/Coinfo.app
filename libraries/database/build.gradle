@@ -33,8 +33,6 @@ android {
 
 dependencies {
 
-    implementation project(path: ':libraries:database')
-
     implementation "androidx.core:core-ktx:$version_core_ktx"
 
     // Hilt
