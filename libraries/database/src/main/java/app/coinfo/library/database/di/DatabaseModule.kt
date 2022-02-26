@@ -1,8 +1,9 @@
 package app.coinfo.library.database.di
 
 import android.content.Context
-import app.coinfo.library.database.CoinfoDatabase
+import androidx.room.Room
 import app.coinfo.library.database.Database
+import app.coinfo.library.database.dao.PortfoliosDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,9 +15,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal object DatabaseModule {
 
+    private const val DATABASE_NAME = "coinfo.db"
+
     @Provides
     @Singleton
-    fun providesDatabase(
+    internal fun providesRoomDatabase(
         @ApplicationContext appContext: Context
-    ): Database = CoinfoDatabase(appContext)
+    ) = Room.databaseBuilder(
+        appContext,
+        Database::class.java, DATABASE_NAME
+    ).fallbackToDestructiveMigration().build()
+
+    @Provides
+    @Singleton
+    fun providesPortfoliosDap(
+        database: Database
+    ): PortfoliosDao = database.portfoliosDao()
 }

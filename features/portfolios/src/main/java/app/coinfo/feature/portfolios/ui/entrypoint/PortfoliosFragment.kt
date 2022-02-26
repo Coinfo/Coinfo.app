@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import app.coinfo.feature.portfolios.R
 import app.coinfo.feature.portfolios.databinding.PortfoliosFragmentPortfoliosBinding
@@ -15,6 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 internal class PortfoliosFragment : Fragment(R.layout.portfolios_fragment_portfolios) {
 
+    private val viewModel: PortfoliosViewModel by viewModels()
     private val binding: PortfoliosFragmentPortfoliosBinding by viewBinding(PortfoliosFragmentPortfoliosBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,5 +39,8 @@ internal class PortfoliosFragment : Fragment(R.layout.portfolios_fragment_portfo
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        viewModel.loadPortfolios()
     }
 }

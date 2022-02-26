@@ -1,11 +1,12 @@
 package app.coinfo.library.database
 
-interface Database {
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import app.coinfo.library.database.dao.PortfoliosDao
+import app.coinfo.library.database.entity.PortfolioEntity
 
-    /**
-     *  Saves portfolio with given name to the database
-     *
-     *  @param name The name ot the portfolio
-     */
-    suspend fun savePortfolio(name: String)
+@Database(entities = [PortfolioEntity::class], version = 1)
+abstract class Database : RoomDatabase() {
+
+    abstract fun portfoliosDao(): PortfoliosDao
 }

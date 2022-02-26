@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.coins.R
 import app.coinfo.feature.coins.databinding.CoinsListItemCoinBinding
-import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.model.UICoinItem
 import com.bumptech.glide.Glide
 
-internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>(CoinsDiffCallback()) {
+internal class CoinsAdapter : ListAdapter<UICoinItem, CoinsAdapter.ViewHolder>(CoinsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
@@ -26,7 +26,7 @@ internal class CoinsAdapter : ListAdapter<CoinListItem, CoinsAdapter.ViewHolder>
         private val binding: CoinsListItemCoinBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(coin: CoinListItem) {
+        fun bind(coin: UICoinItem) {
             binding.root.setOnClickListener { navigateToDeepLink(it, coin.id) }
             binding.textViewCoinName.text = coin.name
             binding.textViewCoinPrice.text = coin.price

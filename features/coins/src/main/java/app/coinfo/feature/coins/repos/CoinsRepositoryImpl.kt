@@ -1,6 +1,6 @@
 package app.coinfo.feature.coins.repos
 
-import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.model.UICoinItem
 import app.coinfo.library.cloud.Cloud
 import app.coinfo.library.cloud.model.Coin
 import app.coinfo.library.core.enums.Currency
@@ -19,9 +19,9 @@ internal class CoinsRepositoryImpl(
         ids: List<String>,
         currency: Currency,
         timeInterval: TimeInterval
-    ): List<CoinListItem> = withContext(Dispatchers.IO) {
+    ): List<UICoinItem> = withContext(Dispatchers.IO) {
         return@withContext cloud.loadCoins(ids, currency).map { coin ->
-            CoinListItem(
+            UICoinItem(
                 id = coin.id,
                 name = coin.name,
                 symbol = coin.symbol,

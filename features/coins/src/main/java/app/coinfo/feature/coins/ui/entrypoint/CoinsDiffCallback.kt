@@ -1,11 +1,11 @@
 package app.coinfo.feature.coins.ui.entrypoint
 
 import androidx.recyclerview.widget.DiffUtil
-import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.model.UICoinItem
 
-internal class CoinsDiffCallback : DiffUtil.ItemCallback<CoinListItem>() {
+internal class CoinsDiffCallback : DiffUtil.ItemCallback<UICoinItem>() {
 
-    override fun areItemsTheSame(oldItem: CoinListItem, newItem: CoinListItem) = oldItem.name == newItem.name
+    override fun areItemsTheSame(oldItem: UICoinItem, newItem: UICoinItem) = oldItem.name == newItem.name
 
-    override fun areContentsTheSame(oldItem: CoinListItem, newItem: CoinListItem) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: UICoinItem, newItem: UICoinItem) = oldItem == newItem
 }

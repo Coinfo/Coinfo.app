@@ -47,4 +47,5 @@ ext {
     version_hilt_compiler = "1.0.0"
     version_glide         = "4.12.0"
     version_core_ktx      = "1.7.0"
+    version_room          = "2.4.2"
 }

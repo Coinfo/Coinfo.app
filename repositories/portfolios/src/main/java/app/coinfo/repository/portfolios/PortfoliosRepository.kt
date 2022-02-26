@@ -1,5 +1,7 @@
 package app.coinfo.repository.portfolios
 
+import app.coinfo.repository.portfolios.model.Portfolio
+
 interface PortfoliosRepository {
 
     /**
@@ -8,4 +10,6 @@ interface PortfoliosRepository {
      * @param name The name of the portfolio
      **/
     suspend fun createPortfolio(name: String)
+
+    suspend fun loadPortfolios(): List<Portfolio>
 }

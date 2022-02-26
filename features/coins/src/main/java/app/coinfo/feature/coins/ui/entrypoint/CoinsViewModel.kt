@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.feature.coins.model.CoinListItem
+import app.coinfo.feature.coins.model.UICoinItem
 import app.coinfo.feature.coins.prefs.CoinsPreferences
 import app.coinfo.feature.coins.repos.CoinsRepository
 import app.coinfo.library.core.enums.Currency
@@ -43,9 +43,9 @@ internal class CoinsViewModel @Inject constructor(
         get() = _currency
     private val _currency = MutableLiveData(currentCurrency)
 
-    val coins: LiveData<List<CoinListItem>>
+    val coins: LiveData<List<UICoinItem>>
         get() = _coins
-    private val _coins = MutableLiveData(emptyList<CoinListItem>())
+    private val _coins = MutableLiveData(emptyList<UICoinItem>())
 
     fun refreshCoins(showLoading: Boolean = false) {
         viewModelScope.launch {
