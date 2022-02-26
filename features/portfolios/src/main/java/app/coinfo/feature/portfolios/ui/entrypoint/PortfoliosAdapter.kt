@@ -32,7 +32,7 @@ internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapte
 
         private fun navigateToDeepLink(view: View, id: Long) = view.findNavController().navigate(
             NavDeepLinkRequest.Builder
-                .fromUri("coinfo://app.coinfo.feature/coin?id=$id".toUri())
+                .fromUri("coinfo://app.coinfo.feature/portfolio?id=$id".toUri())
                 .build()
         )
 
