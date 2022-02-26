@@ -31,7 +31,7 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
         if (item.itemId == R.id.action_add_transaction) {
             findNavController().navigate(
                 NavDeepLinkRequest.Builder
-                    .fromUri("coinfo://app.coinfo.feature/search".toUri())
+                    .fromUri("coinfo://app.coinfo.feature/search?from=PortfolioFragment".toUri())
                     .build()
             )
             true

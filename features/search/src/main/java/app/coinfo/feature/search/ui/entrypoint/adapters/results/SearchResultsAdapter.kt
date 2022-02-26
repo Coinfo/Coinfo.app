@@ -12,22 +12,30 @@ import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.search.databinding.SearchListItemSearchBinding
 import com.bumptech.glide.Glide
 
-internal class SearchResultsAdapter : ListAdapter<UISearchItem, SearchResultsAdapter.ViewHolder>(
+internal class SearchResultsAdapter(
+    private val from: String? = null
+) : ListAdapter<UISearchItem, SearchResultsAdapter.ViewHolder>(
     SearchResultDiffCallback()
 ) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent, from)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
     class ViewHolder private constructor(
-        private val binding: SearchListItemSearchBinding
+        private val binding: SearchListItemSearchBinding,
+        private val from: String?,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: UISearchItem) {
-            binding.root.setOnClickListener { navigateToDeepLink(it, coin.id) }
+            binding.root.setOnClickListener {
+                when (from) {
+                    FROM_COINS_FRAGMENT -> navigateToCoinFeature(it, coin.id)
+                    FROM_PORTFOLIO_FRAGMENT -> {}
+                    else -> throw IllegalStateException("Unknown from state.")
+                }
+            }
             binding.textViewCoinName.text = coin.name
             binding.textViewCoinSymbol.text = coin.symbol
             binding.textViewMarketCapRank.text = coin.rank
@@ -35,7 +43,7 @@ internal class SearchResultsAdapter : ListAdapter<UISearchItem, SearchResultsAda
             binding.executePendingBindings()
         }
 
-        private fun navigateToDeepLink(view: View, id: String) = view.findNavController().navigate(
+        private fun navigateToCoinFeature(view: View, id: String) = view.findNavController().navigate(
             NavDeepLinkRequest.Builder
                 .fromUri("coinfo://app.coinfo.feature/coin?id=$id".toUri())
                 .build()
@@ -48,10 +56,12 @@ internal class SearchResultsAdapter : ListAdapter<UISearchItem, SearchResultsAda
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            private const val FROM_COINS_FRAGMENT = "CoinsFragment"
+            private const val FROM_PORTFOLIO_FRAGMENT = "PortfolioFragment"
+            fun from(parent: ViewGroup, from: String?): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = SearchListItemSearchBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, from)
             }
         }
     }

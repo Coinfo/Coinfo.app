@@ -70,7 +70,7 @@ internal class CoinsFragment : Fragment(R.layout.coins_fragment_coins) {
         if (item.itemId == R.id.action_search) {
             findNavController().navigate(
                 NavDeepLinkRequest.Builder
-                    .fromUri("coinfo://app.coinfo.feature/search".toUri())
+                    .fromUri("coinfo://app.coinfo.feature/search?from=CoinsFragment".toUri())
                     .build()
             )
             true
