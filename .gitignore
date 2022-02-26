@@ -18,3 +18,4 @@ local.properties
 /features/build/intermediates/ktLint/
 /libraries/build/intermediates/ktLint/
 /widgets/build/intermediates/ktLint/
+/repositories/build/intermediates/ktLint/

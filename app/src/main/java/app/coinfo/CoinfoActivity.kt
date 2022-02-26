@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import app.coinfo.databinding.ActivityMainBinding
@@ -35,12 +36,12 @@ class CoinfoActivity : AppCompatActivity() {
 
         // Setup the ActionBar with navController and 3 top level destinations
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.dashboard_navigation_graph, R.id.coins_navigation_graph, R.id.portfolios_navigation_graph)
+            setOf(R.id.dashboard_navigation_graph, R.id.destination_coins, R.id.destination_portfolios)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp()
+        return navController.navigateUp(appBarConfiguration)
     }
 }
