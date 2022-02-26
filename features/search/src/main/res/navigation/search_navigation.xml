@@ -11,8 +11,7 @@
         android:label="@string/search_label_entrypoint"
         tools:layout="@layout/search_fragment_search">
 
-        <deepLink app:uri="coinfo://app.coinfo.feature/search?from={from}" />
-        <argument android:name="from" app:argType="string"/>
+        <deepLink app:uri="coinfo://app.coinfo.feature/search" />
 
     </fragment>
 
