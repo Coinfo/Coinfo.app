@@ -1,3 +1,4 @@
 <resources>
     <string name="portfolio_fragment_title_portfolio">Portfolio</string>
+    <string name="portfolio_menu_item_title_add_transaction">Add Transaction</string>
 </resources>

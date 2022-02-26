@@ -10,6 +10,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import app.coinfo.feature.coins.R
@@ -17,6 +18,7 @@ import app.coinfo.feature.coins.databinding.CoinsFragmentCoinsBinding
 import app.coinfo.feature.coins.ui.decoration.CoinHorizontalDividerItemDecoration
 import app.coinfo.feature.coins.ui.filter.changetimeline.ChangeTimelineFilterBottomSheet
 import app.coinfo.feature.coins.ui.filter.currency.CurrencyFilterBottomSheet
+import app.coinfo.library.core.Constants.KEY_SEARCHED_COIN_ID
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.getBackStackData
@@ -99,6 +101,14 @@ internal class CoinsFragment : Fragment(R.layout.coins_fragment_coins) {
 
         getBackStackData<Currency>(navBackStackEntry, CurrencyFilterBottomSheet.KEY_CURRENCY) {
             it?.let { model.onCurrencyChanged(it) }
+        }
+
+        getBackStackData<String>(navBackStackEntry, KEY_SEARCHED_COIN_ID) { id ->
+            findNavController().navigate(
+                NavDeepLinkRequest.Builder
+                    .fromUri("coinfo://app.coinfo.feature/coin?id=$id".toUri())
+                    .build()
+            )
         }
     }
 

@@ -28,8 +28,16 @@ internal class SearchViewModel @Inject constructor(
         get() = _trendingResults
     private val _trendingResults = MutableLiveData(emptyList<UITrendingItem>())
 
+    val from: LiveData<String>
+        get() = _from
+    private val _from = MutableLiveData("")
+
     init {
         loadTrending()
+    }
+
+    fun setFrom(from: String) {
+        _from.value = from
     }
 
     fun onSearchTextChanged(text: CharSequence) {

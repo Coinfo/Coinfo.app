@@ -45,9 +45,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:visibility="@{viewModel.searchResults.size() == 0}"
-            app:trendingResults="@{viewModel.trendingResults}" >
-
-        </androidx.recyclerview.widget.RecyclerView>
+            app:trendingResults="@{viewModel.trendingResults}"/>
 
         <TextView
             android:id="@+id/label_search_results"
