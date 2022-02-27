@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
     id "androidx.navigation.safeargs.kotlin"
 }
 
@@ -47,4 +48,9 @@ dependencies {
 
     // View Bindings
     implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$version_viewbinding"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$version_dagger"
+    kapt "androidx.hilt:hilt-compiler:$version_hilt_compiler"
+    kapt "com.google.dagger:hilt-compiler:$version_dagger"
 }
