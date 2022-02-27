@@ -38,7 +38,7 @@ android {
 dependencies {
 
     implementation project(path: ':libraries:core')
-    implementation project(path: ':repositories:cloud')
+    implementation project(path: ':repositories:coins')
     implementation project(path: ':libraries:logger')
     implementation project(path: ':libraries:preferences')
 
