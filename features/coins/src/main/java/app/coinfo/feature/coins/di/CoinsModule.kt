@@ -1,8 +1,8 @@
 package app.coinfo.feature.coins.di
 
-import app.coinfo.feature.coins.repos.CoinsRepository
-import app.coinfo.feature.coins.repos.CoinsRepositoryImpl
-import app.coinfo.library.cloud.Cloud
+import app.coinfo.feature.coins.repos.CoinsInternalRepository
+import app.coinfo.feature.coins.repos.CoinsInternalRepositoryImpl
+import app.coinfo.repository.coins.CoinsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +16,6 @@ internal object CoinsModule {
     @Provides
     @Singleton
     fun providesCoinsRepository(
-        cloud: Cloud,
-    ): CoinsRepository = CoinsRepositoryImpl(cloud)
+        coinsRepository: CoinsRepository,
+    ): CoinsInternalRepository = CoinsInternalRepositoryImpl(coinsRepository)
 }

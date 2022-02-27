@@ -4,22 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.library.cloud.Cloud
-import app.coinfo.library.cloud.model.CoinData
-import app.coinfo.library.cloud.model.DeveloperInfo
-import app.coinfo.library.cloud.model.PriceDatePair
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.library.preferences.Preferences
+import app.coinfo.repository.coins.CoinsRepository
+import app.coinfo.repository.coins.model.CoinData
+import app.coinfo.repository.coins.model.DeveloperInfo
+import app.coinfo.repository.coins.model.PriceDatePair
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 internal class CoinViewModel @Inject constructor(
-    private val cloud: Cloud,
+    private val cloud: CoinsRepository,
     private val preferences: Preferences,
 ) : ViewModel() {
 

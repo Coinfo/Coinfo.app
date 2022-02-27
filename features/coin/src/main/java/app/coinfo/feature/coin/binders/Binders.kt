@@ -6,8 +6,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.coinfo.feature.coin.details.R
-import app.coinfo.library.cloud.model.DeveloperInfo
-import app.coinfo.library.cloud.model.PriceDatePair
+import app.coinfo.repository.coins.model.DeveloperInfo
+import app.coinfo.repository.coins.model.PriceDatePair
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
