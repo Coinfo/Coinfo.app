@@ -1,0 +1,5 @@
+<resources>
+    <string name="transactions_toggle_button_text_buy">Buy</string>
+    <string name="transactions_toggle_button_text_sell">Sell</string>
+    <string name="transactions_toggle_button_text_transfer">Transfer</string>
+</resources>

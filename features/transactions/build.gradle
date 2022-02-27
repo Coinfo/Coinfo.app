@@ -29,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -41,4 +44,7 @@ dependencies {
     implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
+
+    // View Bindings
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:$version_viewbinding"
 }
