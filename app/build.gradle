@@ -46,6 +46,7 @@ dependencies {
     implementation project(path: ':features:portfolio')
     implementation project(path: ':features:search')
     implementation project(path: ':features:dashboard')
+    implementation project(path: ':features:transactions')
     implementation project(path: ':libraries:logger')
     implementation project(path: ':libraries:cloud')
     implementation project(path: ':libraries:preferences')
