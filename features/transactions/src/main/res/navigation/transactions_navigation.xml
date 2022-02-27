@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/transactions_navigation_graph"
+    app:startDestination="@id/destination_upsert_transactions">
+
+    <fragment
+        android:id="@+id/destination_upsert_transactions"
+        android:name="app.coinfo.feature.transactions.ui.upsert.UpsertTransactionFragment"
+        android:label="UpsertTransactionFragment">
+
+        <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}" />
+        <argument android:name="coinId" app:argType="string"/>
+
+    </fragment>
+
+</navigation>

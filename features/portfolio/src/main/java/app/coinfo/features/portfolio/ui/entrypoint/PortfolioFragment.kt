@@ -54,8 +54,12 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
         // get the right NavBackStackEntry
         val navBackStackEntry = navController.getBackStackEntry(R.id.destination_portfolio)
 
-        getBackStackData<String>(navBackStackEntry, KEY_SEARCHED_COIN_ID) {
-            // Get the coin ID and navigate to add transaction
+        getBackStackData<String>(navBackStackEntry, KEY_SEARCHED_COIN_ID) { coinId ->
+            findNavController().navigate(
+                NavDeepLinkRequest.Builder
+                    .fromUri("coinfo://app.coinfo.feature/transactions/upsert?coinId=$coinId".toUri())
+                    .build()
+            )
         }
     }
 }
