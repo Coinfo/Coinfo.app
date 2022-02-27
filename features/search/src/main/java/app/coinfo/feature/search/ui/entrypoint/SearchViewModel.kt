@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.search.ui.entrypoint.adapters.results.UISearchItem
 import app.coinfo.feature.search.ui.entrypoint.adapters.trending.UITrendingItem
-import app.coinfo.library.cloud.Cloud
+import app.coinfo.repository.coins.CoinsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class SearchViewModel @Inject constructor(
-    private val cloud: Cloud,
+    private val cloud: CoinsRepository,
 ) : ViewModel() {
 
     private var delayJob: Job? = null

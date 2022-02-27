@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.coins.model.UICoinItem
 import app.coinfo.feature.coins.prefs.CoinsPreferences
-import app.coinfo.feature.coins.repos.CoinsRepository
+import app.coinfo.feature.coins.repos.CoinsInternalRepository
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TimeInterval
 import app.coinfo.library.preferences.Preferences
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class CoinsViewModel @Inject constructor(
-    private val repository: CoinsRepository,
+    private val repository: CoinsInternalRepository,
     private val preferences: Preferences,
     private val localPreferences: CoinsPreferences
 ) : ViewModel() {
