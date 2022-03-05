@@ -2,4 +2,6 @@
     <string name="transactions_toggle_button_text_buy">Buy</string>
     <string name="transactions_toggle_button_text_sell">Sell</string>
     <string name="transactions_toggle_button_text_transfer">Transfer</string>
+    <string name="transactions_text_view_price_per_coin">%s price per coin</string>
+    <string name="transactions_button_text_add_transaction">Add Transaction</string>
 </resources>

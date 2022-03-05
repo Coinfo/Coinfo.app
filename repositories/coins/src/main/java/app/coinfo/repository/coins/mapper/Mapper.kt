@@ -25,6 +25,7 @@ internal val CoinCurrentDataResponse.asCoinData
                 it.pullRequestsMerged
             )
         },
+        symbol = symbol,
         rank = marketData.marketCapRank,
         description = descriptions["en"] ?: "",
         circulatingSupply = marketData.circulatingSupply,
