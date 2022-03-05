@@ -5,6 +5,7 @@ import app.coinfo.library.core.enums.TimeInterval
 
 data class CoinData(
     val name: String,
+    val symbol: String,
     val developerInfo: DeveloperInfo?,
     val maxSupply: Double = 0.0,
     val rank: Int,
