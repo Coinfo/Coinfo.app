@@ -24,6 +24,12 @@ class UpsertTransactionViewModel @Inject constructor(
         get() = _isPriceManuallyChanged
     private val _isPriceManuallyChanged = MutableLiveData(false)
 
+    private val _fee = MutableLiveData("")
+
+    val isFeeManuallyChanged: LiveData<Boolean>
+        get() = _isFeeManuallyChanged
+    private val _isFeeManuallyChanged = MutableLiveData(false)
+
     val symbol: LiveData<String>
         get() = _symbol
     private val _symbol = MutableLiveData("")
@@ -40,4 +46,13 @@ class UpsertTransactionViewModel @Inject constructor(
         _price.value = price.toStringWithSuffix(2)
         _isPriceManuallyChanged.value = true
     }
+
+    fun onUpdateFee(fee: Double) {
+        _fee.value = fee.toStringWithSuffix(2)
+        _isFeeManuallyChanged.value = true
+    }
+
+    fun getPriceValue() = _price.value ?: "0.0"
+
+    fun getFeeValue() = _fee.value ?: "0.0"
 }

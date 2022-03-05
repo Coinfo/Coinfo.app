@@ -109,6 +109,15 @@
                 android:checkable="@{viewModel.isPriceManuallyChanged}"
                 android:checked="@{viewModel.isPriceManuallyChanged}"/>
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_set_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="@string/transactions_chip_text_fee"
+                android:checkable="@{viewModel.isFeeManuallyChanged}"
+                android:checked="@{viewModel.isFeeManuallyChanged}"/>
+
         </com.google.android.material.chip.ChipGroup>
 
         <Button

@@ -5,5 +5,7 @@
     <string name="transactions_text_view_price_per_coin">%s price per coin</string>
     <string name="transactions_button_text_add_transaction">Add Transaction</string>
     <string name="transactions_chip_text_price_per_coin">Price Per Coin</string>
+    <string name="transactions_chip_text_fee">Fee</string>
     <string name="transactions_button_text_update_price">Update Price</string>
+    <string name="transactions_button_text_update_fee">Update Fee</string>
 </resources>
