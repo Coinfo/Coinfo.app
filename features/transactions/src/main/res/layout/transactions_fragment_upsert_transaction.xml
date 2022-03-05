@@ -89,6 +89,28 @@
 
         </LinearLayout>
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_transaction_settings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_set_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="@string/transactions_chip_text_price_per_coin"
+                android:checkable="@{viewModel.isPriceManuallyChanged}"
+                android:checked="@{viewModel.isPriceManuallyChanged}"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
         <Button
             android:id="@+id/button_save"
             android:layout_width="0dp"

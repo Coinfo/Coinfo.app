@@ -11,7 +11,19 @@
 
         <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}" />
         <argument android:name="coinId" app:argType="string"/>
+        <action
+            android:id="@+id/toPriceFragment"
+            app:destination="@id/destination_price" />
 
     </fragment>
+    <dialog
+        android:id="@+id/destination_price"
+        android:name="app.coinfo.feature.transactions.ui.price.PriceFragment"
+        android:label="PriceFragment" >
+        <argument
+            android:name="price"
+            app:argType="string"
+            android:defaultValue="0.0" />
+    </dialog>
 
 </navigation>
