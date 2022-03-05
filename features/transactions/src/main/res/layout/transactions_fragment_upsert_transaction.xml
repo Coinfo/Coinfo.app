@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="app.coinfo.feature.transactions.ui.upsert.UpsertTransactionViewModel" />
+            type="app.coinfo.feature.transactions.ui.entrypoint.UpsertTransactionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.upsert.UpsertTransactionFragment">
+        tools:context=".ui.entrypoint.UpsertTransactionFragment">
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggle_group_transaction_mode"

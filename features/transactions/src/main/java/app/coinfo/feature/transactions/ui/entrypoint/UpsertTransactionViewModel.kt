@@ -1,4 +1,4 @@
-package app.coinfo.feature.transactions.ui.upsert
+package app.coinfo.feature.transactions.ui.entrypoint
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

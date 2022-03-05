@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/destination_upsert_transactions"
-        android:name="app.coinfo.feature.transactions.ui.upsert.UpsertTransactionFragment"
+        android:name="app.coinfo.feature.transactions.ui.entrypoint.UpsertTransactionFragment"
         android:label="UpsertTransactionFragment">
 
         <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}" />
