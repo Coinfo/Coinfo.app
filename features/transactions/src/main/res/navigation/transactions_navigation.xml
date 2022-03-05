@@ -17,6 +17,9 @@
         <action
             android:id="@+id/toFeeFragment"
             app:destination="@id/destination_fee" />
+        <action
+            android:id="@+id/toNotesFragment"
+            app:destination="@id/destination_notes" />
 
     </fragment>
     <dialog
@@ -36,6 +39,14 @@
             android:name="fee"
             app:argType="string"
             android:defaultValue="0.0" />
+    </dialog>
+    <dialog
+        android:id="@+id/destination_notes"
+        android:name="app.coinfo.feature.transactions.ui.notes.NotesFragment"
+        android:label="NotesFragment" >
+        <argument
+            android:name="notes"
+            app:argType="string" />
     </dialog>
 
 </navigation>
