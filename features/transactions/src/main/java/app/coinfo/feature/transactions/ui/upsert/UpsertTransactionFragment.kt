@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentUpsertTransactionBinding
 import app.coinfo.feature.transactions.ui.fee.FeeFragment.Companion.KEY_FEE
+import app.coinfo.feature.transactions.ui.notes.NotesFragment.Companion.KEY_NOTES
 import app.coinfo.feature.transactions.ui.price.PriceFragment.Companion.KEY_PRICE
 import app.coinfo.library.core.ktx.getBackStackData
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -50,6 +51,10 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
         getBackStackData<Double>(navBackStackEntry, KEY_FEE) { fee ->
             fee?.let { viewModel.onUpdateFee(it) }
         }
+
+        getBackStackData<String>(navBackStackEntry, KEY_NOTES) { notes ->
+            notes?.let { viewModel.onUpdateNotes(it) }
+        }
     }
 
     private fun setupClickListeners() {
@@ -60,7 +65,12 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
         }
         binding.chipSetFee.setOnClickListener {
             findNavController().navigate(
-                UpsertTransactionFragmentDirections.toFeeFragment(viewModel.getFeeValue())
+                UpsertTransactionFragmentDirections.toFeeFragment(viewModel.fee)
+            )
+        }
+        binding.chipSetNotes.setOnClickListener {
+            findNavController().navigate(
+                UpsertTransactionFragmentDirections.toNotesFragment(viewModel.notes)
             )
         }
     }
