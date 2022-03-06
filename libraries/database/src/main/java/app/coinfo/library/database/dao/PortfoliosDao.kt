@@ -10,7 +10,7 @@ import app.coinfo.library.database.entity.PortfolioEntity
 interface PortfoliosDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    suspend fun insert(photo: PortfolioEntity)
+    suspend fun insert(portfolio: PortfolioEntity)
 
     @Query("SELECT * FROM portfolios ORDER BY portfolio_creation_date DESC")
     suspend fun loadPortfolios(): List<PortfolioEntity>

@@ -1,4 +1,4 @@
-package app.coinfo.feature.transactions.ui.upsert
+package app.coinfo.feature.transactions.ui.entrypoint
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,14 +7,20 @@ import androidx.lifecycle.viewModelScope
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.repository.coins.CoinsRepository
+import app.coinfo.repository.portfolios.PortfoliosRepository
+import app.coinfo.repository.portfolios.model.Transaction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UpsertTransactionViewModel @Inject constructor(
-    private val coinsRepository: CoinsRepository
+    private val coinsRepository: CoinsRepository,
+    private val portfoliosRepository: PortfoliosRepository,
 ) : ViewModel() {
+
+    private var coinId: String? = null
+    private var portfolioId: Long? = null
 
     val price: LiveData<String>
         get() = _price
@@ -42,9 +48,11 @@ class UpsertTransactionViewModel @Inject constructor(
         get() = _symbol
     private val _symbol = MutableLiveData("")
 
-    fun loadCoinInformation(id: String) {
+    fun loadCoinInformation(coinId: String, portfolioId: Long) {
+        this.coinId = coinId
+        this.portfolioId = portfolioId
         viewModelScope.launch {
-            val data = coinsRepository.getCoinData(id)
+            val data = coinsRepository.getCoinData(coinId)
             _price.value = data.getCurrentPrice(Currency.EUR).toStringWithSuffix(2)
             _symbol.value = data.symbol
         }
@@ -63,6 +71,20 @@ class UpsertTransactionViewModel @Inject constructor(
     fun onUpdateNotes(value: String) {
         notes = value
         _isNotesManuallyChanged.value = true
+    }
+
+    fun onAddTransaction() {
+        viewModelScope.launch {
+            portfoliosRepository.addTransaction(
+                Transaction(
+                    coinId = coinId!!,
+                    portfolioId = portfolioId!!,
+                    symbol = _symbol.value!!,
+                    amount = 1000.0,
+                    pricePerCoin = _price.value?.toDouble() ?: 0.0
+                )
+            )
+        }
     }
 
     fun getPriceValue() = _price.value ?: "0.0"

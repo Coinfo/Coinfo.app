@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import app.coinfo.library.database.Database
 import app.coinfo.library.database.dao.PortfoliosDao
+import app.coinfo.library.database.dao.TransactionsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,13 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providesPortfoliosDap(
+    fun providesPortfoliosDao(
         database: Database
     ): PortfoliosDao = database.portfoliosDao()
+
+    @Provides
+    @Singleton
+    fun providesTransactionsDao(
+        database: Database
+    ): TransactionsDao = database.transactionsDao()
 }

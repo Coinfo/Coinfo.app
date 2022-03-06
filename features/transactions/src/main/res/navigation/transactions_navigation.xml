@@ -6,11 +6,13 @@
 
     <fragment
         android:id="@+id/destination_upsert_transactions"
-        android:name="app.coinfo.feature.transactions.ui.upsert.UpsertTransactionFragment"
+        android:name="app.coinfo.feature.transactions.ui.entrypoint.UpsertTransactionFragment"
         android:label="UpsertTransactionFragment">
 
-        <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}" />
+        <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}&amp;portfolioId={portfolioId}" />
         <argument android:name="coinId" app:argType="string"/>
+        <argument android:name="portfolioId" app:argType="long" />
+
         <action
             android:id="@+id/toPriceFragment"
             app:destination="@id/destination_price" />

@@ -1,4 +1,4 @@
-package app.coinfo.feature.transactions.ui.upsert
+package app.coinfo.feature.transactions.ui.entrypoint
 
 import android.os.Bundle
 import android.view.View
@@ -33,7 +33,7 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
         setupCallbacks()
         setupClickListeners()
 
-        viewModel.loadCoinInformation(args.coinId)
+        viewModel.loadCoinInformation(args.coinId, args.portfolioId)
     }
 
     private fun setupCallbacks() {
@@ -72,6 +72,10 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
             findNavController().navigate(
                 UpsertTransactionFragmentDirections.toNotesFragment(viewModel.notes)
             )
+        }
+        binding.buttonAddTransaction.setOnClickListener {
+            viewModel.onAddTransaction()
+            findNavController().navigateUp()
         }
     }
 }
