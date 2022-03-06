@@ -59,7 +59,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/button_save"
+            app:layout_constraintBottom_toTopOf="@+id/button_add_transaction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toggle_group_transaction_mode">
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/button_save"
+            app:layout_constraintBottom_toTopOf="@+id/button_add_transaction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:singleSelection="true">
@@ -130,7 +130,7 @@
         </com.google.android.material.chip.ChipGroup>
 
         <Button
-            android:id="@+id/button_save"
+            android:id="@+id/button_add_transaction"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
