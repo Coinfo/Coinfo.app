@@ -1,5 +1,6 @@
 package app.coinfo.repository.portfolios
 
+import app.coinfo.repository.portfolios.model.Assets
 import app.coinfo.repository.portfolios.model.Portfolio
 import app.coinfo.repository.portfolios.model.Transaction
 
@@ -21,5 +22,5 @@ interface PortfoliosRepository {
      */
     suspend fun addTransaction(transaction: Transaction)
 
-    suspend fun loadTransactions(portfolioId: Long): List<Transaction>
+    suspend fun loadAssets(portfolioId: Long): Assets
 }

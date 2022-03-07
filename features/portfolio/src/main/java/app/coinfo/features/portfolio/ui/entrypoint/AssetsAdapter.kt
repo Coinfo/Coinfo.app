@@ -22,6 +22,7 @@ internal class AssetsAdapter : ListAdapter<UIAssetsItem, AssetsAdapter.ViewHolde
 
         fun bind(asset: UIAssetsItem) {
             binding.textView.text = asset.id
+            binding.textViewAmount.text = asset.amount
             binding.executePendingBindings()
         }
 

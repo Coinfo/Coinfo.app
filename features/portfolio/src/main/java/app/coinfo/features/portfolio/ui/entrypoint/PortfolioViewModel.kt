@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PortfolioViewModel @Inject constructor(
-    private val portfoliosRepository: PortfoliosRepository
+    private val portfoliosRepository: PortfoliosRepository,
 ) : ViewModel() {
 
     val assets: LiveData<List<UIAssetsItem>>
@@ -20,8 +20,10 @@ class PortfolioViewModel @Inject constructor(
 
     fun loadAssets(portfolioId: Long) {
         viewModelScope.launch {
-            _portfolios.value = portfoliosRepository.loadTransactions(portfolioId).map {
-                UIAssetsItem(id = it.coinId)
+            val assetsResult = portfoliosRepository.loadAssets(portfolioId)
+
+            _portfolios.value = assetsResult.assets.map {
+                UIAssetsItem(id = it.coinId, amount = it.getAssetAmount().toString())
             }
         }
     }
