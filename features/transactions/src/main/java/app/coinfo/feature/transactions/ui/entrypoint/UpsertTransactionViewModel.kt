@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.ktx.toDoubleOrZero
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.repository.coins.CoinsRepository
 import app.coinfo.repository.portfolios.PortfoliosRepository
@@ -41,6 +42,14 @@ class UpsertTransactionViewModel @Inject constructor(
     var notes: String = ""
         private set
 
+    val currency: LiveData<Currency>
+        get() = _currency
+    private val _currency = MutableLiveData(Currency.EUR)
+
+    val isCurrencyManuallyChanged: LiveData<Boolean>
+        get() = _isCurrencyManuallyChanged
+    private val _isCurrencyManuallyChanged = MutableLiveData(false)
+
     val isNotesManuallyChanged: LiveData<Boolean>
         get() = _isNotesManuallyChanged
     private val _isNotesManuallyChanged = MutableLiveData(false)
@@ -65,7 +74,7 @@ class UpsertTransactionViewModel @Inject constructor(
     }
 
     fun onAmountChanged(s: CharSequence) {
-        amount = s.toString().toDouble()
+        amount = s.toString().toDoubleOrZero()
     }
 
     fun onUpdateFee(value: Double) {
@@ -78,6 +87,11 @@ class UpsertTransactionViewModel @Inject constructor(
         _isNotesManuallyChanged.value = true
     }
 
+    fun onUpdateCurrency(value: Currency) {
+        _currency.value = value
+        _isCurrencyManuallyChanged.value = true
+    }
+
     fun onAddTransaction() {
         viewModelScope.launch {
             portfoliosRepository.addTransaction(
@@ -86,9 +100,9 @@ class UpsertTransactionViewModel @Inject constructor(
                     portfolioId = portfolioId!!,
                     symbol = _symbol.value!!,
                     amount = amount,
-                    price = _price.value?.toDouble() ?: 0.0,
-                    fee = fee.toDouble(),
-                    currency = Currency.EUR
+                    price = _price.value?.toDoubleOrZero() ?: 0.0,
+                    fee = fee.toDoubleOrZero(),
+                    currency = _currency.value!!
                 )
             )
         }

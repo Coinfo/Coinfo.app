@@ -11,7 +11,7 @@ import app.coinfo.library.core.ktx.setBackStackData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class FeeFragment : BottomSheetDialogFragment() {
+internal class FeeFragment : BottomSheetDialogFragment() {
 
     private val binding: TransactionsFragmentFeeBinding by viewBinding(TransactionsFragmentFeeBinding::bind)
     private val args: FeeFragmentArgs by navArgs()
