@@ -73,6 +73,7 @@
                 android:ems="10"
                 android:gravity="end"
                 android:inputType="numberDecimal"
+                android:afterTextChanged="@{(edtitable) -> viewModel.onAmountChanged(edtitable)}"
                 android:text="0"
                 android:textAlignment="textEnd"
                 android:textSize="36sp" />

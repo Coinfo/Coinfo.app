@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+    implementation project(path: ':libraries:core')
+
     implementation "androidx.core:core-ktx:$version_core_ktx"
 
     // Hilt
