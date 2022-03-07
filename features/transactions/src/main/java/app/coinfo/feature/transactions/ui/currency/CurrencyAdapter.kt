@@ -1,15 +1,15 @@
-package app.coinfo.feature.coins.ui.filter.currency
+package app.coinfo.feature.transactions.ui.currency
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
-import app.coinfo.feature.coins.databinding.ListItemCurrencyBinding
+import app.coinfo.feature.transactions.databinding.TransactionsListItemCurrencyBinding
 import app.coinfo.library.core.enums.Currency
 
-class CurrencyFilterAdapter(
+class CurrencyAdapter(
     private val onFilterClickListener: (Currency) -> Unit
-) : RecyclerView.Adapter<CurrencyFilterAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
 
     private var selectedFilter: Currency? = null
     private val filters = Currency.values().filter { it.code != "N/A" }.toList()
@@ -28,7 +28,7 @@ class CurrencyFilterAdapter(
     }
 
     class ViewHolder private constructor(
-        private val binding: ListItemCurrencyBinding
+        private val binding: TransactionsListItemCurrencyBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
@@ -45,7 +45,7 @@ class CurrencyFilterAdapter(
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemCurrencyBinding.inflate(layoutInflater, parent, false)
+                val binding = TransactionsListItemCurrencyBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

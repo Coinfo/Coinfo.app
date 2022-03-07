@@ -8,9 +8,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentUpsertTransactionBinding
+import app.coinfo.feature.transactions.ui.currency.CurrencyFragment.Companion.KEY_CURRENCY
 import app.coinfo.feature.transactions.ui.fee.FeeFragment.Companion.KEY_FEE
 import app.coinfo.feature.transactions.ui.notes.NotesFragment.Companion.KEY_NOTES
 import app.coinfo.feature.transactions.ui.price.PriceFragment.Companion.KEY_PRICE
+import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.ktx.getBackStackData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,6 +57,10 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
         getBackStackData<String>(navBackStackEntry, KEY_NOTES) { notes ->
             notes?.let { viewModel.onUpdateNotes(it) }
         }
+
+        getBackStackData<Currency>(navBackStackEntry, KEY_CURRENCY) { notes ->
+            notes?.let { viewModel.onUpdateCurrency(it) }
+        }
     }
 
     private fun setupClickListeners() {
@@ -71,6 +77,11 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
         binding.chipSetNotes.setOnClickListener {
             findNavController().navigate(
                 UpsertTransactionFragmentDirections.toNotesFragment(viewModel.notes)
+            )
+        }
+        binding.chipSetCurrency.setOnClickListener {
+            findNavController().navigate(
+                UpsertTransactionFragmentDirections.toCurrencyFragment(viewModel.currency.value!!)
             )
         }
         binding.buttonAddTransaction.setOnClickListener {

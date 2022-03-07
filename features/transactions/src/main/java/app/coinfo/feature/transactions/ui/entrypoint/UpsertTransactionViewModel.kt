@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.ktx.toDoubleOrZero
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.repository.coins.CoinsRepository
 import app.coinfo.repository.portfolios.PortfoliosRepository
@@ -21,6 +22,7 @@ class UpsertTransactionViewModel @Inject constructor(
 
     private var coinId: String? = null
     private var portfolioId: Long? = null
+    private var amount: Double = 0.0
 
     val price: LiveData<String>
         get() = _price
@@ -39,6 +41,14 @@ class UpsertTransactionViewModel @Inject constructor(
 
     var notes: String = ""
         private set
+
+    val currency: LiveData<Currency>
+        get() = _currency
+    private val _currency = MutableLiveData(Currency.EUR)
+
+    val isCurrencyManuallyChanged: LiveData<Boolean>
+        get() = _isCurrencyManuallyChanged
+    private val _isCurrencyManuallyChanged = MutableLiveData(false)
 
     val isNotesManuallyChanged: LiveData<Boolean>
         get() = _isNotesManuallyChanged
@@ -63,6 +73,10 @@ class UpsertTransactionViewModel @Inject constructor(
         _isPriceManuallyChanged.value = true
     }
 
+    fun onAmountChanged(s: CharSequence) {
+        amount = s.toString().toDoubleOrZero()
+    }
+
     fun onUpdateFee(value: Double) {
         fee = value.toStringWithSuffix(2)
         _isFeeManuallyChanged.value = true
@@ -73,6 +87,11 @@ class UpsertTransactionViewModel @Inject constructor(
         _isNotesManuallyChanged.value = true
     }
 
+    fun onUpdateCurrency(value: Currency) {
+        _currency.value = value
+        _isCurrencyManuallyChanged.value = true
+    }
+
     fun onAddTransaction() {
         viewModelScope.launch {
             portfoliosRepository.addTransaction(
@@ -80,8 +99,10 @@ class UpsertTransactionViewModel @Inject constructor(
                     coinId = coinId!!,
                     portfolioId = portfolioId!!,
                     symbol = _symbol.value!!,
-                    amount = 1000.0,
-                    pricePerCoin = _price.value?.toDouble() ?: 0.0
+                    amount = amount,
+                    price = _price.value?.toDoubleOrZero() ?: 0.0,
+                    fee = fee.toDoubleOrZero(),
+                    currency = _currency.value!!
                 )
             )
         }

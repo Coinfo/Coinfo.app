@@ -22,6 +22,9 @@
         <action
             android:id="@+id/toNotesFragment"
             app:destination="@id/destination_notes" />
+        <action
+            android:id="@+id/toCurrencyFragment"
+            app:destination="@id/destination_currency" />
 
     </fragment>
     <dialog
@@ -49,6 +52,15 @@
         <argument
             android:name="notes"
             app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/destination_currency"
+        android:name="app.coinfo.feature.transactions.ui.currency.CurrencyFragment"
+        android:label="CurrencyFragment" >
+        <argument
+            android:name="currency"
+            app:argType="app.coinfo.library.core.enums.Currency"
+            android:defaultValue="EUR" />
     </dialog>
 
 </navigation>

@@ -7,15 +7,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.fragment.findNavController
 import app.coinfo.library.core.enums.TimeInterval
 
 @MainThread
 inline fun <reified VM : ViewModel> Fragment.parentFragmentViewModels(
+    noinline extrasProducer: (() -> CreationExtras)? = null,
     noinline factoryProducer: (() -> ViewModelProvider.Factory)? = null
 ) = createViewModelLazy(
     VM::class, { requireParentFragment().viewModelStore },
+    { extrasProducer?.invoke() ?: requireParentFragment().defaultViewModelCreationExtras },
     factoryProducer ?: { requireParentFragment().defaultViewModelProviderFactory }
 )
 

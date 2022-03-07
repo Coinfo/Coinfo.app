@@ -73,6 +73,7 @@
                 android:ems="10"
                 android:gravity="end"
                 android:inputType="numberDecimal"
+                android:afterTextChanged="@{(edtitable) -> viewModel.onAmountChanged(edtitable)}"
                 android:text="0"
                 android:textAlignment="textEnd"
                 android:textSize="36sp" />
@@ -99,6 +100,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_set_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="@{viewModel.currency.symbol}"
+                android:checkable="@{viewModel.isCurrencyManuallyChanged}"
+                android:checked="@{viewModel.isCurrencyManuallyChanged}"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_set_price"

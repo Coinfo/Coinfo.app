@@ -3,6 +3,9 @@ package app.coinfo.library.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.database.converter.Converters
 
 @Entity(tableName = "transactions")
 data class TransactionEntity(
@@ -25,4 +28,11 @@ data class TransactionEntity(
 
     @ColumnInfo(name = "symbol")
     val symbol: String,
+
+    @ColumnInfo(name = "fee")
+    val fee: Double,
+
+    @TypeConverters(Converters::class)
+    @ColumnInfo(name = "currency")
+    val currency: Currency,
 )
