@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.coinfo.library.core.enums.Currency
+import app.coinfo.repository.coins.CoinsRepository
 import app.coinfo.repository.portfolios.PortfoliosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PortfolioViewModel @Inject constructor(
     private val portfoliosRepository: PortfoliosRepository,
+    private val coinsRepository: CoinsRepository,
 ) : ViewModel() {
 
     val assets: LiveData<List<UIAssetsItem>>
@@ -20,10 +23,21 @@ class PortfolioViewModel @Inject constructor(
 
     fun loadAssets(portfolioId: Long) {
         viewModelScope.launch {
-            val assetsResult = portfoliosRepository.loadAssets(portfolioId)
+            val portfolioAssets = portfoliosRepository.loadAssets(portfolioId)
+            val coinsMap = coinsRepository.loadCoins(portfolioAssets.coins, Currency.EUR).associateBy { it.id }
 
-            _portfolios.value = assetsResult.assets.map {
-                UIAssetsItem(id = it.coinId, amount = it.getAssetAmount().toString())
+            _portfolios.value = portfolioAssets.assets.map {
+                val coin = coinsMap[it.coinId]!!
+                UIAssetsItem(
+                    id = it.coinId,
+                    name = coin.name,
+                    symbol = coin.symbol,
+                    icon = coin.image,
+                    totalHoldings = it.getAssetAmount().toString(),
+                    totalPrice = (it.getAssetAmount() * coin.currentPrice).toString(),
+                    totalProfitLoss = "0",
+                    price = coin.currentPrice.toString()
+                )
             }
         }
     }
