@@ -6,4 +6,6 @@
     <string name="portfolios_menu_item_title_create_portfolio">Create Portfolio</string>
     <string name="portfolios_button_text_create_portfolio">Create Portfolio</string>
     <string name="portfolios_hint_text_portfolio_name">Portfolio Name</string>
+    <string name="portfolios_text_24_hour_change">24 Hours Change</string>
+    <string name="portfolios_text_total_profit_loss">Total Profit/Loss</string>
 </resources>
