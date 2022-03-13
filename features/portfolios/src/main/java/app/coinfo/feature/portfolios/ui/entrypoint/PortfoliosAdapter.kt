@@ -27,6 +27,9 @@ internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapte
         fun bind(portfolio: UIPortfolioItem) {
             binding.root.setOnClickListener { navigateToDeepLink(it, portfolio.id) }
             binding.textViewPortfolioName.text = portfolio.name
+            binding.textViewPortfolioTotalPrice.text = portfolio.totalValue
+            binding.textView24HourChange.text = portfolio.change24Hour
+            binding.textViewTotalProfitLoss.text = portfolio.totalProfitLoss
             binding.executePendingBindings()
         }
 

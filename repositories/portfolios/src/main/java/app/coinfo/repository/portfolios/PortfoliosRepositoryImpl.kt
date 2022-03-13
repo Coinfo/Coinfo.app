@@ -25,7 +25,7 @@ internal class PortfoliosRepositoryImpl(
 
     override suspend fun loadPortfolios(): List<Portfolio> =
         portfoliosDao.loadPortfolios().map {
-            Portfolio(id = it.id, name = it.name)
+            Portfolio(id = it.id, name = it.name, loadAssets(it.id))
         }
 
     override suspend fun addTransaction(transaction: Transaction) {
