@@ -30,7 +30,7 @@ class PortfolioViewModel @Inject constructor(
     fun loadAssets(portfolioId: Long) {
         viewModelScope.launch {
             val portfolioAssets = portfoliosRepository.loadAssets(portfolioId)
-            val coinsMap = coinsRepository.loadCoins(portfolioAssets.coins, Currency.EUR).associateBy { it.id }
+            val coinsMap = coinsRepository.loadCoins(portfolioAssets.coins, currentCurrency).associateBy { it.id }
             _portfolios.value = portfolioAssets.assets.map {
                 val coin = coinsMap[it.coinId]!!
                 val totalPrice = it.getAssetAmount() * coin.currentPrice
