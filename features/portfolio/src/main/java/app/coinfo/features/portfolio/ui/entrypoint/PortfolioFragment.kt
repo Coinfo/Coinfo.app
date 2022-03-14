@@ -24,6 +24,10 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
     private val binding: PortfolioFragmentPortfolioBinding by viewBinding(PortfolioFragmentPortfolioBinding::bind)
     private val args: PortfolioFragmentArgs by navArgs()
     private val viewModel: PortfolioViewModel by viewModels()
+    private val adapter: AssetsAdapter = AssetsAdapter { coinId ->
+        val uri = "coinfo://app.coinfo.feature/transactions/overview?coinId=$coinId&portfolioId=${args.id}".toUri()
+        findNavController().navigate(NavDeepLinkRequest.Builder.fromUri(uri).build())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +52,7 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerViewPortfolios.adapter = adapter
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         setupFragmentCallbacks()
@@ -64,16 +69,8 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
         val navBackStackEntry = navController.getBackStackEntry(R.id.destination_portfolio)
 
         getBackStackData<String>(navBackStackEntry, KEY_SEARCHED_COIN_ID) { coinId ->
-            findNavController().navigate(
-                NavDeepLinkRequest.Builder
-                    .fromUri(
-                        (
-                            "coinfo://app.coinfo.feature/transactions/upsert?" +
-                                "coinId=$coinId&portfolioId=${args.id}"
-                            ).toUri()
-                    )
-                    .build()
-            )
+            val uri = "coinfo://app.coinfo.feature/transactions/upsert?coinId=$coinId&portfolioId=${args.id}".toUri()
+            findNavController().navigate(NavDeepLinkRequest.Builder.fromUri(uri).build())
         }
     }
 }

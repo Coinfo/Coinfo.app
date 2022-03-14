@@ -8,21 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.features.portfolio.databinding.PortfolioListItemAssetBinding
 import com.bumptech.glide.Glide
 
-internal class AssetsAdapter : ListAdapter<UIAssetsItem, AssetsAdapter.ViewHolder>(
+internal class AssetsAdapter(
+    private val onAssetClickListener: (String) -> Unit
+) : ListAdapter<UIAssetsItem, AssetsAdapter.ViewHolder>(
     AssetsDiffCallback()
 ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent, onAssetClickListener)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
     class ViewHolder private constructor(
-        private val binding: PortfolioListItemAssetBinding
+        private val binding: PortfolioListItemAssetBinding,
+        private val onAssetClickListener: (String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(asset: UIAssetsItem) {
+            binding.root.setOnClickListener { onAssetClickListener(asset.id) }
             binding.textViewAssetName.text = asset.name
             binding.textViewAssetSymbol.text = asset.symbol
             binding.textViewAssetPrice.text = asset.price
@@ -40,10 +44,10 @@ internal class AssetsAdapter : ListAdapter<UIAssetsItem, AssetsAdapter.ViewHolde
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup, onAssetClickListener: (String) -> Unit): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = PortfolioListItemAssetBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(binding, onAssetClickListener)
             }
         }
     }

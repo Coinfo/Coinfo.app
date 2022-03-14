@@ -10,4 +10,5 @@
     <string name="transactions_button_text_update_price">Update Price</string>
     <string name="transactions_button_text_update_fee">Update Fee</string>
     <string name="transactions_button_text_update_notes">Update Notes</string>
+    <string name="transactions_fragment_label_transactions_overview">Transactions Overview</string>
 </resources>

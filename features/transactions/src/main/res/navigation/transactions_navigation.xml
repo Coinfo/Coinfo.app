@@ -63,4 +63,15 @@
             android:defaultValue="EUR" />
     </dialog>
 
+    <fragment
+        android:id="@+id/destination_transactions_overview"
+        android:name="app.coinfo.feature.transactions.ui.overview.TransactionsOverviewFragment"
+        android:label="@string/transactions_fragment_label_transactions_overview">
+
+        <deepLink app:uri="coinfo://app.coinfo.feature/transactions/overview?coinId={coinId}&amp;portfolioId={portfolioId}" />
+        <argument android:name="coinId" app:argType="string"/>
+        <argument android:name="portfolioId" app:argType="long" />
+
+    </fragment>
+
 </navigation>
