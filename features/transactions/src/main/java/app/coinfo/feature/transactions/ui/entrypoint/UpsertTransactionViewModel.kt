@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TransactionType
 import app.coinfo.library.core.ktx.toDoubleOrZero
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.repository.coins.CoinsRepository
@@ -23,6 +24,7 @@ class UpsertTransactionViewModel @Inject constructor(
     private var coinId: String? = null
     private var portfolioId: Long? = null
     private var amount: Double = 0.0
+    private var transactionType: TransactionType = TransactionType.BUY
 
     val price: LiveData<String>
         get() = _price
@@ -92,6 +94,10 @@ class UpsertTransactionViewModel @Inject constructor(
         _isCurrencyManuallyChanged.value = true
     }
 
+    fun onTransactionTypeSelected(type: TransactionType) {
+        transactionType = type
+    }
+
     fun onAddTransaction() {
         viewModelScope.launch {
             portfoliosRepository.addTransaction(
@@ -99,13 +105,19 @@ class UpsertTransactionViewModel @Inject constructor(
                     coinId = coinId!!,
                     portfolioId = portfolioId!!,
                     symbol = _symbol.value!!,
-                    amount = amount,
-                    price = _price.value?.toDoubleOrZero() ?: 0.0,
+                    amount = getValueDependingOnTransactionType(amount),
+                    price = getValueDependingOnTransactionType(_price.value?.toDoubleOrZero() ?: 0.0),
                     fee = fee.toDoubleOrZero(),
-                    currency = _currency.value!!
+                    currency = _currency.value!!,
+                    type = transactionType,
                 )
             )
         }
+    }
+
+    private fun getValueDependingOnTransactionType(amount: Double) = when (transactionType) {
+        TransactionType.BUY -> amount * 1
+        TransactionType.SELL -> amount * -1
     }
 
     fun getPriceValue() = _price.value ?: "0.0"

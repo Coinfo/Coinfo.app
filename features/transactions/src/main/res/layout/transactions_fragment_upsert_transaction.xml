@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="app.coinfo.library.core.enums.TransactionType"/>
         <variable
             name="viewModel"
             type="app.coinfo.feature.transactions.ui.entrypoint.UpsertTransactionViewModel" />
@@ -34,6 +35,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onTransactionTypeSelected(TransactionType.BUY)}"
                 android:text="@string/transactions_toggle_button_text_buy" />
 
             <com.google.android.material.button.MaterialButton
@@ -42,6 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="@{() -> viewModel.onTransactionTypeSelected(TransactionType.SELL)}"
                 android:text="@string/transactions_toggle_button_text_sell" />
 
             <com.google.android.material.button.MaterialButton
