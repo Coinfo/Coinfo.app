@@ -4,6 +4,7 @@ import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TransactionType
 
 data class Transaction(
+    val id: Long = 0L,
     val coinId: String,
     val portfolioId: Long,
     val symbol: String,

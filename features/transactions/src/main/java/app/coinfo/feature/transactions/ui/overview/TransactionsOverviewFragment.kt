@@ -18,12 +18,15 @@ class TransactionsOverviewFragment : Fragment(R.layout.transactions_fragment_tra
     private val binding: TransactionsFragmentTransactionsOverviewBinding by viewBinding(
         TransactionsFragmentTransactionsOverviewBinding::bind
     )
+    private val adapter: TransactionsAdapter = TransactionsAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerViewTransactions.adapter = adapter
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        args.coinId
+
+        viewModel.loadTransactions(args.portfolioId, args.coinId)
     }
 }

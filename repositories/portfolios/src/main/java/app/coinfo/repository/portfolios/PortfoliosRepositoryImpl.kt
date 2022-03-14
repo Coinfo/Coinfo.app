@@ -43,6 +43,21 @@ internal class PortfoliosRepositoryImpl(
         )
     }
 
+    override suspend fun loadTransactions(portfolioId: Long, coinId: String) =
+        transactionsDao.loadTransactions(portfolioId, coinId).map {
+            Transaction(
+                id = it.id,
+                coinId = it.coinId,
+                portfolioId = it.portfolioId,
+                symbol = it.symbol,
+                amount = it.amount,
+                price = it.pricePerCoin,
+                fee = it.fee,
+                currency = it.currency,
+                type = it.transactionType
+            )
+        }
+
     override suspend fun loadAssets(portfolioId: Long): Assets {
         val transactions = mutableMapOf<String, MutableList<Transaction>>()
         transactionsDao.loadTransactions(portfolioId).forEach {
