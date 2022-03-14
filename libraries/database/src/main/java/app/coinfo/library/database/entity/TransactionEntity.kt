@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TransactionType
 import app.coinfo.library.database.converter.Converters
 
 @Entity(tableName = "transactions")
@@ -35,4 +36,8 @@ data class TransactionEntity(
     @TypeConverters(Converters::class)
     @ColumnInfo(name = "currency")
     val currency: Currency,
+
+    @TypeConverters(Converters::class)
+    @ColumnInfo(name = "transaction_type")
+    val transactionType: TransactionType
 )

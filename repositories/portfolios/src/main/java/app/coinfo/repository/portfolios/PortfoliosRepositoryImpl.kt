@@ -37,7 +37,8 @@ internal class PortfoliosRepositoryImpl(
                 pricePerCoin = transaction.price,
                 symbol = transaction.symbol,
                 fee = transaction.fee,
-                currency = transaction.currency
+                currency = transaction.currency,
+                transactionType = transaction.type,
             )
         )
     }
@@ -57,7 +58,8 @@ internal class PortfoliosRepositoryImpl(
                     amount = it.amount,
                     price = it.pricePerCoin,
                     fee = it.fee,
-                    currency = it.currency
+                    currency = it.currency,
+                    type = it.transactionType,
                 )
             )
         }

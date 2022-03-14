@@ -1,6 +1,7 @@
 package app.coinfo.repository.portfolios.model
 
 import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TransactionType
 
 data class Transaction(
     val coinId: String,
@@ -9,5 +10,6 @@ data class Transaction(
     val amount: Double,
     val price: Double,
     val fee: Double,
-    val currency: Currency
+    val currency: Currency,
+    val type: TransactionType,
 )
