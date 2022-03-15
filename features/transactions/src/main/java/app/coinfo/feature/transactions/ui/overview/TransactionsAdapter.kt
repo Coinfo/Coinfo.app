@@ -22,7 +22,7 @@ internal class TransactionsAdapter : ListAdapter<UITransactionItem, Transactions
 
         fun bind(transaction: UITransactionItem) {
             binding.imageViewTransactionType.setImageResource(transaction.typeImage)
-            binding.textViewTransactionType.text = transaction.typeName
+            binding.textViewTransactionType.setText(transaction.typeName)
             binding.textViewTransactionDate.text = transaction.date
             binding.textViewTransactionAmount.text = transaction.amount
             binding.textViewTransactionWorth.text = transaction.worth

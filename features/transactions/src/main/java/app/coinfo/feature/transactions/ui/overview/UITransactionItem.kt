@@ -1,11 +1,12 @@
 package app.coinfo.feature.transactions.ui.overview
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 data class UITransactionItem(
     val id: Long,
     val date: String,
-    val typeName: String,
+    @StringRes val typeName: Int,
     @DrawableRes val typeImage: Int,
     val amount: String,
     val worth: String,
