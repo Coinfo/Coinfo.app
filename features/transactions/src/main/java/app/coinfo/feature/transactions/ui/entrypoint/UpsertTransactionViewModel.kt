@@ -110,6 +110,7 @@ class UpsertTransactionViewModel @Inject constructor(
                     fee = fee.toDoubleOrZero(),
                     currency = _currency.value!!,
                     type = transactionType,
+                    date = System.currentTimeMillis(),
                 )
             )
         }

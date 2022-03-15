@@ -13,4 +13,7 @@
     <string name="core_currency_eur">Euro</string>
     <string name="core_currency_na">Not Defined</string>
 
+    <string name="core_transaction_type_sell">Sell</string>
+    <string name="core_transaction_type_buy">Buy</string>
+
 </resources>
