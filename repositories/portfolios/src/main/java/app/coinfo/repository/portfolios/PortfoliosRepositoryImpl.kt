@@ -39,6 +39,7 @@ internal class PortfoliosRepositoryImpl(
                 fee = transaction.fee,
                 currency = transaction.currency,
                 transactionType = transaction.type,
+                date = transaction.date,
             )
         )
     }
@@ -54,7 +55,8 @@ internal class PortfoliosRepositoryImpl(
                 price = it.pricePerCoin,
                 fee = it.fee,
                 currency = it.currency,
-                type = it.transactionType
+                type = it.transactionType,
+                date = it.date,
             )
         }
 
@@ -75,6 +77,7 @@ internal class PortfoliosRepositoryImpl(
                     fee = it.fee,
                     currency = it.currency,
                     type = it.transactionType,
+                    date = it.date,
                 )
             )
         }

@@ -39,5 +39,8 @@ data class TransactionEntity(
 
     @TypeConverters(Converters::class)
     @ColumnInfo(name = "transaction_type")
-    val transactionType: TransactionType
+    val transactionType: TransactionType,
+
+    @ColumnInfo(name = "date")
+    val date: Long
 )

@@ -21,7 +21,11 @@ internal class TransactionsAdapter : ListAdapter<UITransactionItem, Transactions
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(transaction: UITransactionItem) {
-            binding.textView.text = transaction.id.toString()
+            binding.imageViewTransactionType.setImageResource(transaction.typeImage)
+            binding.textViewTransactionType.text = transaction.typeName
+            binding.textViewTransactionDate.text = transaction.date
+            binding.textViewTransactionAmount.text = transaction.amount
+            binding.textViewTransactionWorth.text = transaction.worth
             binding.executePendingBindings()
         }
 

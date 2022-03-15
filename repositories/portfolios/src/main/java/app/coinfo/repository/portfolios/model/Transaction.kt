@@ -13,4 +13,5 @@ data class Transaction(
     val fee: Double,
     val currency: Currency,
     val type: TransactionType,
+    val date: Long,
 )
