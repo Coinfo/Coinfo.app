@@ -12,4 +12,6 @@
     <string name="transactions_button_text_update_notes">Update Notes</string>
     <string name="transactions_fragment_label_transactions_overview">Transactions Overview</string>
     <string name="transactions_text_total_asset_amount">Total %s</string>
+    <string name="transactions_text_total_asset_worth">Total Worth</string>
+    <string name="transactions_text_total_asset_worth_formatter">%s %s</string>
 </resources>
