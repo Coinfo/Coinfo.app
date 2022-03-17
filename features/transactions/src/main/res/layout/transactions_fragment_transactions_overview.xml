@@ -126,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:text="@{@string/transactions_text_all_time_pl_formatter(viewModel.currency.symbol, DoubleKtxKt.toString(viewModel.allTimeProfitLoss, 2), DoubleKtxKt.toString(viewModel.allTimeProfitLossPercentage, 2))}"
                 tools:text="$1.45 (72.81%)"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_all_time_pl" />

@@ -28,10 +28,12 @@ class TransactionsOverviewViewModel @Inject constructor(
     preferences: Preferences,
 ) : ViewModel() {
 
-    private var averageBuyPricePerCoin = 0.0
-    private var averageBuyAmount = 0.0
-    private var averageSellPricePerCoin = 0.0
-    private var averageSellAmount = 0.0
+    private var buyPricePerCoin = 0.0
+    private var buyAmount = 0.0
+    private var buyWorth = 0.0
+    private var sellPricePerCoin = 0.0
+    private var sellAmount = 0.0
+    private var sellWorth = 0.0
 
     val transactions: LiveData<List<UITransactionItem>>
         get() = _transactions
@@ -44,6 +46,14 @@ class TransactionsOverviewViewModel @Inject constructor(
     val totalWorth: LiveData<Double>
         get() = _totalWorth
     private val _totalWorth = MutableLiveData(0.0)
+
+    val allTimeProfitLoss: LiveData<Double>
+        get() = _allTimeProfitLoss
+    private val _allTimeProfitLoss = MutableLiveData(0.0)
+
+    val allTimeProfitLossPercentage: LiveData<Double>
+        get() = _allTimeProfitLossPercentage
+    private val _allTimeProfitLossPercentage = MutableLiveData(0.0)
 
     val currency: LiveData<Currency>
         get() = _currency
@@ -70,12 +80,15 @@ class TransactionsOverviewViewModel @Inject constructor(
                 calculateAverageBuyAndSell(transaction, coin)
 
                 if (transactions.lastIndex == index) {
-                    if (averageBuyAmount > 0) {
-                        _averageBuy.value = averageBuyPricePerCoin / averageBuyAmount
+                    if (buyAmount > 0) {
+                        _averageBuy.value = buyPricePerCoin / buyAmount
                     }
-                    if (averageSellAmount > 0) {
-                        _averageSell.value = abs(averageSellPricePerCoin / averageSellAmount)
+                    if (sellAmount > 0) {
+                        _averageSell.value = abs(sellPricePerCoin / sellAmount)
                     }
+
+                    _allTimeProfitLoss.value = _totalWorth.safeValue - buyWorth + sellWorth
+                    _allTimeProfitLossPercentage.value = (_allTimeProfitLoss.safeValue / buyWorth) * HUNDRED_PERCENT
                 }
 
                 UITransactionItem(
@@ -108,25 +121,31 @@ class TransactionsOverviewViewModel @Inject constructor(
     private fun calculateAverageBuyAndSell(transaction: Transaction, coinData: CoinData) {
         when (transaction.type) {
             TransactionType.BUY -> {
-                averageBuyPricePerCoin += if (transaction.currency == _currency.safeValue) {
+                buyAmount += transaction.amount
+                buyPricePerCoin += if (transaction.currency == _currency.safeValue) {
+                    buyWorth += (transaction.amount * transaction.pricePerCoin)
                     transaction.pricePerCoin
                 } else {
-                    calculateAverage(transaction, coinData)
+                    val pricePerCoin = calculatePricePerCoin(transaction, coinData)
+                    buyWorth += (transaction.amount * pricePerCoin)
+                    pricePerCoin
                 }
-                averageBuyAmount++
             }
             TransactionType.SELL -> {
-                averageSellPricePerCoin += if (transaction.currency == _currency.safeValue) {
+                sellAmount += abs(transaction.amount)
+                sellPricePerCoin += if (transaction.currency == _currency.safeValue) {
+                    sellWorth += (transaction.amount * transaction.pricePerCoin)
                     transaction.pricePerCoin
                 } else {
-                    calculateAverage(transaction, coinData)
+                    val pricePerCoin = calculatePricePerCoin(transaction, coinData)
+                    sellWorth += (transaction.amount * pricePerCoin)
+                    pricePerCoin
                 }
-                averageSellAmount++
             }
         }
     }
 
-    private fun calculateAverage(transaction: Transaction, coinData: CoinData): Double {
+    private fun calculatePricePerCoin(transaction: Transaction, coinData: CoinData): Double {
         val priceNativeCurrency = coinData.getCurrentPrice(transaction.currency)
         val priceExpectCurrency = coinData.getCurrentPrice(_currency.safeValue)
         return (transaction.pricePerCoin * (priceExpectCurrency / priceNativeCurrency))
@@ -134,5 +153,6 @@ class TransactionsOverviewViewModel @Inject constructor(
 
     companion object {
         private const val TRANSACTION_DATE_FORMATTER = "EEE, d MMM yyyy HH:mm:ss"
+        private const val HUNDRED_PERCENT = 100
     }
 }
