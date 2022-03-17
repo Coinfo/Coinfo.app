@@ -11,6 +11,8 @@
 
     <string name="core_currency_usd">United Stated Dollar</string>
     <string name="core_currency_eur">Euro</string>
+    <string name="core_currency_amd">Armenian Dram</string>
+    <string name="core_currency_rub">Russian Ruble</string>
     <string name="core_currency_na">Not Defined</string>
 
     <string name="core_transaction_type_sell">Sell</string>
