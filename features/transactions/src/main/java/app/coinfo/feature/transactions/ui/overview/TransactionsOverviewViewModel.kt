@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.transactions.R
+import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TransactionType
 import app.coinfo.library.core.ktx.safeValue
 import app.coinfo.library.core.ktx.toString
+import app.coinfo.library.preferences.Preferences
+import app.coinfo.repository.coins.CoinsRepository
 import app.coinfo.repository.portfolios.PortfoliosRepository
 import app.coinfo.repository.portfolios.model.Transaction
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +21,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransactionsOverviewViewModel @Inject constructor(
-    private val portfoliosRepository: PortfoliosRepository
+    private val coinsRepository: CoinsRepository,
+    private val portfoliosRepository: PortfoliosRepository,
+    preferences: Preferences,
 ) : ViewModel() {
 
     val transactions: LiveData<List<UITransactionItem>>
@@ -29,10 +34,23 @@ class TransactionsOverviewViewModel @Inject constructor(
         get() = _totalAmount
     private val _totalAmount = MutableLiveData(0.0)
 
+    val totalWorth: LiveData<Double>
+        get() = _totalWorth
+    private val _totalWorth = MutableLiveData(0.0)
+
+    val currency: LiveData<Currency>
+        get() = _currency
+    private val _currency = MutableLiveData(preferences.loadCurrency())
+
     fun loadTransactions(portfolioId: Long, coinId: String) {
         viewModelScope.launch {
+            val coin = coinsRepository.getCoinData(coinId)
             _transactions.value = portfoliosRepository.loadTransactions(portfolioId, coinId).map { transaction ->
+
                 _totalAmount.value = _totalAmount.safeValue + transaction.amount
+                _totalWorth.value = _totalWorth.safeValue +
+                    (_totalAmount.safeValue * coin.getCurrentPrice(_currency.safeValue))
+
                 UITransactionItem(
                     id = transaction.id,
                     date = transaction.formattedDate,

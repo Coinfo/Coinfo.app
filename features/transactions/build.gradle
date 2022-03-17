@@ -40,6 +40,7 @@ dependencies {
     implementation project(path: ':libraries:core')
     implementation project(path: ':repositories:coins')
     implementation project(path: ':repositories:portfolios')
+    implementation project(path: ':libraries:preferences')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
