@@ -9,7 +9,7 @@ import app.coinfo.features.portfolio.databinding.PortfolioListItemAssetBinding
 import com.bumptech.glide.Glide
 
 internal class AssetsAdapter(
-    private val onAssetClickListener: (String) -> Unit
+    private val onAssetClickListener: (String, String) -> Unit
 ) : ListAdapter<UIAssetsItem, AssetsAdapter.ViewHolder>(
     AssetsDiffCallback()
 ) {
@@ -22,11 +22,11 @@ internal class AssetsAdapter(
 
     class ViewHolder private constructor(
         private val binding: PortfolioListItemAssetBinding,
-        private val onAssetClickListener: (String) -> Unit
+        private val onAssetClickListener: (String, String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(asset: UIAssetsItem) {
-            binding.root.setOnClickListener { onAssetClickListener(asset.id) }
+            binding.root.setOnClickListener { onAssetClickListener(asset.id, asset.symbol) }
             binding.textViewAssetName.text = asset.name
             binding.textViewAssetSymbol.text = asset.symbol
             binding.textViewAssetPrice.text = asset.price
@@ -44,7 +44,7 @@ internal class AssetsAdapter(
         }
 
         companion object {
-            fun from(parent: ViewGroup, onAssetClickListener: (String) -> Unit): ViewHolder {
+            fun from(parent: ViewGroup, onAssetClickListener: (String, String) -> Unit): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = PortfolioListItemAssetBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding, onAssetClickListener)

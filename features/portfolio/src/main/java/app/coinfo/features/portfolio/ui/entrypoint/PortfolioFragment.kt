@@ -24,8 +24,11 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
     private val binding: PortfolioFragmentPortfolioBinding by viewBinding(PortfolioFragmentPortfolioBinding::bind)
     private val args: PortfolioFragmentArgs by navArgs()
     private val viewModel: PortfolioViewModel by viewModels()
-    private val adapter: AssetsAdapter = AssetsAdapter { coinId ->
-        val uri = "coinfo://app.coinfo.feature/transactions/overview?coinId=$coinId&portfolioId=${args.id}".toUri()
+    private val adapter: AssetsAdapter = AssetsAdapter { coinId, coinSymbol ->
+        val uri = (
+            "coinfo://app.coinfo.feature/transactions/overview" +
+                "?coinId=$coinId&portfolioId=${args.id}&coinSymbol=$coinSymbol"
+            ).toUri()
         findNavController().navigate(NavDeepLinkRequest.Builder.fromUri(uri).build())
     }
 
