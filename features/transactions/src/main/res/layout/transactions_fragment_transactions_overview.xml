@@ -84,9 +84,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@{@string/transactions_text_price_currency_formatter(viewModel.currency.symbol, DoubleKtxKt.toString(viewModel.averageBuy, 2))}"
+                android:maxLines="1"
                 tools:text="$1.6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_average_buy" />
+
+            <TextView
+                android:id="@+id/label_average_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/transactions_text_average_asset_sell"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_total_worth" />
+
+            <TextView
+                android:id="@+id/text_view_average_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:maxLines="1"
+                android:text="@{@string/transactions_text_price_currency_formatter(viewModel.currency.symbol, DoubleKtxKt.toString(viewModel.averageSell, 2))}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_average_sell" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
