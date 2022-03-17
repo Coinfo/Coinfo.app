@@ -15,4 +15,5 @@
     <string name="transactions_text_total_asset_worth">Total Worth</string>
     <string name="transactions_text_price_currency_formatter">%s %s</string>
     <string name="transactions_text_average_asset_buy">Average Buy</string>
+    <string name="transactions_text_average_asset_sell">Average Sell</string>
 </resources>

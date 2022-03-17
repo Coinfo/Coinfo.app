@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
+import kotlin.math.abs
 
 @HiltViewModel
 class TransactionsOverviewViewModel @Inject constructor(
@@ -29,6 +30,8 @@ class TransactionsOverviewViewModel @Inject constructor(
 
     private var averageBuyPricePerCoin = 0.0
     private var averageBuyAmount = 0.0
+    private var averageSellPricePerCoin = 0.0
+    private var averageSellAmount = 0.0
 
     val transactions: LiveData<List<UITransactionItem>>
         get() = _transactions
@@ -50,6 +53,10 @@ class TransactionsOverviewViewModel @Inject constructor(
         get() = _averageBuy
     private val _averageBuy = MutableLiveData(0.0)
 
+    val averageSell: LiveData<Double>
+        get() = _averageSell
+    private val _averageSell = MutableLiveData(0.0)
+
     fun loadTransactions(portfolioId: Long, coinId: String) {
         viewModelScope.launch {
             val coin = coinsRepository.getCoinData(coinId)
@@ -63,7 +70,12 @@ class TransactionsOverviewViewModel @Inject constructor(
                 calculateAverageBuyAndSell(transaction, coin)
 
                 if (transactions.lastIndex == index) {
-                    _averageBuy.value = averageBuyPricePerCoin / averageBuyAmount
+                    if (averageBuyAmount > 0) {
+                        _averageBuy.value = averageBuyPricePerCoin / averageBuyAmount
+                    }
+                    if (averageSellAmount > 0) {
+                        _averageSell.value = abs(averageSellPricePerCoin / averageSellAmount)
+                    }
                 }
 
                 UITransactionItem(
@@ -99,13 +111,25 @@ class TransactionsOverviewViewModel @Inject constructor(
                 averageBuyPricePerCoin += if (transaction.currency == _currency.safeValue) {
                     transaction.pricePerCoin
                 } else {
-                    val priceNativeCurrency = coinData.getCurrentPrice(transaction.currency)
-                    val priceExpectCurrency = coinData.getCurrentPrice(_currency.safeValue)
-                    (transaction.pricePerCoin * (priceExpectCurrency / priceNativeCurrency))
+                    calculateAverage(transaction, coinData)
                 }
                 averageBuyAmount++
             }
+            TransactionType.SELL -> {
+                averageSellPricePerCoin += if (transaction.currency == _currency.safeValue) {
+                    transaction.pricePerCoin
+                } else {
+                    calculateAverage(transaction, coinData)
+                }
+                averageSellAmount++
+            }
         }
+    }
+
+    private fun calculateAverage(transaction: Transaction, coinData: CoinData): Double {
+        val priceNativeCurrency = coinData.getCurrentPrice(transaction.currency)
+        val priceExpectCurrency = coinData.getCurrentPrice(_currency.safeValue)
+        return (transaction.pricePerCoin * (priceExpectCurrency / priceNativeCurrency))
     }
 
     companion object {
