@@ -106,7 +106,7 @@ class UpsertTransactionViewModel @Inject constructor(
                     portfolioId = portfolioId!!,
                     symbol = _symbol.value!!,
                     amount = getValueDependingOnTransactionType(amount),
-                    price = getValueDependingOnTransactionType(_price.value?.toDoubleOrZero() ?: 0.0),
+                    pricePerCoin = getValueDependingOnTransactionType(_price.value?.toDoubleOrZero() ?: 0.0),
                     fee = fee.toDoubleOrZero(),
                     currency = _currency.value!!,
                     type = transactionType,

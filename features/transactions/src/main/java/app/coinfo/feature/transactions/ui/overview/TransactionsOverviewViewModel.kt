@@ -11,6 +11,7 @@ import app.coinfo.library.core.ktx.safeValue
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.preferences.Preferences
 import app.coinfo.repository.coins.CoinsRepository
+import app.coinfo.repository.coins.model.CoinData
 import app.coinfo.repository.portfolios.PortfoliosRepository
 import app.coinfo.repository.portfolios.model.Transaction
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,9 @@ class TransactionsOverviewViewModel @Inject constructor(
     private val portfoliosRepository: PortfoliosRepository,
     preferences: Preferences,
 ) : ViewModel() {
+
+    private var averageBuyPricePerCoin = 0.0
+    private var averageBuyAmount = 0.0
 
     val transactions: LiveData<List<UITransactionItem>>
         get() = _transactions
@@ -42,14 +46,25 @@ class TransactionsOverviewViewModel @Inject constructor(
         get() = _currency
     private val _currency = MutableLiveData(preferences.loadCurrency())
 
+    val averageBuy: LiveData<Double>
+        get() = _averageBuy
+    private val _averageBuy = MutableLiveData(0.0)
+
     fun loadTransactions(portfolioId: Long, coinId: String) {
         viewModelScope.launch {
             val coin = coinsRepository.getCoinData(coinId)
-            _transactions.value = portfoliosRepository.loadTransactions(portfolioId, coinId).map { transaction ->
+            val transactions = portfoliosRepository.loadTransactions(portfolioId, coinId)
+            _transactions.value = transactions.mapIndexed { index, transaction ->
 
                 _totalAmount.value = _totalAmount.safeValue + transaction.amount
                 _totalWorth.value = _totalWorth.safeValue +
                     (_totalAmount.safeValue * coin.getCurrentPrice(_currency.safeValue))
+
+                calculateAverageBuyAndSell(transaction, coin)
+
+                if (transactions.lastIndex == index) {
+                    _averageBuy.value = averageBuyPricePerCoin / averageBuyAmount
+                }
 
                 UITransactionItem(
                     id = transaction.id,
@@ -64,7 +79,7 @@ class TransactionsOverviewViewModel @Inject constructor(
     }
 
     private val Transaction.formattedWorth
-        get() = "${currency.symbol}${(amount * price).toString(2)}"
+        get() = "${currency.symbol}${(amount * pricePerCoin).toString(2)}"
 
     private val Transaction.formattedAmount
         get() = "$amount ${symbol.uppercase()}"
@@ -77,6 +92,21 @@ class TransactionsOverviewViewModel @Inject constructor(
             TransactionType.SELL -> R.drawable.transactions_ic_sell
             TransactionType.BUY -> R.drawable.transactions_ic_buy
         }
+
+    private fun calculateAverageBuyAndSell(transaction: Transaction, coinData: CoinData) {
+        when (transaction.type) {
+            TransactionType.BUY -> {
+                averageBuyPricePerCoin += if (transaction.currency == _currency.safeValue) {
+                    transaction.pricePerCoin
+                } else {
+                    val priceNativeCurrency = coinData.getCurrentPrice(transaction.currency)
+                    val priceExpectCurrency = coinData.getCurrentPrice(_currency.safeValue)
+                    (transaction.pricePerCoin * (priceExpectCurrency / priceNativeCurrency))
+                }
+                averageBuyAmount++
+            }
+        }
+    }
 
     companion object {
         private const val TRANSACTION_DATE_FORMATTER = "EEE, d MMM yyyy HH:mm:ss"

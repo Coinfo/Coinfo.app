@@ -9,7 +9,7 @@ data class Transaction(
     val portfolioId: Long,
     val symbol: String,
     val amount: Double,
-    val price: Double,
+    val pricePerCoin: Double,
     val fee: Double,
     val currency: Currency,
     val type: TransactionType,

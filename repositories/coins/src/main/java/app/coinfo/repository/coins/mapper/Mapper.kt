@@ -34,43 +34,63 @@ internal val CoinCurrentDataResponse.asCoinData
         allTimeHighInCurrency = mapOf(
             Currency.USD to (marketData.allTimeHighInCurrency[Currency.USD.code] ?: 0.0),
             Currency.EUR to (marketData.allTimeHighInCurrency[Currency.EUR.code] ?: 0.0),
+            Currency.AMD to (marketData.allTimeHighInCurrency[Currency.AMD.code] ?: 0.0),
+            Currency.RUB to (marketData.allTimeHighInCurrency[Currency.RUB.code] ?: 0.0),
         ),
         fullyDilutedValuationInCurrency = mapOf(
             Currency.USD to (marketData.fullyDilutedValuation[Currency.USD.code] ?: 0.0),
             Currency.EUR to (marketData.fullyDilutedValuation[Currency.EUR.code] ?: 0.0),
+            Currency.AMD to (marketData.fullyDilutedValuation[Currency.AMD.code] ?: 0.0),
+            Currency.RUB to (marketData.fullyDilutedValuation[Currency.RUB.code] ?: 0.0),
         ),
         allTimeLowInCurrency = mapOf(
             Currency.USD to (marketData.allTimeLowInCurrency[Currency.USD.code] ?: 0.0),
             Currency.EUR to (marketData.allTimeLowInCurrency[Currency.EUR.code] ?: 0.0),
+            Currency.AMD to (marketData.allTimeLowInCurrency[Currency.AMD.code] ?: 0.0),
+            Currency.RUB to (marketData.allTimeLowInCurrency[Currency.RUB.code] ?: 0.0),
         ),
         marketCapInCurrency = mapOf(
             Currency.USD to (marketData.marketCapInCurrency[Currency.USD.code] ?: 0.0),
             Currency.EUR to (marketData.marketCapInCurrency[Currency.EUR.code] ?: 0.0),
+            Currency.AMD to (marketData.marketCapInCurrency[Currency.AMD.code] ?: 0.0),
+            Currency.RUB to (marketData.marketCapInCurrency[Currency.RUB.code] ?: 0.0),
         ),
         currentPrice = mapOf(
             Currency.USD to (marketData.currentPriceInCurrency[Currency.USD.code] ?: 0.0),
             Currency.EUR to (marketData.currentPriceInCurrency[Currency.EUR.code] ?: 0.0),
+            Currency.AMD to (marketData.currentPriceInCurrency[Currency.AMD.code] ?: 0.0),
+            Currency.RUB to (marketData.currentPriceInCurrency[Currency.RUB.code] ?: 0.0),
         ),
         percentageChange = mapOf(
             TimeInterval.HOUR to mapOf(
                 Currency.USD to (marketData.priceChangePercentage1hInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage1hInCurrency[Currency.EUR.code] ?: 0.0),
+                Currency.AMD to (marketData.priceChangePercentage1hInCurrency[Currency.AMD.code] ?: 0.0),
+                Currency.RUB to (marketData.priceChangePercentage1hInCurrency[Currency.RUB.code] ?: 0.0),
             ),
             TimeInterval.DAY to mapOf(
                 Currency.USD to (marketData.priceChangePercentage24hInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage24hInCurrency[Currency.EUR.code] ?: 0.0),
+                Currency.AMD to (marketData.priceChangePercentage24hInCurrency[Currency.AMD.code] ?: 0.0),
+                Currency.RUB to (marketData.priceChangePercentage24hInCurrency[Currency.RUB.code] ?: 0.0),
             ),
             TimeInterval.WEEK to mapOf(
                 Currency.USD to (marketData.priceChangePercentage7dInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage7dInCurrency[Currency.EUR.code] ?: 0.0),
+                Currency.AMD to (marketData.priceChangePercentage7dInCurrency[Currency.AMD.code] ?: 0.0),
+                Currency.RUB to (marketData.priceChangePercentage7dInCurrency[Currency.RUB.code] ?: 0.0),
             ),
             TimeInterval.MONTH to mapOf(
                 Currency.USD to (marketData.priceChangePercentage30dInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage30dInCurrency[Currency.EUR.code] ?: 0.0),
+                Currency.AMD to (marketData.priceChangePercentage30dInCurrency[Currency.AMD.code] ?: 0.0),
+                Currency.RUB to (marketData.priceChangePercentage30dInCurrency[Currency.RUB.code] ?: 0.0),
             ),
             TimeInterval.YEAR to mapOf(
                 Currency.USD to (marketData.priceChangePercentage1yInCurrency[Currency.USD.code] ?: 0.0),
                 Currency.EUR to (marketData.priceChangePercentage1yInCurrency[Currency.EUR.code] ?: 0.0),
+                Currency.AMD to (marketData.priceChangePercentage1yInCurrency[Currency.AMD.code] ?: 0.0),
+                Currency.RUB to (marketData.priceChangePercentage1yInCurrency[Currency.RUB.code] ?: 0.0),
             ),
         )
     )
