@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentTransactionsOverviewBinding
+import app.coinfo.library.core.ktx.setString
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ class TransactionsOverviewFragment : Fragment(R.layout.transactions_fragment_tra
         binding.recyclerViewTransactions.adapter = adapter
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.labelTotalAmount.setString(R.string.transactions_text_total_asset_amount, args.coinSymbol.uppercase())
 
         viewModel.loadTransactions(args.portfolioId, args.coinId)
     }

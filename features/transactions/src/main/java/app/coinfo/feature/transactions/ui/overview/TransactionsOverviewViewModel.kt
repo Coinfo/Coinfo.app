@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.feature.transactions.R
 import app.coinfo.library.core.enums.TransactionType
+import app.coinfo.library.core.ktx.safeValue
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.repository.portfolios.PortfoliosRepository
 import app.coinfo.repository.portfolios.model.Transaction
@@ -24,9 +25,14 @@ class TransactionsOverviewViewModel @Inject constructor(
         get() = _transactions
     private val _transactions = MutableLiveData(emptyList<UITransactionItem>())
 
+    val totalAmount: LiveData<Double>
+        get() = _totalAmount
+    private val _totalAmount = MutableLiveData(0.0)
+
     fun loadTransactions(portfolioId: Long, coinId: String) {
         viewModelScope.launch {
             _transactions.value = portfoliosRepository.loadTransactions(portfolioId, coinId).map { transaction ->
+                _totalAmount.value = _totalAmount.safeValue + transaction.amount
                 UITransactionItem(
                     id = transaction.id,
                     date = transaction.formattedDate,
