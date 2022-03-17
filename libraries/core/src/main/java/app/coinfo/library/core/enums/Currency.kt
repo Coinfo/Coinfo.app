@@ -9,11 +9,12 @@ enum class Currency(
     val code: String,
     val symbol: String,
     @StringRes val resId: Int,
-    val number: Int
 ) {
-    EUR("466a214c-9022-11ec-b909-0242ac120002", "eur", "€", R.string.core_currency_eur, 978),
-    USD("466a23fe-9022-11ec-b909-0242ac120002", "usd", "$", R.string.core_currency_usd, 840),
-    NA("466a253e-9022-11ec-b909-0242ac120002", "N/A", "", R.string.core_currency_na, 0);
+    EUR("466a214c-9022-11ec-b909-0242ac120002", "eur", "€", R.string.core_currency_eur),
+    USD("466a23fe-9022-11ec-b909-0242ac120002", "usd", "$", R.string.core_currency_usd),
+    AMD("bbbb3eb6-a5ff-11ec-b909-0242ac120002", "amd", "֏", R.string.core_currency_amd),
+    RUB("bbbb4230-a5ff-11ec-b909-0242ac120002", "rub", "₽", R.string.core_currency_rub),
+    NA("466a253e-9022-11ec-b909-0242ac120002", "N/A", "", R.string.core_currency_na);
 
     companion object {
         /** Returns symbol for the given currency code */
