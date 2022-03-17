@@ -14,6 +14,8 @@
     <string name="transactions_text_total_asset_amount">Total %s</string>
     <string name="transactions_text_total_asset_worth">Total Worth</string>
     <string name="transactions_text_price_currency_formatter">%s %s</string>
+    <string name="transactions_text_all_time_pl_formatter">%s %s (%s%%)</string>
     <string name="transactions_text_average_asset_buy">Average Buy</string>
     <string name="transactions_text_average_asset_sell">Average Sell</string>
+    <string name="transactions_text_all_time_profit_loss">All time profit loss</string>
 </resources>
