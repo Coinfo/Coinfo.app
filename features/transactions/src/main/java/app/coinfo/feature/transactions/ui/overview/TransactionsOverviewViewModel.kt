@@ -1,6 +1,5 @@
 package app.coinfo.feature.transactions.ui.overview
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -95,9 +94,9 @@ class TransactionsOverviewViewModel @Inject constructor(
         }
 
     private fun calculateAverageBuyAndSell(transaction: Transaction, coinData: CoinData) {
-        when(transaction.type) {
+        when (transaction.type) {
             TransactionType.BUY -> {
-                averageBuyPricePerCoin += if (transaction.currency == _currency.safeValue)  {
+                averageBuyPricePerCoin += if (transaction.currency == _currency.safeValue) {
                     transaction.pricePerCoin
                 } else {
                     val priceNativeCurrency = coinData.getCurrentPrice(transaction.currency)
