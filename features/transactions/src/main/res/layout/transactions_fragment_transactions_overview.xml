@@ -27,7 +27,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_total_amount"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_average_buy"
                 app:transactions="@{viewModel.transactions}" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                tools:text="18.000"
+                tools:text="$18.000"
                 android:text="@{DoubleKtxKt.toString(viewModel.totalAmount, 2)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/label_total_amount" />
@@ -63,10 +63,30 @@
                 android:id="@+id/text_view_total_worth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/transactions_text_total_asset_worth_formatter(viewModel.currency.symbol, DoubleKtxKt.toString(viewModel.totalWorth, 2))}"
+                android:text="@{@string/transactions_text_price_currency_formatter(viewModel.currency.symbol, DoubleKtxKt.toString(viewModel.totalWorth, 2))}"
                 tools:text="100.000.000"
                 app:layout_constraintEnd_toEndOf="@+id/label_total_worth"
                 app:layout_constraintTop_toBottomOf="@+id/label_total_worth" />
+
+            <TextView
+                android:id="@+id/label_average_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/transactions_text_average_asset_buy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_total_amount" />
+
+            <TextView
+                android:id="@+id/text_view_average_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{@string/transactions_text_price_currency_formatter(viewModel.currency.symbol, DoubleKtxKt.toString(viewModel.averageBuy, 2))}"
+                tools:text="$1.6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_average_buy" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
