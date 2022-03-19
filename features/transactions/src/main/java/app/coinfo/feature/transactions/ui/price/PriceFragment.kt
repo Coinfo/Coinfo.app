@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentPriceBinding
 import app.coinfo.library.core.ktx.setBackStackData
-import app.coinfo.library.core.ktx.toString
+import app.coinfo.library.core.ktx.toDoubleOrZero
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -33,7 +33,7 @@ internal class PriceFragment : BottomSheetDialogFragment() {
 
     private fun setupClickListeners() {
         binding.buttonUpdatePrice.setOnClickListener {
-            setBackStackData(KEY_PRICE, binding.editTextPricePerCoin.text.toString().toDouble(), true)
+            setBackStackData(KEY_PRICE, binding.editTextPricePerCoin.text.toString().toDoubleOrZero(), true)
         }
     }
 

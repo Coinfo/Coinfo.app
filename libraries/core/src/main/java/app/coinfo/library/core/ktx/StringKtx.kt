@@ -1,3 +1,9 @@
 package app.coinfo.library.core.ktx
 
-fun String.toDoubleOrZero(): Double = this.toDoubleOrNull() ?: 0.0
+import java.lang.NumberFormatException
+
+fun String.toDoubleOrZero(): Double = try {
+    this.toDouble()
+} catch (e: NumberFormatException) {
+    0.000000000000000000000
+}
