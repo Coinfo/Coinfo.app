@@ -23,7 +23,7 @@ class UpsertTransactionViewModel @Inject constructor(
 
     private var coinId: String? = null
     private var portfolioId: Long? = null
-    private var amount: Double = 0.0
+    private var amount: Double = 0.00000000000000000000
     private var transactionType: TransactionType = TransactionType.BUY
 
     val price: LiveData<String>
@@ -71,7 +71,7 @@ class UpsertTransactionViewModel @Inject constructor(
     }
 
     fun onUpdatePrice(price: Double) {
-        _price.value = price.toStringWithSuffix(2)
+        _price.value = price.toString()
         _isPriceManuallyChanged.value = true
     }
 
@@ -80,7 +80,7 @@ class UpsertTransactionViewModel @Inject constructor(
     }
 
     fun onUpdateFee(value: Double) {
-        fee = value.toStringWithSuffix(2)
+        fee = value.toString()
         _isFeeManuallyChanged.value = true
     }
 
@@ -117,8 +117,8 @@ class UpsertTransactionViewModel @Inject constructor(
     }
 
     private fun getValueDependingOnTransactionType(amount: Double) = when (transactionType) {
-        TransactionType.BUY -> amount * 1
-        TransactionType.SELL -> amount * -1
+        TransactionType.BUY -> amount * 1.00000000000000000000
+        TransactionType.SELL -> amount * -1.00000000000000000000
     }
 
     fun getPriceValue() = _price.value ?: "0.0"

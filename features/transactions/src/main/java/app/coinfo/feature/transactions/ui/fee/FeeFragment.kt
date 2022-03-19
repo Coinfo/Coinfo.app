@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentFeeBinding
 import app.coinfo.library.core.ktx.setBackStackData
+import app.coinfo.library.core.ktx.toDoubleOrZero
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -32,7 +33,7 @@ internal class FeeFragment : BottomSheetDialogFragment() {
 
     private fun setupClickListeners() {
         binding.buttonUpdateFee.setOnClickListener {
-            setBackStackData(KEY_FEE, binding.editTextFee.text.toString().toDouble(), true)
+            setBackStackData(KEY_FEE, binding.editTextFee.text.toString().toDoubleOrZero(), true)
         }
     }
 
