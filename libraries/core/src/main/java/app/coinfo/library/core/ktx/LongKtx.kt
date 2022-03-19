@@ -3,9 +3,8 @@ package app.coinfo.library.core.ktx
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-private const val DEFAULT_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss"
+/** Private */
+private const val TRANSACTION_DATE_FORMATTER = "EEE, d MMM yyyy HH:mm:ss"
 
-/** Converts Long to Date string. */
-fun Long.toDate(
-    format: String = DEFAULT_DATE_FORMAT,
-) = SimpleDateFormat(format, Locale.getDefault()).format(this)
+fun Long.toFormattedDate(format: String = TRANSACTION_DATE_FORMATTER) =
+    SimpleDateFormat(TRANSACTION_DATE_FORMATTER, Locale.getDefault()).format(this)

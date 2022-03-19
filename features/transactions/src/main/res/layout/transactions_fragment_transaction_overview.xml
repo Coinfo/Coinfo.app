@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="app.coinfo.library.core.ktx.DoubleKtxKt"/>
+        <variable
+            name="viewModel"
+            type="app.coinfo.feature.transactions.ui.transaction.TransactionOverviewViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".ui.transaction.TransactionOverviewFragment">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/transactions_title_transaction_details"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/label_transaction_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/transactions_label_transaction_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/label_transaction_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/transactions_label_transaction_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_type" />
+
+        <TextView
+            android:id="@+id/label_transaction_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/transactions_label_transaction_quantity"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_date" />
+
+        <TextView
+            android:id="@+id/label_transaction_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/transactions_label_transaction_fee"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_quantity" />
+
+        <TextView
+            android:id="@+id/text_view_transaction_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{context.getString(viewModel.transactionType)}"
+            tools:text="Sell"
+            app:layout_constraintBottom_toBottomOf="@+id/label_transaction_type"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_transaction_type" />
+
+        <TextView
+            android:id="@+id/text_view_transaction_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{viewModel.transactionDate}"
+            tools:text="Wed, March 16 1987 15:30"
+            app:layout_constraintBottom_toBottomOf="@+id/label_transaction_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_transaction_date" />
+
+        <TextView
+            android:id="@+id/text_view_transaction_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/transactions_text_price_currency_formatter(viewModel.transactionCoinSymbol, DoubleKtxKt.toString(viewModel.transactionAmount, 2))}"
+            tools:text="1.000.000 CRO"
+            app:layout_constraintBottom_toBottomOf="@+id/label_transaction_quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_transaction_quantity" />
+
+        <TextView
+            android:id="@+id/text_view_transaction_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/transactions_text_price_currency_formatter(viewModel.transactionCurrency.symbol, DoubleKtxKt.toString(viewModel.transactionFee, 2))}"
+            tools:text="1.000 CRO"
+            app:layout_constraintBottom_toBottomOf="@+id/label_transaction_fee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_transaction_fee" />
+
+        <Button
+            android:id="@+id/button_edit_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/transactions_button_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_fee" />
+
+        <Button
+            android:id="@+id/button_delete_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/transactions_button_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_edit_transaction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

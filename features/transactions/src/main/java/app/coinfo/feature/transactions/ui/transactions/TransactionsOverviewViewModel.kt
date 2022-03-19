@@ -1,4 +1,4 @@
-package app.coinfo.feature.transactions.ui.overview
+package app.coinfo.feature.transactions.ui.transactions
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +8,7 @@ import app.coinfo.feature.transactions.R
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TransactionType
 import app.coinfo.library.core.ktx.safeValue
+import app.coinfo.library.core.ktx.toFormattedDate
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.preferences.Preferences
 import app.coinfo.repository.coins.CoinsRepository
@@ -16,8 +17,6 @@ import app.coinfo.repository.portfolios.PortfoliosRepository
 import app.coinfo.repository.portfolios.model.Transaction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Locale
 import javax.inject.Inject
 import kotlin.math.abs
 
@@ -93,7 +92,7 @@ class TransactionsOverviewViewModel @Inject constructor(
 
                 UITransactionItem(
                     id = transaction.id,
-                    date = transaction.formattedDate,
+                    date = transaction.date.toFormattedDate(),
                     typeName = transaction.type.resId,
                     typeImage = transaction.typeAsImage,
                     amount = transaction.formattedAmount,
@@ -108,9 +107,6 @@ class TransactionsOverviewViewModel @Inject constructor(
 
     private val Transaction.formattedAmount
         get() = "$amount ${symbol.uppercase()}"
-
-    private val Transaction.formattedDate
-        get() = SimpleDateFormat(TRANSACTION_DATE_FORMATTER, Locale.getDefault()).format(date)
 
     private val Transaction.typeAsImage
         get() = when (type) {
@@ -152,7 +148,6 @@ class TransactionsOverviewViewModel @Inject constructor(
     }
 
     companion object {
-        private const val TRANSACTION_DATE_FORMATTER = "EEE, d MMM yyyy HH:mm:ss"
         private const val HUNDRED_PERCENT = 100
     }
 }
