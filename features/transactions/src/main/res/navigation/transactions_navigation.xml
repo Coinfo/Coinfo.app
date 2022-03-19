@@ -65,7 +65,7 @@
 
     <fragment
         android:id="@+id/destination_transactions_overview"
-        android:name="app.coinfo.feature.transactions.ui.overview.TransactionsOverviewFragment"
+        android:name="app.coinfo.feature.transactions.ui.transactions.TransactionsOverviewFragment"
         android:label="@string/transactions_fragment_label_transactions_overview">
 
         <deepLink app:uri="coinfo://app.coinfo.feature/transactions/overview?coinId={coinId}&amp;portfolioId={portfolioId}&amp;coinSymbol={coinSymbol}" />
@@ -73,6 +73,18 @@
         <argument android:name="portfolioId" app:argType="long" />
         <argument android:name="coinSymbol" app:argType="string" />
 
+        <action
+            android:id="@+id/toTransactionOverview"
+            app:destination="@id/destination_transaction_overview" />
+
     </fragment>
+
+    <dialog
+        android:id="@+id/destination_transaction_overview"
+        android:name="app.coinfo.feature.transactions.ui.transaction.TransactionOverviewFragment"
+        android:label="TransactionOverviewFragment" >
+
+        <argument android:name="transactionId" app:argType="long" />
+    </dialog>
 
 </navigation>

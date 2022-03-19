@@ -1,9 +1,10 @@
-package app.coinfo.feature.transactions.ui.overview
+package app.coinfo.feature.transactions.ui.transactions
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentTransactionsOverviewBinding
@@ -19,7 +20,9 @@ class TransactionsOverviewFragment : Fragment(R.layout.transactions_fragment_tra
     private val binding: TransactionsFragmentTransactionsOverviewBinding by viewBinding(
         TransactionsFragmentTransactionsOverviewBinding::bind
     )
-    private val adapter: TransactionsAdapter = TransactionsAdapter()
+    private val adapter: TransactionsAdapter = TransactionsAdapter { id ->
+        findNavController().navigate(TransactionsOverviewFragmentDirections.toTransactionOverview(id))
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

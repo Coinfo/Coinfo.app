@@ -25,4 +25,7 @@ interface TransactionsDao {
             "WHERE (portfolio_id = :portfolioId AND coin_id = :coinId) ORDER BY date DESC"
     )
     suspend fun loadTransactions(portfolioId: Long, coinId: String): List<TransactionEntity>
+
+    @Query("SELECT * FROM transactions WHERE transaction_id = :transactionId")
+    suspend fun loadTransaction(transactionId: Long): TransactionEntity
 }

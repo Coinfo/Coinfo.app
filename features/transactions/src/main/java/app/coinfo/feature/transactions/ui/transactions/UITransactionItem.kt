@@ -1,4 +1,4 @@
-package app.coinfo.feature.transactions.ui.overview
+package app.coinfo.feature.transactions.ui.transactions
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

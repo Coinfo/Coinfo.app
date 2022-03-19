@@ -24,5 +24,7 @@ interface PortfoliosRepository {
 
     suspend fun loadTransactions(portfolioId: Long, coinId: String): List<Transaction>
 
+    suspend fun loadTransaction(id: Long): Transaction
+
     suspend fun loadAssets(portfolioId: Long): Assets
 }
