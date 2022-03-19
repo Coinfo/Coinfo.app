@@ -11,6 +11,7 @@ import app.coinfo.repository.portfolios.PortfoliosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.abs
 
 @HiltViewModel
 class TransactionOverviewViewModel @Inject constructor(
@@ -37,6 +38,14 @@ class TransactionOverviewViewModel @Inject constructor(
         get() = _transactionCoinSymbol
     private val _transactionCoinSymbol = MutableLiveData("")
 
+    val transactionCoinPrice: LiveData<Double>
+        get() = _transactionCoinPrice
+    private val _transactionCoinPrice = MutableLiveData(0.0)
+
+    val transactionCost: LiveData<Double>
+        get() = _transactionCost
+    private val _transactionCost = MutableLiveData(0.0)
+
     val transactionCurrency: LiveData<Currency>
         get() = _transactionCurrency
     private val _transactionCurrency = MutableLiveData(Currency.NA)
@@ -46,10 +55,12 @@ class TransactionOverviewViewModel @Inject constructor(
             with(portfoliosRepository.loadTransaction(id)) {
                 _transactionType.value = type.resId
                 _transactionDate.value = date.toFormattedDate()
-                _transactionAmount.value = amount
-                _transactionCoinSymbol.value = symbol
+                _transactionAmount.value = abs(amount)
+                _transactionCoinSymbol.value = symbol.uppercase()
                 _transactionCurrency.value = currency
                 _transactionFee.value = fee
+                _transactionCoinPrice.value = abs(pricePerCoin)
+                _transactionCost.value = abs(pricePerCoin * amount)
             }
         }
     }

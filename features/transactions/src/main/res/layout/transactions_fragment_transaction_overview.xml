@@ -50,11 +50,11 @@
             android:id="@+id/label_transaction_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
             android:text="@string/transactions_label_transaction_quantity"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_transaction_date" />
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_price_per_coin" />
 
         <TextView
             android:id="@+id/label_transaction_fee"
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="@{@string/transactions_text_price_currency_formatter(viewModel.transactionCoinSymbol, DoubleKtxKt.toString(viewModel.transactionAmount, 2))}"
+            android:text="@{@string/transactions_text_price_currency_formatter(DoubleKtxKt.toString(viewModel.transactionAmount, 2), viewModel.transactionCoinSymbol)}"
             tools:text="1.000.000 CRO"
             app:layout_constraintBottom_toBottomOf="@+id/label_transaction_quantity"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@{@string/transactions_text_price_currency_formatter(viewModel.transactionCurrency.symbol, DoubleKtxKt.toString(viewModel.transactionFee, 2))}"
-            tools:text="1.000 CRO"
+            tools:text="$10"
             app:layout_constraintBottom_toBottomOf="@+id/label_transaction_fee"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/label_transaction_fee" />
@@ -114,13 +114,14 @@
             android:id="@+id/button_edit_transaction"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/transactions_button_edit"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_transaction_fee" />
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_cost" />
 
         <Button
             android:id="@+id/button_delete_transaction"
@@ -134,6 +135,48 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_edit_transaction" />
+
+        <TextView
+            android:id="@+id/label_transaction_price_per_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/transactions_label_transaction_price_per_coin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_date" />
+
+        <TextView
+            android:id="@+id/label_transaction_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/transactions_label_transaction_cost"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_transaction_fee" />
+
+        <TextView
+            android:id="@+id/text_view_transaction_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            tools:text="$10.000"
+            android:text="@{@string/transactions_text_price_currency_formatter(viewModel.transactionCurrency.symbol, DoubleKtxKt.toString(viewModel.transactionCost, 2))}"
+            app:layout_constraintBottom_toBottomOf="@+id/label_transaction_cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_transaction_cost" />
+
+        <TextView
+            android:id="@+id/text_view_transaction_price_per_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@{@string/transactions_text_price_currency_formatter(viewModel.transactionCurrency.symbol, DoubleKtxKt.toString(viewModel.transactionCoinPrice, 2))}"
+            tools:text="$0.10"
+            app:layout_constraintBottom_toBottomOf="@+id/label_transaction_price_per_coin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/label_transaction_price_per_coin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
