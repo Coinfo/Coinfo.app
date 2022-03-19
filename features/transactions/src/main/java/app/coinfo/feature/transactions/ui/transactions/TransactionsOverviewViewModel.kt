@@ -75,7 +75,7 @@ class TransactionsOverviewViewModel @Inject constructor(
 
                 _totalAmount.value = _totalAmount.safeValue + transaction.amount
                 _totalWorth.value = _totalWorth.safeValue +
-                    (_totalAmount.safeValue * coin.getCurrentPrice(_currency.safeValue))
+                    (transaction.amount * coin.getCurrentPrice(_currency.safeValue))
 
                 calculateAverageBuyAndSell(transaction, coin)
 
