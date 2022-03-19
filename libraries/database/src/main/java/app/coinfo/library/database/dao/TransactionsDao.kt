@@ -28,4 +28,7 @@ interface TransactionsDao {
 
     @Query("SELECT * FROM transactions WHERE transaction_id = :transactionId")
     suspend fun loadTransaction(transactionId: Long): TransactionEntity
+
+    @Query("DELETE FROM transactions WHERE transaction_id = :transactionId")
+    suspend fun deleteTransaction(transactionId: Long)
 }

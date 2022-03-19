@@ -75,6 +75,10 @@ internal class PortfoliosRepositoryImpl(
             )
         }
 
+    override suspend fun deleteTransaction(id: Long) {
+        transactionsDao.deleteTransaction(id)
+    }
+
     override suspend fun loadAssets(portfolioId: Long): Assets {
         val transactions = mutableMapOf<String, MutableList<Transaction>>()
         transactionsDao.loadTransactions(portfolioId).forEach {

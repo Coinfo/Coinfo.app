@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentTransactionOverviewBinding
+import app.coinfo.library.core.ktx.setBackStackData
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +33,18 @@ class TransactionOverviewFragment : BottomSheetDialogFragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        setupClickListeners()
 
         viewModel.loadTransaction(args.transactionId)
+    }
+
+    private fun setupClickListeners() {
+        binding.buttonDeleteTransaction.setOnClickListener {
+            setBackStackData(KEY_DELETED_TRANSACTION_ID, args.transactionId, true)
+        }
+    }
+
+    companion object {
+        const val KEY_DELETED_TRANSACTION_ID = "app.coinfo.feature.transactions.KEY_DELETED_TRANSACTION_ID"
     }
 }
