@@ -67,6 +67,7 @@ class TransactionsOverviewViewModel @Inject constructor(
     private val _averageSell = MutableLiveData(0.0)
 
     fun loadTransactions(portfolioId: Long, coinId: String) {
+        cleanup()
         viewModelScope.launch {
             val coin = coinsRepository.getCoinData(coinId)
             val transactions = portfoliosRepository.loadTransactions(portfolioId, coinId)
@@ -99,6 +100,12 @@ class TransactionsOverviewViewModel @Inject constructor(
                     worth = transaction.formattedWorth
                 )
             }
+        }
+    }
+
+    fun deleteTransaction(id: Long) {
+        viewModelScope.launch {
+            portfoliosRepository.deleteTransaction(id)
         }
     }
 
@@ -139,6 +146,21 @@ class TransactionsOverviewViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun cleanup() {
+        buyPricePerCoin = 0.0
+        buyAmount = 0.0
+        buyWorth = 0.0
+        sellPricePerCoin = 0.0
+        sellAmount = 0.0
+        sellWorth = 0.0
+        _totalAmount.value = 0.0
+        _totalWorth.value = 0.0
+        _allTimeProfitLoss.value = 0.0
+        _allTimeProfitLossPercentage.value = 0.0
+        _averageBuy.value = 0.0
+        _averageSell.value = 0.0
     }
 
     private fun calculatePricePerCoin(transaction: Transaction, coinData: CoinData): Double {
