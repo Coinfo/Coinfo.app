@@ -111,6 +111,7 @@ class UpsertTransactionViewModel @Inject constructor(
                     currency = _currency.value!!,
                     type = transactionType,
                     date = System.currentTimeMillis(),
+                    notes = notes,
                 )
             )
         }

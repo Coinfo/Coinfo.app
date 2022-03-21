@@ -38,6 +38,10 @@ class TransactionOverviewViewModel @Inject constructor(
         get() = _transactionCoinSymbol
     private val _transactionCoinSymbol = MutableLiveData("")
 
+    val transactionNotes: LiveData<String>
+        get() = _transactionNotes
+    private val _transactionNotes = MutableLiveData("")
+
     val transactionCoinPrice: LiveData<Double>
         get() = _transactionCoinPrice
     private val _transactionCoinPrice = MutableLiveData(0.0)
@@ -61,6 +65,7 @@ class TransactionOverviewViewModel @Inject constructor(
                 _transactionFee.value = fee
                 _transactionCoinPrice.value = abs(pricePerCoin)
                 _transactionCost.value = abs(pricePerCoin * amount)
+                _transactionNotes.value = notes
             }
         }
     }

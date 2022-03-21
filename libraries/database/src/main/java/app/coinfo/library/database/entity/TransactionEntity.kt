@@ -42,5 +42,8 @@ data class TransactionEntity(
     val transactionType: TransactionType,
 
     @ColumnInfo(name = "date")
-    val date: Long
+    val date: Long,
+
+    @ColumnInfo(name = "notes")
+    val notes: String,
 )

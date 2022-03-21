@@ -7,7 +7,7 @@ import app.coinfo.library.database.dao.TransactionsDao
 import app.coinfo.library.database.entity.PortfolioEntity
 import app.coinfo.library.database.entity.TransactionEntity
 
-@Database(entities = [PortfolioEntity::class, TransactionEntity::class], version = 6)
+@Database(entities = [PortfolioEntity::class, TransactionEntity::class], version = 1)
 abstract class Database : RoomDatabase() {
 
     abstract fun portfoliosDao(): PortfoliosDao
