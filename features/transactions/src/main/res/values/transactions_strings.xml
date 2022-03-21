@@ -28,4 +28,5 @@
     <string name="transactions_button_edit">Edit</string>
     <string name="transactions_button_delete">Delete</string>
     <string name="transactions_placeholder_text_transaction_type_undefined">Undefined</string>
+    <string name="transactions_label_transactions_notes">Notes</string>
 </resources>

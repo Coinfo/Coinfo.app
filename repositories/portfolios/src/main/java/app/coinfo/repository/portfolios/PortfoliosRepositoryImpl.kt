@@ -40,6 +40,7 @@ internal class PortfoliosRepositoryImpl(
                 currency = transaction.currency,
                 transactionType = transaction.type,
                 date = transaction.date,
+                notes = transaction.notes,
             )
         )
     }
@@ -57,6 +58,7 @@ internal class PortfoliosRepositoryImpl(
                 currency = it.currency,
                 type = it.transactionType,
                 date = it.date,
+                notes = it.notes,
             )
         }
 
@@ -72,6 +74,7 @@ internal class PortfoliosRepositoryImpl(
                 currency = currency,
                 type = transactionType,
                 date = date,
+                notes = notes,
             )
         }
 
@@ -97,6 +100,7 @@ internal class PortfoliosRepositoryImpl(
                     currency = it.currency,
                     type = it.transactionType,
                     date = it.date,
+                    notes = it.notes,
                 )
             )
         }

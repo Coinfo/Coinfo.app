@@ -14,4 +14,5 @@ data class Transaction(
     val currency: Currency,
     val type: TransactionType,
     val date: Long,
+    val notes: String
 )
