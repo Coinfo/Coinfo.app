@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.transactions.R
 import app.coinfo.feature.transactions.databinding.TransactionsFragmentTransactionOverviewBinding
@@ -39,6 +40,15 @@ class TransactionOverviewFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupClickListeners() {
+        // Edit Transaction
+        binding.buttonEditTransaction.setOnClickListener {
+            findNavController().navigate(
+                TransactionOverviewFragmentDirections.toUpsertTransactionFragment(
+                    coinId = null, portfolioId = -1L, args.transactionId
+                )
+            )
+        }
+        // Delete Transaction
         binding.buttonDeleteTransaction.setOnClickListener {
             setBackStackData(KEY_DELETED_TRANSACTION_ID, args.transactionId, true)
         }

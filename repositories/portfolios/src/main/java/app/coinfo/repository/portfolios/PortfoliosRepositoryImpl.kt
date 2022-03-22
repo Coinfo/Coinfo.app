@@ -45,6 +45,24 @@ internal class PortfoliosRepositoryImpl(
         )
     }
 
+    override suspend fun updateTransaction(transaction: Transaction) {
+        transactionsDao.update(
+            TransactionEntity(
+                id = transaction.id,
+                coinId = transaction.coinId,
+                portfolioId = transaction.portfolioId,
+                amount = transaction.amount,
+                pricePerCoin = transaction.pricePerCoin,
+                symbol = transaction.symbol,
+                fee = transaction.fee,
+                currency = transaction.currency,
+                transactionType = transaction.type,
+                date = transaction.date,
+                notes = transaction.notes,
+            )
+        )
+    }
+
     override suspend fun loadTransactions(portfolioId: Long, coinId: String) =
         transactionsDao.loadTransactions(portfolioId, coinId).map {
             Transaction(

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import app.coinfo.library.database.entity.TransactionEntity
 
 @Dao
@@ -11,6 +12,9 @@ interface TransactionsDao {
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     suspend fun insert(transaction: TransactionEntity)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(transaction: TransactionEntity)
 
     /**
      * Loads all transactions

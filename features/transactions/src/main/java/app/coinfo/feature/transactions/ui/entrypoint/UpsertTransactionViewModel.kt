@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TransactionType
+import app.coinfo.library.core.ktx.safeValue
 import app.coinfo.library.core.ktx.toDoubleOrZero
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.repository.coins.CoinsRepository
@@ -14,6 +15,7 @@ import app.coinfo.repository.portfolios.model.Transaction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.abs
 
 @HiltViewModel
 class UpsertTransactionViewModel @Inject constructor(
@@ -23,8 +25,15 @@ class UpsertTransactionViewModel @Inject constructor(
 
     private var coinId: String? = null
     private var portfolioId: Long? = null
-    private var amount: Double = 0.00000000000000000000
-    private var transactionType: TransactionType = TransactionType.BUY
+    private var transactionId: Long = 0L
+
+    val transactionType: LiveData<TransactionType>
+        get() = _transactionType
+    private val _transactionType = MutableLiveData(TransactionType.BUY)
+
+    val amount: LiveData<Double>
+        get() = _amount
+    private val _amount = MutableLiveData(0.00000000000000000000)
 
     val price: LiveData<String>
         get() = _price
@@ -63,10 +72,27 @@ class UpsertTransactionViewModel @Inject constructor(
     fun loadCoinInformation(coinId: String, portfolioId: Long) {
         this.coinId = coinId
         this.portfolioId = portfolioId
+        this.transactionId = 0L
         viewModelScope.launch {
             val data = coinsRepository.getCoinData(coinId)
             _price.value = data.getCurrentPrice(Currency.EUR).toStringWithSuffix(2)
             _symbol.value = data.symbol
+        }
+    }
+
+    fun loadCoinInformation(transactionId: Long) {
+        this.transactionId = transactionId
+        viewModelScope.launch {
+            val data = portfoliosRepository.loadTransaction(transactionId)
+            _price.value = abs(data.pricePerCoin).toString()
+            coinId = data.coinId
+            portfolioId = data.portfolioId
+            _symbol.value = data.symbol
+            _currency.value = data.currency
+            _amount.value = abs(data.amount)
+            _transactionType.value = data.type
+            fee = abs(data.fee).toString()
+            notes = data.notes
         }
     }
 
@@ -76,7 +102,7 @@ class UpsertTransactionViewModel @Inject constructor(
     }
 
     fun onAmountChanged(s: CharSequence) {
-        amount = s.toString().toDoubleOrZero()
+        _amount.value = s.toString().toDoubleOrZero()
     }
 
     fun onUpdateFee(value: Double) {
@@ -95,32 +121,35 @@ class UpsertTransactionViewModel @Inject constructor(
     }
 
     fun onTransactionTypeSelected(type: TransactionType) {
-        transactionType = type
+        _transactionType.value = type
     }
 
-    fun onAddTransaction() {
+    fun onAddEditTransaction(edit: Boolean = false) {
+        val transaction = Transaction(
+            id = transactionId,
+            coinId = coinId!!,
+            portfolioId = portfolioId!!,
+            symbol = _symbol.value!!,
+            amount = getValueDependingOnTransactionType(_amount.safeValue),
+            pricePerCoin = getValueDependingOnTransactionType(_price.value?.toDoubleOrZero() ?: 0.0),
+            fee = fee.toDoubleOrZero(),
+            currency = _currency.value!!,
+            type = _transactionType.value!!,
+            date = System.currentTimeMillis(),
+            notes = notes,
+        )
+
         viewModelScope.launch {
-            portfoliosRepository.addTransaction(
-                Transaction(
-                    coinId = coinId!!,
-                    portfolioId = portfolioId!!,
-                    symbol = _symbol.value!!,
-                    amount = getValueDependingOnTransactionType(amount),
-                    pricePerCoin = getValueDependingOnTransactionType(_price.value?.toDoubleOrZero() ?: 0.0),
-                    fee = fee.toDoubleOrZero(),
-                    currency = _currency.value!!,
-                    type = transactionType,
-                    date = System.currentTimeMillis(),
-                    notes = notes,
-                )
-            )
+            if (edit) {
+                portfoliosRepository.updateTransaction(transaction)
+            } else {
+                portfoliosRepository.addTransaction(transaction)
+            }
         }
     }
 
-    private fun getValueDependingOnTransactionType(amount: Double) = when (transactionType) {
+    private fun getValueDependingOnTransactionType(amount: Double) = when (_transactionType.value!!) {
         TransactionType.BUY -> amount * 1.00000000000000000000
         TransactionType.SELL -> amount * -1.00000000000000000000
     }
-
-    fun getPriceValue() = _price.value ?: "0.0"
 }
