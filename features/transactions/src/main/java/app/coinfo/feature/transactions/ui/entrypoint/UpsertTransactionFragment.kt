@@ -35,7 +35,13 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
         setupCallbacks()
         setupClickListeners()
 
-        viewModel.loadCoinInformation(args.coinId, args.portfolioId)
+        if (args.coinId != null && args.portfolioId != PORTFOLIO_ID_NOT_SET_VALUE) {
+            binding.buttonAddTransaction.setText(R.string.transactions_button_text_add_transaction)
+            viewModel.loadCoinInformation(args.coinId!!, args.portfolioId)
+        } else {
+            binding.buttonAddTransaction.setText(R.string.transactions_button_text_edit_transaction)
+            viewModel.loadCoinInformation(args.transactionId)
+        }
     }
 
     private fun setupCallbacks() {
@@ -66,7 +72,7 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
     private fun setupClickListeners() {
         binding.chipSetPrice.setOnClickListener {
             findNavController().navigate(
-                UpsertTransactionFragmentDirections.toPriceFragment(viewModel.getPriceValue())
+                UpsertTransactionFragmentDirections.toPriceFragment(viewModel.price.value ?: "0.0")
             )
         }
         binding.chipSetFee.setOnClickListener {
@@ -85,8 +91,16 @@ internal class UpsertTransactionFragment : Fragment(R.layout.transactions_fragme
             )
         }
         binding.buttonAddTransaction.setOnClickListener {
-            viewModel.onAddTransaction()
+            if (args.transactionId != PORTFOLIO_ID_NOT_SET_VALUE) {
+                viewModel.onAddEditTransaction(true)
+            } else {
+                viewModel.onAddEditTransaction(false)
+            }
             findNavController().navigateUp()
         }
+    }
+
+    companion object {
+        private const val PORTFOLIO_ID_NOT_SET_VALUE = -1L
     }
 }

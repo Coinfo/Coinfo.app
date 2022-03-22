@@ -11,9 +11,10 @@
         android:label="UpsertTransactionFragment"
         tools:layout="@layout/transactions_fragment_upsert_transaction">
 
-        <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}&amp;portfolioId={portfolioId}" />
-        <argument android:name="coinId" app:argType="string"/>
-        <argument android:name="portfolioId" app:argType="long" />
+        <deepLink app:uri="coinfo://app.coinfo.feature/transactions/upsert?coinId={coinId}&amp;portfolioId={portfolioId}&amp;transactionId={transactionId}" />
+        <argument android:name="coinId" app:argType="string" app:nullable="true" />
+        <argument android:name="portfolioId" app:argType="long" android:defaultValue="-1L"/>
+        <argument android:name="transactionId" app:argType="long" android:defaultValue="-1L"/>
 
         <action
             android:id="@+id/toPriceFragment"
@@ -93,6 +94,9 @@
         tools:layout="@layout/transactions_fragment_transaction_overview">
 
         <argument android:name="transactionId" app:argType="long" />
+        <action
+            android:id="@+id/toUpsertTransactionFragment"
+            app:destination="@id/destination_upsert_transactions" />
     </dialog>
 
 </navigation>
