@@ -50,6 +50,7 @@ dependencies {
     implementation project(path: ':libraries:logger')
     implementation project(path: ':libraries:preferences')
     implementation project(path: ':libraries:database')
+    implementation project(path: ':libraries:design')
     implementation project(path: ':repositories:coins')
     implementation project(path: ':repositories:portfolios')
 
