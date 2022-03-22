@@ -8,17 +8,26 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Coinfo"
 include ':app'
-include ':widgets:fngindex'
+
+// Features
 include ':features:coins'
 include ':features:portfolios'
 include ':features:portfolio'
 include ':features:dashboard'
+include ':features:transactions'
+include ':features:coin'
+include ':features:search'
+
+// Libraries
 include ':libraries:logger'
 include ':libraries:core'
 include ':libraries:database'
+include ':libraries:design'
 include ':libraries:preferences'
-include ':features:coin'
-include ':features:search'
+
+// Repositories
 include ':repositories:portfolios'
 include ':repositories:coins'
-include ':features:transactions'
+
+// Widgets
+include ':widgets:fngindex'
