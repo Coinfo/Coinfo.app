@@ -4,6 +4,7 @@
 
     <style name="DesignTitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
     </style>
 
     <style name="DesignSubtitle" parent="TextAppearance.Material3.BodySmall">

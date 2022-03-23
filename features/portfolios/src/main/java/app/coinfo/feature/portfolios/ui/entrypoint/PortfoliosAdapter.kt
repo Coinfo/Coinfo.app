@@ -3,6 +3,7 @@ package app.coinfo.feature.portfolios.ui.entrypoint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.findNavController
@@ -24,10 +25,16 @@ internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapte
         private val binding: PortfoliosListItemPortfolioBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(portfolio: UIPortfolioItem) {
-            binding.root.setOnClickListener { navigateToDeepLink(it, portfolio.id) }
-            binding.textViewPortfolioName.text = portfolio.name
-            binding.textViewPortfolioWorth.text = portfolio.worth
+        fun bind(portfolio: UIPortfolioItem) = with(portfolio) {
+            binding.root.setOnClickListener { navigateToDeepLink(it, id) }
+            binding.textViewPortfolioName.text = name
+            binding.textViewPortfolioWorth.text = worth
+            binding.textViewPortfolioProfitLoss.text = totalProfitLoss
+            binding.textViewPortfolioProfitLossPercentage.text = totalProfitLossPercentage
+            binding.textViewPortfolioProfitLossPercentage.setTextColor(
+                ContextCompat.getColor(binding.root.context, trendColor)
+            )
+            binding.imageViewPortfolioProfitLossTrand.setImageResource(trendImageRes)
             binding.executePendingBindings()
         }
 
