@@ -81,7 +81,7 @@ class PortfoliosViewModel @Inject constructor(
             totalProfitLoss = "$symbol${currentCurrency.symbol}${abs(profitLoss).toString(2)}",
             totalProfitLossPercentage = "${abs(profitLossPercentage).toString(2)}%",
             trendImageRes = if (isTrendPositive) {
-                R.drawable.design_ic_positive_trand
+                R.drawable.design_ic_positive_trend
             } else { R.drawable.design_ic_negative_trend },
             trendColor = if (isTrendPositive) R.color.trendPositive else R.color.trendNegative
         )

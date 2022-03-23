@@ -34,7 +34,7 @@ internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapte
             binding.textViewPortfolioProfitLossPercentage.setTextColor(
                 ContextCompat.getColor(binding.root.context, trendColor)
             )
-            binding.imageViewPortfolioProfitLossTrand.setImageResource(trendImageRes)
+            binding.imageViewPortfolioProfitLossTrend.setImageResource(trendImageRes)
             binding.executePendingBindings()
         }
 

@@ -11,4 +11,12 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="DesignActionButton" parent="Widget.Material3.Button.ElevatedButton.Icon">
+        <item name="backgroundTint">#182331</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="iconTint">?attr/colorPrimary</item>
+    </style>
+
 </resources>

@@ -8,4 +8,6 @@
     <string name="portfolios_hint_text_portfolio_name">Portfolio Name</string>
     <string name="portfolios_text_24_hour_change">24 Hours Change</string>
     <string name="portfolios_text_total_profit_loss">Total Profit/Loss</string>
+    <string name="portfolios_button_text_add_asset">Add Asset</string>
+    <string name="portfolios_button_text_edit_portfolio">Edit</string>
 </resources>
