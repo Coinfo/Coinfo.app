@@ -70,15 +70,15 @@ class PortfoliosViewModel @Inject constructor(
         }
 
         val profitLoss = totalWorth - totalBuy + totalSell
-        val profitLossPercentage = (profitLoss / totalBuy) * HUNDRED_PERCENT
+        val profitLossPercentage = if (totalBuy == 0.0) 0.0 else (profitLoss / totalBuy) * HUNDRED_PERCENT
         val isTrendPositive = profitLoss >= 0
-        val symbol = if (isTrendPositive) "+" else "-"
+        val symbol = if (profitLoss == 0.0) "" else if (profitLoss > 0) "+ " else "- "
 
         UIPortfolioItem(
             id = portfolio.id,
             name = portfolio.name,
-            worth = "$symbol ${currentCurrency.symbol}${(abs(totalWorth)).toString(2)}",
-            totalProfitLoss = "$symbol ${currentCurrency.symbol}${abs(profitLoss).toString(2)}",
+            worth = "$symbol${currentCurrency.symbol}${(abs(totalWorth)).toString(2)}",
+            totalProfitLoss = "$symbol${currentCurrency.symbol}${abs(profitLoss).toString(2)}",
             totalProfitLossPercentage = "${abs(profitLossPercentage).toString(2)}%",
             trendImageRes = if (isTrendPositive) {
                 R.drawable.design_ic_positive_trand
