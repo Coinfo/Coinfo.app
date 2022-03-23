@@ -2,6 +2,19 @@
 
 <resources>
 
+    <style name="DesignActionBarTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DesignActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="background">?android:colorBackground</item>
+        <item name="titleTextStyle">@style/DesignActionBarTitle</item>
+        <!-- Remove Shadow from Action Bar -->
+        <item name="elevation">0dp</item>
+    </style>
+
     <style name="DesignTitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">28sp</item>
