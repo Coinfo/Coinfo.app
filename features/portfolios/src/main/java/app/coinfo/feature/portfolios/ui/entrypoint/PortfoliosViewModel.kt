@@ -4,14 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.coinfo.feature.portfolios.R
 import app.coinfo.library.core.enums.Currency
+import app.coinfo.library.core.enums.TransactionType
 import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.preferences.Preferences
 import app.coinfo.repository.coins.CoinsRepository
+import app.coinfo.repository.coins.model.Coin
 import app.coinfo.repository.portfolios.PortfoliosRepository
+import app.coinfo.repository.portfolios.model.Asset
+import app.coinfo.repository.portfolios.model.Portfolio
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.abs
 
 @HiltViewModel
 class PortfoliosViewModel @Inject constructor(
@@ -31,23 +39,55 @@ class PortfoliosViewModel @Inject constructor(
         viewModelScope.launch {
             _portfolios.value = portfoliosRepository.loadPortfolios().map { portfolio ->
                 val coinsMap = coinsRepository.loadCoins(portfolio.assets.coins, currentCurrency).associateBy { it.id }
-                var totalValue = 0.0
-                val change24h = 0.0
-                val totalProfitLoss = 0.0
-                portfolio.assets.assets.forEach {
-                    val coin = coinsMap[it.coinId]!!
-                    val coinTotalValue = it.getAssetAmount() * coin.currentPrice
-                    totalValue += coinTotalValue
-                }
-
-                UIPortfolioItem(
-                    id = portfolio.id,
-                    name = portfolio.name,
-                    totalValue = "${totalValue.toString(2)}${currentCurrency.symbol}",
-                    change24Hour = "${change24h.toString(2)}${currentCurrency.symbol}",
-                    totalProfitLoss = "${totalProfitLoss.toString(2)}${currentCurrency.symbol}",
-                )
+                createUIPortfolioItem(portfolio, portfolio.assets.assets, coinsMap)
             }
         }
+    }
+
+    private suspend fun createUIPortfolioItem(
+        portfolio: Portfolio,
+        assets: List<Asset>,
+        coins: Map<String, Coin>
+    ): UIPortfolioItem = withContext(Dispatchers.IO) {
+        var totalSell = 0.0
+        var totalBuy = 0.0
+        var totalWorth = 0.0
+        assets.forEach { asset ->
+            var totalAmountPerAsset = 0.0
+            asset.transactions.forEach { transaction ->
+                when (transaction.type) {
+                    TransactionType.BUY -> {
+                        totalAmountPerAsset += transaction.amount
+                        totalBuy += transaction.amount * transaction.pricePerCoin
+                    }
+                    TransactionType.SELL -> {
+                        totalAmountPerAsset += transaction.amount
+                        totalSell += transaction.amount * transaction.pricePerCoin
+                    }
+                }
+            }
+            totalWorth += totalAmountPerAsset * coins[asset.coinId]!!.currentPrice
+        }
+
+        val profitLoss = totalWorth - totalBuy + totalSell
+        val profitLossPercentage = if (totalBuy == 0.0) 0.0 else (profitLoss / totalBuy) * HUNDRED_PERCENT
+        val isTrendPositive = profitLoss >= 0
+        val symbol = if (profitLoss == 0.0) "" else if (profitLoss > 0) "+ " else "- "
+
+        UIPortfolioItem(
+            id = portfolio.id,
+            name = portfolio.name,
+            worth = "$symbol${currentCurrency.symbol}${(abs(totalWorth)).toString(2)}",
+            totalProfitLoss = "$symbol${currentCurrency.symbol}${abs(profitLoss).toString(2)}",
+            totalProfitLossPercentage = "${abs(profitLossPercentage).toString(2)}%",
+            trendImageRes = if (isTrendPositive) {
+                R.drawable.design_ic_positive_trand
+            } else { R.drawable.design_ic_negative_trend },
+            trendColor = if (isTrendPositive) R.color.trendPositive else R.color.trendNegative
+        )
+    }
+
+    companion object {
+        private const val HUNDRED_PERCENT = 100
     }
 }
