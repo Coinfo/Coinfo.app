@@ -1,79 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/half_margin"
+        android:layout_marginLeft="@dimen/standard_margin"
+        android:layout_marginRight="@dimen/standard_margin">
 
-        <TextView
-            android:id="@+id/text_view_portfolio_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-            tools:text="Crypto.com Portfolio"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/text_view_portfolio_total_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="16dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            tools:text="8000$"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_name" />
+            <TextView
+                android:id="@+id/text_view_portfolio_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Crypto.com Portfolio" />
 
-        <TextView
-            android:id="@+id/label_24_hour_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="16dp"
-            android:text="@string/portfolios_text_24_hour_change"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_total_price" />
+            <TextView
+                android:id="@+id/text_view_portfolio_worth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/half_half_margin"
+                style="@style/DesignTitleLarge"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_name"
+                tools:text="8000$" />
 
-        <TextView
-            android:id="@+id/label_total_profit_loss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/portfolios_text_total_profit_loss"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_24_hour_change" />
+            <TextView
+                android:id="@+id/text_view_portfolio_profit_loss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/half_half_margin"
+                android:layout_marginBottom="@dimen/standard_margin"
+                style="@style/DesignSubtitle"
+                tools:text="+ $200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_worth" />
 
-        <TextView
-            android:id="@+id/text_view_24_hour_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            tools:text="+5000$ (100%)"
-            app:layout_constraintBottom_toBottomOf="@+id/label_24_hour_change"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/label_24_hour_change" />
+            <ImageView
+                android:id="@+id/image_view_portfolio_profit_loss_trand"
+                android:layout_width="@dimen/standard_margin"
+                android:layout_height="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/half_half_margin"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_portfolio_profit_loss"
+                app:layout_constraintStart_toEndOf="@+id/text_view_portfolio_profit_loss"
+                app:layout_constraintTop_toTopOf="@+id/text_view_portfolio_profit_loss"
+                app:srcCompat="@drawable/design_ic_positive_trand" />
 
-        <TextView
-            android:id="@+id/text_view_total_profit_loss"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            tools:text="+189000$ (1500%)"
-            app:layout_constraintBottom_toBottomOf="@+id/label_total_profit_loss"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/label_total_profit_loss" />
+            <TextView
+                android:id="@+id/text_view_portfolio_profit_loss_percentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/half_half_margin"
+                tools:text="50%"
+                style="@style/DesignSubtitle"
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_portfolio_profit_loss_trand"
+                app:layout_constraintStart_toEndOf="@+id/image_view_portfolio_profit_loss_trand"
+                app:layout_constraintTop_toTopOf="@+id/image_view_portfolio_profit_loss_trand" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>

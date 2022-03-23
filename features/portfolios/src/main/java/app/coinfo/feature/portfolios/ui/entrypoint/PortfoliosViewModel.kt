@@ -43,7 +43,7 @@ class PortfoliosViewModel @Inject constructor(
                 UIPortfolioItem(
                     id = portfolio.id,
                     name = portfolio.name,
-                    totalValue = "${totalValue.toString(2)}${currentCurrency.symbol}",
+                    worth = "${currentCurrency.symbol}${totalValue.toString(2)}",
                     change24Hour = "${change24h.toString(2)}${currentCurrency.symbol}",
                     totalProfitLoss = "${totalProfitLoss.toString(2)}${currentCurrency.symbol}",
                 )
