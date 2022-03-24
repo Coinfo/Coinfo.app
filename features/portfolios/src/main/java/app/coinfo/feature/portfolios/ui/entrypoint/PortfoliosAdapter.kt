@@ -11,23 +11,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.portfolios.databinding.PortfoliosListItemPortfolioBinding
 
-internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapter.ViewHolder>(
+internal class PortfoliosAdapter(
+    private val onAddAssetClickListener: (portfolioId: Long) -> Unit
+) : ListAdapter<UIPortfolioItem, PortfoliosAdapter.ViewHolder>(
     PortfoliosDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onAddAssetClickListener)
     }
 
     class ViewHolder private constructor(
         private val binding: PortfoliosListItemPortfolioBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(portfolio: UIPortfolioItem) = with(portfolio) {
+        fun bind(portfolio: UIPortfolioItem, onAddAssetClickListener: (portfolioId: Long) -> Unit) = with(portfolio) {
             binding.root.setOnClickListener { navigateToPortfolioDetails(it, id) }
             binding.buttonPortfolioEdit.setOnClickListener { navigateToEditPortfolio(it, id) }
+            binding.buttonPortfolioAddAsset.setOnClickListener { onAddAssetClickListener(id) }
             binding.textViewPortfolioName.text = name
             binding.textViewPortfolioWorth.text = worth
             binding.textViewPortfolioProfitLoss.text = totalProfitLoss

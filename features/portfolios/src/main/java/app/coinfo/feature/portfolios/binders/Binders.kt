@@ -7,8 +7,5 @@ import app.coinfo.feature.portfolios.ui.entrypoint.UIPortfolioItem
 
 @BindingAdapter("portfolios")
 internal fun bindPortfolios(recyclerView: RecyclerView, portfolios: List<UIPortfolioItem>?) {
-    if (recyclerView.adapter == null) {
-        recyclerView.adapter = PortfoliosAdapter()
-    }
     (recyclerView.adapter as PortfoliosAdapter).submitList(portfolios)
 }
