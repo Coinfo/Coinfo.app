@@ -14,4 +14,7 @@ interface PortfoliosDao {
 
     @Query("SELECT * FROM portfolios ORDER BY portfolio_creation_date DESC")
     suspend fun loadPortfolios(): List<PortfolioEntity>
+
+    @Query("SELECT * FROM portfolios WHERE portfolio_id=:id")
+    suspend fun loadPortfolio(id: Long): PortfolioEntity
 }

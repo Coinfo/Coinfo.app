@@ -28,6 +28,10 @@ internal class PortfoliosRepositoryImpl(
             Portfolio(id = it.id, name = it.name, loadAssets(it.id))
         }
 
+    override suspend fun loadPortfolio(id: Long, includeAssets: Boolean) = with(portfoliosDao.loadPortfolio(id)) {
+        Portfolio(id = id, name = name, if (includeAssets) loadAssets(id) else Assets(emptyList(), emptyList()))
+    }
+
     override suspend fun addTransaction(transaction: Transaction) {
         transactionsDao.insert(
             TransactionEntity(
