@@ -3,9 +3,14 @@
 <resources>
     <string name="portfolios_fragment_title_portfolios">Portfolios</string>
     <string name="portfolios_fragment_title_create_portfolio">Create Portfolio</string>
+    <string name="portfolios_fragment_title_edit_portfolio">Edit Portfolio</string>
     <string name="portfolios_menu_item_title_create_portfolio">Create Portfolio</string>
     <string name="portfolios_button_text_create_portfolio">Create Portfolio</string>
     <string name="portfolios_hint_text_portfolio_name">Portfolio Name</string>
     <string name="portfolios_text_24_hour_change">24 Hours Change</string>
     <string name="portfolios_text_total_profit_loss">Total Profit/Loss</string>
+    <string name="portfolios_button_text_add_asset">Add Asset</string>
+    <string name="portfolios_button_text_edit_portfolio">Edit</string>
+    <string name="portfolios_button_text_confirm_edit">Confirm Edit</string>
+    <string name="portfolios_button_text_delete_portfolio">Delete</string>
 </resources>

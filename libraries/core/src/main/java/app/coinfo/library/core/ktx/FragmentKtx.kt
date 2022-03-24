@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.createViewModelLazy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
@@ -21,6 +23,10 @@ inline fun <reified VM : ViewModel> Fragment.parentFragmentViewModels(
     { extrasProducer?.invoke() ?: requireParentFragment().defaultViewModelCreationExtras },
     factoryProducer ?: { requireParentFragment().defaultViewModelProviderFactory }
 )
+
+fun <T : Any, L : LiveData<T>> Fragment.observe(liveData: L?, body: (T) -> Unit) {
+    liveData?.observe(viewLifecycleOwner, Observer(body))
+}
 
 fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
     findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)

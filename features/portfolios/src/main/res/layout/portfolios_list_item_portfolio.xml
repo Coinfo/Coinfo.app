@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_portfolio_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Crypto.com Portfolio" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_portfolio_worth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,39 +40,62 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_name"
                 tools:text="8000$" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_portfolio_profit_loss"
+                style="@style/DesignSubtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/half_half_margin"
-                android:layout_marginBottom="@dimen/standard_margin"
-                style="@style/DesignSubtitle"
-                tools:text="+ $200"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/half_margin"
+                app:layout_constraintBottom_toTopOf="@+id/button_portfolio_add_asset"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_worth" />
+                app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_worth"
+                tools:text="+ $200" />
 
             <ImageView
-                android:id="@+id/image_view_portfolio_profit_loss_trand"
+                android:id="@+id/image_view_portfolio_profit_loss_trend"
                 android:layout_width="@dimen/standard_margin"
                 android:layout_height="@dimen/standard_margin"
                 android:layout_marginStart="@dimen/half_half_margin"
                 app:layout_constraintBottom_toBottomOf="@+id/text_view_portfolio_profit_loss"
                 app:layout_constraintStart_toEndOf="@+id/text_view_portfolio_profit_loss"
                 app:layout_constraintTop_toTopOf="@+id/text_view_portfolio_profit_loss"
-                app:srcCompat="@drawable/design_ic_positive_trand" />
+                app:srcCompat="@drawable/design_ic_positive_trend" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_portfolio_profit_loss_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_half_margin"
                 tools:text="50%"
                 style="@style/DesignSubtitle"
-                app:layout_constraintBottom_toBottomOf="@+id/image_view_portfolio_profit_loss_trand"
-                app:layout_constraintStart_toEndOf="@+id/image_view_portfolio_profit_loss_trand"
-                app:layout_constraintTop_toTopOf="@+id/image_view_portfolio_profit_loss_trand" />
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_portfolio_profit_loss_trend"
+                app:layout_constraintStart_toEndOf="@+id/image_view_portfolio_profit_loss_trend"
+                app:layout_constraintTop_toTopOf="@+id/image_view_portfolio_profit_loss_trend" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_portfolio_add_asset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/standard_margin"
+                android:layout_marginStart="@dimen/standard_margin"
+                android:text="@string/portfolios_button_text_add_asset"
+                style="@style/DesignActionButton"
+                app:icon="@drawable/design_ic_add_asset"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_portfolio_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/half_margin"
+                android:text="@string/portfolios_button_text_edit_portfolio"
+                style="@style/DesignActionButton"
+                app:layout_constraintBottom_toBottomOf="@+id/button_portfolio_add_asset"
+                app:layout_constraintStart_toEndOf="@+id/button_portfolio_add_asset"
+                app:layout_constraintTop_toTopOf="@+id/button_portfolio_add_asset" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

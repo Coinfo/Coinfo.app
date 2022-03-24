@@ -15,6 +15,10 @@ interface PortfoliosRepository {
 
     suspend fun loadPortfolios(): List<Portfolio>
 
+    suspend fun loadPortfolio(id: Long, includeAssets: Boolean = false): Portfolio
+
+    suspend fun deletePortfolio(id: Long)
+
     /**
      * Adds transaction
      *

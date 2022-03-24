@@ -21,4 +21,15 @@
         android:label="@string/portfolios_fragment_title_create_portfolio"
         tools:layout="@layout/portfolios_fragment_create_portfolio"/>
 
+    <fragment
+        android:id="@+id/destination_edit_portfolio"
+        android:name="app.coinfo.feature.portfolios.ui.edit.EditPortfolioFragment"
+        android:label="@string/portfolios_fragment_title_edit_portfolio"
+        tools:layout="@layout/portfolios_fragment_edit_portfolio">
+
+        <deepLink app:uri="coinfo://app.coinfo.feature/portfolios?portfolioId={portfolioId}" />
+        <argument android:name="portfolioId" app:argType="long"/>
+
+    </fragment>
+
 </navigation>
