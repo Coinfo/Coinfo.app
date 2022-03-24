@@ -8,3 +8,6 @@ val MutableLiveData<Double>.safeValue
 
 val MutableLiveData<Currency>.safeValue
     get() = value ?: Currency.EUR
+
+val MutableLiveData<String>.safeValue
+    get() = value ?: ""

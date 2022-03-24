@@ -19,6 +19,8 @@ interface PortfoliosRepository {
 
     suspend fun deletePortfolio(id: Long)
 
+    suspend fun editPortfolio(portfolioId: Long, portfolioName: String)
+
     /**
      * Adds transaction
      *

@@ -1,9 +1,9 @@
 package app.coinfo.feature.portfolios.ui.edit
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.coinfo.library.core.ktx.safeValue
 import app.coinfo.library.core.utils.SingleLiveEvent
 import app.coinfo.repository.portfolios.PortfoliosRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,16 +18,13 @@ internal class EditPortfolioViewModel @Inject constructor(
     private var portfolioId: Long? = null
 
     val navigateBack = SingleLiveEvent<Unit>()
-
-    val portfolioName: LiveData<String>
-        get() = _portfolioName
-    private val _portfolioName = MutableLiveData("")
+    val portfolioName = MutableLiveData("")
 
     fun loadPortfolioDetails(id: Long) {
         portfolioId = id
         viewModelScope.launch {
             with(portfoliosRepository.loadPortfolio(id)) {
-                _portfolioName.value = name
+                portfolioName.value = name
             }
         }
     }
@@ -35,6 +32,13 @@ internal class EditPortfolioViewModel @Inject constructor(
     fun onDelete() {
         viewModelScope.launch {
             portfolioId?.let { portfoliosRepository.deletePortfolio(it) }
+            navigateBack.call()
+        }
+    }
+
+    fun onEdit() {
+        viewModelScope.launch {
+            portfolioId?.let { portfoliosRepository.editPortfolio(it, portfolioName.safeValue) }
             navigateBack.call()
         }
     }

@@ -24,7 +24,7 @@
             android:layout_marginTop="@dimen/standard_margin"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@{viewModel.portfolioName}"
+            android:text="@={viewModel.portfolioName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +36,7 @@
             android:layout_marginStart="@dimen/standard_margin"
             android:layout_marginEnd="@dimen/standard_margin"
             android:text="@string/portfolios_button_text_confirm_edit"
+            android:onClick="@{() -> viewModel.onEdit()}"
             app:layout_constraintBottom_toTopOf="@+id/button_delete_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
