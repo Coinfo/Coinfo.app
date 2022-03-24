@@ -26,7 +26,8 @@ internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapte
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(portfolio: UIPortfolioItem) = with(portfolio) {
-            binding.root.setOnClickListener { navigateToDeepLink(it, id) }
+            binding.root.setOnClickListener { navigateToPortfolioDetails(it, id) }
+            binding.buttonPortfolioEdit.setOnClickListener { navigateToEditPortfolio(it, id) }
             binding.textViewPortfolioName.text = name
             binding.textViewPortfolioWorth.text = worth
             binding.textViewPortfolioProfitLoss.text = totalProfitLoss
@@ -38,9 +39,15 @@ internal class PortfoliosAdapter : ListAdapter<UIPortfolioItem, PortfoliosAdapte
             binding.executePendingBindings()
         }
 
-        private fun navigateToDeepLink(view: View, id: Long) = view.findNavController().navigate(
+        private fun navigateToPortfolioDetails(view: View, id: Long) = view.findNavController().navigate(
             NavDeepLinkRequest.Builder
                 .fromUri("coinfo://app.coinfo.feature/portfolio?id=$id".toUri())
+                .build()
+        )
+
+        private fun navigateToEditPortfolio(view: View, id: Long) = view.findNavController().navigate(
+            NavDeepLinkRequest.Builder
+                .fromUri("coinfo://app.coinfo.feature/portfolios?portfolioId=$id".toUri())
                 .build()
         )
 
