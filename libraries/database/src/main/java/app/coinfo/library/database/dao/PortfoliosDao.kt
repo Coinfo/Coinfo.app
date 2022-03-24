@@ -17,4 +17,7 @@ interface PortfoliosDao {
 
     @Query("SELECT * FROM portfolios WHERE portfolio_id=:id")
     suspend fun loadPortfolio(id: Long): PortfolioEntity
+
+    @Query("DELETE FROM portfolios WHERE portfolio_id=:id")
+    suspend fun deletePortfolio(id: Long)
 }

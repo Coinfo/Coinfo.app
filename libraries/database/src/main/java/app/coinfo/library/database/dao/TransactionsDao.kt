@@ -35,4 +35,7 @@ interface TransactionsDao {
 
     @Query("DELETE FROM transactions WHERE transaction_id = :transactionId")
     suspend fun deleteTransaction(transactionId: Long)
+
+    @Query("DELETE FROM transactions WHERE portfolio_id = :portfolioId")
+    suspend fun deleteTransactionsWithPortfolioId(portfolioId: Long)
 }

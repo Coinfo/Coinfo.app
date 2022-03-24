@@ -32,6 +32,11 @@ internal class PortfoliosRepositoryImpl(
         Portfolio(id = id, name = name, if (includeAssets) loadAssets(id) else Assets(emptyList(), emptyList()))
     }
 
+    override suspend fun deletePortfolio(id: Long) {
+        portfoliosDao.deletePortfolio(id)
+        transactionsDao.deleteTransactionsWithPortfolioId(id)
+    }
+
     override suspend fun addTransaction(transaction: Transaction) {
         transactionsDao.insert(
             TransactionEntity(

@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import app.coinfo.feature.portfolios.R
 import app.coinfo.feature.portfolios.databinding.PortfoliosFragmentEditPortfolioBinding
+import app.coinfo.library.core.ktx.observe
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,5 +28,9 @@ internal class EditPortfolioFragment : Fragment(R.layout.portfolios_fragment_edi
         binding.viewModel = viewModel
 
         viewModel.loadPortfolioDetails(args.portfolioId)
+
+        observe(viewModel.navigateBack) {
+            findNavController().popBackStack()
+        }
     }
 }

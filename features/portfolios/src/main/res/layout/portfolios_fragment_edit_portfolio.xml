@@ -48,6 +48,7 @@
             android:layout_marginEnd="@dimen/standard_margin"
             android:layout_marginBottom="@dimen/standard_margin"
             android:text="@string/portfolios_button_text_delete_portfolio"
+            android:onClick="@{() -> viewModel.onDelete()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
