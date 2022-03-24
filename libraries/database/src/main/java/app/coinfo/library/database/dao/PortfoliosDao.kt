@@ -20,4 +20,7 @@ interface PortfoliosDao {
 
     @Query("DELETE FROM portfolios WHERE portfolio_id=:id")
     suspend fun deletePortfolio(id: Long)
+
+    @Query("UPDATE portfolios SET portfolio_name=:portfolioName WHERE portfolio_id=:portfolioId")
+    suspend fun updatePortfolio(portfolioId: Long, portfolioName: String)
 }
