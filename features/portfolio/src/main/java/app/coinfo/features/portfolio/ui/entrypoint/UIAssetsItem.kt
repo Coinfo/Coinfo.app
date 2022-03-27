@@ -1,6 +1,6 @@
 package app.coinfo.features.portfolio.ui.entrypoint
 
-data class UIAssetsItem(
+internal data class UIAssetsItem(
     val id: String,
     val symbol: String,
     val name: String,

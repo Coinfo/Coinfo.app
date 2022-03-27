@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PortfolioViewModel @Inject constructor(
+internal class PortfolioViewModel @Inject constructor(
     private val portfoliosRepository: PortfoliosRepository,
     private val coinsRepository: CoinsRepository,
     private val preferences: Preferences,
@@ -23,15 +23,20 @@ class PortfolioViewModel @Inject constructor(
     private val currentCurrency: Currency
         get() = preferences.loadCurrency()
 
+    val portfolioName: LiveData<String>
+        get() = _portfolioName
+    private val _portfolioName = MutableLiveData<String>()
+
     val assets: LiveData<List<UIAssetsItem>>
         get() = _portfolios
     private val _portfolios = MutableLiveData(emptyList<UIAssetsItem>())
 
     fun loadAssets(portfolioId: Long) {
         viewModelScope.launch {
-            val portfolioAssets = portfoliosRepository.loadAssets(portfolioId)
-            val coinsMap = coinsRepository.loadCoins(portfolioAssets.coins, currentCurrency).associateBy { it.id }
-            _portfolios.value = portfolioAssets.assets.map {
+            val portfolio = portfoliosRepository.loadPortfolio(portfolioId, true)
+            val coinsMap = coinsRepository.loadCoins(portfolio.assets.coins, currentCurrency).associateBy { it.id }
+            _portfolioName.value = portfolio.name
+            _portfolios.value = portfolio.assets.assets.map {
                 val coin = coinsMap[it.coinId]!!
                 val totalPrice = it.getAssetAmount() * coin.currentPrice
                 UIAssetsItem(

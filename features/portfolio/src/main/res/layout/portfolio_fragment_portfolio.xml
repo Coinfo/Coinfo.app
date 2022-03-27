@@ -44,6 +44,7 @@
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+                android:text="@{viewModel.portfolioName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Crypto.com Portfolio" />
