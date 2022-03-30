@@ -3,7 +3,6 @@ package app.coinfo.features.portfolio.ui.entrypoint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -42,22 +41,13 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) =
-        if (item.itemId == R.id.action_add_transaction) {
-            findNavController().navigate(
-                NavDeepLinkRequest.Builder
-                    .fromUri("coinfo://app.coinfo.feature/search".toUri())
-                    .build()
-            )
-            true
-        } else super.onContextItemSelected(item)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerViewPortfolios.adapter = adapter
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.buttonPortfolioAddAsset.setOnClickListener { navigateToSearch() }
         setupFragmentCallbacks()
 
         viewModel.loadAssets(args.id)
@@ -78,5 +68,13 @@ internal class PortfolioFragment : Fragment(R.layout.portfolio_fragment_portfoli
                 ).toUri()
             findNavController().navigate(NavDeepLinkRequest.Builder.fromUri(uri).build())
         }
+    }
+
+    private fun navigateToSearch() {
+        findNavController().navigate(
+            NavDeepLinkRequest.Builder
+                .fromUri("coinfo://app.coinfo.feature/search".toUri())
+                .build()
+        )
     }
 }
