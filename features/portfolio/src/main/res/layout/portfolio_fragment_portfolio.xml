@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="app.coinfo.library.core.ktx.DoubleKtxKt"/>
         <variable
             name="viewModel"
             type="app.coinfo.features.portfolio.ui.entrypoint.PortfolioViewModel" />
@@ -55,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/half_half_margin"
+                android:text="@{@string/portfolio_text_placeholder_worth(viewModel.symbol, viewModel.currentCurrency.symbol, DoubleKtxKt.toString(viewModel.worth, 2))}"
                 style="@style/DesignTitleLarge"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_name"
@@ -67,6 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/standard_margin"
                 android:layout_marginTop="@dimen/half_half_margin"
+                android:text="@{@string/portfolio_text_placeholder_total_profit_loss(viewModel.symbol, viewModel.currentCurrency.symbol, DoubleKtxKt.toString(viewModel.totalProfitLoss, 2))}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_portfolio_worth"
                 tools:text="+ $200" />
@@ -79,13 +82,15 @@
                 app:layout_constraintBottom_toBottomOf="@+id/text_view_portfolio_profit_loss"
                 app:layout_constraintStart_toEndOf="@+id/text_view_portfolio_profit_loss"
                 app:layout_constraintTop_toTopOf="@+id/text_view_portfolio_profit_loss"
-                app:srcCompat="@drawable/design_ic_positive_trend" />
+                android:src="@{viewModel.isTotalProfitLossTrendPositive ? @drawable/design_ic_positive_trend : @drawable/design_ic_negative_trend}" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_portfolio_profit_loss_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/half_half_margin"
+                android:text="@{@string/portfolio_text_placeholder_total_profit_loss_percentage(DoubleKtxKt.toString(viewModel.totalProfitLossPercentage, 2))}"
+                android:textColor="@{viewModel.isTotalProfitLossTrendPositive ? @color/trendPositive : @color/trendNegative}"
                 tools:text="50%"
                 style="@style/DesignSubtitle"
                 app:layout_constraintBottom_toBottomOf="@+id/image_view_portfolio_profit_loss_trend"
