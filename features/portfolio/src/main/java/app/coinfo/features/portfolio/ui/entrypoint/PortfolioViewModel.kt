@@ -4,18 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.features.portfolio.R
 import app.coinfo.library.core.enums.Currency
 import app.coinfo.library.core.enums.TransactionType
 import app.coinfo.library.core.ktx.safeValue
-import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.library.preferences.Preferences
 import app.coinfo.repository.coins.CoinsRepository
 import app.coinfo.repository.coins.model.Coin
 import app.coinfo.repository.portfolios.PortfoliosRepository
 import app.coinfo.repository.portfolios.model.Asset
-import app.coinfo.repository.portfolios.model.Portfolio
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,7 +62,8 @@ internal class PortfolioViewModel @Inject constructor(
     fun loadAssets(portfolioId: Long) {
         viewModelScope.launch {
             val portfolio = portfoliosRepository.loadPortfolio(portfolioId, true)
-            val coinsMap = coinsRepository.loadCoins(portfolio.assets.coins, _currentCurrency.safeValue).associateBy { it.id }
+            val coinsMap = coinsRepository.loadCoins(portfolio.assets.coins, _currentCurrency.safeValue)
+                .associateBy { it.id }
             _portfolioName.value = portfolio.name
             _portfolios.value = portfolio.assets.assets.map {
                 val coin = coinsMap[it.coinId]!!
