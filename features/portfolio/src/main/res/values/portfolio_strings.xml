@@ -1,6 +1,5 @@
 <resources>
     <string name="portfolio_fragment_title_portfolio">Portfolio</string>
-    <string name="portfolio_menu_item_title_add_transaction">Add Transaction</string>
     <string name="portfolio_button_text_add_asset">Add Asset</string>
     <string name="portfolio_text_placeholder_worth">%s%s%s</string>
     <string name="portfolio_text_placeholder_total_profit_loss_percentage">%s%%</string>
