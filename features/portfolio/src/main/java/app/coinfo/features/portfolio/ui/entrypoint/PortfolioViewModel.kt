@@ -117,6 +117,7 @@ internal class PortfolioViewModel @Inject constructor(
                     _totalProfitLossPercentage.value = abs(profitLossPercentage)
                     _isTotalProfitLossTrendPositive.value = isTrendPositive
                     _portfolios.value = listOfAssets
+                    _portfolioName.value = portfolio.name
                 }
             }
         }
