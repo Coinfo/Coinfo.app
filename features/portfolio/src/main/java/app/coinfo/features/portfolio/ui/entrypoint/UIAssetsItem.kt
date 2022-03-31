@@ -1,5 +1,7 @@
 package app.coinfo.features.portfolio.ui.entrypoint
 
+import android.graphics.drawable.Drawable
+
 internal data class UIAssetsItem(
     val id: String,
     val symbol: String,
@@ -8,5 +10,8 @@ internal data class UIAssetsItem(
     val totalHoldings: String,
     val totalPrice: String,
     val totalProfitLoss: String,
+    val totalProfitLossPercentage: String,
     val price: String,
+    val color: Int,
+    val trend: Int,
 )

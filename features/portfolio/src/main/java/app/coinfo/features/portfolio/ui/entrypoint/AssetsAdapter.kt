@@ -3,6 +3,7 @@ package app.coinfo.features.portfolio.ui.entrypoint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.features.portfolio.databinding.PortfolioListItemAssetBinding
@@ -26,6 +27,7 @@ internal class AssetsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(asset: UIAssetsItem) {
+            val context = binding.root.context
             binding.root.setOnClickListener { onAssetClickListener(asset.id, asset.symbol) }
             binding.textViewAssetName.text = asset.name
             binding.textViewAssetSymbol.text = asset.symbol
@@ -33,7 +35,11 @@ internal class AssetsAdapter(
             binding.imageViewAssetIcon.load(asset.icon)
             binding.textViewAssetTotalHoldings.text = asset.totalHoldings
             binding.textViewAssetAllTimeProfitLose.text = asset.totalProfitLoss
+            binding.textViewAssetAllTimeProfitLosePercentage.text = asset.totalProfitLossPercentage
+            binding.textViewAssetAllTimeProfitLosePercentage.setTextColor(
+                ContextCompat.getColor(context, asset.color))
             binding.textViewAssetTotalPrice.text = asset.totalPrice
+            binding.imageViewProfitLossTrend.setImageDrawable(ContextCompat.getDrawable(context, asset.trend))
             binding.executePendingBindings()
         }
 

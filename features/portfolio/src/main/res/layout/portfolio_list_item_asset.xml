@@ -98,6 +98,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_view_asset_symbol" />
 
+        <ImageView
+            android:id="@+id/image_view_profit_loss_trend"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_asset_all_time_profit_lose"
+            app:layout_constraintStart_toEndOf="@+id/text_view_asset_all_time_profit_lose"
+            app:layout_constraintTop_toTopOf="@+id/text_view_asset_all_time_profit_lose"
+            app:srcCompat="@drawable/design_ic_positive_trend" />
+
+        <TextView
+            android:id="@+id/text_view_asset_all_time_profit_lose_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="268%"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_profit_loss_trend"
+            app:layout_constraintStart_toEndOf="@+id/image_view_profit_loss_trend"
+            app:layout_constraintTop_toTopOf="@+id/image_view_profit_loss_trend" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
