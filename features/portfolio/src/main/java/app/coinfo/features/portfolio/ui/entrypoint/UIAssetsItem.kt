@@ -8,5 +8,8 @@ internal data class UIAssetsItem(
     val totalHoldings: String,
     val totalPrice: String,
     val totalProfitLoss: String,
+    val totalProfitLossPercentage: String,
     val price: String,
+    val color: Int,
+    val trend: Int,
 )
