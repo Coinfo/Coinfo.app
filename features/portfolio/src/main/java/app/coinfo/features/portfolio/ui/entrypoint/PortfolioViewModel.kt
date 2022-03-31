@@ -145,7 +145,7 @@ internal class PortfolioViewModel @Inject constructor(
             name = this.name,
             symbol = this.symbol,
             icon = this.image,
-            totalHoldings = totalAmountPerAsset.toString(),
+            totalHoldings = totalAmountPerAsset.toString(2),
             totalPrice = _currentCurrency.safeValue.symbol +
                 totalWorthForAsset.toStringWithSuffix(2),
             totalProfitLoss = getTrendSymbol(profitLossForAsset) + _currentCurrency.safeValue.symbol +
