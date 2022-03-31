@@ -12,7 +12,9 @@ import app.coinfo.library.core.ktx.toString
 import app.coinfo.library.core.ktx.toStringWithSuffix
 import app.coinfo.library.preferences.Preferences
 import app.coinfo.repository.coins.CoinsRepository
+import app.coinfo.repository.coins.model.Coin
 import app.coinfo.repository.portfolios.PortfoliosRepository
+import app.coinfo.repository.portfolios.model.Asset
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -92,27 +94,10 @@ internal class PortfolioViewModel @Inject constructor(
                     }
                     totalWorthForAsset += totalAmountPerAsset * coins[asset.coinId]!!.currentPrice
 
-                    val coin = coins[asset.coinId]!!
-                    val profitLossForAsset = totalWorthForAsset - totalBuyForAsset + totalSellForAsset
-                    val profitLossPercentageForAsset = if (totalBuyForAsset == 0.0)
-                        0.0 else (profitLossForAsset / totalBuyForAsset) * HUNDRED_PERCENT
-                    val isTrendPositiveForAsset = profitLossForAsset >= 0
-
                     listOfAssets.add(
-                        UIAssetsItem(
-                            id = asset.coinId,
-                            name = coin.name,
-                            symbol = coin.symbol,
-                            icon = coin.image,
-                            totalHoldings = totalAmountPerAsset.toString(),
-                            totalPrice = totalWorthForAsset.toStringWithSuffix(2) +
-                                _currentCurrency.safeValue.symbol,
-                            totalProfitLoss = profitLossForAsset.toString(2),
-                            totalProfitLossPercentage = "${profitLossPercentageForAsset.toString(2)}%",
-                            price = coin.currentPrice.toStringWithSuffix(2) + _currentCurrency.safeValue.symbol,
-                            color = if (isTrendPositiveForAsset) R.color.trendPositive else R.color.trendNegative,
-                            trend = if (isTrendPositiveForAsset) R.drawable.design_ic_positive_trend
-                            else R.drawable.design_ic_negative_trend
+                        coins[asset.coinId]!!.createUIAssetsItem(
+                            asset,
+                            totalAmountPerAsset, totalWorthForAsset, totalBuyForAsset, totalSellForAsset
                         )
                     )
 
@@ -124,11 +109,10 @@ internal class PortfolioViewModel @Inject constructor(
                 val profitLoss = totalWorth - totalBuy + totalSell
                 val profitLossPercentage = if (totalBuy == 0.0) 0.0 else (profitLoss / totalBuy) * HUNDRED_PERCENT
                 val isTrendPositive = profitLoss >= 0
-                val symbol = if (profitLoss == 0.0) "" else if (profitLoss > 0) "+ " else "- "
 
                 withContext(Dispatchers.Main) {
                     _worth.value = abs(totalWorth)
-                    _symbol.value = symbol
+                    _symbol.value = getTrendSymbol(profitLoss)
                     _totalProfitLoss.value = abs(profitLoss)
                     _totalProfitLossPercentage.value = abs(profitLossPercentage)
                     _isTotalProfitLossTrendPositive.value = isTrendPositive
@@ -136,6 +120,41 @@ internal class PortfolioViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun getTrendSymbol(pl: Double) = when {
+        pl == 0.0 -> ""
+        pl > 0 -> "+ "
+        else -> "- "
+    }
+
+    private fun Coin.createUIAssetsItem(
+        asset: Asset,
+        totalAmountPerAsset: Double,
+        totalWorthForAsset: Double,
+        totalBuyForAsset: Double,
+        totalSellForAsset: Double
+    ): UIAssetsItem {
+        val profitLossForAsset = totalWorthForAsset - totalBuyForAsset + totalSellForAsset
+        val profitLossPercentageForAsset = if (totalBuyForAsset == 0.0)
+            0.0 else (profitLossForAsset / totalBuyForAsset) * HUNDRED_PERCENT
+        val isTrendPositiveForAsset = profitLossForAsset >= 0
+        return UIAssetsItem(
+            id = asset.coinId,
+            name = this.name,
+            symbol = this.symbol,
+            icon = this.image,
+            totalHoldings = totalAmountPerAsset.toString(),
+            totalPrice = _currentCurrency.safeValue.symbol +
+                totalWorthForAsset.toStringWithSuffix(2),
+            totalProfitLoss = getTrendSymbol(profitLossForAsset) + _currentCurrency.safeValue.symbol +
+                abs(profitLossForAsset).toString(2),
+            totalProfitLossPercentage = "${profitLossPercentageForAsset.toString(2)}%",
+            price = _currentCurrency.safeValue.symbol + this.currentPrice.toStringWithSuffix(2),
+            color = if (isTrendPositiveForAsset) R.color.trendPositive else R.color.trendNegative,
+            trend = if (isTrendPositiveForAsset) R.drawable.design_ic_positive_trend
+            else R.drawable.design_ic_negative_trend
+        )
     }
 
     companion object {

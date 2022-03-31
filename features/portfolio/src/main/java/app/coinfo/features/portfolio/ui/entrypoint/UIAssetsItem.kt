@@ -1,7 +1,5 @@
 package app.coinfo.features.portfolio.ui.entrypoint
 
-import android.graphics.drawable.Drawable
-
 internal data class UIAssetsItem(
     val id: String,
     val symbol: String,

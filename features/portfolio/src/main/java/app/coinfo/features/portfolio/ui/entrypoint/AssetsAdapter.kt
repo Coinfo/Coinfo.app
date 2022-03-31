@@ -29,7 +29,6 @@ internal class AssetsAdapter(
         fun bind(asset: UIAssetsItem) {
             val context = binding.root.context
             binding.root.setOnClickListener { onAssetClickListener(asset.id, asset.symbol) }
-            binding.textViewAssetName.text = asset.name
             binding.textViewAssetSymbol.text = asset.symbol
             binding.textViewAssetPrice.text = asset.price
             binding.imageViewAssetIcon.load(asset.icon)
@@ -37,7 +36,8 @@ internal class AssetsAdapter(
             binding.textViewAssetAllTimeProfitLose.text = asset.totalProfitLoss
             binding.textViewAssetAllTimeProfitLosePercentage.text = asset.totalProfitLossPercentage
             binding.textViewAssetAllTimeProfitLosePercentage.setTextColor(
-                ContextCompat.getColor(context, asset.color))
+                ContextCompat.getColor(context, asset.color)
+            )
             binding.textViewAssetTotalPrice.text = asset.totalPrice
             binding.imageViewProfitLossTrend.setImageDrawable(ContextCompat.getDrawable(context, asset.trend))
             binding.executePendingBindings()
