@@ -57,6 +57,10 @@ subprojects {
 }
 
 ext {
+    min_sdk = 26
+    target_sdk = 31
+    compile_sdk = 31
+    
     version_navigation    = "2.5.0"
     version_viewbinding   = "1.5.3"
     version_dagger        = "2.42"

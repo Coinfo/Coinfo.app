@@ -22,12 +22,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk compile_sdk
 
     defaultConfig {
         applicationId "app.coinfo"
-        minSdk 26
-        targetSdk 31
+        minSdk min_sdk
+        targetSdk target_sdk
         versionCode 1
         versionName "1.0"
 
