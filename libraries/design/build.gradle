@@ -20,11 +20,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk compile_sdk
 
     defaultConfig {
-        minSdk 21
-        targetSdk 31
+        minSdk min_sdk
+        targetSdk target_sdk
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -46,6 +46,6 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation "androidx.appcompat:appcompat:${version_appcompat}"
+    implementation "com.google.android.material:material:${version_material}"
 }

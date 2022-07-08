@@ -23,10 +23,10 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.4"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.40.1"
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1")
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.42"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.0"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -35,9 +35,9 @@ buildscript {
 
 plugins {
     id "io.gitlab.arturbosch.detekt" version "1.19.0"
-    id "org.jlleitschuh.gradle.ktlint" version "10.1.0"
-    id "com.diffplug.spotless" version "6.2.2"
-    id 'org.jetbrains.kotlin.android' version '1.5.30' apply false
+    id "org.jlleitschuh.gradle.ktlint" version "10.3.0"
+    id "com.diffplug.spotless" version "6.4.2"
+    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
 }
 
 apply from: "$rootDir/.spotless/spotless.gradle"
@@ -57,11 +57,20 @@ subprojects {
 }
 
 ext {
-    version_navigation    = "2.5.0-alpha03"
+    min_sdk = 26
+    target_sdk = 31
+    compile_sdk = 31
+
+    version_navigation    = "2.5.0"
     version_viewbinding   = "1.5.3"
-    version_dagger        = "2.40.1"
+    version_dagger        = "2.42"
     version_hilt_compiler = "1.0.0"
-    version_glide         = "4.12.0"
-    version_core_ktx      = "1.7.0"
+    version_glide         = "4.13.0"
+    version_core_ktx      = "1.8.0"
     version_room          = "2.4.2"
+    version_appcompat     = "1.4.2"
+    version_material      = "1.6.1"
+    version_lifecycle     = "2.5.0"
+    version_markwon       = "4.6.2"
+    version_retrofit      = "2.9.0"
 }

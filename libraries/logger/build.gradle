@@ -22,13 +22,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk compile_sdk
 
     defaultConfig {
-        minSdk 26
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        minSdk min_sdk
+        targetSdk target_sdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -51,9 +49,12 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'com.google.dagger:hilt-android:2.40.1'
-    kapt 'androidx.hilt:hilt-compiler:1.0.0'
-    kapt 'com.google.dagger:hilt-compiler:2.40.1'
+    implementation "androidx.core:core-ktx:${version_core_ktx}"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$version_dagger"
+    kapt "androidx.hilt:hilt-compiler:$version_hilt_compiler"
+    kapt "com.google.dagger:hilt-compiler:$version_dagger"
+
     testImplementation 'junit:junit:4.13.2'
 }

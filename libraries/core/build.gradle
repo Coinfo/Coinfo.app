@@ -20,13 +20,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk compile_sdk
 
     defaultConfig {
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        minSdk min_sdk
+        targetSdk target_sdk
 
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -48,16 +46,17 @@ android {
 
 dependencies {
 
+    implementation "androidx.core:core-ktx:${version_core_ktx}"
+    implementation "androidx.appcompat:appcompat:${version_appcompat}"
+    implementation "com.google.android.material:material:${version_material}"
+
     // Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation "androidx.fragment:fragment-ktx:1.4.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.5.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
 
     testImplementation 'junit:junit:4.13.2'
 }
