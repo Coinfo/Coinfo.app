@@ -60,8 +60,8 @@ dependencies {
     implementation project(path: ':libraries:design')
 
     implementation "androidx.core:core-ktx:$version_core_ktx"
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation "androidx.appcompat:appcompat:${version_appcompat}"
+    implementation "com.google.android.material:material:${version_material}"
 
     // Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
@@ -73,7 +73,6 @@ dependencies {
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$version_dagger"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.hilt:hilt-compiler:$version_hilt_compiler"
     kapt "com.google.dagger:hilt-compiler:$version_dagger"
 }

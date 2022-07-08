@@ -56,9 +56,9 @@ dependencies {
     implementation project(path: ':repositories:coins')
     implementation project(path: ':libraries:core')
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
+    implementation "androidx.core:core-ktx:${version_core_ktx}"
+    implementation "androidx.appcompat:appcompat:${version_appcompat}"
+    implementation "com.google.android.material:material:${version_material}"
 
     // Navigation
     implementation "androidx.navigation:navigation-runtime-ktx:${version_navigation}"
