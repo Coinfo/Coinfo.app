@@ -20,8 +20,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.coinfo.feature.search.ui.entrypoint.adapters.results.UISearchItem
-import app.coinfo.feature.search.ui.entrypoint.adapters.trending.UITrendingItem
 import app.coinfo.repository.coins.CoinsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -40,9 +38,9 @@ internal class SearchViewModel @Inject constructor(
         get() = _searchResults
     private val _searchResults = MutableLiveData(emptyList<UISearchItem>())
 
-    val trendingResults: LiveData<List<UITrendingItem>>
+    val trendingResults: LiveData<List<UISearchItem>>
         get() = _trendingResults
-    private val _trendingResults = MutableLiveData(emptyList<UITrendingItem>())
+    private val _trendingResults = MutableLiveData(emptyList<UISearchItem>())
 
     val from: LiveData<String>
         get() = _from
@@ -63,7 +61,7 @@ internal class SearchViewModel @Inject constructor(
             if (delayJob?.isCancelled == false) {
                 val searchResult = cloud.search(text.toString())
                 _searchResults.value = searchResult.coins.map {
-                    UISearchItem(
+                    UISearchResultItem(
                         it.id, it.symbol, it.name, it.marketCapRank.toString(), it.image
                     )
                 }
@@ -75,7 +73,7 @@ internal class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             val trendingResult = cloud.getTrending()
             _trendingResults.value = trendingResult.coins.map {
-                UITrendingItem(
+                UITrendingResultItem(
                     it.id, it.symbol, it.name, it.marketCapRank.toString(), it.image
                 )
             }

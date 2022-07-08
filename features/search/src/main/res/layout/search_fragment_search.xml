@@ -60,11 +60,13 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
+            android:visibility="@{viewModel.searchResults.size() == 0}"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:trendingResults="@{viewModel.trendingResults}"
             tools:listitem="@layout/search_list_item_trending"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:orientation="horizontal"
-            android:visibility="@{viewModel.searchResults.size() == 0}"
-            app:trendingResults="@{viewModel.trendingResults}" />
+            tools:orientation="horizontal"/>
 
         <TextView
             android:id="@+id/label_search_results"
@@ -82,12 +84,12 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            tools:listitem="@layout/search_list_item_search"
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:orientation="vertical"
             android:visibility="@{viewModel.searchResults.size() != 0}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:searchResults="@{viewModel.searchResults}" />
+            app:searchResults="@{viewModel.searchResults}"
+            tools:listitem="@layout/search_list_item_search"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:orientation="vertical"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

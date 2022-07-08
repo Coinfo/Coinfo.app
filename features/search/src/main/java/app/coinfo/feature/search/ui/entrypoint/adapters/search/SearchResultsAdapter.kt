@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package app.coinfo.feature.search.ui.entrypoint.adapters.results
+package app.coinfo.feature.search.ui.entrypoint.adapters.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,6 +23,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.search.databinding.SearchListItemSearchBinding
+import app.coinfo.feature.search.ui.entrypoint.SearchResultDiffCallback
+import app.coinfo.feature.search.ui.entrypoint.UISearchItem
 import app.coinfo.library.core.Constants.KEY_SEARCHED_COIN_ID
 import com.bumptech.glide.Glide
 

@@ -23,11 +23,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import app.coinfo.feature.search.databinding.SearchListItemTrendingBinding
+import app.coinfo.feature.search.ui.entrypoint.SearchResultDiffCallback
+import app.coinfo.feature.search.ui.entrypoint.UISearchItem
 import app.coinfo.library.core.Constants.KEY_SEARCHED_COIN_ID
 import com.bumptech.glide.Glide
 
-internal class TrendingResultsAdapter : ListAdapter<UITrendingItem, TrendingResultsAdapter.ViewHolder>(
-    TrendingResultDiffCallback()
+internal class TrendingResultsAdapter : ListAdapter<UISearchItem, TrendingResultsAdapter.ViewHolder>(
+    SearchResultDiffCallback()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.from(parent)
@@ -40,7 +42,7 @@ internal class TrendingResultsAdapter : ListAdapter<UITrendingItem, TrendingResu
         private val binding: SearchListItemTrendingBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(coin: UITrendingItem) {
+        fun bind(coin: UISearchItem) {
             binding.root.setOnClickListener {
                 it.findNavController().previousBackStackEntry?.savedStateHandle?.set(KEY_SEARCHED_COIN_ID, coin.id)
                 it.findNavController().popBackStack()

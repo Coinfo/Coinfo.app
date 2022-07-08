@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package app.coinfo.feature.search.ui.entrypoint.adapters.trending
+package app.coinfo.feature.search.ui.entrypoint
 
 import androidx.recyclerview.widget.DiffUtil
 
-internal class TrendingResultDiffCallback : DiffUtil.ItemCallback<UITrendingItem>() {
+internal class SearchResultDiffCallback : DiffUtil.ItemCallback<UISearchItem>() {
 
-    override fun areItemsTheSame(oldItem: UITrendingItem, newItem: UITrendingItem) = oldItem.id == newItem.id
+    override fun areItemsTheSame(oldItem: UISearchItem, newItem: UISearchItem) = oldItem.id == newItem.id
 
-    override fun areContentsTheSame(oldItem: UITrendingItem, newItem: UITrendingItem) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: UISearchItem, newItem: UISearchItem) =
+        ((oldItem is UISearchResultItem && newItem is UISearchResultItem) && oldItem == newItem) ||
+            ((oldItem is UITrendingResultItem && newItem is UITrendingResultItem) && oldItem == newItem)
 }

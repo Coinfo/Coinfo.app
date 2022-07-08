@@ -20,10 +20,9 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import app.coinfo.feature.search.ui.entrypoint.adapters.results.SearchResultsAdapter
-import app.coinfo.feature.search.ui.entrypoint.adapters.results.UISearchItem
+import app.coinfo.feature.search.ui.entrypoint.UISearchItem
+import app.coinfo.feature.search.ui.entrypoint.adapters.search.SearchResultsAdapter
 import app.coinfo.feature.search.ui.entrypoint.adapters.trending.TrendingResultsAdapter
-import app.coinfo.feature.search.ui.entrypoint.adapters.trending.UITrendingItem
 
 @BindingAdapter("searchResults")
 internal fun bindSearchResults(recyclerView: RecyclerView, results: List<UISearchItem>?) {
@@ -34,7 +33,7 @@ internal fun bindSearchResults(recyclerView: RecyclerView, results: List<UISearc
 }
 
 @BindingAdapter("trendingResults")
-internal fun bindTrendingResults(recyclerView: RecyclerView, results: List<UITrendingItem>?) {
+internal fun bindTrendingResults(recyclerView: RecyclerView, results: List<UISearchItem>?) {
     if (recyclerView.adapter == null) {
         val layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView.layoutManager = layoutManager
