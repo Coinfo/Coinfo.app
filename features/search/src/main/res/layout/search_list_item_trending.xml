@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@sample/images" />
 
         <TextView
             android:id="@+id/text_view_coin_name"
@@ -50,7 +50,7 @@
             app:layout_constraintStart_toEndOf="@+id/image_view_coin_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Bitcoin" />
+            tools:text="@sample/search.json/data/name" />
 
         <TextView
             android:id="@+id/text_view_coin_symbol"
@@ -61,7 +61,7 @@
             app:layout_constraintBottom_toTopOf="@+id/text_view_market_cap_rank"
             app:layout_constraintStart_toEndOf="@+id/image_view_coin_image"
             app:layout_constraintTop_toBottomOf="@+id/text_view_coin_name"
-            tools:text="BTC" />
+            tools:text="@sample/search.json/data/symbol" />
 
         <TextView
             android:id="@+id/text_view_market_cap_rank"
@@ -73,7 +73,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_view_coin_image"
             app:layout_constraintTop_toBottomOf="@+id/text_view_coin_symbol"
-            tools:text="1" />
+            tools:text="@sample/search.json/data/rank" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

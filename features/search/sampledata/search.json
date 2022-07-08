@@ -1,0 +1,15 @@
+{
+  "comment": "Sample Data used inside Search module",
+  "data": [
+    {
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "rank": 1
+    },
+    {
+      "name": "Ripple",
+      "symbol": "XRP",
+      "rank": 7
+    }
+  ]
+}

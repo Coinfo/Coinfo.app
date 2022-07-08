@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2022 Coinfo App Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +19,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="app.coinfo.feature.search.ui.entrypoint.SearchViewModel" />
@@ -60,8 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
+            tools:listitem="@layout/search_list_item_trending"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:orientation="horizontal"
             android:visibility="@{viewModel.searchResults.size() == 0}"
-            app:trendingResults="@{viewModel.trendingResults}"/>
+            app:trendingResults="@{viewModel.trendingResults}" />
 
         <TextView
             android:id="@+id/label_search_results"
@@ -79,6 +82,9 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
+            tools:listitem="@layout/search_list_item_search"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:orientation="vertical"
             android:visibility="@{viewModel.searchResults.size() != 0}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:searchResults="@{viewModel.searchResults}" />
